@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/components/curve.dart';
 import 'package:wirdul_latif/model/wird_model.dart';
 import 'package:wirdul_latif/provider/wird_provider.dart';
+import 'package:wirdul_latif/screens/hamza_yusuf_msg.dart';
 import 'package:wirdul_latif/utils/colors.dart';
-
 
 class HomeScreen extends StatefulWidget {
   final List<WirdModel>? wirdList;
@@ -33,8 +34,6 @@ class _HomeScreenState extends State<HomeScreen> {
       });
     });
   }
-
-  
 
   List<Widget> bodyWidget(List<WirdModel>? wirdlist) {
     List<Widget> finalList = [];
@@ -136,8 +135,8 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               Text(
                 '(${element.rep} times)',
-                style:
-                    const TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
+                style: const TextStyle(
+                    color: Colors.red, fontWeight: FontWeight.bold),
               )
             ],
           ),
@@ -150,7 +149,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       // mainAxisAlignment: MainAxisAlignment.center,
       children: [
-       const Expanded(flex: 2, child: SizedBox()),
+        const Expanded(flex: 2, child: SizedBox()),
         Expanded(
           flex: 2,
           child: Row(
@@ -158,7 +157,7 @@ class _HomeScreenState extends State<HomeScreen> {
               InkWell(
                 onTap: () => {
                   controller.previousPage(
-                      duration:const Duration(milliseconds: 300),
+                      duration: const Duration(milliseconds: 300),
                       curve: Curves.linear)
                 },
                 child: const Icon(
@@ -167,14 +166,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: WirdColors.seconderyColor,
                 ),
               ),
-             const Expanded(child: SizedBox()),
+              const Expanded(child: SizedBox()),
               InkWell(
                 onTap: () {
                   controller.nextPage(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.linear);
                 },
-                child:const Icon(
+                child: const Icon(
                   Icons.arrow_right,
                   size: 50,
                   color: WirdColors.seconderyColor,
@@ -195,7 +194,14 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (BuildContext context, wirdData, Widget? child) {
         return PageView(
           controller: controller,
-          children: [...bodyWidget(widget.wirdList)],
+          children: [
+            IntroWidget(
+              controller: controller,
+              appbar: appBarArea(context),
+            ),
+            ...bodyWidget(widget.wirdList),
+            OutroWidget(controller: controller, appbar: appBarArea(context))
+          ],
         );
       }),
       bottomNavigationBar: bottomCounterButton(context),
@@ -215,7 +221,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ClipPath(
                 clipper: CurveClipper(),
                 child: Container(
-                  decoration:const BoxDecoration(
+                  decoration: const BoxDecoration(
                       gradient: LinearGradient(colors: [
                     Color.fromARGB(56, 94, 142, 1),
                     Color.fromARGB(25, 56, 94, 1),
@@ -231,16 +237,44 @@ class _HomeScreenState extends State<HomeScreen> {
               child: GestureDetector(
                 onTap: () async {
                   // countButtonMethod(wirdData);
-                  var rep =
-                       widget.wirdList![controller.page!.toInt()].rep;
-                  setState(() {
-                    count++;
-                  });
-                  if (rep == count || rep < count) {
-                    count = 0;
+                  if (_currentPage == 0) {
                     controller.nextPage(
-                        duration:const Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 300),
                         curve: Curves.linear);
+                  } else if (_currentPage == 44) {
+                    controller.nextPage(
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.linear);
+                  } else if (_currentPage == 45) {
+                    showDialog(
+                      context: context,
+                      builder: (context) =>  AlertDialog(
+                        content: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children:  [
+                            const Text('Are you Sure You \n Want Close The App',textAlign: TextAlign.center,),
+                            const SizedBox(height: 16,),
+                            ElevatedButton(
+                              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)),
+                              onPressed: (){
+                            
+                              SystemNavigator.pop();
+                            }, child:const  Text('EXIT'))
+                          ],
+                        ),
+                      ),
+                    );
+                  } else {
+                    var rep = widget.wirdList![controller.page!.toInt()].rep;
+                    setState(() {
+                      count++;
+                    });
+                    if (rep == count || rep < count) {
+                      count = 0;
+                      controller.nextPage(
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.linear);
+                    }
                   }
                 },
                 child: RotatedBox(
@@ -250,7 +284,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     child: RotatedBox(
                       quarterTurns: 2,
                       child: Container(
-                        decoration:const BoxDecoration(
+                        decoration: const BoxDecoration(
                           gradient: LinearGradient(
                               colors: [
                                 Color.fromARGB(255, 239, 211, 133),
@@ -273,26 +307,50 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 30.0,
                                 ),
-                                child: Stack(children: [
-                                  Align(
-                                    alignment: Alignment.center,
-                                    child: Image.asset(
-                                      'asset/white_fingerprint.png',
-                                      color: Colors.white.withOpacity(0.4),
-                                      colorBlendMode: BlendMode.modulate,
-                                    ),
-                                  ),
-                                  Align(
-                                      alignment: Alignment.center,
-                                      child: Text(
-                                        '$count',
-                                        // count.toString(),
-                                        style:const TextStyle(
-                                            color: Colors.black,
-                                            fontSize: 50,
-                                            fontWeight: FontWeight.bold),
-                                      ))
-                                ]),
+                                child: _currentPage == 0 || _currentPage == 45
+                                    ? Row(
+                                        mainAxisSize: MainAxisSize.max,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          _currentPage == 0
+                                              ? const Text(
+                                                  'START',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      fontSize: 50),
+                                                )
+                                              : const Text(
+                                                  'END',
+                                                  style: TextStyle(
+                                                      fontWeight:
+                                                          FontWeight.w800,
+                                                      fontSize: 50),
+                                                )
+                                        ],
+                                      )
+                                    : Stack(children: [
+                                        Align(
+                                          alignment: Alignment.center,
+                                          child: Image.asset(
+                                            'asset/white_fingerprint.png',
+                                            color:
+                                                Colors.white.withOpacity(0.4),
+                                            colorBlendMode: BlendMode.modulate,
+                                          ),
+                                        ),
+                                        Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              '$count',
+                                              // count.toString(),
+                                              style: const TextStyle(
+                                                  color: Colors.black,
+                                                  fontSize: 50,
+                                                  fontWeight: FontWeight.bold),
+                                            ))
+                                      ]),
                               ),
                             )),
                           ],
@@ -304,15 +362,77 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          Positioned(
-            top: 5,
-            left: 0,
-            right: 0,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [Text("${_currentPage + 1}/${widget.wirdList!.length}")],
-            ),
-          )
+          _currentPage == 0 || _currentPage == 45
+              ? const SizedBox()
+              : Positioned(
+                  top: 5,
+                  left: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text("$_currentPage /${widget.wirdList!.length}")
+                    ],
+                  ),
+                )
+        ],
+      ),
+    );
+  }
+}
+
+class IntroWidget extends StatelessWidget {
+  const IntroWidget({
+    super.key,
+    required this.controller,
+    required this.appbar,
+  });
+
+  final PageController controller;
+  final Widget appbar;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      // mainAxisSize: MainAxisSize.min,
+      // mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        appbar,
+        const Padding(
+          padding: EdgeInsets.all(30.0),
+          child: HamzaYusfMsg(),
+        ),
+        const Text(
+          '-Sheikh Hamza Yusuf',
+          style: TextStyle(fontWeight: FontWeight.bold),
+        )
+      ],
+    );
+  }
+}
+
+class OutroWidget extends StatelessWidget {
+  const OutroWidget({
+    super.key,
+    required this.controller,
+    required this.appbar,
+  });
+
+  final PageController controller;
+  final Widget appbar;
+
+  @override
+  Widget build(BuildContext context) {
+    return SingleChildScrollView(
+      child: Column(
+        // mainAxisSize: MainAxisSize.min,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          appbar,
+          const Padding(
+            padding: EdgeInsets.all(30.0),
+            child: BioOfHaddad(),
+          ),
         ],
       ),
     );

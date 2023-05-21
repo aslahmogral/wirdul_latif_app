@@ -3,9 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:wirdul_latif/home_screen.dart';
 import 'package:wirdul_latif/model/wird_model.dart';
 import 'package:wirdul_latif/provider/wird_provider.dart';
+import 'package:wirdul_latif/screens/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

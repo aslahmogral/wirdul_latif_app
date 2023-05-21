@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/provider/wird_provider.dart';
-import 'package:wirdul_latif/splash_screen.dart';
+import 'package:wirdul_latif/screens/splash_screen.dart';
 
 void main() {
   runApp(const MyApp());
