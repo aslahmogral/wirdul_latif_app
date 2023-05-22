@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:wirdul_latif/components/curve.dart';
 import 'package:wirdul_latif/model/wird_model.dart';
 import 'package:wirdul_latif/provider/wird_provider.dart';
-import 'package:wirdul_latif/screens/hamza_yusuf_msg.dart';
+import 'package:wirdul_latif/screens/intro_outro_msg.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -265,7 +265,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     );
                   } else {
-                    var rep = widget.wirdList![controller.page!.toInt()].rep;
+                    var rep = widget.wirdList![controller.page!.toInt()-1].rep;
                     setState(() {
                       count++;
                     });
@@ -331,6 +331,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ],
                                       )
                                     : Stack(children: [
+                                      
                                         Align(
                                           alignment: Alignment.center,
                                           child: Image.asset(
@@ -343,6 +344,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         Align(
                                             alignment: Alignment.center,
                                             child: Text(
+
                                               '$count',
                                               // count.toString(),
                                               style: const TextStyle(
