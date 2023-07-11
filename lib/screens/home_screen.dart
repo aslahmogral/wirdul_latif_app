@@ -352,14 +352,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         Align(
                                             alignment: Alignment.center,
-                                            child:count == 0 ? const SizedBox() : Text(
-                                              '$count',
-                                              // count.toString(),
-                                              style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 50,
-                                                  fontWeight: FontWeight.bold),
-                                            ))
+                                            child: count == 0
+                                                ? const SizedBox()
+                                                : Text(
+                                                    '$count',
+                                                    // count.toString(),
+                                                    style: const TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 50,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ))
                                       ]),
                               ),
                             )),
