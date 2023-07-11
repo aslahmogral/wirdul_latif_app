@@ -155,10 +155,11 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Row(
             children: [
               InkWell(
-                onTap: () => {
+                onTap: () {
+                  count = 0;
                   controller.previousPage(
                       duration: const Duration(milliseconds: 300),
-                      curve: Curves.linear)
+                      curve: Curves.linear);
                 },
                 child: const Icon(
                   Icons.arrow_left,
@@ -169,6 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Expanded(child: SizedBox()),
               InkWell(
                 onTap: () {
+                  count = 0;
                   controller.nextPage(
                       duration: const Duration(milliseconds: 300),
                       curve: Curves.linear);
@@ -248,24 +250,32 @@ class _HomeScreenState extends State<HomeScreen> {
                   } else if (_currentPage == 45) {
                     showDialog(
                       context: context,
-                      builder: (context) =>  AlertDialog(
+                      builder: (context) => AlertDialog(
                         content: Column(
                           mainAxisSize: MainAxisSize.min,
-                          children:  [
-                            const Text('Are you Sure You \n Want Close The App',textAlign: TextAlign.center,),
-                            const SizedBox(height: 16,),
+                          children: [
+                            const Text(
+                              'Are you Sure You \n Want Close The App',
+                              textAlign: TextAlign.center,
+                            ),
+                            const SizedBox(
+                              height: 16,
+                            ),
                             ElevatedButton(
-                              style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.black)),
-                              onPressed: (){
-                            
-                              SystemNavigator.pop();
-                            }, child:const  Text('EXIT'))
+                                style: ButtonStyle(
+                                    backgroundColor: MaterialStateProperty.all(
+                                        Colors.black)),
+                                onPressed: () {
+                                  SystemNavigator.pop();
+                                },
+                                child: const Text('EXIT'))
                           ],
                         ),
                       ),
                     );
                   } else {
-                    var rep = widget.wirdList![controller.page!.toInt()-1].rep;
+                    var rep =
+                        widget.wirdList![controller.page!.toInt() - 1].rep;
                     setState(() {
                       count++;
                     });
@@ -331,7 +341,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ],
                                       )
                                     : Stack(children: [
-                                      
                                         Align(
                                           alignment: Alignment.center,
                                           child: Image.asset(
@@ -343,15 +352,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         Align(
                                             alignment: Alignment.center,
-                                            child: Text(
-
-                                              '$count',
-                                              // count.toString(),
-                                              style: const TextStyle(
-                                                  color: Colors.black,
-                                                  fontSize: 50,
-                                                  fontWeight: FontWeight.bold),
-                                            ))
+                                            child: count == 0
+                                                ? const SizedBox()
+                                                : Text(
+                                                    '$count',
+                                                    // count.toString(),
+                                                    style: const TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 50,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ))
                                       ]),
                               ),
                             )),
@@ -370,12 +381,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   top: 5,
                   left: 0,
                   right: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("$_currentPage /${widget.wirdList!.length}")
-                    ],
-                  ),
+                  child: Builder(builder: (context) {
+                    var verseLeft = widget.wirdList!.length - _currentPage;
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [Text("$verseLeft wird left")],
+                    );
+                  }),
                 )
         ],
       ),
