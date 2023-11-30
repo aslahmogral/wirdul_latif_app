@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.wirdul_latif">
    <application
-        android:label="wirdul_latif"
+        android:label="Wird-ul Latif"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
