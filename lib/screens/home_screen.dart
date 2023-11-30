@@ -125,10 +125,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 textDirection: TextDirection.rtl,
                 child: Text("${element.arabic} ",
                     textAlign: TextAlign.center,
-                    style: GoogleFonts.amiri(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 28,
-                    )),
+                    style:const TextStyle(
+                      fontSize: 22,
+                      fontFamily: 'AmiriQuran'))
               ),
               const SizedBox(
                 height: 30,
@@ -196,6 +195,9 @@ class _HomeScreenState extends State<HomeScreen> {
           builder: (BuildContext context, wirdData, Widget? child) {
         return PageView(
           controller: controller,
+          onPageChanged: (_) {
+            count = 0;
+          },
           children: [
             IntroWidget(
               controller: controller,
