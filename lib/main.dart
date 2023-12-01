@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<WirdProvider>(
-            create: (context) => WirdProvider(),
+            create: (context) => WirdProvider.main(),
           ),
           
         ],
@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
             // is not restarted.
             primarySwatch: Colors.blue,
+            fontFamily: 'Poppins'
           ),
           home: const SplashScreen(),
         ));
