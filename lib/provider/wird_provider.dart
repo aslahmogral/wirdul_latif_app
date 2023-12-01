@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:wirdul_latif/model/wird_model.dart';
 import 'package:wirdul_latif/service/wird_from_json.dart';
 
 class WirdProvider with ChangeNotifier {
+  final controller = PageController(initialPage: 0);
+  int count = 0;
+  int currentPage = 0;
+
+  
+  late final List<WirdModel>? wirdList;
+
   List<WirdModel>? _wirddata;
 
   List<WirdModel>? get wirddata => _wirddata;
@@ -11,5 +19,83 @@ class WirdProvider with ChangeNotifier {
     _wirddata = await WirdService().loadLocalJsonData();
 
     notifyListeners();
+  }
+
+  WirdProvider.main() {
+    print('wird laif');
+  }
+
+  WirdProvider(
+    context,
+    List<WirdModel>? wirdlists,
+  ) {
+    wirdList = wirdlists;
+    currentPage = 0;
+    controller.addListener(() {
+      currentPage = controller.page!.toInt();
+    });
+    notifyListeners();
+  }
+
+  void rebuildPage() {
+    notifyListeners();
+  }
+
+  void onFingerPrintButtonClicked(BuildContext context) {
+    notifyListeners();
+    if (currentPage == 0) {
+      controller.nextPage(
+          duration: const Duration(milliseconds: 1), curve: Curves.linear);
+    } else if (currentPage == 44) {
+      controller.nextPage(
+          duration: const Duration(milliseconds: 1), curve: Curves.linear);
+    } else if (currentPage == 45) {
+      showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Are you Sure You \n Want Close The App',
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(
+                height: 16,
+              ),
+              ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor: MaterialStateProperty.all(Colors.black)),
+                  onPressed: () {
+                    SystemNavigator.pop();
+                  },
+                  child: const Text('EXIT'))
+            ],
+          ),
+        ),
+      );
+    } else {
+      var rep = wirdList![controller.page!.toInt() - 1].rep;
+
+      count++;
+      notifyListeners();
+      if (rep == count || rep < count) {
+        count = 0;
+        controller.nextPage(
+            duration: const Duration(milliseconds: 1), curve: Curves.linear);
+      }
+    }
+  }
+
+  void onRightNavigateButtonClicked() {
+    count = 0;
+    controller.nextPage(
+        duration: const Duration(milliseconds: 1), curve: Curves.linear);
+  }
+
+  void onLeftNavigateButtonClicked() {
+    count = 0;
+    controller.previousPage(
+        duration: const Duration(milliseconds: 1), curve: Curves.linear);
   }
 }

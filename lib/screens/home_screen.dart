@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/components/curve.dart';
 import 'package:wirdul_latif/model/wird_model.dart';
@@ -17,25 +15,39 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final controller = PageController(initialPage: 0);
-  int count = 0;
-  int _currentPage = 0;
-
   @override
-  void initState() {
-    super.initState();
-    // setState(() {
-    //   getWirdData();
-    // });
-    _currentPage = 0;
-    controller.addListener(() {
-      setState(() {
-        _currentPage = controller.page!.toInt();
-      });
-    });
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(
+            create: (context) =>
+                WirdProvider(context, widget.wirdList as List<WirdModel>)),
+      ],
+      child: Consumer<WirdProvider>(builder: (context, model, child) {
+        return Scaffold(
+          body: PageView(
+            controller: model.controller,
+            onPageChanged: (_) {
+              model.count = 0;
+              model.rebuildPage();
+            },
+            children: [
+              IntroWidget(
+                controller: model.controller,
+                appbar: appBarArea(context),
+              ),
+              ...bodyWidget(widget.wirdList, model),
+              OutroWidget(
+                  controller: model.controller, appbar: appBarArea(context))
+            ],
+          ),
+          bottomNavigationBar: bottomCounterButton(context, model),
+        );
+      }),
+    );
   }
 
-  List<Widget> bodyWidget(List<WirdModel>? wirdlist) {
+  List<Widget> bodyWidget(List<WirdModel>? wirdlist, WirdProvider model) {
     List<Widget> finalList = [];
 
     wirdlist?.forEach((element) {
@@ -50,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
               textShowArea(context, element)
             ],
           ),
-          sideNavigateButtons()
+          sideNavigateButtons(model)
         ],
       ));
     });
@@ -68,20 +80,23 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         Positioned(
-            bottom: 0,
+          bottom: 0,
+          child: SizedBox(
+            // width: MediaQuery.of(context).size.width / 2.3,
             child: SizedBox(
-                // width: MediaQuery.of(context).size.width / 2.3,
-                child: SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    // color: Colors.green,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        SizedBox(
-                            width: MediaQuery.of(context).size.width / 2,
-                            child: Image.asset('asset/bismillah.png')),
-                      ],
-                    )))),
+              width: MediaQuery.of(context).size.width,
+              // color: Colors.green,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                      width: MediaQuery.of(context).size.width / 2,
+                      child: Image.asset('asset/bismillah.png')),
+                ],
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
@@ -122,13 +137,13 @@ class _HomeScreenState extends State<HomeScreen> {
             mainAxisSize: MainAxisSize.min,
             children: [
               Directionality(
-                textDirection: TextDirection.rtl,
-                child: Text("${element.arabic} ",
-                    textAlign: TextAlign.center,
-                    style:const TextStyle(
-                      fontSize: 22,
-                      fontFamily: 'AmiriQuran'))
-              ),
+                  textDirection: TextDirection.rtl,
+                  child: Text("${element.arabic} ",
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'AmiriQuran'))),
               const SizedBox(
                 height: 30,
               ),
@@ -144,7 +159,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Column sideNavigateButtons() {
+  Column sideNavigateButtons(WirdProvider model) {
     return Column(
       // mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -155,10 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               InkWell(
                 onTap: () {
-                  count = 0;
-                  controller.previousPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.linear);
+                  model.onLeftNavigateButtonClicked();
                 },
                 child: const Icon(
                   Icons.arrow_left,
@@ -169,10 +181,7 @@ class _HomeScreenState extends State<HomeScreen> {
               const Expanded(child: SizedBox()),
               InkWell(
                 onTap: () {
-                  count = 0;
-                  controller.nextPage(
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.linear);
+                  model.onRightNavigateButtonClicked();
                 },
                 child: const Icon(
                   Icons.arrow_right,
@@ -188,33 +197,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Consumer<WirdProvider>(
-          builder: (BuildContext context, wirdData, Widget? child) {
-        return PageView(
-          controller: controller,
-          onPageChanged: (_) {
-            count = 0;
-          },
-          children: [
-            IntroWidget(
-              controller: controller,
-              appbar: appBarArea(context),
-            ),
-            ...bodyWidget(widget.wirdList),
-            OutroWidget(controller: controller, appbar: appBarArea(context))
-          ],
-        );
-      }),
-      bottomNavigationBar: bottomCounterButton(context),
-    );
-  }
-
-  Widget bottomCounterButton(
-    BuildContext context,
-  ) {
+  Widget bottomCounterButton(BuildContext context, WirdProvider model) {
     return SizedBox(
       height: 180,
       child: Stack(
@@ -241,53 +224,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: GestureDetector(
                 onTap: () async {
                   // countButtonMethod(wirdData);
-                  if (_currentPage == 0) {
-                    controller.nextPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.linear);
-                  } else if (_currentPage == 44) {
-                    controller.nextPage(
-                        duration: const Duration(milliseconds: 300),
-                        curve: Curves.linear);
-                  } else if (_currentPage == 45) {
-                    showDialog(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        content: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            const Text(
-                              'Are you Sure You \n Want Close The App',
-                              textAlign: TextAlign.center,
-                            ),
-                            const SizedBox(
-                              height: 16,
-                            ),
-                            ElevatedButton(
-                                style: ButtonStyle(
-                                    backgroundColor: MaterialStateProperty.all(
-                                        Colors.black)),
-                                onPressed: () {
-                                  SystemNavigator.pop();
-                                },
-                                child: const Text('EXIT'))
-                          ],
-                        ),
-                      ),
-                    );
-                  } else {
-                    var rep =
-                        widget.wirdList![controller.page!.toInt() - 1].rep;
-                    setState(() {
-                      count++;
-                    });
-                    if (rep == count || rep < count) {
-                      count = 0;
-                      controller.nextPage(
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.linear);
-                    }
-                  }
+                  model.onFingerPrintButtonClicked(context);
                 },
                 child: RotatedBox(
                   quarterTurns: 2,
@@ -319,23 +256,31 @@ class _HomeScreenState extends State<HomeScreen> {
                                 padding: const EdgeInsets.symmetric(
                                   vertical: 30.0,
                                 ),
-                                child: _currentPage == 0 || _currentPage == 45
+                                child: model.currentPage == 0 &&
+                                            model.currentPage != 1 ||
+                                        model.currentPage == 45
                                     ? Row(
                                         mainAxisSize: MainAxisSize.max,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          _currentPage == 0
+                                          model.currentPage == 0
                                               ? const Text(
                                                   'START',
                                                   style: TextStyle(
-                                                      fontWeight:
-                                                          FontWeight.w800,
+                                                      color: Color.fromARGB(
+                                                          172, 0, 0, 0),
+                                                      fontFamily: 'BlackOpsOne',
+                                                      // fontWeight:
+                                                      // FontWeight.w800,
                                                       fontSize: 50),
                                                 )
                                               : const Text(
                                                   'END',
                                                   style: TextStyle(
+                                                      color: Color.fromARGB(
+                                                          163, 0, 0, 0),
+                                                      fontFamily: 'BlackOpsOne',
                                                       fontWeight:
                                                           FontWeight.w800,
                                                       fontSize: 50),
@@ -354,13 +299,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                         ),
                                         Align(
                                             alignment: Alignment.center,
-                                            child: count == 0
+                                            child: model.count == 0
                                                 ? const SizedBox()
                                                 : Text(
-                                                    '$count',
+                                                    '${model.count}',
                                                     // count.toString(),
                                                     style: const TextStyle(
-                                                        color: Colors.black,
+                                                        fontFamily:
+                                                            'BlackOpsOne',
+                                                        color: Color.fromARGB(
+                                                            124, 0, 0, 0),
                                                         fontSize: 50,
                                                         fontWeight:
                                                             FontWeight.bold),
@@ -377,17 +325,22 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ),
-          _currentPage == 0 || _currentPage == 45
+          model.currentPage == 0 || model.currentPage == 45
               ? const SizedBox()
               : Positioned(
                   top: 5,
                   left: 0,
                   right: 0,
                   child: Builder(builder: (context) {
-                    var verseLeft = widget.wirdList!.length - _currentPage;
+                    var verseLeft = widget.wirdList!.length - model.currentPage;
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: [Text("$verseLeft wird left")],
+                      children: [
+                        Text(
+                          "$verseLeft wird left",
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        )
+                      ],
                     );
                   }),
                 )
@@ -409,20 +362,25 @@ class IntroWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      // mainAxisSize: MainAxisSize.min,
-      // mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        appbar,
-        const Padding(
-          padding: EdgeInsets.all(30.0),
-          child: HamzaYusfMsg(),
-        ),
-        const Text(
-          '-Sheikh Hamza Yusuf',
-          style: TextStyle(fontWeight: FontWeight.bold),
-        )
-      ],
+    return SingleChildScrollView(
+      child: Column(
+        // mainAxisSize: MainAxisSize.min,
+        // mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          appbar,
+          const Padding(
+            padding: EdgeInsets.all(30.0),
+            child: HamzaYusfMsg(),
+          ),
+          const Text(
+            'Sheikh Hamza Yusuf',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(
+            height: 16,
+          )
+        ],
+      ),
     );
   }
 }

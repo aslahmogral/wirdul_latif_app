@@ -7,13 +7,11 @@ class HamzaYusfMsg extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: const [
-        SizedBox(
-          height: 50,
-        ),
+        
         Center(
           child: Text(
             '"People are in need of the Prophetic du’ā’s now, more than ever, because there are shayateen everywhere. If we could see the unseen world, I’m telling you, we would all pass out. Because there are demons all over the place. What you’re doing whilst reciting invocations and litanies is creating a space around you, that if the Jinn and shaytaan see it, they have to back away. If you are consistent with this (Wird al Latif), I guarantee you will see a difference in your life. And if you miss it out you’ll feel horrible during the day – it’ll feel like going outside without brushing your teeth. Put yourself in the protection of Allāh through daily du’ā."',
-            style: TextStyle(fontSize: 16),
+            // style: TextStyle(fontSize: 16),
             textAlign: TextAlign.justify,
           ),
         )
