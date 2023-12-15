@@ -8,7 +8,6 @@ class WirdProvider with ChangeNotifier {
   int count = 0;
   int currentPage = 0;
 
-  
   late final List<WirdModel>? wirdList;
 
   List<WirdModel>? _wirddata;
@@ -22,7 +21,12 @@ class WirdProvider with ChangeNotifier {
   }
 
   WirdProvider.main() {
-    print('wird laif');
+    // print('wird laif');
+  }
+
+  vibrateOnButtonClick() {
+    Clipboard.setData(const ClipboardData());
+    HapticFeedback.lightImpact();
   }
 
   WirdProvider(
@@ -44,12 +48,14 @@ class WirdProvider with ChangeNotifier {
   void onFingerPrintButtonClicked(BuildContext context) {
     notifyListeners();
     if (currentPage == 0) {
-      controller.nextPage(
-          duration: const Duration(milliseconds: 1), curve: Curves.linear);
+      vibrateOnButtonClick();
+      nextPage();
     } else if (currentPage == 44) {
-      controller.nextPage(
-          duration: const Duration(milliseconds: 1), curve: Curves.linear);
+      vibrateOnButtonClick();
+
+      nextPage();
     } else if (currentPage == 45) {
+      vibrateOnButtonClick();
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -76,19 +82,24 @@ class WirdProvider with ChangeNotifier {
       );
     } else {
       var rep = wirdList![controller.page!.toInt() - 1].rep;
-
+      // vibrateOnButtonClick();
       count++;
       notifyListeners();
       if (rep == count || rep < count) {
+        vibrateOnButtonClick();
+
         count = 0;
-        controller.nextPage(
-            duration: const Duration(milliseconds: 1), curve: Curves.linear);
+        nextPage();
       }
     }
   }
 
   void onRightNavigateButtonClicked() {
     count = 0;
+    nextPage();
+  }
+
+  void nextPage() {
     controller.nextPage(
         duration: const Duration(milliseconds: 1), curve: Curves.linear);
   }
