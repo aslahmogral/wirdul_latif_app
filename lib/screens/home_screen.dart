@@ -236,10 +236,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         decoration: const BoxDecoration(
                           gradient: LinearGradient(
                               colors: [
-                                Color.fromARGB(255, 239, 211, 133),
-                                Color.fromARGB(255, 236, 205, 117),
-                                Color(0xffF3C137),
-                                Color(0xffF3C137),
+                                WirdColors.primaryColor,
+                                WirdColors.primaryColor,
+                                WirdColors.primaryColor,
                               ],
                               begin: Alignment.topCenter,
                               end: Alignment.bottomCenter),
@@ -269,7 +268,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   'START',
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
-                                                          172, 0, 0, 0),
+                                                          172, 255, 255, 255),
                                                       fontFamily: 'BlackOpsOne',
                                                       // fontWeight:
                                                       // FontWeight.w800,
@@ -279,7 +278,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   'END',
                                                   style: TextStyle(
                                                       color: Color.fromARGB(
-                                                          163, 0, 0, 0),
+                                                          162, 255, 255, 255),
                                                       fontFamily: 'BlackOpsOne',
                                                       fontWeight:
                                                           FontWeight.w800,
@@ -308,7 +307,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                                         fontFamily:
                                                             'BlackOpsOne',
                                                         color: Color.fromARGB(
-                                                            124, 0, 0, 0),
+                                                            255, 255, 255, 255),
                                                         fontSize: 50,
                                                         fontWeight:
                                                             FontWeight.bold),
