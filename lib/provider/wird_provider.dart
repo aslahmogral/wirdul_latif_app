@@ -25,7 +25,6 @@ class WirdProvider with ChangeNotifier {
   }
 
   vibrateOnButtonClick() {
-    Clipboard.setData(const ClipboardData());
     HapticFeedback.lightImpact();
   }
 
