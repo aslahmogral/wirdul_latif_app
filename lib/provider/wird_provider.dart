@@ -58,6 +58,9 @@ class WirdProvider with ChangeNotifier {
       showDialog(
         context: context,
         builder: (context) => AlertDialog(
+          shape: const RoundedRectangleBorder(
+    borderRadius: BorderRadius.all(Radius.circular(32.0))),
+
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
