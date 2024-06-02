@@ -5,4 +5,5 @@ class WirdColors {
   // #061930
   static const seconderyColor = Color.fromARGB(255, 231, 185, 58);
   static const seconderyColorDark = Color(0xffcfa531);
+  static const primaryDaycolor = Color(0xff057468);
 }

@@ -74,7 +74,7 @@ flutter:
     - asset/bismillah.png
     - asset/white_fingerprint.png
     - asset/wird.json
-    - asset/wirddata.json
+    - asset/
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

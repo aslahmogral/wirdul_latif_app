@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import '../lib/wird_files/wird_method.dart';
+import '../lib/deprecated/wird_files/wird_method.dart';
 
 void main() {
   test('get morning wird arabic', () {
