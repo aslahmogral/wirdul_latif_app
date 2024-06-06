@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
+import 'package:rive/rive.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
+import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 import 'package:wirdul_latif/widgets/container_shader.dart';
 
@@ -28,16 +30,18 @@ class HomeScreen extends StatelessWidget {
               AnimatedContainer(
                       duration: Duration(milliseconds: 1000),
                       child: IconButton(
-                          onPressed: () {
-                            model.swithDayOrNight();
-                          },
-                          icon: model.isNightMode
-                              ? Icon(
-                                  Icons.dark_mode,
-                                )
-                                  .animate()
-                                  .shimmer(duration: Duration(seconds: 1))
-                              : Icon(Icons.light_mode)))
+                              onPressed: () {
+                                model.swithDayOrNight();
+                              },
+                              icon: !model.isNightMode
+                                  ? Icon(
+                                      Icons.dark_mode,
+                                    )
+                                      .animate()
+                                      .fadeIn(duration: Duration(seconds: 1))
+                                  : Icon(Icons.light_mode))
+                          .animate()
+                          .fadeIn(duration: Duration(seconds: 1)))
                   .animate()
                   .shimmer(duration: Duration(seconds: 1))
             ],
@@ -63,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                morningAndEveningWirdSection()
+                morningAndEveningWirdSection(context)
                     .animate()
                     .shimmer(duration: Duration(milliseconds: 300))
                     .moveX(),
@@ -82,20 +86,30 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Row morningAndEveningWirdSection() {
+  Row morningAndEveningWirdSection(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        morningOrEveningCard(
-            size: 170,
-            imagePath: 'asset/morning.jpg',
-            title: 'Morning',
-            subTitle: 'Wird'),
-        morningOrEveningCard(
-            size: 170,
-            imagePath: 'asset/night.jpg',
-            title: 'Evening',
-            subTitle: 'Wird'),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(WirdScreen.routename,arguments: {'wird':'morning'});
+          },
+          child: morningOrEveningCard(
+              size: 170,
+              imagePath: 'asset/morning.jpg',
+              title: 'Morning',
+              subTitle: 'Wird'),
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(WirdScreen.routename,arguments: {'wird':'evening'});
+          },
+          child: morningOrEveningCard(
+              size: 170,
+              imagePath: 'asset/night.jpg',
+              title: 'Evening',
+              subTitle: 'Wird'),
+        ),
       ],
     );
   }

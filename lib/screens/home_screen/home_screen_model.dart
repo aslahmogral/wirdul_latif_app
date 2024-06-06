@@ -8,3 +8,4 @@ class HomeScreenModel with ChangeNotifier {
     notifyListeners();
   }
 }
+  
