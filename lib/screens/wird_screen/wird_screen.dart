@@ -113,32 +113,66 @@ class WirdScreen extends StatelessWidget {
                         ),
                         Align(
                           alignment: Alignment.bottomCenter,
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              SizedBox(
-                                height: 70,
-                                width: 70,
-                                child: CircularProgressIndicator(
-                                  value: 25 / 100,
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    WirdColors.primaryDaycolor,
+                          child: InkWell(
+                            onTap: () {
+                              model.thasbeehButtonClicked();
+                            },
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 70,
+                                  width: 70,
+                                  child: CircularProgressIndicator(
+                                    value: model.wirdList[model.currentPage]
+                                                    .counted !=
+                                                null &&
+                                            model.wirdList[model.currentPage]
+                                                    .counted !=
+                                                0
+                                        ? (model.currentPageWirdCounted /
+                                                model
+                                                    .wirdList[model.currentPage]
+                                                    .count)
+                                            .toDouble()
+                                        : 0,
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      WirdColors.primaryDaycolor,
+                                    ),
+                                    backgroundColor:
+                                        Colors.black45.withOpacity(0.2),
                                   ),
-                                  backgroundColor:
-                                      Colors.black45.withOpacity(0.2),
                                 ),
-                              ),
-                              Container(
-                                child: Text(
-                                  model.wirdList[model.currentPage].count
-                                      .toString(),
-                                  style: const TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold),
+                                Container(
+                                  child: Text(
+                                    "${model.wirdList[model.currentPage].counted != null ? model.currentPageWirdCounted : 0}/${model.wirdList[model.currentPage].count.toString()}",
+                                    style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                              ),
-                            ],
+                                Visibility(
+                                  visible: model.wirdList[model.currentPage].completed ?? false,
+                                  child: Container(
+                                    height: 75,
+                                    width: 75,
+                                    decoration: BoxDecoration(
+                                      shape: BoxShape.circle,
+                                      color: WirdColors.primaryDaycolor,
+                                      gradient: WirdGradients.listTileShadeGradient
+                                    ),
+                                    child: Center(
+                                      child: Icon(
+                                        size:35,
+                                        Icons.done_all,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
                         )
                       ],

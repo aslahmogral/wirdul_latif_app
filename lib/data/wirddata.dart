@@ -378,7 +378,9 @@ class WirdulLatif {
           wird: value['wird'],
           // eveningWird: value['eveningwird'],
           english: value['english'],
-          count: value['count']));
+          count: value['count'],
+          )
+          );
     });
     return finalList;
   }

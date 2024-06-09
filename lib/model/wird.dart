@@ -2,9 +2,14 @@ class Wird {
   final String wird;
   final String english;
   final int count;
+  int? counted;
+  bool? completed;
 
-  Wird(
+  Wird( 
       {required this.wird,
       required this.english,
-      required this.count});
+      required this.count,
+      this.counted,
+      this.completed
+      });
 }

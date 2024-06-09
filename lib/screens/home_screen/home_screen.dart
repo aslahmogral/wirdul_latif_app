@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                         : Icon(
                             Icons.light_mode,
                             key: ValueKey('light'),
-                          ),
+                          ).animate(onComplete: (controller) => controller.loop(),).rotate(duration: Duration(seconds: 15)),
                   ))
             ],
           ),
@@ -87,11 +87,18 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
           ),
-          bottomNavigationBar: const Padding(
+          bottomNavigationBar: Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
               'Please include App Developer in your \n prayers 🤲',
               textAlign: TextAlign.center,
+            ).animate(
+              onComplete: (controller) {
+                controller.repeat();
+              },
+            ).shimmer(
+              color: Colors.yellow,
+              duration: Duration(seconds: 3),
             ),
           ),
         ),
