@@ -21,7 +21,44 @@ class WirdScreen extends StatelessWidget {
           builder: (context, model, child) {
             return Scaffold(
               appBar: AppBar(
-                title: Text('wird'),
+                leading: Container(),
+                centerTitle: true,
+                title: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    model.type == WirdType.morning
+                        ? Text('Morning Wird')
+                        : Text('Evening Wird'),
+                    Text(
+                      '1/44',
+                      style: TextStyle(fontSize: 16),
+                    )
+                  ],
+                ),
+                actions: [
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      CircularProgressIndicator(
+                        backgroundColor: Colors.black45.withOpacity(0.2),
+                        value: (model.currentPage + 1) / model.wirdList.length ,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                            WirdColors.primaryColor),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)}%',
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                  IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
+                ],
               ),
               body: PageView.builder(
                 itemCount: model.wirdList.length,
@@ -153,18 +190,20 @@ class WirdScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Visibility(
-                                  visible: model.wirdList[model.currentPage].completed ?? false,
+                                  visible: model.wirdList[model.currentPage]
+                                          .completed ??
+                                      false,
                                   child: Container(
                                     height: 75,
                                     width: 75,
                                     decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: WirdColors.primaryDaycolor,
-                                      gradient: WirdGradients.listTileShadeGradient
-                                    ),
+                                        shape: BoxShape.circle,
+                                        color: WirdColors.primaryDaycolor,
+                                        gradient: WirdGradients
+                                            .listTileShadeGradient),
                                     child: Center(
                                       child: Icon(
-                                        size:35,
+                                        size: 35,
                                         Icons.done_all,
                                         color: Colors.white,
                                       ),

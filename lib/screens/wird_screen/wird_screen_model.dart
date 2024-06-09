@@ -2,17 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/model/wird.dart';
 
+enum WirdType { morning, evening }
+
 class WirdScreenModel with ChangeNotifier {
   List<Wird> wirdList = [];
   int currentPage = 0;
   PageController controller = PageController();
   int currentPageWirdCounted =
       0; // here the wird.counted assigned because of ui not reflecting issue
+  late WirdType type;
 
   WirdScreenModel(arguments) {
-    if (arguments['wird'] == 'morning') {
+    type = arguments['wird'] == 'morning'
+        ? WirdType.morning
+        : WirdType.evening;
+    if (type == WirdType.morning) {
       wirdList = WirdulLatif.morningWird;
-    } else if (arguments['wird'] == 'evening') {
+    } else {
       wirdList = WirdulLatif.eveningWird;
     }
     controller.addListener(_onPageChanged);
