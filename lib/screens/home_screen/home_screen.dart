@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils/colors.dart';
-import 'package:wirdul_latif/widgets/container_shader.dart';
+import 'package:wirdul_latif/widgets/morning_evening_wird_card.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routename = 'homescreen';
@@ -58,32 +58,32 @@ class HomeScreen extends StatelessWidget {
                 ),
                 quranMessageSection()
                     .animate()
-                    .shimmer(duration: Duration(milliseconds:500 ))
-                  .scale(
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeInOutCirc,
-                    //  To the original position
-                  ),
+                    .shimmer(duration: Duration(milliseconds: 1500))
+                    .scale(
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOutCirc,
+                      //  To the original position
+                    ),
                 const SizedBox(
                   height: 30,
                 ),
                 motivationShortsTileSection()
                     .animate()
-                    .shimmer(duration: Duration(milliseconds: 500))
-                                        .scale(
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeInOutCirc,
-                  ),
+                    .shimmer(duration: Duration(milliseconds: 1500))
+                    .scale(
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOutCirc,
+                    ),
                 const SizedBox(
                   height: 30,
                 ),
                 morningAndEveningWirdSection(context)
                     .animate()
-                    .shimmer(duration: Duration(milliseconds: 500))
+                    .shimmer(duration: Duration(milliseconds: 1500))
                     .scale(
-                    duration: Duration(milliseconds: 500),
-                    curve: Curves.easeInOutCirc,
-                  ),
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.easeInOutCirc,
+                    ),
               ],
             ),
           ),
@@ -95,62 +95,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  Row morningAndEveningWirdSection(context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        InkWell(
-          onTap: () {
-            Navigator.of(context).pushNamed(WirdScreen.routename,
-                arguments: {'wird': 'morning'});
-          },
-          child: morningOrEveningCard(
-              size: 170,
-              imagePath: 'asset/morning.jpg',
-              title: 'Morning',
-              subTitle: 'Wird'),
-        ),
-        InkWell(
-          onTap: () {
-            Navigator.of(context).pushNamed(WirdScreen.routename,
-                arguments: {'wird': 'evening'});
-          },
-          child: morningOrEveningCard(
-              size: 170,
-              imagePath: 'asset/night.jpg',
-              title: 'Evening',
-              subTitle: 'Wird'),
-        ),
-      ],
-    );
-  }
-
-  Container motivationShortsTileSection() {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListTile(
-          leading: Icon(Icons.bolt, color: Colors.yellow, size: 30),
-          title: Text(
-            'Motivational Shorts',
-            style: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-          trailing: Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white,
-          ),
-        ),
-      ),
-      // height: 70,
-      decoration: BoxDecoration(
-        color: WirdColors.primaryDaycolor,
-        gradient: WirdGradients.listTileShadeGradient,
-        borderRadius: BorderRadius.circular(15),
       ),
     );
   }
@@ -206,6 +150,62 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           height: 200,
+        ),
+      ],
+    );
+  }
+
+  Container motivationShortsTileSection() {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          leading: Icon(Icons.bolt, color: Colors.yellow, size: 30),
+          title: Text(
+            'Motivational Shorts',
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      // height: 70,
+      decoration: BoxDecoration(
+        color: WirdColors.primaryDaycolor,
+        gradient: WirdGradients.listTileShadeGradient,
+        borderRadius: BorderRadius.circular(15),
+      ),
+    );
+  }
+
+  Row morningAndEveningWirdSection(context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(WirdScreen.routename,
+                arguments: {'wird': 'morning'});
+          },
+          child: MorningOrEveningCard(
+              size: 170,
+              imagePath: 'asset/morning.jpg',
+              title: 'Morning',
+              subTitle: 'Wird'),
+        ),
+        InkWell(
+          onTap: () {
+            Navigator.of(context).pushNamed(WirdScreen.routename,
+                arguments: {'wird': 'evening'});
+          },
+          child: MorningOrEveningCard(
+              size: 170,
+              imagePath: 'asset/night.jpg',
+              title: 'Evening',
+              subTitle: 'Wird'),
         ),
       ],
     );

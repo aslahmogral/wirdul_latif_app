@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
               // is not restarted.
               primarySwatch: Colors.blue,
-              fontFamily: 'Poppins'),
+              fontFamily: 'Poppins'),   
           home: const HomeScreen(),
         ));
   }
