@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
-import 'package:rive/rive.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils/colors.dart';
@@ -27,23 +26,27 @@ class HomeScreen extends StatelessWidget {
                   // color: WirdColors.primaryDaycolor,
                 )),
             actions: [
-              AnimatedContainer(
-                      duration: Duration(milliseconds: 1000),
-                      child: IconButton(
-                              onPressed: () {
-                                model.swithDayOrNight();
-                              },
-                              icon: !model.isNightMode
-                                  ? Icon(
-                                      Icons.dark_mode,
-                                    )
-                                      .animate()
-                                      .fadeIn(duration: Duration(seconds: 1))
-                                  : Icon(Icons.light_mode))
-                          .animate()
-                          .fadeIn(duration: Duration(seconds: 1)))
-                  .animate()
-                  .shimmer(duration: Duration(seconds: 1))
+              IconButton(
+                  onPressed: () {
+                    model.swithDayOrNight();
+                  },
+                  icon: AnimatedSwitcher(
+                    duration: Duration(milliseconds: 300),
+                    transitionBuilder:
+                        (Widget child, Animation<double> animation) {
+                      // return FadeTransition(opacity: animation, child: child);
+                      return ScaleTransition(scale: animation, child: child);
+                    },
+                    child: model.isNightMode
+                        ? Icon(
+                            Icons.dark_mode,
+                            key: ValueKey('dark'),
+                          )
+                        : Icon(
+                            Icons.light_mode,
+                            key: ValueKey('light'),
+                          ),
+                  ))
             ],
           ),
           body: Padding(
@@ -55,22 +58,32 @@ class HomeScreen extends StatelessWidget {
                 ),
                 quranMessageSection()
                     .animate()
-                    .shimmer(duration: Duration(milliseconds: 300))
-                    .moveX(),
+                    .shimmer(duration: Duration(milliseconds:500 ))
+                  .scale(
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.easeInOutCirc,
+                    //  To the original position
+                  ),
                 const SizedBox(
                   height: 30,
                 ),
                 motivationShortsTileSection()
                     .animate()
-                    .shimmer(duration: Duration(milliseconds: 300))
-                    .moveX(),
+                    .shimmer(duration: Duration(milliseconds: 500))
+                                        .scale(
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.easeInOutCirc,
+                  ),
                 const SizedBox(
                   height: 30,
                 ),
                 morningAndEveningWirdSection(context)
                     .animate()
-                    .shimmer(duration: Duration(milliseconds: 300))
-                    .moveX(),
+                    .shimmer(duration: Duration(milliseconds: 500))
+                    .scale(
+                    duration: Duration(milliseconds: 500),
+                    curve: Curves.easeInOutCirc,
+                  ),
               ],
             ),
           ),
@@ -92,7 +105,8 @@ class HomeScreen extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(WirdScreen.routename,arguments: {'wird':'morning'});
+            Navigator.of(context).pushNamed(WirdScreen.routename,
+                arguments: {'wird': 'morning'});
           },
           child: morningOrEveningCard(
               size: 170,
@@ -102,7 +116,8 @@ class HomeScreen extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            Navigator.of(context).pushNamed(WirdScreen.routename,arguments: {'wird':'evening'});
+            Navigator.of(context).pushNamed(WirdScreen.routename,
+                arguments: {'wird': 'evening'});
           },
           child: morningOrEveningCard(
               size: 170,

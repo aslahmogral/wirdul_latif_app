@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/screens/wird_screen/wird_screen_model.dart';
-import 'package:wirdul_latif/screens/wird_screen/wird_screen_model.dart';
-import 'package:wirdul_latif/screens/wird_screen/wird_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class WirdScreen extends StatelessWidget {
@@ -25,46 +23,7 @@ class WirdScreen extends StatelessWidget {
               appBar: AppBar(
                 title: Text('wird'),
               ),
-              floatingActionButtonLocation:
-                  FloatingActionButtonLocation.centerFloat,
-              floatingActionButton: SizedBox(
-                height: 100,
-                width: 100,
-                child: FloatingActionButton(
-                  backgroundColor: Colors.transparent,
-                  elevation: 0,
-                  shape: const CircleBorder(),
-                  onPressed: () {},
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      SizedBox(
-                        height: 70,
-                        width: 70,
-                        child: CircularProgressIndicator(
-                          value: 25/100,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            WirdColors.primaryDaycolor,
-                          ),
-                          backgroundColor: Colors.black45
-                              .withOpacity(0.2),
-                        ),
-                      ),
-                      Container(
-                        child: Text(
-                          '3',
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                    ],
-                  ),
-                  
-                ),
-              ),
-              body: PageView.builder(
+             body: PageView.builder(
                 itemCount: model.wirdList.length,
                 controller: model.controller,
                 onPageChanged: (value) {
@@ -151,6 +110,46 @@ class WirdScreen extends StatelessWidget {
                   );
                 },
               ),
+                floatingActionButtonLocation:
+                  FloatingActionButtonLocation.centerFloat,
+              floatingActionButton: SizedBox(
+                height: 100,
+                width: 100,
+                child: FloatingActionButton(
+                  backgroundColor: Colors.transparent,
+                  elevation: 0,
+                  shape: const CircleBorder(),
+                  onPressed: () {},
+                  child: Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      SizedBox(
+                        height: 70,
+                        width: 70,
+                        child: CircularProgressIndicator(
+                          value: 25/100,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            WirdColors.primaryDaycolor,
+                          ),
+                          backgroundColor: Colors.black45
+                              .withOpacity(0.2),
+                        ),
+                      ),
+                      Container(
+                        child: Text(
+                          '3',
+                          style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                  
+                ),
+              ),
+             
             );
           },
         );
