@@ -21,7 +21,7 @@ class WirdScreen extends StatelessWidget {
           builder: (context, model, child) {
             return Scaffold(
               appBar: AppBar(
-                leading: Container(),
+                
                 centerTitle: true,
                 title: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -30,7 +30,7 @@ class WirdScreen extends StatelessWidget {
                         ? Text('Morning Wird')
                         : Text('Evening Wird'),
                     Text(
-                      '1/44',
+                      '${model.currentPage + 1} / 44',
                       style: TextStyle(fontSize: 16),
                     )
                   ],
@@ -48,11 +48,23 @@ class WirdScreen extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
+                      if(model.currentPage ==0)
                       Text(
-                        '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)}%',
+                        '0%',
                         style: TextStyle(
                           fontSize: 12,
                           color: Colors.black,
+                        ),
+                      ),
+                      
+                      Visibility(
+                        visible: model.currentPage != 0,
+                        child: Text(
+                          '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)}%',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                          ),
                         ),
                       ),
                     ],

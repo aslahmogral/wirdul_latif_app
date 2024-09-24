@@ -56,36 +56,22 @@ class HomeScreen extends StatelessWidget {
                 const SizedBox(
                   height: 30,
                 ),
-                quranMessageSection()
-                    .animate()
-                    .shimmer(duration: Duration(milliseconds: 1500))
-                    .scale(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInOutCirc,
-                      //  To the original position
-                    ),
+                quranMessageSection(),
                 const SizedBox(
                   height: 30,
                 ),
-                motivationShortsTileSection()
-                    .animate()
-                    .shimmer(duration: Duration(milliseconds: 1500))
-                    .scale(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInOutCirc,
-                    ),
+                motivationShortsTileSection(),
+                    
                 const SizedBox(
                   height: 30,
                 ),
                 morningAndEveningWirdSection(context)
-                    .animate()
-                    .shimmer(duration: Duration(milliseconds: 1500))
-                    .scale(
-                      duration: Duration(milliseconds: 500),
-                      curve: Curves.easeInOutCirc,
-                    ),
+                    
               ],
-            ),
+            ).animate().scale(
+                      duration: Duration(seconds: 1),
+                      curve: Curves.easeInOutCirc,
+                    ).then(delay: Duration(milliseconds: 500)).shimmer(),
           ),
           bottomNavigationBar: Padding(
             padding: EdgeInsets.all(16.0),
