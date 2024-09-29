@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/screens/wird_screen/wird_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class WirdScreen extends StatelessWidget {
   static String routename = 'wirdscreen';
+  final WirdType wirdType;
 
-  const WirdScreen({super.key});
+  const WirdScreen({super.key, required this.wirdType});
 
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> arguments =
-        (ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>);
+   
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => WirdScreenModel(arguments))
+        ChangeNotifierProvider(create: (context) => WirdScreenModel(wirdType))
       ],
       builder: (context, child) {
         return Consumer<WirdScreenModel>(
@@ -26,9 +27,7 @@ class WirdScreen extends StatelessWidget {
                 title: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    model.type == WirdType.morning
-                        ? Text('Morning Wird')
-                        : Text('Evening Wird'),
+                    Text('${model.TitleText[0].toUpperCase()}${model.TitleText.substring(1)} Wird'),
                     Text(
                       '${model.currentPage + 1} / 44',
                       style: TextStyle(fontSize: 16),

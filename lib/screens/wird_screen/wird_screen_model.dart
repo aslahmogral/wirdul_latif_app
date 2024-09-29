@@ -1,26 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/model/wird.dart';
-
-enum WirdType { morning, evening }
+import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
+import 'package:wirdul_latif/utils.dart/constants.dart';
 
 class WirdScreenModel with ChangeNotifier {
   List<Wird> wirdList = [];
   int currentPage = 0;
   PageController controller = PageController();
-  int currentPageWirdCounted =
-      0; // here the wird.counted assigned because of ui not reflecting issue
+  int currentPageWirdCounted = 0;
+  // here the wird.counted assigned because of ui not reflecting issue
   late WirdType type;
+  String TitleText = '';
 
-  WirdScreenModel(arguments) {
-    type = arguments['wird'] == 'morning'
-        ? WirdType.morning
-        : WirdType.evening;
-    if (type == WirdType.morning) {
-      wirdList = WirdulLatif.morningWird;
-    } else {
-      wirdList = WirdulLatif.eveningWird;
-    }
+  WirdScreenModel(WirdType wirdType) {
+    type = wirdType;
+    initialize();
     controller.addListener(_onPageChanged);
   }
 
@@ -54,5 +49,27 @@ class WirdScreenModel with ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  initialize() {
+    if (type == WirdType.morning) {
+      setMorningDatas();
+    }
+
+    if (type == WirdType.evening) {
+      setEveningDatas();
+    }
+
+    notifyListeners();
+  }
+
+  setMorningDatas() {
+    wirdList = WirdulLatif.morningWird;
+    TitleText = Constants.morning;
+  }
+
+  setEveningDatas() {
+    wirdList = WirdulLatif.eveningWird;
+    TitleText = Constants.evening;
   }
 }

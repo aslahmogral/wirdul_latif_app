@@ -1,23 +1,53 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
+import 'package:wirdul_latif/utils.dart/constants.dart';
+
+enum WirdType { morning, evening }
 
 class HomeScreenModel with ChangeNotifier {
   bool isNightMode = false;
   int currentindex = 0;
+  late BuildContext _context;
+  late WirdType wirdType;
+  // String MorningOrEveningContainerTitle = '';
+  String titleText = '';
 
-  swithDayOrNight() {
-    isNightMode = !isNightMode;
-    notifyListeners();
+  HomeScreenModel(BuildContext context, {required WirdType wirdType}) {
+    _context = context;
+    this.wirdType = wirdType;
+    initialize();
   }
-
-  List<BottomNavigationBarItem> bottonNavigationBarItems = [
-    BottomNavigationBarItem(icon: Icon(Icons.sunny,color: Colors.black,),label: 'Morning'),
-    BottomNavigationBarItem(icon: Icon(Icons.nightlight,),label: 'Evening'),
-    BottomNavigationBarItem(icon: Icon(Icons.bolt),label: 'motivation'),
-    BottomNavigationBarItem(icon: Icon(Icons.settings),label: 'settings'),
-  ];
 
   onItemTapped(int index) {
     currentindex = index;
     notifyListeners();
+  }
+
+  navigateToWird() {
+    Navigator.push(
+        _context,
+        MaterialPageRoute(
+          builder: (context) => WirdScreen(
+            wirdType: wirdType,
+          ),
+        ));
+  }
+
+  initialize() {
+    if (wirdType == WirdType.morning) {
+      setMorningDatas();
+    } else {
+      setEveningDatas();
+    }
+    notifyListeners();
+  }
+
+  setMorningDatas() {
+    titleText = Constants.morning;
+  }
+
+  setEveningDatas() {
+    titleText = Constants.evening;
   }
 }

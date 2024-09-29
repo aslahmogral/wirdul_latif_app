@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
+import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
+import 'package:wirdul_latif/screens/wird_screen/wird_screen_model.dart';
+import 'package:wirdul_latif/utils.dart/constants.dart';
 
 class BottomNavbarModel with ChangeNotifier {
   BottomNavbarModel() {
-    checkIsItMorningOrEvening();
+    // checkIsItMorningOrEvening();
   }
   int currentindex = 0;
   bool isMorning = false;
@@ -38,10 +41,10 @@ class BottomNavbarModel with ChangeNotifier {
   currentScreen() {
     switch (currentindex) {
       case 0:
-        return HomeScreen();
+        return HomeScreen(wirdType: WirdType.morning);
       case 1:
         return Center(
-          child: Text('evening'),
+          child: HomeScreen(wirdType: WirdType.evening)
         );
       case 2:
         return Center(
@@ -52,7 +55,7 @@ class BottomNavbarModel with ChangeNotifier {
           child: Text('setttings'),
         );
       default:
-        return HomeScreen();
+        return HomeScreen(wirdType: WirdType.morning);
     }
   }
 }
