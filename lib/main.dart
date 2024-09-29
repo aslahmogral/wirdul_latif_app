@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/deprecated/provider/wird_provider.dart';
 import 'package:wirdul_latif/routes.dart';
-import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
+import 'package:wirdul_latif/screens/bottom_nav_bar/bottomNavbar.dart';
 
 void main() {
   WirdulLatif.initWird();
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
               // is not restarted.
               primarySwatch: Colors.blue,
               fontFamily: 'Poppins'),   
-          home: const HomeScreen(),
+          home: const BottomNavBar(),
         ));
   }
 }

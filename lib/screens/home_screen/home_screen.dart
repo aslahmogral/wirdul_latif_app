@@ -10,6 +10,8 @@ class HomeScreen extends StatelessWidget {
   static String routename = 'homescreen';
   const HomeScreen({super.key});
 
+  
+
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -73,20 +75,7 @@ class HomeScreen extends StatelessWidget {
                       curve: Curves.easeInOutCirc,
                     ).then(delay: Duration(milliseconds: 500)).shimmer(),
           ),
-          bottomNavigationBar: Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Text(
-              'Please include App Developer in your \n prayers 🤲',
-              textAlign: TextAlign.center,
-            ).animate(
-              onComplete: (controller) {
-                controller.repeat();
-              },
-            ).shimmer(
-              color: Colors.yellow,
-              duration: Duration(seconds: 3),
-            ),
-          ),
+          
         ),
       ),
     );
