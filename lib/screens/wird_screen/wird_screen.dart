@@ -58,16 +58,17 @@ class WirdScreen extends StatelessWidget {
                                   color: WirdColors.primaryDaycolor,
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(20.0),
+                                  padding: const EdgeInsets.only(
+                                      top: 16.0, left: 16.0, right: 16.0),
                                   child: Text(
                                     model.wirdList[index].wird,
-                                    textAlign: TextAlign.right,
+                                    textAlign: TextAlign.center,
                                     style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 24
-                                        // fontFamily: 'AmiriQuran',
-                                        ),
+                                      color: Colors.white,
+                                      // fontWeight: FontWeight.bold,
+                                      fontSize: 24,
+                                      fontFamily: 'Kfgqpc',
+                                    ),
                                   ),
                                 ),
                               ),
@@ -168,28 +169,19 @@ class thasbeehCounter extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
-                    Text(
-                      '${model.currentPage + 1} / 44',
-                      // style: TextStyle(fontSize: 16),
-                    ),
-                    Spacer(),
                     if (model.currentPage == 0)
                       Text(
                         '0%',
-                        // style: TextStyle(
-                        //   fontSize: 12,
-                        //   // color: Colors.black,
-                        // ),
                       ),
                     Visibility(
                       visible: model.currentPage != 0,
                       child: Text(
-                        '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)}% ',
-                        // style: TextStyle(
-                        //   // fontSize: 12,
-                        //   // color: Colors.black,
-                        // ),
+                        '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)} % ',
                       ),
+                    ),
+                    Spacer(),
+                    Text(
+                      '${model.currentPage + 1} / 44',
                     ),
                   ],
                 ),
@@ -201,6 +193,23 @@ class thasbeehCounter extends StatelessWidget {
               height: 50,
               width: MediaQuery.of(context).size.width,
             ),
+            Container(
+              height: 50,
+              child: Column(
+                children: [
+                  Spacer(),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                    child: LinearProgressIndicator(
+                      color: Colors.teal,
+                      minHeight: 0.5,
+                      value:(model.currentPage + 1) / model.wirdList.length ,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
             Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
