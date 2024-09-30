@@ -27,45 +27,9 @@ class WirdScreen extends StatelessWidget {
                   children: [
                     Text(
                         '${model.TitleText[0].toUpperCase()}${model.TitleText.substring(1)} Wird'),
-                    Text(
-                      '${model.currentPage + 1} / 44',
-                      style: TextStyle(fontSize: 16),
-                    )
                   ],
                 ),
                 actions: [
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      CircularProgressIndicator(
-                        backgroundColor: Colors.black45.withOpacity(0.2),
-                        value: (model.currentPage + 1) / model.wirdList.length,
-                        valueColor: AlwaysStoppedAnimation<Color>(
-                            WirdColors.primaryColor),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      if (model.currentPage == 0)
-                        Text(
-                          '0%',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.black,
-                          ),
-                        ),
-                      Visibility(
-                        visible: model.currentPage != 0,
-                        child: Text(
-                          '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)}%',
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
                   IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
                 ],
               ),
@@ -163,71 +127,8 @@ class WirdScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        Align(
-                          alignment: Alignment.bottomCenter,
-                          child: InkWell(
-                            onTap: () {
-                              model.thasbeehButtonClicked();
-                            },
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: [
-                                SizedBox(
-                                  height: 70,
-                                  width: 70,
-                                  child: CircularProgressIndicator(
-                                    value: model.wirdList[model.currentPage]
-                                                    .counted !=
-                                                null &&
-                                            model.wirdList[model.currentPage]
-                                                    .counted !=
-                                                0
-                                        ? (model.currentPageWirdCounted /
-                                                model
-                                                    .wirdList[model.currentPage]
-                                                    .count)
-                                            .toDouble()
-                                        : 0,
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                      WirdColors.primaryDaycolor,
-                                    ),
-                                    backgroundColor:
-                                        Colors.black45.withOpacity(0.2),
-                                  ),
-                                ),
-                                Container(
-                                  child: Text(
-                                    "${model.wirdList[model.currentPage].counted != null ? model.currentPageWirdCounted : 0}/${model.wirdList[model.currentPage].count.toString()}",
-                                    style: const TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                ),
-                                Visibility(
-                                  visible: model.wirdList[model.currentPage]
-                                          .completed ??
-                                      false,
-                                  child: Container(
-                                    height: 75,
-                                    width: 75,
-                                    decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: WirdColors.primaryDaycolor,
-                                        gradient: WirdGradients
-                                            .listTileShadeGradient),
-                                    child: Center(
-                                      child: Icon(
-                                        size: 35,
-                                        Icons.done_all,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+                        thasbeehCounter(
+                          model: model,
                         )
                       ],
                     ),
@@ -238,6 +139,116 @@ class WirdScreen extends StatelessWidget {
           },
         );
       },
+    );
+  }
+}
+
+class thasbeehCounter extends StatelessWidget {
+  final WirdScreenModel model;
+  const thasbeehCounter({
+    super.key,
+    required this.model,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: InkWell(
+        onTap: () {
+          model.thasbeehButtonClicked();
+        },
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        child: Stack(
+          alignment: Alignment.center,
+          children: [
+            Container(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Row(
+                  children: [
+                    Text(
+                      '${model.currentPage + 1} / 44',
+                      // style: TextStyle(fontSize: 16),
+                    ),
+                    Spacer(),
+                    if (model.currentPage == 0)
+                      Text(
+                        '0%',
+                        // style: TextStyle(
+                        //   fontSize: 12,
+                        //   // color: Colors.black,
+                        // ),
+                      ),
+                    Visibility(
+                      visible: model.currentPage != 0,
+                      child: Text(
+                        '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)}% ',
+                        // style: TextStyle(
+                        //   // fontSize: 12,
+                        //   // color: Colors.black,
+                        // ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color: Theme.of(context).primaryColor,
+              ),
+              height: 50,
+              width: MediaQuery.of(context).size.width,
+            ),
+            Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(100),
+                    color: Theme.of(context).scaffoldBackgroundColor),
+                height: 100,
+                width: 100),
+            SizedBox(
+              height: 70,
+              width: 70,
+              child: CircularProgressIndicator(
+                value: model.wirdList[model.currentPage].counted != null &&
+                        model.wirdList[model.currentPage].counted != 0
+                    ? (model.currentPageWirdCounted /
+                            model.wirdList[model.currentPage].count)
+                        .toDouble()
+                    : 0,
+                valueColor: AlwaysStoppedAnimation<Color>(
+                  WirdColors.primaryDaycolor,
+                ),
+                backgroundColor: Colors.black45.withOpacity(0.2),
+              ),
+            ),
+            Container(
+              child: Text(
+                "${model.wirdList[model.currentPage].counted != null ? model.currentPageWirdCounted : 0}/${model.wirdList[model.currentPage].count.toString()}",
+              ),
+            ),
+            Visibility(
+              visible: model.wirdList[model.currentPage].completed ?? false,
+              child: Container(
+                height: 75,
+                width: 75,
+                decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: WirdColors.primaryDaycolor,
+                    gradient: WirdGradients.listTileShadeGradient),
+                child: Center(
+                  child: Icon(
+                    size: 35,
+                    Icons.done_all,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

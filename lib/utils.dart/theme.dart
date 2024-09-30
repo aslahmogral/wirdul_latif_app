@@ -30,7 +30,7 @@ class customTheme {
 
   static final ThemeData lightTheme =
       ThemeData.light(useMaterial3: true).copyWith(
-    primaryColor: Colors.blue,
+    primaryColor:Colors.teal,
     hintColor: Colors.teal,
     scaffoldBackgroundColor: Colors.white,
     textTheme: TextTheme(
