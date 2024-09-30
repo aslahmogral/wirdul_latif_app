@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(wirdType);
-    // Map<String, dynamic> arg = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>÷
+   
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(

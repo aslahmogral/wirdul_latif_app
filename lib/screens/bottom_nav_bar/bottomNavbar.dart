@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/screens/bottom_nav_bar/bottom_navbar_model.dart';
-import 'package:wirdul_latif/utils/colors.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar({super.key});

@@ -59,7 +59,7 @@ class WirdScreen extends StatelessWidget {
                                 ),
                                 child: Padding(
                                   padding: const EdgeInsets.only(
-                                      top: 16.0, left: 16.0, right: 16.0),
+                                      top: 16.0, left: 16.0, right: 16.0,bottom: 8),
                                   child: Text(
                                     model.wirdList[index].wird,
                                     textAlign: TextAlign.center,
@@ -106,12 +106,6 @@ class WirdScreen extends StatelessWidget {
                                                 .replaceAll(
                                                     RegExp(r'[˹˺]'), ''),
                                             textAlign: TextAlign.left,
-                                            // style: const TextStyle(
-                                            //     color: Colors.black45,
-                                            //     fontWeight: FontWeight.bold,
-                                            //     fontSize: 16
-                                            //     // fontFamily: 'AmiriQuran',
-                                            //     ),
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headlineSmall
@@ -203,13 +197,12 @@ class thasbeehCounter extends StatelessWidget {
                     child: LinearProgressIndicator(
                       color: Colors.teal,
                       minHeight: 0.5,
-                      value:(model.currentPage + 1) / model.wirdList.length ,
+                      value: (model.currentPage + 1) / model.wirdList.length,
                     ),
                   ),
                 ],
               ),
             ),
-
             Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(100),
