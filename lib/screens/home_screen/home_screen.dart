@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
-import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -122,18 +121,17 @@ class HomeScreen extends StatelessWidget {
           height: 200,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            image: DecorationImage(
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: FadeInImage(
+              placeholder: AssetImage(
+                  model.mainImagePath), // Add your placeholder image here
               image: AssetImage(model.mainImagePath),
               fit: BoxFit.cover,
+              fadeInDuration: Duration(milliseconds: 300),
             ),
           ),
-        ),
-        Container(
-          height: 200,
-          decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 0, 0, 0),
-              borderRadius: BorderRadius.circular(15),
-              gradient: WirdGradients.containerShadeGradient),
         ),
         Container(
           decoration: BoxDecoration(
