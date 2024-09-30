@@ -12,7 +12,6 @@ class WirdScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (context) => WirdScreenModel(wirdType))
@@ -22,12 +21,12 @@ class WirdScreen extends StatelessWidget {
           builder: (context, model, child) {
             return Scaffold(
               appBar: AppBar(
-                
                 centerTitle: true,
                 title: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    Text('${model.TitleText[0].toUpperCase()}${model.TitleText.substring(1)} Wird'),
+                    Text(
+                        '${model.TitleText[0].toUpperCase()}${model.TitleText.substring(1)} Wird'),
                     Text(
                       '${model.currentPage + 1} / 44',
                       style: TextStyle(fontSize: 16),
@@ -40,22 +39,21 @@ class WirdScreen extends StatelessWidget {
                     children: [
                       CircularProgressIndicator(
                         backgroundColor: Colors.black45.withOpacity(0.2),
-                        value: (model.currentPage + 1) / model.wirdList.length ,
+                        value: (model.currentPage + 1) / model.wirdList.length,
                         valueColor: AlwaysStoppedAnimation<Color>(
                             WirdColors.primaryColor),
                       ),
                       const SizedBox(
                         width: 10,
                       ),
-                      if(model.currentPage ==0)
-                      Text(
-                        '0%',
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: Colors.black,
+                      if (model.currentPage == 0)
+                        Text(
+                          '0%',
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: Colors.black,
+                          ),
                         ),
-                      ),
-                      
                       Visibility(
                         visible: model.currentPage != 0,
                         child: Text(
@@ -126,30 +124,36 @@ class WirdScreen extends StatelessWidget {
                                     padding: const EdgeInsets.all(20.0),
                                     child: Column(
                                       children: [
-                                        Text(
-                                          'TRANSLATION',
-                                          textAlign: TextAlign.center,
-                                          style: TextStyle(
-                                              color: Colors.black45,
-                                              fontWeight: FontWeight.w900,
-                                              fontSize: 22
-                                              // fontFamily: 'AmiriQuran',
-                                              ),
-                                        ),
+                                        Text('TRANSLATION',
+                                            textAlign: TextAlign.center,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineSmall
+                                                ?.copyWith(
+                                                    fontSize: 22,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
                                         SizedBox(
                                           height: 16,
                                         ),
                                         Text(
-                                          model.wirdList[index].english
-                                              .replaceAll(RegExp(r'[˹˺]'), ''),
-                                          textAlign: TextAlign.left,
-                                          style: const TextStyle(
-                                              color: Colors.black45,
-                                              fontWeight: FontWeight.bold,
-                                              fontSize: 16
-                                              // fontFamily: 'AmiriQuran',
-                                              ),
-                                        ),
+                                            model.wirdList[index].english
+                                                .replaceAll(
+                                                    RegExp(r'[˹˺]'), ''),
+                                            textAlign: TextAlign.left,
+                                            // style: const TextStyle(
+                                            //     color: Colors.black45,
+                                            //     fontWeight: FontWeight.bold,
+                                            //     fontSize: 16
+                                            //     // fontFamily: 'AmiriQuran',
+                                            //     ),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headlineSmall
+                                                ?.copyWith(
+                                                    fontSize: 16,
+                                                    fontWeight:
+                                                        FontWeight.bold)),
                                       ],
                                     ),
                                   )),

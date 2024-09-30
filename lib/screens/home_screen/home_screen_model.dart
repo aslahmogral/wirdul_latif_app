@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:wirdul_latif/main.dart';
 import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils.dart/constants.dart';
 
@@ -10,8 +12,9 @@ class HomeScreenModel with ChangeNotifier {
   int currentindex = 0;
   late BuildContext _context;
   late WirdType wirdType;
-  // String MorningOrEveningContainerTitle = '';
   String titleText = '';
+  IconData wirdIcon = Icons.sunny;
+  String mainImagePath = '';
 
   HomeScreenModel(BuildContext context, {required WirdType wirdType}) {
     _context = context;
@@ -45,9 +48,14 @@ class HomeScreenModel with ChangeNotifier {
 
   setMorningDatas() {
     titleText = Constants.morning;
+    wirdIcon = Icons.sunny;
+    mainImagePath = 'asset/morning.jpg';
   }
 
   setEveningDatas() {
     titleText = Constants.evening;
+    wirdIcon = Icons.nightlight;
+    mainImagePath = 'asset/night.jpg';
+
   }
 }

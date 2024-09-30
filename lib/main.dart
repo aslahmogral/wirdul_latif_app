@@ -5,15 +5,18 @@ import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/deprecated/provider/wird_provider.dart';
 import 'package:wirdul_latif/routes.dart';
 import 'package:wirdul_latif/screens/bottom_nav_bar/bottomNavbar.dart';
+import 'package:wirdul_latif/utils.dart/theme.dart';
 
 void main() {
   WirdulLatif.initWird();
-  runApp(const MyApp());
-    Animate.restartOnHotReload = true;
+  runApp( MyApp());
+  Animate.restartOnHotReload = true;
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+   MyApp({Key? key}) : super(key: key);
+
+  bool isDarkMode = true;
 
   // This widget is the root of your application.
   @override
@@ -28,10 +31,7 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Wird Al Latif',
           routes: AppRoutes.routes,
-          theme: ThemeData(
-              // is not restarted.
-              primarySwatch: Colors.blue,
-              fontFamily: 'Poppins'),   
+          theme: isDarkMode? customTheme.darkTheme : customTheme.lightTheme,
           home: const BottomNavBar(),
         ));
   }

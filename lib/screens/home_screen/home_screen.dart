@@ -122,8 +122,8 @@ class HomeScreen extends StatelessWidget {
           height: 200,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
-            image: const DecorationImage(
-              image: AssetImage('asset/morning.jpg'),
+            image: DecorationImage(
+              image: AssetImage(model.mainImagePath),
               fit: BoxFit.cover,
             ),
           ),
@@ -225,7 +225,7 @@ class HomeScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
-          leading: Icon(Icons.sunny, color: Colors.yellow, size: 30),
+          leading: Icon(model.wirdIcon, color: Colors.yellow, size: 30),
           title: Text(
             'Read ${model.titleText[0].toUpperCase()}${model.titleText.substring(1)} Wird',
             style: TextStyle(

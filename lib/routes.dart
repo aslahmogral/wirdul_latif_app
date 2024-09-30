@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
-import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
-import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
+// import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
+// import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 
 class AppRoutes {
 
