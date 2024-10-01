@@ -160,22 +160,40 @@ class thasbeehCounter extends StatelessWidget {
           children: [
             Container(
               child: Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: const EdgeInsets.symmetric( horizontal: 16.0),
                 child: Row(
                   children: [
                     if (model.currentPage == 0)
-                      Text(
-                        '0%',
+                      Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            '0%',
+                          ),
+                          Text('Completed',style: TextStyle(fontSize: 10),),
+                        ],
                       ),
                     Visibility(
                       visible: model.currentPage != 0,
-                      child: Text(
-                        '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)} % ',
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)} % ',
+                          ),
+                           Text('Completed',style: TextStyle(fontSize: 10),),
+                        ],
                       ),
                     ),
                     Spacer(),
-                    Text(
-                      '${model.currentPage + 1} / 44',
+                    Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                          '${43 - model.currentPage} ',
+                        ),
+                        Text('Remaining',style: TextStyle(fontSize: 10),),
+                      ],
                     ),
                   ],
                 ),
@@ -184,11 +202,11 @@ class thasbeehCounter extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
                 color: Theme.of(context).primaryColor,
               ),
-              height: 50,
+              height: 60,
               width: MediaQuery.of(context).size.width,
             ),
             Container(
-              height: 50,
+              height: 60,
               child: Column(
                 children: [
                   Spacer(),
