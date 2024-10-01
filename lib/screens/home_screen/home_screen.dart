@@ -122,12 +122,22 @@ class HomeScreen extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
           ),
-          child: ClipRRect(
+          child:model.wirdType == WirdType.morning ? ClipRRect(
             borderRadius: BorderRadius.circular(15),
             child: FadeInImage(
               placeholder: AssetImage(
-                  model.mainImagePath), // Add your placeholder image here
-              image: AssetImage(model.mainImagePath),
+                  'asset/night.jpg'), // Add your placeholder image here
+              image: AssetImage('asset/morning.jpg'),
+              fit: BoxFit.cover,
+              fadeInDuration: Duration(milliseconds: 300),
+            ),
+          ):ClipRRect(
+            borderRadius: BorderRadius.circular(15),
+            child: FadeInImage(
+              filterQuality: FilterQuality.high,
+              placeholder: AssetImage(
+                  'asset/morning.jpg'), // Add your placeholder image here
+              image: AssetImage('asset/night.jpg'),
               fit: BoxFit.cover,
               fadeInDuration: Duration(milliseconds: 300),
             ),

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
-import 'package:wirdul_latif/screens/wird_screen/wird_screen_model.dart';
-import 'package:wirdul_latif/utils.dart/constants.dart';
 
 class BottomNavbarModel with ChangeNotifier {
   BottomNavbarModel() {
-    // checkIsItMorningOrEvening();
+    checkIsItMorningOrEvening();
   }
   int currentindex = 0;
   bool isMorning = false;
