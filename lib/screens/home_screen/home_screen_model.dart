@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
-import 'package:wirdul_latif/utils.dart/constants.dart';
+import 'package:wirdul_latif/screens/zikr_screen.dart/zikr_screen.dart';
+import 'package:wirdul_latif/utils/constants.dart';
 
 enum WirdType { morning, evening }
 
@@ -34,6 +35,14 @@ class HomeScreenModel with ChangeNotifier {
         ));
   }
 
+  navigateToZikr() {
+    Navigator.push(
+        _context,
+        MaterialPageRoute(
+          builder: (context) => ZikrScreen(),
+        ));
+  }
+
   initialize() {
     if (wirdType == WirdType.morning) {
       setMorningDatas();
@@ -53,6 +62,5 @@ class HomeScreenModel with ChangeNotifier {
     titleText = Constants.evening;
     wirdIcon = Icons.nightlight;
     mainImagePath = 'asset/night.jpg';
-
   }
 }

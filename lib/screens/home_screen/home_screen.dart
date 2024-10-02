@@ -10,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     print(wirdType);
-   
+
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -33,7 +33,11 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(
                     height: 20,
                   ),
-                  quranMessageSection(),
+                  InkWell(
+                      onTap: () {
+                        model.navigateToZikr();
+                      },
+                      child: quranMessageSection()),
                   const SizedBox(
                     height: 20,
                   ),
@@ -60,16 +64,16 @@ class HomeScreen extends StatelessWidget {
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
       children: [
-        Container(
-          height: 200,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(15),
-            image: const DecorationImage(
-              image: AssetImage('asset/quotes1.jpg'),
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
+        // Container(
+        //   height: 200,
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(15),
+        //     image: const DecorationImage(
+        //       image: AssetImage(Initialize.quranQuotes),
+        //       fit: BoxFit.cover,
+        //     ),
+        //   ),
+        // ),
         Container(
           height: 200,
           decoration: BoxDecoration(
@@ -85,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '“And glorify the praises of your Lord beore sunrise before sunset”',
+                    '“And glorify the praises of your Lord before sunrise before sunset”',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                         fontSize: 16,
@@ -122,26 +126,28 @@ class HomeScreen extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15),
           ),
-          child:model.wirdType == WirdType.morning ? ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: FadeInImage(
-              placeholder: AssetImage(
-                  'asset/night.jpg'), // Add your placeholder image here
-              image: AssetImage('asset/morning.jpg'),
-              fit: BoxFit.cover,
-              fadeInDuration: Duration(milliseconds: 300),
-            ),
-          ):ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: FadeInImage(
-              filterQuality: FilterQuality.high,
-              placeholder: AssetImage(
-                  'asset/morning.jpg'), // Add your placeholder image here
-              image: AssetImage('asset/night.jpg'),
-              fit: BoxFit.cover,
-              fadeInDuration: Duration(milliseconds: 300),
-            ),
-          ),
+          child: model.wirdType == WirdType.morning
+              ? ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: FadeInImage(
+                    placeholder: AssetImage(
+                        'asset/night.jpg'), // Add your placeholder image here
+                    image: AssetImage('asset/morning.jpg'),
+                    fit: BoxFit.cover,
+                    fadeInDuration: Duration(milliseconds: 300),
+                  ),
+                )
+              : ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: FadeInImage(
+                    filterQuality: FilterQuality.high,
+                    placeholder: AssetImage(
+                        'asset/morning.jpg'), // Add your placeholder image here
+                    image: AssetImage('asset/night.jpg'),
+                    fit: BoxFit.cover,
+                    fadeInDuration: Duration(milliseconds: 300),
+                  ),
+                ),
         ),
         Container(
           decoration: BoxDecoration(

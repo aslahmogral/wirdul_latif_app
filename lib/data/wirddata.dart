@@ -7,7 +7,7 @@ class WirdulLatif {
   static final Map<String, Map<String, dynamic>> _wirdList = {
     "1": {
       "wird":
-          "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ , قُلْ هُوَ اللهُ أَحَدٌ ، اللّهُ الصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ ",
+          "،\n  بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ , قُلْ هُوَ اللهُ أَحَدٌ ، اللّهُ الصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ ",
       "english":
           "1. Say, ˹O Prophet,˺ “He is Allah—One ˹and Indivisible˺; 2. Allah—the Sustainer ˹needed by all˺. 3. He has never had offspring, nor was He born. 4. And there is none comparable to Him.”",
       "eveningwird": "",
@@ -15,7 +15,7 @@ class WirdulLatif {
     },
     "2": {
       "wird":
-          "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ، مِنْ شَرِّ مَا خَلَقَ، وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ، وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ (3)",
+          "\n  بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ، مِنْ شَرِّ مَا خَلَقَ، وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ، وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ ",
       "english":
           "1. Say, ˹O Prophet,˺ “I seek refuge in the Lord of the daybreak 2. from the evil of whatever He has created, 3. and from the evil of the night when it grows dark, 4. and from the evil of those ˹witches casting spells by˺ blowing onto knots, 5. and from the evil of an envier when they envy.”",
       "eveningwird": "",
@@ -23,7 +23,7 @@ class WirdulLatif {
     },
     "3": {
       "wird":
-          "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\nقُلْ أَعُوذُ بِرَبِّ النَّاسِ، مَلِكِ النَّاسِ إِلَهِ النَّاسِ، مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ، مِنَ الْجِنَّةِ وَالنَّاسِ (3)",
+          "\n  بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\nقُلْ أَعُوذُ بِرَبِّ النَّاسِ، مَلِكِ النَّاسِ إِلَهِ النَّاسِ، مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ، مِنَ الْجِنَّةِ وَالنَّاسِ   ",
       "english":
           "1. Say, ˹O Prophet,˺ “I seek refuge in the Lord of humankind, 2. the Master of humankind, 3. the God of humankind, 4. from the evil of the lurking whisperer— 5. who whispers into the hearts of humankind— 6. from among jinn and humankind.”",
       "eveningwird": "",
@@ -31,7 +31,7 @@ class WirdulLatif {
     },
     "4": {
       "wird":
-          "رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ، وَأَعُوذُ بِكَ رَبِّ أَنْ يَحْضُرُونِ (3)",
+          "رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ، وَأَعُوذُ بِكَ رَبِّ أَنْ يَحْضُرُونِ   ",
       "english":
           "O my Lord I seek refuge in You from the seduction and suggestions of devils\nAnd I seek refuge in You from their demonic presence",
       "eveningwird": "",
@@ -63,7 +63,7 @@ class WirdulLatif {
     },
     "8": {
       "wird":
-          "\nلَوْ أَنْزَلْنَا هَٰذَا الْقُرْآنَ عَلَىٰ جَبَلٍ لَرَأَيْتَهُ خَاشِعًا مُتَصَدِّعًا مِنْ خَشْيَةِ اللَّـهِ ۚ وَتِلْكَ الْأَمْثَالُ نَضْرِبُهَا لِلنَّاسِ لَعَلَّهُمْ يَتَفَكَّرُونَ ﴿٢١﴾\nهُوَ اللَّـهُ الَّذِي لَا إِلَـٰهَ إِلَّا هُوَ ۖ عَالِمُ الْغَيْبِ وَالشَّهَادَةِ ۖ هُوَ الرَّحْمَـٰنُ الرَّحِيمُ ﴿٢٢﴾\n",
+          "\nلَوْ أَنْزَلْنَا هَٰذَا الْقُرْآنَ عَلَىٰ جَبَلٍ لَرَأَيْتَهُ خَاشِعًا مُتَصَدِّعًا مِنْ خَشْيَةِ اللَّـهِ ۚ وَتِلْكَ الْأَمْثَالُ نَضْرِبُهَا لِلنَّاسِ لَعَلَّهُمْ يَتَفَكَّرُونَ \nهُوَ اللَّـهُ الَّذِي لَا إِلَـٰهَ إِلَّا هُوَ ۖ عَالِمُ الْغَيْبِ وَالشَّهَادَةِ ۖ هُوَ الرَّحْمَـٰنُ الرَّحِيمُ ،\n",
       "english":
           "Had We sent down this Qur’ān on a mountain, you would have certainly seen it humbling itself and splitting asunder for its fear of Allāh.We relate these parables to men so that they may reflect. He is Allāh; there is no god, but Him. The AllKnower of the Unseen and the seen. He is the Most Compassionate, Most Merciful.",
       "eveningwird": "",
@@ -71,7 +71,7 @@ class WirdulLatif {
     },
     "9": {
       "wird":
-          "هُوَ اللَّـهُ الَّذِي لَا إِلَـٰهَ إِلَّا هُوَ الْمَلِكُ الْقُدُّوسُ السَّلَامُ الْمُؤْمِنُ الْمُهَيْمِنُ الْعَزِيزُ الْجَبَّارُ الْمُتَكَبِّرُ ۚ سُبْحَانَ اللَّـهِ عَمَّا يُشْرِكُونَ ﴿٢٣﴾\nهُوَ اللَّـهُ الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ ۖ لَهُ الْأَسْمَاءُ الْحُسْنَىٰ ۚ يُسَبِّحُ لَهُ مَا فِي السَّمَاوَاتِ وَالْأَرْضِ ۚ وَهُوَ الْعَزِيزُ الْحَكِيمُ.",
+          "هُوَ اللَّـهُ الَّذِي لَا إِلَـٰهَ إِلَّا هُوَ الْمَلِكُ الْقُدُّوسُ السَّلَامُ الْمُؤْمِنُ الْمُهَيْمِنُ الْعَزِيزُ الْجَبَّارُ الْمُتَكَبِّرُ ۚ سُبْحَانَ اللَّـهِ عَمَّا يُشْرِكُونَ ،\nهُوَ اللَّـهُ الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ ۖ لَهُ الْأَسْمَاءُ الْحُسْنَىٰ ۚ يُسَبِّحُ لَهُ مَا فِي السَّمَاوَاتِ وَالْأَرْضِ ۚ وَهُوَ الْعَزِيزُ الْحَكِيمُ.",
       "english":
           " He is Allāh; there is no god, but Him; the King, the Most Pure, the Source of Peace (Perfection), the Giver of Security, the Protector, the All-Mighty, the Compeller, the Supremely Great; Glory be to Allāh. (High is He) above all that they associate as partners with Him. He is Allāh, the Creator, the Maker, the Fashioner. To Him belongs the Most Beautiful Names. Everything in the Heavens and the earth glorify Him. And He is the All-Mighty, the All-Wise ",
       "eveningwird": "",
@@ -87,7 +87,7 @@ class WirdulLatif {
     },
     "11": {
       "wird":
-          "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.\n",
+          "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ\n",
       "english":
           "I seek refuge in the Perfect Words of God from the evil He has created. ",
       "eveningwird": "",
@@ -95,7 +95,7 @@ class WirdulLatif {
     },
     "12": {
       "wird":
-          "بِسْمِ اللهِ الذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ\n",
+          "\n  بِسْمِ اللهِ الذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ\n",
       "english":
           "“Peace and salutations to Noah among the nations (man, jinn and all that exist)!” Verily, this is the way that We reward the righteous. For he was one of Our believing bondsmen",
       "eveningwird": "",
@@ -103,7 +103,7 @@ class WirdulLatif {
     },
     "13": {
       "wird":
-          "اللَّهُمَّ إِنِّي أَصْبَحْتُ مِنْكَ فِي نِعْمَةٍ وَعَافِيَةٍ وَسِتْرٍ، فَأَتِمَّ نِعْمَتَكَ عَلَيَّ وَعَافِيَتَكَ وَسِتْرَكَ فِي الدُّنْيَا وَالآخِرَةِ.\n",
+          "اللَّهُمَّ إِنِّي أَصْبَحْتُ مِنْكَ فِي نِعْمَةٍ وَعَافِيَةٍ وَسِتْرٍ، فَأَتِمَّ نِعْمَتَكَ عَلَيَّ وَعَافِيَتَكَ وَسِتْرَكَ فِي الدُّنْيَا وَالآخِرَةِ\n",
       "english":
           "O Allāh! I find myself this morning with favours (bounties), good health and protection from You. So, O Allāh, complete Your favours, good health and Your protection for me in this world as well as in the Hereafter.",
       "eveningwird":

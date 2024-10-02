@@ -5,11 +5,13 @@ import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/deprecated/provider/wird_provider.dart';
 import 'package:wirdul_latif/routes.dart';
 import 'package:wirdul_latif/screens/bottom_nav_bar/bottomNavbar.dart';
-import 'package:wirdul_latif/utils.dart/constants.dart';
-import 'package:wirdul_latif/utils.dart/theme.dart';
+import 'package:wirdul_latif/utils/constants.dart';
+import 'package:wirdul_latif/utils/initialize.dart';
+import 'package:wirdul_latif/utils/theme.dart';
 
 void main() {
   WirdulLatif.initWird();
+  Initialize();
   runApp(MyApp());
   Animate.restartOnHotReload = true;
 }
