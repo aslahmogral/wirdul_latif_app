@@ -12,6 +12,7 @@ class WirdScreenModel with ChangeNotifier {
   // here the wird.counted assigned because of ui not reflecting issue
   late WirdType type;
   String TitleText = '';
+  bool tabhere = true;
 
   WirdScreenModel(WirdType wirdType) {
     type = wirdType;
@@ -26,6 +27,7 @@ class WirdScreenModel with ChangeNotifier {
   }
 
   thasbeehButtonClicked() {
+    tabhere = false;
     if (wirdList[currentPage].counted == null) {
       wirdList[currentPage].counted = 0;
       wirdList[currentPage].completed = false;

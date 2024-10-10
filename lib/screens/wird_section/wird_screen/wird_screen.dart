@@ -55,13 +55,17 @@ class WirdScreen extends StatelessWidget {
                                 Container(
                                   // padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
-                                    gradient: WirdGradients.listTileShadeGradient,
+                                    gradient:
+                                        WirdGradients.listTileShadeGradient,
                                     borderRadius: BorderRadius.circular(15),
                                     color: WirdColors.primaryDaycolor,
                                   ),
                                   child: Padding(
                                     padding: const EdgeInsets.only(
-                                        top: 16.0, left: 16.0, right: 16.0,bottom: 8),
+                                        top: 16.0,
+                                        left: 16.0,
+                                        right: 16.0,
+                                        bottom: 8),
                                     child: Text(
                                       model.wirdList[index].wird,
                                       textAlign: TextAlign.center,
@@ -125,7 +129,7 @@ class WirdScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        thasbeehCounter(
+                        bottomBar(
                           model: model,
                         )
                       ],
@@ -141,9 +145,9 @@ class WirdScreen extends StatelessWidget {
   }
 }
 
-class thasbeehCounter extends StatelessWidget {
+class bottomBar extends StatelessWidget {
   final WirdScreenModel model;
-  const thasbeehCounter({
+  const bottomBar({
     super.key,
     required this.model,
   });
@@ -152,125 +156,253 @@ class thasbeehCounter extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: InkWell(
-        onTap: () {
-          model.thasbeehButtonClicked();
-        },
-        splashColor: Colors.transparent,
-        highlightColor: Colors.transparent,
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            Container(
-              child: Padding(
-                padding: const EdgeInsets.symmetric( horizontal: 16.0),
-                child: Row(
-                  children: [
-                    if (model.currentPage == 0)
-                      Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            '0%',
-                          ),
-                          Text('Completed',style: TextStyle(fontSize: 10),),
-                        ],
-                      ),
-                    Visibility(
-                      visible: model.currentPage != 0,
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)} % ',
-                          ),
-                           Text('Completed',style: TextStyle(fontSize: 10),),
-                        ],
-                      ),
-                    ),
-                    Spacer(),
-                    Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          '${43 - model.currentPage} ',
+      child: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Container(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          print('hi');
+                        },
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.undo,
+                            ),
+                            Text(
+                              'Previous',
+                              style: TextStyle(fontSize: 10),
+                            ),
+                          ],
                         ),
-                        Text('Remaining',style: TextStyle(fontSize: 10),),
-                      ],
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      if (model.currentPage == 0)
+                        InkWell(
+                          onTap: () {
+                            print('object');
+                          },
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                '0%',
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                'Completed',
+                                style: TextStyle(fontSize: 10),
+                              ),
+                            ],
+                          ),
+                        ),
+                      Visibility(
+                        visible: model.currentPage != 0,
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)} % ',
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              'Completed',
+                              style: TextStyle(fontSize: 10),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Spacer(),
+                      InkWell(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              '${43 - model.currentPage} ',
+                            ),
+                            SizedBox(
+                              height: 4,
+                            ),
+                            Text(
+                              'Remaining',
+                              style: TextStyle(fontSize: 10),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.skip_next,
+                            ),
+                            Text(
+                              'Skip',
+                              style: TextStyle(fontSize: 10),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  color: Theme.of(context).primaryColor,
+                ),
+                height: 60,
+                width: MediaQuery.of(context).size.width,
+              ),
+
+              //linear progress indicator
+              Container(
+                height: 60,
+                child: Column(
+                  children: [
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                      child: LinearProgressIndicator(
+                        color: Colors.teal,
+                        minHeight: 5,
+                        value: (model.currentPage + 1) / model.wirdList.length,
+                      ),
                     ),
                   ],
                 ),
               ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color: Theme.of(context).primaryColor,
-              ),
-              height: 60,
-              width: MediaQuery.of(context).size.width,
-            ),
-            Container(
-              height: 60,
-              child: Column(
+
+              //circular progress indicator
+            ],
+          ),
+          counter(context)
+        ],
+      ),
+    );
+  }
+
+  InkWell counter(BuildContext context) {
+    return InkWell(
+      onTap: () {
+        model.thasbeehButtonClicked();
+      },
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Stack(
+            alignment: Alignment.bottomCenter,
+            children: [
+              Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(100),
+                      color: Theme.of(context).scaffoldBackgroundColor),
+                  height: 100,
+                  width: 100),
+              Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Spacer(),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                    child: LinearProgressIndicator(
-                      color: Colors.teal,
-                      minHeight: 0.5,
-                      value: (model.currentPage + 1) / model.wirdList.length,
-                    ),
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: [
+                      SizedBox(
+                        height: 80,
+                        width: 80,
+                        child: CircularProgressIndicator(
+                          value: model.wirdList[model.currentPage].counted !=
+                                      null &&
+                                  model.wirdList[model.currentPage].counted != 0
+                              ? (model.currentPageWirdCounted /
+                                      model.wirdList[model.currentPage].count)
+                                  .toDouble()
+                              : 0,
+                          valueColor: AlwaysStoppedAnimation<Color>(
+                            WirdColors.primaryDaycolor,
+                          ),
+                          backgroundColor: Colors.black45.withOpacity(0.2),
+                        ),
+                      ),
+                      Container(
+                        // color: Colors.green,
+                        height: 80,
+                        width: 80,
+                        child: Center(
+                          child: Text(
+                            "${model.wirdList[model.currentPage].counted != null ? model.currentPageWirdCounted : 0}/${model.wirdList[model.currentPage].count.toString()}",
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: model.wirdList[model.currentPage].completed ??
+                            false,
+                        child: Container(
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: WirdColors.primaryDaycolor,
+                              gradient: WirdGradients.listTileShadeGradient),
+                          child: Center(
+                            child: Icon(
+                              size: 35,
+                              Icons.done_all,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Visibility(
+                        visible: model.tabhere,
+                        child: Container(
+                          height: 80,
+                          width: 80,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              color: WirdColors.primaryDaycolor,
+                              gradient: WirdGradients.listTileShadeGradient),
+                          child: Center(
+                              child: Text(
+                            '\t\tTAP \n Here...',
+                            style: TextStyle(
+                                fontWeight: FontWeight.w900, fontSize: 18),
+                          )),
+                        ),
+                      ),
+                    ],
                   ),
+                  SizedBox(
+                    height: 12,
+                  )
                 ],
               ),
-            ),
-            Container(
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(100),
-                    color: Theme.of(context).scaffoldBackgroundColor),
-                height: 100,
-                width: 100),
-            SizedBox(
-              height: 70,
-              width: 70,
-              child: CircularProgressIndicator(
-                value: model.wirdList[model.currentPage].counted != null &&
-                        model.wirdList[model.currentPage].counted != 0
-                    ? (model.currentPageWirdCounted /
-                            model.wirdList[model.currentPage].count)
-                        .toDouble()
-                    : 0,
-                valueColor: AlwaysStoppedAnimation<Color>(
-                  WirdColors.primaryDaycolor,
-                ),
-                backgroundColor: Colors.black45.withOpacity(0.2),
-              ),
-            ),
-            Container(
-              child: Text(
-                "${model.wirdList[model.currentPage].counted != null ? model.currentPageWirdCounted : 0}/${model.wirdList[model.currentPage].count.toString()}",
-              ),
-            ),
-            Visibility(
-              visible: model.wirdList[model.currentPage].completed ?? false,
-              child: Container(
-                height: 75,
-                width: 75,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: WirdColors.primaryDaycolor,
-                    gradient: WirdGradients.listTileShadeGradient),
-                child: Center(
-                  child: Icon(
-                    size: 35,
-                    Icons.done_all,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
+            ],
+          ),
+          SizedBox(
+            height: 12,
+          )
+        ],
       ),
     );
   }
