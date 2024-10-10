@@ -24,7 +24,7 @@ class BottomNavbarModel with ChangeNotifier {
     //     label: 'Evening'),
     BottomNavigationBarItem(
         icon: Icon(
-          Icons.all_inclusive,
+          Icons.fingerprint,
         ),
         label: 'Counter'),
     BottomNavigationBarItem(icon: Icon(Icons.bolt), label: 'motivation'),
