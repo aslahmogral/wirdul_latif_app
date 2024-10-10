@@ -3,6 +3,16 @@ import 'package:wirdul_latif/model/wird.dart';
 class WirdulLatif {
   static List<Wird> morningWird = [];
   static List<Wird> eveningWird = [];
+  static List<Wird> Zikr = [];
+
+  // static final Map<String, Map<String, dynamic>> _zikrList = {
+  //   "1": {
+  //     "wird": "،\n  بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ,دْ  ",
+  //     "english": "1. Say, ”",
+  //     "eveningwird": "",
+  //     "count": 3
+  //   },
+  // };
 
   static final Map<String, Map<String, dynamic>> _wirdList = {
     "1": {
@@ -369,18 +379,34 @@ class WirdulLatif {
   static void initWird() {
     morningWird = _getMorningWird();
     eveningWird = _getEveningWird();
+    Zikr = [
+      Wird(wird: 'هِ الرَّحْمَنِ الرَّحِيمِ', english: 'english', count: 3),
+      Wird(wird: 'هِنِ الرَّحِيمِ', english: 'english', count: 2)
+    ];
   }
+
+  // static List<Wird> _getZikr() {
+  //   List<Wird> finalList = [];
+  //   _zikrList.forEach((key, value) {
+  //     finalList.add(Wird(
+  //       wird: value['wird'],
+  //       // eveningWird: value['eveningwird'],
+  //       english: value['english'],
+  //       count: value['count'],
+  //     ));
+  //   });
+  //   return finalList;
+  // }
 
   static List<Wird> _getMorningWird() {
     List<Wird> finalList = [];
     _wirdList.forEach((key, value) {
       finalList.add(Wird(
-          wird: value['wird'],
-          // eveningWird: value['eveningwird'],
-          english: value['english'],
-          count: value['count'],
-          )
-          );
+        wird: value['wird'],
+        // eveningWird: value['eveningwird'],
+        english: value['english'],
+        count: value['count'],
+      ));
     });
     return finalList;
   }
@@ -390,9 +416,7 @@ class WirdulLatif {
     _wirdList.forEach((key, value) {
       String eveningWird = value['eveningwird'] ?? '';
       finalList.add(Wird(
-          wird: eveningWird != ''
-              ? eveningWird
-              : value['wird'],
+          wird: eveningWird != '' ? eveningWird : value['wird'],
           // eveningWird: value['eveningwird'],
           english: value['english'],
           count: value['count']));

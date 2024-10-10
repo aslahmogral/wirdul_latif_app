@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wirdul_latif/screens/zikr_screen.dart/zikr_screen_model.dart';
+import 'package:wirdul_latif/deprecated/zikr_section/zikr_screen.dart/zikr_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class ZikrScreen extends StatelessWidget {
@@ -208,7 +208,7 @@ class thasbeehCounter extends StatelessWidget {
                     child: LinearProgressIndicator(
                       color: Colors.teal,
                       minHeight: 0.5,
-                      value: (model.currentPage + 1) / model.wirdList.length,
+                      value: model.currentPage / model.wirdList.length,
                     ),
                   ),
                 ],
@@ -242,7 +242,7 @@ class thasbeehCounter extends StatelessWidget {
               ),
             ),
             Visibility(
-              visible: (model.wirdList[model.currentPage].completed ?? false) && model.currentPageWirdCounted != 0 ,
+              visible: (model.wirdList[model.currentPage].completed) ?? false,
               child: Container(
                 height: 75,
                 width: 75,

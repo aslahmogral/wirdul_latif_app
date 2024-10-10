@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/utils/colors.dart';
-
+@deprecated
 class MorningOrEveningCard extends StatelessWidget {
   final String imagePath;
   final double size;

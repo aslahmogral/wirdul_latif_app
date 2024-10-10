@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
-import 'package:wirdul_latif/screens/wird_screen/wird_screen_model.dart';
+import 'package:wirdul_latif/screens/wird_section/home_screen/home_screen_model.dart';
+import 'package:wirdul_latif/screens/wird_section/wird_screen/wird_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class WirdScreen extends StatelessWidget {
@@ -45,81 +45,84 @@ class WirdScreen extends StatelessWidget {
                     child: Stack(
                       children: [
                         SingleChildScrollView(
-                          child: Column(
-                            children: [
-                              SizedBox(
-                                height: 26,
-                              ),
-                              Container(
-                                // padding: const EdgeInsets.all(10),
-                                decoration: BoxDecoration(
-                                  gradient: WirdGradients.listTileShadeGradient,
-                                  borderRadius: BorderRadius.circular(15),
-                                  color: WirdColors.primaryDaycolor,
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 26,
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 16.0, left: 16.0, right: 16.0,bottom: 8),
-                                  child: Text(
-                                    model.wirdList[index].wird,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      // fontWeight: FontWeight.bold,
-                                      fontSize: 24,
-                                      fontFamily: 'Kfgqpc',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 16,
-                              ),
-                              Container(
+                                Container(
+                                  // padding: const EdgeInsets.all(10),
                                   decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: WirdGradients
-                                          .listTileShadeGradient.colors.last
-                                          .withOpacity(0.5),
-                                      width: 2,
-                                    ),
+                                    gradient: WirdGradients.listTileShadeGradient,
                                     borderRadius: BorderRadius.circular(15),
+                                    color: WirdColors.primaryDaycolor,
                                   ),
                                   child: Padding(
-                                    padding: const EdgeInsets.all(20.0),
-                                    child: Column(
-                                      children: [
-                                        Text('TRANSLATION',
-                                            textAlign: TextAlign.center,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineSmall
-                                                ?.copyWith(
-                                                    fontSize: 22,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                        SizedBox(
-                                          height: 16,
-                                        ),
-                                        Text(
-                                            model.wirdList[index].english
-                                                .replaceAll(
-                                                    RegExp(r'[˹˺]'), ''),
-                                            textAlign: TextAlign.left,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headlineSmall
-                                                ?.copyWith(
-                                                    fontSize: 16,
-                                                    fontWeight:
-                                                        FontWeight.bold)),
-                                      ],
+                                    padding: const EdgeInsets.only(
+                                        top: 16.0, left: 16.0, right: 16.0,bottom: 8),
+                                    child: Text(
+                                      model.wirdList[index].wird,
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        // fontWeight: FontWeight.bold,
+                                        fontSize: 24,
+                                        fontFamily: 'Kfgqpc',
+                                      ),
                                     ),
-                                  )),
-                              SizedBox(
-                                height: 100,
-                              )
-                            ],
+                                  ),
+                                ),
+                                SizedBox(
+                                  height: 16,
+                                ),
+                                Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: WirdGradients
+                                            .listTileShadeGradient.colors.last
+                                            .withOpacity(0.5),
+                                        width: 2,
+                                      ),
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(20.0),
+                                      child: Column(
+                                        children: [
+                                          Text('TRANSLATION',
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headlineSmall
+                                                  ?.copyWith(
+                                                      fontSize: 22,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                          SizedBox(
+                                            height: 16,
+                                          ),
+                                          Text(
+                                              model.wirdList[index].english
+                                                  .replaceAll(
+                                                      RegExp(r'[˹˺]'), ''),
+                                              textAlign: TextAlign.left,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .headlineSmall
+                                                  ?.copyWith(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold)),
+                                        ],
+                                      ),
+                                    )),
+                                SizedBox(
+                                  height: 100,
+                                )
+                              ],
+                            ),
                           ),
                         ),
                         thasbeehCounter(

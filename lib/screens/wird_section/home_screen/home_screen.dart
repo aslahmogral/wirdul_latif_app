@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
+import 'package:wirdul_latif/screens/wird_section/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -20,40 +20,58 @@ class HomeScreen extends StatelessWidget {
         builder: (context, model, child) => Scaffold(
           body: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                      onTap: () {
-                        model.navigateToWird();
-                      },
-                      child: MorningOrEveningContainer(context, model)),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                      onTap: () {
-                        model.navigateToZikr();
-                      },
-                      child: quranMessageSection()),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  dummyStreakContainer(),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  InkWell(
-                      onTap: () {
-                        model.navigateToWird();
-                      },
-                      child: StartButton(model)),
-                  const SizedBox(
-                    height: 30,
-                  ),
-                ],
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.center,
+                    //   children: [
+                     
+                    //     ElevatedButton(
+                    //         onPressed: () {
+                    //           model.changeTab(WirdType.morning);
+                    //         },
+                    //         child: Text('Morning')),
+                    //     ElevatedButton(
+                    //         onPressed: () {
+                    //           model.changeTab(WirdType.evening);
+                    //         },
+                    //         child: Text('evening'))
+                    //   ],
+                    // ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                        onTap: () {
+                          model.navigateToWird();
+                        },
+                        child: MorningOrEveningContainer(context, model)),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                        onTap: () {
+                          model.navigateToZikr();
+                        },
+                        child: quranMessageSection()),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    dummyStreakContainer(),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                        onTap: () {
+                          model.navigateToWird();
+                        },
+                        child: StartButton(model)),
+                    const SizedBox(
+                      height: 30,
+                    ),
+                  ],
+                ),
               )),
         ),
       ),

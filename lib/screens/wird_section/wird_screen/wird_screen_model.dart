@@ -1,24 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/model/wird.dart';
-import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
+import 'package:wirdul_latif/screens/wird_section/home_screen/home_screen_model.dart';
+import 'package:wirdul_latif/utils/constants.dart';
 
-class ZikrScreenModel with ChangeNotifier {
-  List<Wird> wirdList = [
-    Wird(
-        wird: 'لا إله إلا الله',
-        english: 'There is no god but Allah',
-        count: 3),
-    Wird(
-        wird: 'لا إله إلا الله', english: 'There is no god but Allah', count: 3)
-  ];
+class WirdScreenModel with ChangeNotifier {
+  List<Wird> wirdList = [];
   int currentPage = 0;
   PageController controller = PageController();
   int currentPageWirdCounted = 0;
   // here the wird.counted assigned because of ui not reflecting issue
+  late WirdType type;
   String TitleText = '';
-  String percentageTracker = '';
 
-  WirdScreenModel() {
+  WirdScreenModel(WirdType wirdType) {
+    type = wirdType;
+    initialize();
     controller.addListener(_onPageChanged);
   }
 
@@ -51,24 +48,28 @@ class ZikrScreenModel with ChangeNotifier {
           duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
     }
 
-    // percentageTracker = percentageTrackerMethod();
+    notifyListeners();
+  }
+
+  initialize() {
+    if (type == WirdType.morning) {
+      setMorningDatas();
+    }
+
+    if (type == WirdType.evening) {
+      setEveningDatas();
+    }
 
     notifyListeners();
   }
 
-  String percentageTrackerMethod() {
-    double calculated =
-        (currentPageWirdCounted) / wirdList[currentPage].count * 100;
-    return calculated.toStringAsFixed(0);
+  setMorningDatas() {
+    wirdList = WirdulLatif.morningWird;
+    TitleText = Constants.morning;
   }
 
-  bool isCurrentZikrCompleted() {
-    bool finalBool = wirdList[currentPage].completed ?? false;
-    print(finalBool);
-    print(wirdList[0].counted);
-    print('lllll');
-    print(wirdList[1].counted);
-
-    return finalBool;
+  setEveningDatas() {
+    wirdList = WirdulLatif.eveningWird;
+    TitleText = Constants.evening;
   }
 }

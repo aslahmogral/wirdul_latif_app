@@ -39,7 +39,7 @@ dependencies:
   google_fonts: ^3.0.1
   lottie: ^2.3.2
   flutter_animate: ^4.5.0
-  rive: ^0.13.4
+  # rive: ^0.13.4
   # wirdul_latif: ^0.0.2
 
 dev_dependencies:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
-import 'package:wirdul_latif/screens/zikr_screen.dart/zikr_screen.dart';
+import 'package:wirdul_latif/model/wird.dart';
+import 'package:wirdul_latif/screens/wird_section/wird_screen/wird_screen.dart';
+import 'package:wirdul_latif/deprecated/zikr_section/zikr_screen.dart/zikr_screen.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 
 enum WirdType { morning, evening }
@@ -41,6 +42,12 @@ class HomeScreenModel with ChangeNotifier {
         MaterialPageRoute(
           builder: (context) => ZikrScreen(),
         ));
+  }
+
+  changeTab(WirdType wirdType) {
+    this.wirdType = wirdType;
+    initialize();
+    notifyListeners();
   }
 
   initialize() {
