@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wirdul_latif/model/wird.dart';
 import 'package:wirdul_latif/screens/wird_section/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/deprecated/zikr_section/zikr_screen.dart/zikr_screen.dart';
 import 'package:wirdul_latif/utils/constants.dart';
@@ -14,10 +13,11 @@ class HomeScreenModel with ChangeNotifier {
   String titleText = '';
   IconData wirdIcon = Icons.sunny;
   String mainImagePath = '';
+  bool isMorning = false;
 
-  HomeScreenModel(BuildContext context, {required WirdType wirdType}) {
+  HomeScreenModel(BuildContext context) {
     _context = context;
-    this.wirdType = wirdType;
+    checkIsItMorningOrEvening();
     initialize();
   }
 
@@ -42,6 +42,14 @@ class HomeScreenModel with ChangeNotifier {
         MaterialPageRoute(
           builder: (context) => ZikrScreen(),
         ));
+  }
+
+  checkIsItMorningOrEvening() {
+    var now = DateTime.now();
+    isMorning = now.hour >= 0 && now.hour < 12;
+    isMorning ? wirdType = WirdType.morning : wirdType = WirdType.evening;
+    changeTab(wirdType);
+    notifyListeners();
   }
 
   changeTab(WirdType wirdType) {

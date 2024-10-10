@@ -11,6 +11,8 @@ class customTheme {
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white38,
     ),
+
+
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: Colors.grey[400], fontFamily: 'Poppins'),
       bodyMedium: TextStyle(color: Colors.grey[400], fontFamily: 'Poppins'),

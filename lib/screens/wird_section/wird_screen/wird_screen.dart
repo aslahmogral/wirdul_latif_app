@@ -168,24 +168,9 @@ class bottomBar extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      InkWell(
-                        onTap: () {
-                          print('hi');
-                        },
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.undo,
-                            ),
-                            Text(
-                              'Previous',
-                              style: TextStyle(fontSize: 10),
-                            ),
-                          ],
-                        ),
-                      ),
+                      IconButton(
+                          onPressed: model.undoOrPrevPage,
+                          icon: Icon(Icons.undo)),
                       SizedBox(
                         width: 8,
                       ),
@@ -250,22 +235,9 @@ class bottomBar extends StatelessWidget {
                       SizedBox(
                         width: 8,
                       ),
-                      InkWell(
-                        onTap: () {},
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.skip_next,
-                            ),
-                            Text(
-                              'Skip',
-                              style: TextStyle(fontSize: 10),
-                            ),
-                          ],
-                        ),
-                      ),
+                      IconButton(
+                          onPressed: model.skipOrNextPage,
+                          icon: Icon(Icons.skip_next)),
                     ],
                   ),
                 ),

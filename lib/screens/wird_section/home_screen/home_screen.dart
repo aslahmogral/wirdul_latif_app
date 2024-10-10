@@ -5,16 +5,16 @@ import 'package:wirdul_latif/utils/colors.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routename = 'homescreen';
-  final WirdType wirdType;
-  const HomeScreen({super.key, required this.wirdType});
+  // final WirdType wirdType;
+  const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    print(wirdType);
+    
 
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (context) => HomeScreenModel(context, wirdType: wirdType)),
+            create: (context) => HomeScreenModel(context, )),
       ],
       child: Consumer<HomeScreenModel>(
         builder: (context, model, child) => Scaffold(

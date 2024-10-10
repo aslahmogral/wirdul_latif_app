@@ -74,4 +74,14 @@ class WirdScreenModel with ChangeNotifier {
     wirdList = WirdulLatif.eveningWird;
     TitleText = Constants.evening;
   }
+
+  skipOrNextPage() {
+    controller.nextPage(
+        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+  }
+
+  undoOrPrevPage() {
+    controller.previousPage(
+        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+  }
 }
