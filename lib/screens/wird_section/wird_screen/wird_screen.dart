@@ -170,7 +170,7 @@ class bottomBar extends StatelessWidget {
                     children: [
                       IconButton(
                           onPressed: model.undoOrPrevPage,
-                          icon: Icon(Icons.undo)),
+                          icon: Icon(Icons.skip_previous)),
                       SizedBox(
                         width: 8,
                       ),
@@ -186,9 +186,7 @@ class bottomBar extends StatelessWidget {
                               Text(
                                 '0%',
                               ),
-                              SizedBox(
-                                height: 8,
-                              ),
+                             
                               Text(
                                 'Completed',
                                 style: TextStyle(fontSize: 10),
@@ -204,9 +202,7 @@ class bottomBar extends StatelessWidget {
                             Text(
                               '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)} % ',
                             ),
-                            SizedBox(
-                              height: 4,
-                            ),
+                             
                             Text(
                               'Completed',
                               style: TextStyle(fontSize: 10),
@@ -222,9 +218,7 @@ class bottomBar extends StatelessWidget {
                             Text(
                               '${43 - model.currentPage} ',
                             ),
-                            SizedBox(
-                              height: 4,
-                            ),
+                             
                             Text(
                               'Remaining',
                               style: TextStyle(fontSize: 10),
