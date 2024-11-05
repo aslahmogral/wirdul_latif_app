@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/screens/wird_section/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/screens/wird_section/wird_screen/wird_screen_model.dart';
@@ -21,6 +22,12 @@ class WirdScreen extends StatelessWidget {
           builder: (context, model, child) {
             return Scaffold(
               appBar: AppBar(
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: () {
+                    model.saveToDB();
+                  },
+                ),
                 centerTitle: true,
                 title: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -52,76 +59,11 @@ class WirdScreen extends StatelessWidget {
                                 SizedBox(
                                   height: 26,
                                 ),
-                                Container(
-                                  // padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    gradient:
-                                        WirdGradients.listTileShadeGradient,
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: WirdColors.primaryDaycolor,
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 16.0,
-                                        left: 16.0,
-                                        right: 16.0,
-                                        bottom: 8),
-                                    child: Text(
-                                      model.wirdList[index].wird,
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        // fontWeight: FontWeight.bold,
-                                        fontSize: 24,
-                                        fontFamily: 'Kfgqpc',
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                                arabicCard(model, index),
                                 SizedBox(
                                   height: 16,
                                 ),
-                                Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: WirdGradients
-                                            .listTileShadeGradient.colors.last
-                                            .withOpacity(0.5),
-                                        width: 2,
-                                      ),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Column(
-                                        children: [
-                                          Text('TRANSLATION',
-                                              textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headlineSmall
-                                                  ?.copyWith(
-                                                      fontSize: 22,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                          SizedBox(
-                                            height: 16,
-                                          ),
-                                          Text(
-                                              model.wirdList[index].english
-                                                  .replaceAll(
-                                                      RegExp(r'[˹˺]'), ''),
-                                              textAlign: TextAlign.left,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headlineSmall
-                                                  ?.copyWith(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                        ],
-                                      ),
-                                    )),
+                                translationCard(context, model, index),
                                 SizedBox(
                                   height: 100,
                                 )
@@ -141,6 +83,94 @@ class WirdScreen extends StatelessWidget {
           },
         );
       },
+    );
+  }
+
+  Container translationCard(
+      BuildContext context, WirdScreenModel model, int index) {
+    return Container(
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: WirdGradients.listTileShadeGradient.colors.last
+                .withOpacity(0.5),
+            width: 2,
+          ),
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            children: [
+              Text('TRANSLATION',
+                  textAlign: TextAlign.center,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall
+                      ?.copyWith(fontSize: 22, fontWeight: FontWeight.bold)),
+              SizedBox(
+                height: 16,
+              ),
+              Text(
+                  model.wirdList[index].english.replaceAll(RegExp(r'[˹˺]'), ''),
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineSmall
+                      ?.copyWith(fontSize: 16, fontWeight: FontWeight.bold)),
+            ],
+          ),
+        ));
+  }
+
+  Container arabicCard(WirdScreenModel model, int index) {
+    return Container(
+      // padding: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        gradient: WirdGradients.listTileShadeGradient,
+        borderRadius: BorderRadius.circular(15),
+        color: WirdColors.primaryDaycolor,
+      ),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 16.0, right: 16.0, bottom: 8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.white, width: 2),
+                  shape: BoxShape.circle,
+                  color: Colors.transparent,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    (model.currentPage + 1).toString(),
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                model.wirdList[index].wird,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                  // fontWeight: FontWeight.bold,
+                  fontSize: 24,
+                  fontFamily: 'Kfgqpc',
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
@@ -186,7 +216,6 @@ class bottomBar extends StatelessWidget {
                               Text(
                                 '0%',
                               ),
-                             
                               Text(
                                 'Completed',
                                 style: TextStyle(fontSize: 10),
@@ -202,7 +231,6 @@ class bottomBar extends StatelessWidget {
                             Text(
                               '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)} % ',
                             ),
-                             
                             Text(
                               'Completed',
                               style: TextStyle(fontSize: 10),
@@ -218,7 +246,6 @@ class bottomBar extends StatelessWidget {
                             Text(
                               '${43 - model.currentPage} ',
                             ),
-                             
                             Text(
                               'Remaining',
                               style: TextStyle(fontSize: 10),
@@ -275,100 +302,112 @@ class bottomBar extends StatelessWidget {
       onTap: () {
         model.thasbeehButtonClicked();
       },
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Stack(
-            alignment: Alignment.bottomCenter,
-            children: [
-              Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(100),
-                      color: Theme.of(context).scaffoldBackgroundColor),
-                  height: 100,
-                  width: 100),
-              Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Stack(
-                    alignment: Alignment.bottomCenter,
-                    children: [
-                      SizedBox(
-                        height: 80,
-                        width: 80,
-                        child: CircularProgressIndicator(
-                          value: model.wirdList[model.currentPage].counted !=
-                                      null &&
-                                  model.wirdList[model.currentPage].counted != 0
-                              ? (model.currentPageWirdCounted /
-                                      model.wirdList[model.currentPage].count)
-                                  .toDouble()
-                              : 0,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            WirdColors.primaryDaycolor,
-                          ),
-                          backgroundColor: Colors.black45.withOpacity(0.2),
-                        ),
-                      ),
-                      Container(
-                        // color: Colors.green,
-                        height: 80,
-                        width: 80,
-                        child: Center(
-                          child: Text(
-                            "${model.wirdList[model.currentPage].counted != null ? model.currentPageWirdCounted : 0}/${model.wirdList[model.currentPage].count.toString()}",
-                          ),
-                        ),
-                      ),
-                      Visibility(
-                        visible: model.wirdList[model.currentPage].completed ??
-                            false,
-                        child: Container(
+      child: KeyboardListener(
+        focusNode: model.focusNode,
+        autofocus: false,
+        onKeyEvent: (event) {
+          if (event is KeyUpEvent &&
+              event.logicalKey == LogicalKeyboardKey.space) {
+            model.thasbeehButtonClicked();
+          }
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: [
+                Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(100),
+                        color: Theme.of(context).scaffoldBackgroundColor),
+                    height: 100,
+                    width: 100),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Stack(
+                      alignment: Alignment.bottomCenter,
+                      children: [
+                        SizedBox(
                           height: 80,
                           width: 80,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: WirdColors.primaryDaycolor,
-                              gradient: WirdGradients.listTileShadeGradient),
+                          child: CircularProgressIndicator(
+                            value: model.wirdList[model.currentPage].counted !=
+                                        null &&
+                                    model.wirdList[model.currentPage].counted !=
+                                        0
+                                ? (model.currentPageWirdCounted /
+                                        model.wirdList[model.currentPage].count)
+                                    .toDouble()
+                                : 0,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              WirdColors.primaryDaycolor,
+                            ),
+                            backgroundColor: Colors.black45.withOpacity(0.2),
+                          ),
+                        ),
+                        Container(
+                          // color: Colors.green,
+                          height: 80,
+                          width: 80,
                           child: Center(
-                            child: Icon(
-                              size: 35,
-                              Icons.done_all,
-                              color: Colors.white,
+                            child: Text(
+                              "${model.wirdList[model.currentPage].counted != null ? model.currentPageWirdCounted : 0}/${model.wirdList[model.currentPage].count.toString()}",
                             ),
                           ),
                         ),
-                      ),
-                      Visibility(
-                        visible: model.tabhere,
-                        child: Container(
-                          height: 80,
-                          width: 80,
-                          decoration: BoxDecoration(
-                              shape: BoxShape.circle,
-                              color: WirdColors.primaryDaycolor,
-                              gradient: WirdGradients.listTileShadeGradient),
-                          child: Center(
-                              child: Text(
-                            '\t\tTAP \n Here...',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900, fontSize: 18),
-                          )),
+                        Visibility(
+                          visible:
+                              model.wirdList[model.currentPage].completed ??
+                                  false,
+                          child: Container(
+                            height: 80,
+                            width: 80,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: WirdColors.primaryDaycolor,
+                                gradient: WirdGradients.listTileShadeGradient),
+                            child: Center(
+                              child: Icon(
+                                size: 35,
+                                Icons.done_all,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 12,
-                  )
-                ],
-              ),
-            ],
-          ),
-          SizedBox(
-            height: 12,
-          )
-        ],
+                        Visibility(
+                          visible: model.tabhere,
+                          child: Container(
+                            height: 80,
+                            width: 80,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                color: WirdColors.primaryDaycolor,
+                                gradient: WirdGradients.listTileShadeGradient),
+                            child: Center(
+                                child: Text(
+                              '\t\tTAP \n Here...',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.w900, fontSize: 18),
+                            )),
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 12,
+                    )
+                  ],
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 12,
+            )
+          ],
+        ),
       ),
     );
   }

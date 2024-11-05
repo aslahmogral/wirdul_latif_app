@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/screens/counter_screen/sub_screens/counter_screen_start_model.dart';
 
@@ -24,8 +25,7 @@ class CounterScreenStart extends StatelessWidget {
                   IconButton(
                       onPressed: () async {
                         int? val = await editCounterNumber(context, model);
-                        if(val != null)
-                        model.changeCounterNumber(val);
+                        if (val != null) model.changeCounterNumber(val);
                       },
                       icon: Icon(Icons.edit))
                 ],
@@ -42,35 +42,44 @@ class CounterScreenStart extends StatelessWidget {
               onTap: () {
                 model.increment();
               },
-              child: Center(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          model.count.toString(),
-                          style: const TextStyle(
-                            fontSize: 100,
+              child: KeyboardListener(
+                focusNode: model.focusNode,
+                onKeyEvent: (event) {
+                  if (event is KeyUpEvent &&
+                      event.logicalKey == LogicalKeyboardKey.space) {
+                    model.increment();
+                  }
+                },
+                child: Center(
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            model.count.toString(),
+                            style: const TextStyle(
+                              fontSize: 100,
+                            ),
                           ),
-                        ),
-                        Visibility(
-                            visible: !model.infinite,
-                            child: Text('/ ${model.counterNumber}')),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Visibility(
-                        visible: model.extraAmountVisible,
-                        child: Text(
-                          '+${model.extraCount.toString()}',
-                          style: TextStyle(color: Colors.green),
-                        ))
-                  ],
+                          Visibility(
+                              visible: !model.infinite,
+                              child: Text('/ ${model.counterNumber}')),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Visibility(
+                          visible: model.extraAmountVisible,
+                          child: Text(
+                            '+${model.extraCount.toString()}',
+                            style: TextStyle(color: Colors.green),
+                          ))
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -112,4 +121,3 @@ class CounterScreenStart extends StatelessWidget {
         });
   }
 }
-

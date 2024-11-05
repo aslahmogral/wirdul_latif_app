@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
           theme: Settings.isDarkMode
               ? customTheme.darkTheme
               : customTheme.lightTheme,
-          home: const BottomNavBar(),
+          home: const BottomNavBar(), 
         )); 
   }
 }

@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/model/wird.dart';
+import 'package:wirdul_latif/model/wird_history_item.dart';
 import 'package:wirdul_latif/screens/wird_section/home_screen/home_screen_model.dart';
+import 'package:wirdul_latif/services/db_handlers.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 
 class WirdScreenModel with ChangeNotifier {
@@ -13,6 +17,21 @@ class WirdScreenModel with ChangeNotifier {
   late WirdType type;
   String TitleText = '';
   bool tabhere = true;
+  final FocusNode focusNode = FocusNode();
+  final WirdDatabaseHelper dbHelper = WirdDatabaseHelper();
+    
+  //dbhandlers
+  saveToDB() async {
+    print(WirdType.evening.toString());
+    await dbHelper.insertWird(WirdHistroyItem(
+        createdDate: DateTime.now().toString(),
+        currentWird: currentPage,
+        status: currentPage < wirdList.length ? 'onporgress' : 'completed',
+        wirdType: type.toString()));
+    String path = join(await getDatabasesPath(), 'wird_database.db');
+    print('Database path: $path');
+    WirdDatabaseHelper().printWirds();
+  }
 
   WirdScreenModel(WirdType wirdType) {
     type = wirdType;

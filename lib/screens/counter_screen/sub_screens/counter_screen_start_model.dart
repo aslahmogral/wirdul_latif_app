@@ -6,6 +6,8 @@ class CounterScreenStartModel with ChangeNotifier {
   int counterNumber;
   bool extraAmountVisible = false;
   bool infinite = false;
+  final FocusNode focusNode = FocusNode();
+
   CounterScreenStartModel(this.counterNumber) {
     if (counterNumber == 1000000000) {
       infinite = true;
