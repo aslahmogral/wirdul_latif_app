@@ -9,15 +9,24 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-            create: (context) => HomeScreenModel(context, )),
+            create: (context) => HomeScreenModel(
+                  context,
+                )),
       ],
       child: Consumer<HomeScreenModel>(
         builder: (context, model, child) => Scaffold(
+          appBar: AppBar(
+            title: Text('Wird al latif'),
+            actions: [
+              IconButton(
+                onPressed: () {},
+                icon: Icon(Icons.share),
+              ),
+            ],
+          ),
           body: Padding(
               padding: const EdgeInsets.all(16.0),
               child: SingleChildScrollView(
@@ -26,7 +35,7 @@ class HomeScreen extends StatelessWidget {
                     // Row(
                     //   mainAxisAlignment: MainAxisAlignment.center,
                     //   children: [
-                     
+
                     //     ElevatedButton(
                     //         onPressed: () {
                     //           model.changeTab(WirdType.morning);
@@ -58,10 +67,10 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    dummyStreakContainer(),
-                    const SizedBox(
-                      height: 20,
-                    ),
+                    // dummyStreakContainer(),
+                    // const SizedBox(
+                    //   height: 20,
+                    // ),
                     InkWell(
                         onTap: () {
                           model.navigateToWird();

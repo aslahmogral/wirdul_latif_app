@@ -14,7 +14,7 @@ class CounterScreen extends StatelessWidget {
       ],
       child: Consumer<CounterScreenModel>(builder: (context, model, child) {
         return Scaffold(
-          // appBar: AppBar(),
+          appBar: AppBar(title: Text('Zikr Counter'),centerTitle: true,),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Center(
