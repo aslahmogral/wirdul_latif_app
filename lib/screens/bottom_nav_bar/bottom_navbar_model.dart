@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/screens/counter_screen/counter_screen.dart';
 import 'package:wirdul_latif/screens/reels_screen/youtube_reels.dart';
+import 'package:wirdul_latif/screens/settings_screen/settings_screen.dart';
 import 'package:wirdul_latif/screens/wird_section_screens/wird_home_screen/wird_home_screen.dart';
 
 class BottomNavbarModel with ChangeNotifier {
-  BottomNavbarModel() {
-  }
+  BottomNavbarModel() {}
   int currentindex = 0;
   bool isMorning = false;
 
@@ -22,10 +22,10 @@ class BottomNavbarModel with ChangeNotifier {
     //     label: 'Evening'),
     BottomNavigationBarItem(
         icon: Icon(
-          Icons.fingerprint,
+          Icons.adjust,
         ),
         label: 'Counter'),
-    BottomNavigationBarItem(icon: Icon(Icons.bolt), label: 'motivation'),
+    BottomNavigationBarItem(icon: Icon(Icons.smart_display), label: 'motivation'),
     BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'settings'),
   ];
 
@@ -33,8 +33,6 @@ class BottomNavbarModel with ChangeNotifier {
     currentindex = index;
     notifyListeners();
   }
-
-
 
   currentScreen() {
     switch (currentindex) {
@@ -44,16 +42,14 @@ class BottomNavbarModel with ChangeNotifier {
       //   return Center(child: HomeScreen(wirdType:isMorning ? WirdType.morning : WirdType.evening));
       // case 2:
       //   return Center(child:ZikrHomeScreen());
-       case 1:
-        return Center(child:CounterScreen());
+      case 1:
+        return Center(child: CounterScreen());
       case 2:
         return Center(
           child: YoutubeReelsScreen(),
         );
       case 3:
-        return Center(
-          child: Text('setttings'),
-        );
+        return SettingsScreen();
       default:
         return HomeScreen();
     }
