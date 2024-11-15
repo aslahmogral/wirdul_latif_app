@@ -10,12 +10,9 @@ class YoutubeReelsScreen extends StatefulWidget {
 
 class _YoutubeReelsScreenState extends State<YoutubeReelsScreen> {
   final List<String> videoIds = [
-    'Dv1t1gzRKZU', // Replace with your YouTube video IDs
-    'Dv1t1gzRKZU',
-    'iLnmTe5Q2Qw',
+    // Replace with your YouTube video IDs
+
     'W58htAlrB0Y', // Replace with your YouTube video IDs
-    'W58htAlrB0Y',
-    'W58htAlrB0Y',
   ];
 
   late YoutubePlayerController _controller;
@@ -103,23 +100,23 @@ class _YoutubePlayerItemState extends State<YoutubePlayerItem> {
           controller: _controller,
           showVideoProgressIndicator: true,
         ),
-        Positioned(
-          bottom: 30,
-          child: FloatingActionButton(
-            backgroundColor: Colors.white,
-            onPressed: () {
-              setState(() {
-                _controller.value.isPlaying
-                    ? _controller.pause()
-                    : _controller.play();
-              });
-            },
-            child: Icon(
-              _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
-              color: Colors.black,
-            ),
-          ),
-        ),
+        // Positioned(
+        //   bottom: 30,
+        //   child: FloatingActionButton(
+        //     backgroundColor: Colors.white,
+        //     onPressed: () {
+        //       setState(() {
+        //         _controller.value.isPlaying
+        //             ? _controller.pause()
+        //             : _controller.play();
+        //       });
+        //     },
+        //     child: Icon(
+        //       _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+        //       color: Colors.black,
+        //     ),
+        //   ),
+        // ),
       ],
     );
   }
