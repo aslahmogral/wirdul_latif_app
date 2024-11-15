@@ -7,7 +7,7 @@ class WirdulLatif {
 
   // static final Map<String, Map<String, dynamic>> _zikrList = {
   //   "1": {
-  //     "wird": "،\n  بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ,دْ  ",
+  //     "wird": "،  بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ ,دْ  ",
   //     "english": "1. Say, ”",
   //     "eveningwird": "",
   //     "count": 3
@@ -17,7 +17,7 @@ class WirdulLatif {
   static final Map<String, Map<String, dynamic>> _wirdList = {
     "1": {
       "wird":
-          "،\n  بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ , قُلْ هُوَ اللهُ أَحَدٌ ، اللّهُ الصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ ",
+          " بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ , قُلْ هُوَ اللهُ أَحَدٌ ، اللّهُ الصَّمَدُ، لَمْ يَلِدْ وَلَمْ يُولَدْ ، وَلَمْ يَكُنْ لَهُ كُفُوًا أَحَدٌ ",
       "english":
           "1. Say, ˹O Prophet,˺ “He is Allah—One ˹and Indivisible˺; 2. Allah—the Sustainer ˹needed by all˺. 3. He has never had offspring, nor was He born. 4. And there is none comparable to Him.”",
       "eveningwird": "",
@@ -25,7 +25,7 @@ class WirdulLatif {
     },
     "2": {
       "wird":
-          "\n  بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ، مِنْ شَرِّ مَا خَلَقَ، وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ، وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ ",
+          "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ، مِنْ شَرِّ مَا خَلَقَ، وَمِنْ شَرِّ غَاسِقٍ إِذَا وَقَبَ، وَمِنْ شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ، وَمِنْ شَرِّ حَاسِدٍ إِذَا حَسَدَ ",
       "english":
           "1. Say, ˹O Prophet,˺ “I seek refuge in the Lord of the daybreak 2. from the evil of whatever He has created, 3. and from the evil of the night when it grows dark, 4. and from the evil of those ˹witches casting spells by˺ blowing onto knots, 5. and from the evil of an envier when they envy.”",
       "eveningwird": "",
@@ -33,7 +33,7 @@ class WirdulLatif {
     },
     "3": {
       "wird":
-          "\n  بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ\nقُلْ أَعُوذُ بِرَبِّ النَّاسِ، مَلِكِ النَّاسِ إِلَهِ النَّاسِ، مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ، مِنَ الْجِنَّةِ وَالنَّاسِ   ",
+          "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ أَعُوذُ بِرَبِّ النَّاسِ، مَلِكِ النَّاسِ إِلَهِ النَّاسِ، مِنْ شَرِّ الْوَسْوَاسِ الْخَنَّاسِ الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ، مِنَ الْجِنَّةِ وَالنَّاسِ   ",
       "english":
           "1. Say, ˹O Prophet,˺ “I seek refuge in the Lord of humankind, 2. the Master of humankind, 3. the God of humankind, 4. from the evil of the lurking whisperer— 5. who whispers into the hearts of humankind— 6. from among jinn and humankind.”",
       "eveningwird": "",
@@ -43,7 +43,7 @@ class WirdulLatif {
       "wird":
           "رَبِّ أَعُوذُ بِكَ مِنْ هَمَزَاتِ الشَّيَاطِينِ، وَأَعُوذُ بِكَ رَبِّ أَنْ يَحْضُرُونِ   ",
       "english":
-          "O my Lord I seek refuge in You from the seduction and suggestions of devils\nAnd I seek refuge in You from their demonic presence",
+          "O my Lord, I seek Your protection from the temptations and whispers of the devilsAnd I seek Your protection from their evil presence",
       "eveningwird": "",
       "count": 3
     },
@@ -59,13 +59,13 @@ class WirdulLatif {
       "wird":
           "فسبحانَ اللهِ حِينَ تُمْسُونَ وَحِينَ تُصْبِحُونَ، وَلَهُ الْحَمْدُ فِي السَّمَواتِ وَالْأَرْضِ وَعَشِيَّا وَحِينَ تُظْهِرُونَ، يُخْرِجُ الْحَيَّ مِنَ الْمَيِّتِ وَيُخْرِجُ المَيِّتَ مِنَ الحَيِّ ويُحْيِي الأَرْضَ بَعْدَ مَوْتِهَا وَكَذَلِكَ تُخْرَجُونَ",
       "english":
-          "Glory be to Allah the Exalted, when the day turns to evening, and when the night turns to day;to Him belongs all Praise -in the Heavens and upon Earth,and by night and at the brightest hour!He brings the dead to life! And He brings the living to their death!\nHe revives the earth after its death. In this same way,you will be brought from the current stage you are in, to the next.",
+          "Glory be to Allah the Exalted, when the day turns to evening, and when the night turns to day;to Him belongs all Praise -in the Heavens and upon Earth,and by night and at the brightest hour!He brings the dead to life! And He brings the living to their death!He revives the earth after its death. In this same way,you will be brought from the current stage you are in, to the next.",
       "eveningwird": "",
       "count": 1
     },
     "7": {
       "wird":
-          "أَعُوْذُ بِٱللّٰهِ ٱلسَّمِيعِ ٱلْعَلِيْمِ مِنَ ٱلشَّيْطَانِ ٱلرَّجِيمِ\n",
+          "أَعُوْذُ بِٱللّٰهِ ٱلسَّمِيعِ ٱلْعَلِيْمِ مِنَ ٱلشَّيْطَانِ ٱلرَّجِيمِ",
       "english":
           "I seek refuge in God, Who hears all things, and knows all things,from the influence of Satan the one who chose to remain distant from God’s Grace.",
       "eveningwird": "",
@@ -73,7 +73,7 @@ class WirdulLatif {
     },
     "8": {
       "wird":
-          "\nلَوْ أَنْزَلْنَا هَٰذَا الْقُرْآنَ عَلَىٰ جَبَلٍ لَرَأَيْتَهُ خَاشِعًا مُتَصَدِّعًا مِنْ خَشْيَةِ اللَّـهِ ۚ وَتِلْكَ الْأَمْثَالُ نَضْرِبُهَا لِلنَّاسِ لَعَلَّهُمْ يَتَفَكَّرُونَ \nهُوَ اللَّـهُ الَّذِي لَا إِلَـٰهَ إِلَّا هُوَ ۖ عَالِمُ الْغَيْبِ وَالشَّهَادَةِ ۖ هُوَ الرَّحْمَـٰنُ الرَّحِيمُ ،\n",
+          "لَوْ أَنْزَلْنَا هَٰذَا الْقُرْآنَ عَلَىٰ جَبَلٍ لَرَأَيْتَهُ خَاشِعًا مُتَصَدِّعًا مِنْ خَشْيَةِ اللَّـهِ ۚ وَتِلْكَ الْأَمْثَالُ نَضْرِبُهَا لِلنَّاسِ لَعَلَّهُمْ يَتَفَكَّرُونَ  اللَّـهُ الَّذِي لَا إِلَـٰهَ إِلَّا هُوَ ۖ عَالِمُ الْغَيْبِ وَالشَّهَادَةِ ۖ هُوَ الرَّحْمَـٰنُ الرَّحِيمُ ،",
       "english":
           "Had We sent down this Qur’ān on a mountain, you would have certainly seen it humbling itself and splitting asunder for its fear of Allāh.We relate these parables to men so that they may reflect. He is Allāh; there is no god, but Him. The AllKnower of the Unseen and the seen. He is the Most Compassionate, Most Merciful.",
       "eveningwird": "",
@@ -81,7 +81,7 @@ class WirdulLatif {
     },
     "9": {
       "wird":
-          "هُوَ اللَّـهُ الَّذِي لَا إِلَـٰهَ إِلَّا هُوَ الْمَلِكُ الْقُدُّوسُ السَّلَامُ الْمُؤْمِنُ الْمُهَيْمِنُ الْعَزِيزُ الْجَبَّارُ الْمُتَكَبِّرُ ۚ سُبْحَانَ اللَّـهِ عَمَّا يُشْرِكُونَ ،\nهُوَ اللَّـهُ الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ ۖ لَهُ الْأَسْمَاءُ الْحُسْنَىٰ ۚ يُسَبِّحُ لَهُ مَا فِي السَّمَاوَاتِ وَالْأَرْضِ ۚ وَهُوَ الْعَزِيزُ الْحَكِيمُ.",
+          "هُوَ اللَّـهُ الَّذِي لَا إِلَـٰهَ إِلَّا هُوَ الْمَلِكُ الْقُدُّوسُ السَّلَامُ الْمُؤْمِنُ الْمُهَيْمِنُ الْعَزِيزُ الْجَبَّارُ الْمُتَكَبِّرُ ۚ سُبْحَانَ اللَّـهِ عَمَّا يُشْرِكُونَ ، اللَّـهُ الْخَالِقُ الْبَارِئُ الْمُصَوِّرُ ۖ لَهُ الْأَسْمَاءُ الْحُسْنَىٰ ۚ يُسَبِّحُ لَهُ مَا فِي السَّمَاوَاتِ وَالْأَرْضِ ۚ وَهُوَ الْعَزِيزُ الْحَكِيمُ.",
       "english":
           " He is Allāh; there is no god, but Him; the King, the Most Pure, the Source of Peace (Perfection), the Giver of Security, the Protector, the All-Mighty, the Compeller, the Supremely Great; Glory be to Allāh. (High is He) above all that they associate as partners with Him. He is Allāh, the Creator, the Maker, the Fashioner. To Him belongs the Most Beautiful Names. Everything in the Heavens and the earth glorify Him. And He is the All-Mighty, the All-Wise ",
       "eveningwird": "",
@@ -97,7 +97,7 @@ class WirdulLatif {
     },
     "11": {
       "wird":
-          "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ\n",
+          "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",
       "english":
           "I seek refuge in the Perfect Words of God from the evil He has created. ",
       "eveningwird": "",
@@ -105,7 +105,7 @@ class WirdulLatif {
     },
     "12": {
       "wird":
-          "\n  بِسْمِ اللهِ الذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ\n",
+          "  بِسْمِ اللهِ الذِي لَا يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الْأَرْضِ وَلَا فِي السَّمَاءِ، وَهُوَ السَّمِيعُ الْعَلِيمُ",
       "english":
           "“Peace and salutations to Noah among the nations (man, jinn and all that exist)!” Verily, this is the way that We reward the righteous. For he was one of Our believing bondsmen",
       "eveningwird": "",
@@ -113,7 +113,7 @@ class WirdulLatif {
     },
     "13": {
       "wird":
-          "اللَّهُمَّ إِنِّي أَصْبَحْتُ مِنْكَ فِي نِعْمَةٍ وَعَافِيَةٍ وَسِتْرٍ، فَأَتِمَّ نِعْمَتَكَ عَلَيَّ وَعَافِيَتَكَ وَسِتْرَكَ فِي الدُّنْيَا وَالآخِرَةِ\n",
+          "اللَّهُمَّ إِنِّي أَصْبَحْتُ مِنْكَ فِي نِعْمَةٍ وَعَافِيَةٍ وَسِتْرٍ، فَأَتِمَّ نِعْمَتَكَ عَلَيَّ وَعَافِيَتَكَ وَسِتْرَكَ فِي الدُّنْيَا وَالآخِرَةِ",
       "english":
           "O Allāh! I find myself this morning with favours (bounties), good health and protection from You. So, O Allāh, complete Your favours, good health and Your protection for me in this world as well as in the Hereafter.",
       "eveningwird":
@@ -173,7 +173,7 @@ class WirdulLatif {
       "wird":
           "اللَّهُمَّ إِنِّي أَسْأَلُكَ مِنْ فَجْأَةِ الْخَيْرِ، وَأَعُوذُ بِكَ مِنْ فَجْأَةِ الشَّرِّ.",
       "english":
-          "O Allāh! I ask You of unexpected good fortune, and I seek refuge in You from unexpected illfortune",
+          "O Allah, I ask You for sudden good things to happen, and I seek Your protection from sudden bad things.",
       "eveningwird": "",
       "count": 1
     },
@@ -181,7 +181,7 @@ class WirdulLatif {
       "wird":
           "اللَّهُمَّ أَنْتَ رَبِّي لَا إِلَهَ إِلَّا أَنْتَ خَلَقْتَنِي، وَأَنَا عَبْدُكَ وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لَا يَغْفِرُ الذُّنُوبَ إِلَّا أَنْتَ.",
       "english":
-          "O my Beloved Lord, You are my Caretaker,the One Who looks after me fully and completely!There is no one worthy of being sought but You.You have created me, and I am Yours.\nI commit to my promise and covenant to You, to the maximum of my ability!I seek refuge in You from the evil of that which I have brought about through my actions!I come to You, fully acknowledging Your great favors upon me!And I come to You acknowledging my sins - forgive me! For no one can forgive but You!",
+          "O my Beloved Lord, You are my Caretaker,the One Who looks after me fully and completely!There is no one worthy of being sought but You.You have created me, and I am Yours.I commit to my promise and covenant to You, to the maximum of my ability!I seek refuge in You from the evil of that which I have brought about through my actions!I come to You, fully acknowledging Your great favors upon me!And I come to You acknowledging my sins - forgive me! For no one can forgive but You!",
       "eveningwird": "",
       "count": 1
     },
@@ -189,7 +189,7 @@ class WirdulLatif {
       "wird":
           "اللَّهُمَّ أَنْتَ رَبِّي لا إِلَهَ إِلا أَنْتَ، عَلَيْكَ تَوَكَّلْتُ، وَأَنْتَ رَبُّ الْعَرْشِ الْعَظِيمِ، مَا شَاءَ اللَّهُ كَانَ، وَمَا لَمْ يَشَأْ لَمْ يَكُنْ، لا حَوْلَ وَلا قُوَّةَ إِلاَّ بِاللَّهِ الْعَلِيِّ الْعَظِيمِ، أَعْلَمُ أَنَّ اللَّهَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ، وَأَنَّ اللَّهَ قَدْ أَحَاطَ بِكُلِّ شَيْءٍ عِلْمًا، اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنْ شَرِّ نَفْسِي، وَمِنْ شَرِّ كُلِّ دَابَّةٍ أَنْتَ آخِذٌ بِنَاصِيَتِهَا، إِنَّ رَبِّي عَلَى صِرَاطٍ مُسْتَقِيمٍ.",
       "english":
-          "O my Lord Who is closer to me than myself!You are the One Who looks after me.\nThere is no one worthy of my focus but You!Upon You I rely completely.You are the Lord of the Vast Arsh (the cosmos).",
+          "O my Lord Who is closer to me than myself!You are the One Who looks after me.There is no one worthy of my focus but You!Upon You I rely completely.You are the Lord of the Vast Arsh (the cosmos).",
       "eveningwird": "",
       "count": 1
     },
@@ -205,7 +205,7 @@ class WirdulLatif {
       "wird":
           "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنَ الْجُبْنِ وَالْبُخْلِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ وَقَهْرِ الرِّجَالِ.",
       "english":
-          "O my Lord, I come to You seeking Your refuge from suffering anxiety or sadness,\nand from being afflicted by incapacity or laziness,and from feeling cowardice or miserliness,and from facing overwhelming debt or the oppression of people",
+          "O my Lord, I come to You seeking Your refuge from suffering anxiety or sadness,and from being afflicted by incapacity or laziness,and from feeling cowardice or miserliness,and from facing overwhelming debt or the oppression of people",
       "eveningwird": "",
       "count": 1
     },
@@ -213,7 +213,7 @@ class WirdulLatif {
       "wird":
           "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَافِيَةَ فِي الدُّنْيَا وَالآخِرَةِ.",
       "english":
-          "Allāh! I beseech You to grant me safety in this world as well as in the Hereafter.",
+          "O Allāh, I beg of You to keep me safe and sound in this life and the next.",
       "eveningwird": "",
       "count": 1
     },
@@ -228,7 +228,7 @@ class WirdulLatif {
     "27": {
       "wird": "اللهمَّ اسْتُرْ عَوْرَاتِي، وَآمِنْ رَوْعَاتِي.",
       "english":
-          "O Allāh! Conceal my faults and defects and lay to rest my fears.",
+          "O Allāh! Please hide my mistakes and weaknesses and make me feel safe and secure.",
       "eveningwird": "",
       "count": 1
     },
@@ -244,7 +244,7 @@ class WirdulLatif {
       "wird":
           "اللَّهُمَّ، أَنْتَ خَلَقْتَنِي وَأَنْتَ تَهْدِينِي وَأَنْتَ تُطْعِمُنِي وَأَنْتَ تَسْقِينِي وَأَنْتَ تُمِيتُنِي وَأَنْتَ تُحْيِينِي وَأَنْتَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.",
       "english":
-          "O my Lord, it is You Who created me,and You Who guides me,You Who feeds me, and You Who gives me to drink!You cause me to die, and You bring me back to life!\nAnd You are Able to do anything, You have Complete Power.Nothing can stand in the way of Your bringing to pass that which You wish to bring to pass.",
+          "O my Lord, it is You Who created me,and You Who guides me,You Who feeds me, and You Who gives me to drink!You cause me to die, and You bring me back to life!And You are Able to do anything, You have Complete Power.Nothing can stand in the way of Your bringing to pass that which You wish to bring to pass.",
       "eveningwird": "",
       "count": 1
     },
@@ -261,7 +261,7 @@ class WirdulLatif {
       "wird":
           "اللَّهُمَّ بِكَ أَصْبَحْنَا، وَبِكَ أَمْسَيْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَعَلَيْكَ نَتَوَكَّلُ، وَإِلَيْكَ النُّشُورُ.",
       "english":
-          "In the morning:O my Lord,by You we have awoken to this day,and by You we will retire into its night.By You we live, and by You we die.We place our complete reliance upon You.And to You we will be resurrected.In the evening:O my Lord,by You we retire into this night,and by You we awaken to this day.By You we live, and by You we die.\nWe place our complete reliance upon You.And our destiny is to return to You.",
+          "In the morning:O my Lord,by You we have awoken to this day,and by You we will retire into its night.By You we live, and by You we die.We place our complete reliance upon You.And to You we will be resurrected.In the evening:O my Lord,by You we retire into this night,and by You we awaken to this day.By You we live, and by You we die.We place our complete reliance upon You.And our destiny is to return to You.",
       "eveningwird":
           "اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَعَلَيْكَ نَتَوَكَّلُ، وَإِلَيْكَ النُّشُورُ",
       "count": 1
@@ -297,7 +297,7 @@ class WirdulLatif {
       "wird":
           "اللَّهُمَّ مَا أَصْبَحَ بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ، لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ عَلَى ذَلِكَ.",
       "english":
-          "Allāh! Whatever bounty has come my way, or the way of any of Your creation this morning, has indeed come from You. You have no partner, and to You belong all Praises and all Thanks",
+          "O Allah! Any blessing that has reached me or any of Your creation this morning is from You alone. You have no partner. Praise and thanks are due to You.",
       "eveningwird":
           "اللَّهُمَّ مَا أَمْسَى بِي مِنْ نِعْمَةٍ أَوْ بِأَحَدٍ مِنْ خَلْقِكَ فَمِنْكَ وَحْدَكَ، لَا شَرِيكَ لَكَ، فَلَكَ الْحَمْدُ وَلَكَ الشُّكْرُ عَلَى ذَلِكَ",
       "count": 1

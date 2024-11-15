@@ -49,32 +49,37 @@ class WirdScreen extends StatelessWidget {
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                // SizedBox(
+                                //   height: 12,
+                                // ),
+                                CircleAvatar(
+                                  backgroundColor: WirdColors.primaryDaycolor,
+                                  child: Text(
+                                    (model.currentPage + 1).toString(),
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 14),
+                                  ),
+                                ),
                                 SizedBox(
-                                  height: 26,
+                                  height: 16,
                                 ),
                                 Container(
-                                  // padding: const EdgeInsets.all(10),
+                                  padding: const EdgeInsets.all(16),
+                                  width: MediaQuery.of(context).size.width,
                                   decoration: BoxDecoration(
                                     gradient:
                                         WirdGradients.listTileShadeGradient,
                                     borderRadius: BorderRadius.circular(15),
                                     color: WirdColors.primaryDaycolor,
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 16.0,
-                                        left: 16.0,
-                                        right: 16.0,
-                                        bottom: 8),
-                                    child: Text(
-                                      model.wirdList[index].wird,
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        // fontWeight: FontWeight.bold,
-                                        fontSize: 24,
-                                        fontFamily: 'Kfgqpc',
-                                      ),
+                                  child: Text(
+                                    model.wirdList[index].wird,
+                                    textAlign: TextAlign.center,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      // fontWeight: FontWeight.bold,
+                                      fontSize: 24,
+                                      fontFamily: 'Kfgqpc',
                                     ),
                                   ),
                                 ),
@@ -186,7 +191,6 @@ class bottomBar extends StatelessWidget {
                               Text(
                                 '0%',
                               ),
-                             
                               Text(
                                 'Completed',
                                 style: TextStyle(fontSize: 10),
@@ -202,7 +206,6 @@ class bottomBar extends StatelessWidget {
                             Text(
                               '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)} % ',
                             ),
-                             
                             Text(
                               'Completed',
                               style: TextStyle(fontSize: 10),
@@ -218,7 +221,6 @@ class bottomBar extends StatelessWidget {
                             Text(
                               '${43 - model.currentPage} ',
                             ),
-                             
                             Text(
                               'Remaining',
                               style: TextStyle(fontSize: 10),
@@ -340,7 +342,7 @@ class bottomBar extends StatelessWidget {
                         ),
                       ),
                       Visibility(
-                        visible: model.tabhere,
+                        visible: model.tapHere,
                         child: Container(
                           height: 80,
                           width: 80,
