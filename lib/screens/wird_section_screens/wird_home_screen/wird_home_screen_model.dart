@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wirdul_latif/screens/wird_section/wird_screen/wird_screen.dart';
+import 'package:wirdul_latif/screens/wird_section_screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/deprecated/zikr_section/zikr_screen.dart/zikr_screen.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 

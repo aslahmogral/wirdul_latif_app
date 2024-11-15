@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wirdul_latif/screens/wird_section/home_screen/home_screen_model.dart';
-import 'package:wirdul_latif/screens/wird_section/wird_screen/wird_screen_model.dart';
+import 'package:wirdul_latif/screens/wird_section_screens/wird_home_screen/wird_home_screen_model.dart';
+import 'package:wirdul_latif/screens/wird_section_screens/wird_screen/wird_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class WirdScreen extends StatelessWidget {
@@ -30,7 +30,51 @@ class WirdScreen extends StatelessWidget {
                   ],
                 ),
                 actions: [
-                  IconButton(onPressed: () {}, icon: Icon(Icons.settings)),
+                  IconButton(
+                    onPressed: () {
+                      showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return Container(
+                              height: 500,
+                              width: MediaQuery.of(context).size.width,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    const Text('Settings'),
+                                    SizedBox(height: 16),
+                                    ListTile(
+                                      leading: Text(
+                                        'Translation',
+                                        style: TextStyle(fontSize: 16),
+                                      ),
+                                      trailing: StatefulBuilder(
+                                        builder: (context, setState) {
+                                          return Switch(
+                                            value: model.showTranslation,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                model.showTranslationClicked(value);
+                                              });
+                                            },
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    Spacer(),
+                                    // ElevatedButton(
+                                    //   child: const Text('Save'),
+                                    //   onPressed: () => Navigator.pop(context),
+                                    // ),
+                                  ],
+                                ),
+                              ));
+                        },
+                      );
+                    },
+                    icon: Icon(Icons.settings),
+                  ),
                 ],
               ),
               body: PageView.builder(
@@ -86,47 +130,48 @@ class WirdScreen extends StatelessWidget {
                                 SizedBox(
                                   height: 16,
                                 ),
-                                Container(
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: WirdGradients
-                                            .listTileShadeGradient.colors.last
-                                            .withOpacity(0.5),
-                                        width: 2,
+                                Visibility(
+                                  visible: model.showTranslation,
+                                  child: Container(
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: WirdGradients
+                                              .listTileShadeGradient.colors.last
+                                              .withOpacity(0.5),
+                                          width: 2,
+                                        ),
+                                        borderRadius: BorderRadius.circular(15),
                                       ),
-                                      borderRadius: BorderRadius.circular(15),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(20.0),
-                                      child: Column(
-                                        children: [
-                                          Text('TRANSLATION',
-                                              textAlign: TextAlign.center,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headlineSmall
-                                                  ?.copyWith(
-                                                      fontSize: 22,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                          SizedBox(
-                                            height: 16,
-                                          ),
-                                          Text(
-                                              model.wirdList[index].english
-                                                  .replaceAll(
-                                                      RegExp(r'[˹˺]'), ''),
-                                              textAlign: TextAlign.left,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headlineSmall
-                                                  ?.copyWith(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20.0),
+                                        child: Column(
+                                          children: [
+                                            // Text('TRANSLATION',
+                                            //     textAlign: TextAlign.center,
+                                            //     style: Theme.of(context)
+                                            //         .textTheme
+                                            //         .headlineSmall
+                                            //         ?.copyWith(
+                                            //             fontSize: 14,
+                                            //             )),
+                                            // SizedBox(
+                                            //   height: 16,
+                                            // ),
+                                            Text(
+                                                model.wirdList[index].english
+                                                    .replaceAll(
+                                                        RegExp(r'[˹˺]'), ''),
+                                                textAlign: TextAlign.left,
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .headlineSmall
+                                                    ?.copyWith(
                                                       fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold)),
-                                        ],
-                                      ),
-                                    )),
+                                                    )),
+                                          ],
+                                        ),
+                                      )),
+                                ),
                                 SizedBox(
                                   height: 100,
                                 )

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/model/wird.dart';
-import 'package:wirdul_latif/screens/wird_section/home_screen/home_screen_model.dart';
+import 'package:wirdul_latif/screens/wird_section_screens/wird_home_screen/wird_home_screen_model.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 
 class WirdScreenModel with ChangeNotifier {
@@ -13,11 +13,15 @@ class WirdScreenModel with ChangeNotifier {
   late WirdType type;
   String TitleText = '';
   bool tapHere = true;
-
+  bool showTranslation = true;
   WirdScreenModel(WirdType wirdType) {
     type = wirdType;
     initialize();
     controller.addListener(_onPageChanged);
+  }
+  showTranslationClicked(val) {
+    showTranslation = val;
+    notifyListeners();
   }
 
   void _onPageChanged() {

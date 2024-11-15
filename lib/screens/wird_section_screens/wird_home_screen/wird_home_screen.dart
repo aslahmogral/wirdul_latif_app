@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wirdul_latif/screens/wird_section/home_screen/home_screen_model.dart';
+import 'package:wirdul_latif/screens/wird_section_screens/wird_home_screen/wird_home_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class HomeScreen extends StatelessWidget {
