@@ -8,11 +8,18 @@ import 'package:wirdul_latif/screens/bottom_nav_bar/bottomNavbar.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 import 'package:wirdul_latif/utils/initialize.dart';
 import 'package:wirdul_latif/utils/theme.dart';
+import 'package:wirdul_latif/utils/theme_provider.dart';
 
 void main() {
   WirdulLatif.initWird();
   Initialize();
-  runApp(MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: MyApp(),
+    ),
+  );
+
   Animate.restartOnHotReload = true;
 }
 
@@ -21,6 +28,8 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     final themeProvider = Provider.of<ThemeProvider>(context);
+
     return MultiProvider(
         providers: [
           ChangeNotifierProvider<WirdProvider>(
@@ -31,10 +40,10 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Wird Al Latif',
           routes: AppRoutes.routes,
-          theme: Settings.isDarkMode
+          theme: themeProvider.isDarkMode
               ? customTheme.darkTheme
               : customTheme.lightTheme,
           home: const BottomNavBar(),
-        )); 
+        ));
   }
 }

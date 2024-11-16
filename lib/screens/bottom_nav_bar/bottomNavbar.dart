@@ -16,6 +16,7 @@ class BottomNavBar extends StatelessWidget {
           return Scaffold(
             body: model.currentScreen(),
             bottomNavigationBar: BottomNavigationBar(
+              showUnselectedLabels: true,
               items: model.bottonNavigationBarItems,
               currentIndex: model.currentindex,
               onTap: model.onItemTapped,
