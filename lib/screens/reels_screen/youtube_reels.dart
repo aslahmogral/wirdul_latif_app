@@ -23,7 +23,7 @@ class _YoutubeReelsScreenState extends State<YoutubeReelsScreen> {
     _controller = YoutubePlayerController(
       initialVideoId: videoIds[0],
       flags: const YoutubePlayerFlags(
-        autoPlay: true,
+        autoPlay: false,
         mute: false,
         loop: true,
         enableCaption: false,

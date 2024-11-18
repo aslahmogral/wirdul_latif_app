@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_plus/share_plus.dart';
 import 'package:wirdul_latif/screens/wird_section_screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/deprecated/zikr_section/zikr_screen.dart/zikr_screen.dart';
 import 'package:wirdul_latif/utils/constants.dart';
@@ -71,6 +72,10 @@ class HomeScreenModel with ChangeNotifier {
     titleText = Constants.morning;
     wirdIcon = Icons.sunny;
     mainImagePath = 'asset/morning.jpg';
+  }
+
+  void shareApp() {
+    Share.share('Check out this amazing app: ${Constants.appLink}');
   }
 
   setEveningDatas() {

@@ -22,7 +22,9 @@ class HomeScreen extends StatelessWidget {
             title: Text('Wird al latif'),
             actions: [
               IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  model.shareApp();
+                },
                 icon: Icon(Icons.share),
               ),
             ],

@@ -12,6 +12,8 @@ class customTheme {
       unselectedItemColor: Colors.white38,
     ),
 
+   
+
 
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: Colors.grey[400], fontFamily: 'Poppins'),
@@ -35,6 +37,8 @@ class customTheme {
     primaryColor:Colors.teal,
     hintColor: Colors.teal,
     scaffoldBackgroundColor: Colors.white,
+    appBarTheme: AppBarTheme(color: Colors.white),
+    
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
       bodyMedium: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
@@ -52,7 +56,8 @@ class customTheme {
     ),
     
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
-      // backgroundColor: Colors.white,
+      backgroundColor: Colors.white,
+      type: BottomNavigationBarType.fixed,
       selectedItemColor: Colors.black,
       unselectedItemColor: Colors.black38,
     ),
