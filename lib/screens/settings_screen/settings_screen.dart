@@ -33,7 +33,7 @@ class SettingsScreen extends StatelessWidget {
                       trailing: Switch(
                         value: themeProvider.isDarkMode,
                         onChanged: (value) {
-                          themeProvider.toggleTheme();
+                          themeProvider.toggleDarkMode();
                         },
                       ),
                     ),

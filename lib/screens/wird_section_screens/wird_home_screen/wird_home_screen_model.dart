@@ -38,11 +38,11 @@ class HomeScreenModel with ChangeNotifier {
   }
 
   navigateToZikr() {
-    Navigator.push(
-        _context,
-        MaterialPageRoute(
-          builder: (context) => ZikrScreen(),
-        ));
+    // Navigator.push(
+    //     _context,
+    //     MaterialPageRoute(
+    //       builder: (context) => ZikrScreen(),
+    //     ));
   }
 
   checkIsItMorningOrEvening() {

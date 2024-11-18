@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
-import 'package:wirdul_latif/main.dart';
 import 'package:wirdul_latif/screens/wird_section_screens/wird_home_screen/wird_home_screen_model.dart';
 import 'package:wirdul_latif/screens/wird_section_screens/wird_screen/wird_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
+import 'package:wirdul_latif/utils/theme_provider_model.dart';
 
 class WirdScreen extends StatelessWidget {
   static String routename = 'wirdscreen';
@@ -19,184 +19,223 @@ class WirdScreen extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => WirdScreenModel(wirdType))
       ],
       builder: (context, child) {
-        return Consumer<WirdScreenModel>(
-          builder: (context, model, child) {
-            return Scaffold(
-              appBar: AppBar(
-                leading: IconButton(onPressed: (){
-                  model.closeButton(context);
-                }, icon: Icon(Icons.close)),
-                centerTitle: true,
-                title: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                        '${model.TitleText[0].toUpperCase()}${model.TitleText.substring(1)} Wird'),
+        return Consumer<ThemeProvider>(
+            builder: (context, ThemeProvider, child) {
+          return Consumer<WirdScreenModel>(
+            builder: (context, model, child) {
+              return Scaffold(
+                appBar: AppBar(
+                  leading: IconButton(
+                      onPressed: () {
+                        model.closeButton(context);
+                      },
+                      icon: Icon(Icons.close)),
+                  centerTitle: true,
+                  title: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Text(
+                          '${model.TitleText[0].toUpperCase()}${model.TitleText.substring(1)} Wird'),
+                    ],
+                  ),
+                  actions: [
+                    setttingsBottomSheet(context, ThemeProvider),
                   ],
                 ),
-                actions: [
-                  IconButton(
-                    onPressed: () {
-                      showModalBottomSheet<void>(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return Container(
-                              height: 500,
-                              width: MediaQuery.of(context).size.width,
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  children: <Widget>[
-                                    const Text('Settings'),
-                                    SizedBox(height: 16),
-                                    ListTile(
-                                      leading: Text(
-                                        'Translation',
-                                        style: TextStyle(fontSize: 16),
-                                      ),
-                                      trailing: StatefulBuilder(
-                                        builder: (context, setState) {
-                                          return Switch(
-                                            value: model.showTranslation,
-                                            onChanged: (value) {
-                                              setState(() {
-                                                model.showTranslationClicked(
-                                                    value);
-                                              });
-                                            },
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                    Spacer(),
-                                    // ElevatedButton(
-                                    //   child: const Text('Save'),
-                                    //   onPressed: () => Navigator.pop(context),
-                                    // ),
-                                  ],
-                                ),
-                              ));
-                        },
-                      );
-                    },
-                    icon: Icon(Icons.settings),
-                  ),
-                ],
-              ),
-              body: PageView.builder(
-                itemCount: model.wirdList.length,
-                controller: model.controller,
-                onPageChanged: (value) {
-                  model.currentPage = value;
-                },
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Stack(
-                      children: [
-                        SingleChildScrollView(
-                          child: Center(
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                // SizedBox(
-                                //   height: 12,
-                                // ),
-                                CircleAvatar(
-                                  backgroundColor: WirdColors.primaryDaycolor,
-                                  child: Text(
-                                    (model.currentPage + 1).toString(),
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 14),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16,
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.all(16),
-                                  width: MediaQuery.of(context).size.width,
-                                  decoration: BoxDecoration(
-                                    gradient:
-                                        WirdGradients.listTileShadeGradient,
-                                    borderRadius: BorderRadius.circular(15),
-                                    color: WirdColors.primaryDaycolor,
-                                  ),
-                                  child: Text(
-                                    model.wirdList[index].wird,
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      // fontWeight: FontWeight.bold,
-                                      fontSize: 24,
-                                      fontFamily: 'Kfgqpc',
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 16,
-                                ),
-                                Visibility(
-                                  visible: model.showTranslation,
-                                  child: Container(
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: WirdGradients
-                                              .listTileShadeGradient.colors.last
-                                              .withOpacity(0.5),
-                                          width: 2,
-                                        ),
-                                        borderRadius: BorderRadius.circular(15),
-                                      ),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(20.0),
-                                        child: Column(
-                                          children: [
-                                            // Text('TRANSLATION',
-                                            //     textAlign: TextAlign.center,
-                                            //     style: Theme.of(context)
-                                            //         .textTheme
-                                            //         .headlineSmall
-                                            //         ?.copyWith(
-                                            //             fontSize: 14,
-                                            //             )),
-                                            // SizedBox(
-                                            //   height: 16,
-                                            // ),
-                                            Text(
-                                                model.wirdList[index].english
-                                                    .replaceAll(
-                                                        RegExp(r'[˹˺]'), ''),
-                                                textAlign: TextAlign.left,
-                                                style: Theme.of(context)
+                body: Stack(
+                  children: [
+                    PageView.builder(
+                      itemCount: model.wirdList.length,
+                      controller: model.controller,
+                      onPageChanged: (value) {
+                        model.currentPage = value;
+                      },
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Stack(
+                            children: [
+                              SingleChildScrollView(
+                                child: Center(
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      CircleAvatar(
+                                        radius: 18,
+                                        backgroundColor:
+                                            WirdColors.primaryDaycolor,
+                                        child: CircleAvatar(
+                                          radius: 16,
+                                          backgroundColor: Theme.of(context)
+                                              .scaffoldBackgroundColor,
+                                          child: Text(
+                                            (model.currentPage + 1).toString(),
+                                            style: TextStyle(
+                                                color: Theme.of(context)
                                                     .textTheme
                                                     .headlineSmall
-                                                    ?.copyWith(
-                                                      fontSize: 16,
-                                                    )),
-                                          ],
+                                                    ?.color,
+                                                fontSize: 12),
+                                          ),
                                         ),
-                                      )),
+                                      ),
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                      Container(
+                                        padding: const EdgeInsets.all(16),
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                          gradient: WirdGradients
+                                              .listTileShadeGradient,
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          color: WirdColors.primaryDaycolor,
+                                        ),
+                                        child: Text(
+                                          model.wirdList[index].wird,
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(
+                                            color: Colors.white,
+                                            // fontWeight: FontWeight.bold,
+                                            fontSize: 24,
+                                            fontFamily: 'Kfgqpc',
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                      Visibility(
+                                        visible:
+                                            ThemeProvider.isEnglishTranslation,
+                                        child: Container(
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: WirdGradients
+                                                    .listTileShadeGradient
+                                                    .colors
+                                                    .last
+                                                    .withOpacity(0.5),
+                                                width: 2,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(20.0),
+                                              child: Column(
+                                                children: [
+                                                  // Text('TRANSLATION',
+                                                  //     textAlign: TextAlign.center,
+                                                  //     style: Theme.of(context)
+                                                  //         .textTheme
+                                                  //         .headlineSmall
+                                                  //         ?.copyWith(
+                                                  //             fontSize: 14,
+                                                  //             )),
+                                                  // SizedBox(
+                                                  //   height: 16,
+                                                  // ),
+                                                  Text(
+                                                      model.wirdList[index]
+                                                          .english
+                                                          .replaceAll(
+                                                              RegExp(r'[˹˺]'),
+                                                              ''),
+                                                      textAlign: TextAlign.left,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .headlineSmall
+                                                          ?.copyWith(
+                                                            fontSize: 16,
+                                                          )),
+                                                ],
+                                              ),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 100,
+                                      )
+                                    ],
+                                  ),
                                 ),
-                                SizedBox(
-                                  height: 100,
-                                )
-                              ],
-                            ),
+                              ),
+                            ],
                           ),
-                        ),
-                        bottomBar(
-                          model: model,
-                        )
-                      ],
+                        );
+                      },
                     ),
-                  );
-                },
-              ),
-            );
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: bottomBar(
+                        model: model,
+                      ),
+                    ),
+                  ],
+                ),
+              );
+            },
+          );
+        });
+      },
+    );
+  }
+
+  IconButton setttingsBottomSheet(BuildContext context, ThemeProvider model) {
+    return IconButton(
+      onPressed: () {
+        showModalBottomSheet<void>(
+          context: context,
+          builder: (BuildContext context) {
+            return Container(
+                height: 500,
+                width: MediaQuery.of(context).size.width,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: <Widget>[
+                      const Text('Settings'),
+                      SizedBox(height: 16),
+                      ListTile(
+                        leading: Text(
+                          'English Translation',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        trailing: Switch(
+                          value: model.isEnglishTranslation,
+                          onChanged: (value) {
+                            model.toggleEnglishTranslation();
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        leading: Text(
+                          'Dark Mode',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        trailing: Switch(
+                          value: model.isDarkMode,
+                          onChanged: (value) {
+                            model.toggleDarkMode();
+                          },
+                        ),
+                      ),
+                      Spacer(),
+                      // ElevatedButton(
+                      //   child: const Text('Save'),
+                      //   onPressed: () => Navigator.pop(context),
+                      // ),
+                    ],
+                  ),
+                ));
           },
         );
       },
+      icon: Icon(Icons.settings),
     );
   }
 }
@@ -225,8 +264,10 @@ class bottomBar extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                          onPressed: model.undoOrPrevPage,
-                          icon: Icon(Icons.skip_previous)),
+                        onPressed: model.undoOrPrevPage,
+                        icon: Icon(Icons.skip_previous),
+                        color: Colors.white,
+                      ),
                       SizedBox(
                         width: 8,
                       ),
@@ -241,10 +282,12 @@ class bottomBar extends StatelessWidget {
                             children: [
                               Text(
                                 '0%',
+                                style: TextStyle(color: Colors.white),
                               ),
                               Text(
                                 'Completed',
-                                style: TextStyle(fontSize: 10),
+                                style: TextStyle(
+                                    fontSize: 10, color: Colors.white),
                               ),
                             ],
                           ),
@@ -256,10 +299,12 @@ class bottomBar extends StatelessWidget {
                           children: [
                             Text(
                               '${((model.currentPage + 1) / model.wirdList.length * 100).toStringAsFixed(0)} % ',
+                              style: TextStyle(color: Colors.white),
                             ),
                             Text(
                               'Completed',
-                              style: TextStyle(fontSize: 10),
+                              style:
+                                  TextStyle(fontSize: 10, color: Colors.white),
                             ),
                           ],
                         ),
@@ -271,10 +316,12 @@ class bottomBar extends StatelessWidget {
                           children: [
                             Text(
                               '${43 - model.currentPage} ',
+                              style: TextStyle(color: Colors.white),
                             ),
                             Text(
                               'Remaining',
-                              style: TextStyle(fontSize: 10),
+                              style:
+                                  TextStyle(fontSize: 10, color: Colors.white),
                             ),
                           ],
                         ),
@@ -283,8 +330,10 @@ class bottomBar extends StatelessWidget {
                         width: 8,
                       ),
                       IconButton(
-                          onPressed: model.skipOrNextPage,
-                          icon: Icon(Icons.skip_next)),
+                        onPressed: model.skipOrNextPage,
+                        icon: Icon(Icons.skip_next),
+                        color: Colors.white,
+                      ),
                     ],
                   ),
                 ),
@@ -305,7 +354,8 @@ class bottomBar extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       child: LinearProgressIndicator(
-                        color: Colors.teal,
+                        // color: Colors.teal,
+                        color: Theme.of(context).textTheme.bodyMedium?.color,
                         minHeight: 5,
                         value: (model.currentPage + 1) / model.wirdList.length,
                       ),
@@ -325,6 +375,8 @@ class bottomBar extends StatelessWidget {
 
   InkWell counter(BuildContext context) {
     return InkWell(
+      splashColor: Colors.transparent,
+      highlightColor: Colors.transparent,
       onTap: () {
         model.thasbeehButtonClicked();
       },
@@ -350,6 +402,8 @@ class bottomBar extends StatelessWidget {
                         height: 80,
                         width: 80,
                         child: CircularProgressIndicator(
+                          
+                          strokeWidth: 4,
                           value: model.wirdList[model.currentPage].counted !=
                                       null &&
                                   model.wirdList[model.currentPage].counted != 0
@@ -359,12 +413,12 @@ class bottomBar extends StatelessWidget {
                               : 0,
                           valueColor: AlwaysStoppedAnimation<Color>(
                             WirdColors.primaryDaycolor,
+                           
                           ),
                           backgroundColor: Colors.black45.withOpacity(0.2),
                         ),
                       ),
                       Container(
-                        // color: Colors.green,
                         height: 80,
                         width: 80,
                         child: Center(
@@ -393,7 +447,7 @@ class bottomBar extends StatelessWidget {
                         ),
                       ),
                       Visibility(
-                        visible: model.tapHere ,
+                        visible: model.tapHere,
                         child: Container(
                           height: 80,
                           width: 80,
@@ -402,17 +456,22 @@ class bottomBar extends StatelessWidget {
                               color: WirdColors.primaryDaycolor,
                               gradient: WirdGradients.listTileShadeGradient),
                           child: Center(
-                              child: Column(
+                                  child: Column(
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Text(
                                 'TAPP ',
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w900, fontSize: 18,color: Colors.white),
+                                    fontWeight: FontWeight.w900,
+                                    fontSize: 18,
+                                    color: Colors.white),
                               ),
-                              Icon(Icons.touch_app)
+                              Icon(Icons.touch_app, color: Colors.white)
                             ],
-                          )).animate(onPlay: (controller) => controller.repeat()).shake(),
+                          ))
+                              .animate(
+                                  onPlay: (controller) => controller.repeat())
+                              .shake(),
                         ),
                       ),
                     ],
