@@ -353,12 +353,23 @@ class bottomBar extends StatelessWidget {
                     Spacer(),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                      child: LinearProgressIndicator(
-                        // color: Colors.teal,
-                        color: Theme.of(context).textTheme.bodyMedium?.color,
-                        minHeight: 5,
-                        value: (model.currentPage + 1) / model.wirdList.length,
-                      ),
+                      child: TweenAnimationBuilder<double>(
+                          tween: Tween<double>(
+                            begin: 0.0,
+                            end:
+                                (model.currentPage + 1) / model.wirdList.length,
+                          ),
+                          duration: const Duration(milliseconds: 300),
+                          builder: (context, value, _) {
+                            return LinearProgressIndicator(
+                                // color: Colors.teal,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.color,
+                                minHeight: 5,
+                                value: value);
+                          }),
                     ),
                   ],
                 ),
@@ -401,22 +412,24 @@ class bottomBar extends StatelessWidget {
                       SizedBox(
                         height: 80,
                         width: 80,
-                        child: CircularProgressIndicator(
-                          
-                          strokeWidth: 4,
-                          value: model.wirdList[model.currentPage].counted !=
-                                      null &&
-                                  model.wirdList[model.currentPage].counted != 0
-                              ? (model.currentPageWirdCounted /
-                                      model.wirdList[model.currentPage].count)
-                                  .toDouble()
-                              : 0,
-                          valueColor: AlwaysStoppedAnimation<Color>(
-                            WirdColors.primaryDaycolor,
-                           
-                          ),
-                          backgroundColor: Colors.black45.withOpacity(0.2),
-                        ),
+                        child: TweenAnimationBuilder<double>(
+                            tween: Tween<double>(
+                                begin: 0.0, end: model.progressOfEachWird()),
+                            duration: Duration(
+                                milliseconds:
+                                    model.progressOfEachWird() == 0 ? 0 : 300),
+                            builder: (context, value, _) {
+                              return CircularProgressIndicator(
+                                // value: value,
+                                value: value,
+
+                                valueColor: AlwaysStoppedAnimation<Color>(
+                                  WirdColors.primaryDaycolor,
+                                ),
+                                backgroundColor:
+                                    Colors.black45.withOpacity(0.2),
+                              );
+                            }),
                       ),
                       Container(
                         height: 80,

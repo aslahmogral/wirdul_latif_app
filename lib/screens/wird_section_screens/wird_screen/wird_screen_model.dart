@@ -30,7 +30,7 @@ class WirdScreenModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void closeButton(context){
+  void closeButton(context) {
     tapHere = true;
     notifyListeners();
     Navigator.pop(context);
@@ -73,6 +73,17 @@ class WirdScreenModel with ChangeNotifier {
     }
 
     notifyListeners();
+  }
+
+  double progressOfEachWird() {
+    if (wirdList[currentPage].count == 1) {
+      return 0;
+    }
+
+    return wirdList[currentPage].counted != null &&
+            wirdList[currentPage].counted != 0
+        ? (currentPageWirdCounted / wirdList[currentPage].count).toDouble()
+        : 0;
   }
 
   setMorningDatas() {
