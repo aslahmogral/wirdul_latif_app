@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
+import 'package:wirdul_latif/main.dart';
 import 'package:wirdul_latif/screens/wird_section_screens/wird_home_screen/wird_home_screen_model.dart';
 import 'package:wirdul_latif/screens/wird_section_screens/wird_screen/wird_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
@@ -55,7 +57,8 @@ class WirdScreen extends StatelessWidget {
                                             value: model.showTranslation,
                                             onChanged: (value) {
                                               setState(() {
-                                                model.showTranslationClicked(value);
+                                                model.showTranslationClicked(
+                                                    value);
                                               });
                                             },
                                           );
@@ -396,11 +399,17 @@ class bottomBar extends StatelessWidget {
                               color: WirdColors.primaryDaycolor,
                               gradient: WirdGradients.listTileShadeGradient),
                           child: Center(
-                              child: Text(
-                            '\t\tTAP \n Here...',
-                            style: TextStyle(
-                                fontWeight: FontWeight.w900, fontSize: 18),
-                          )),
+                              child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                'TAPP ',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w900, fontSize: 18,color: Colors.white),
+                              ),
+                              Icon(Icons.touch_app)
+                            ],
+                          )).animate(onPlay: (controller) => controller.repeat()).shake(),
                         ),
                       ),
                     ],
