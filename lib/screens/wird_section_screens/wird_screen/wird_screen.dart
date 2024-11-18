@@ -23,6 +23,9 @@ class WirdScreen extends StatelessWidget {
           builder: (context, model, child) {
             return Scaffold(
               appBar: AppBar(
+                leading: IconButton(onPressed: (){
+                  model.closeButton(context);
+                }, icon: Icon(Icons.close)),
                 centerTitle: true,
                 title: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -390,7 +393,7 @@ class bottomBar extends StatelessWidget {
                         ),
                       ),
                       Visibility(
-                        visible: model.tapHere,
+                        visible: model.tapHere ,
                         child: Container(
                           height: 80,
                           width: 80,

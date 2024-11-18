@@ -30,6 +30,12 @@ class WirdScreenModel with ChangeNotifier {
     notifyListeners();
   }
 
+  void closeButton(context){
+    tapHere = true;
+    notifyListeners();
+    Navigator.pop(context);
+  }
+
   thasbeehButtonClicked() {
     tapHere = false;
     if (wirdList[currentPage].counted == null) {
