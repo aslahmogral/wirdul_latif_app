@@ -8,7 +8,7 @@ class WirdulLatif {
   static List<Wird> eveningWird = [];
   static List<Wird> Zikr = [];
 
-  Future<void> fetchData({bool sync = false}) async {
+  Future<void> initWirdData({bool sync = false}) async {
     if (sync) {
       final prefs = await SharedPreferences.getInstance();
       final response = await http.get(Uri.parse(
@@ -36,7 +36,7 @@ class WirdulLatif {
       final prefs = await SharedPreferences.getInstance();
       final data = prefs.getString('wird_data');
       if (data == null) {
-        await fetchData(sync: true);
+        await initWirdData(sync: true);
       } else {
         final wirdData = jsonDecode(data);
         if (wirdData is Map<String, dynamic>) {
@@ -54,6 +54,9 @@ class WirdulLatif {
         }
       }
     }
+
+    morningWird = _getMorningWird();
+    eveningWird = _getEveningWird();
   }
 
   // Future<void> _initFromStorage() async {
@@ -75,23 +78,23 @@ class WirdulLatif {
   // }
 
   static Map<String, Map<String, dynamic>> _wirdList = {};
-  static void initWird({bool sync = false}) async {
-    await WirdulLatif().fetchData(sync: sync);
-    morningWird = _getMorningWird();
-    eveningWird = _getEveningWird();
-    Zikr = [
-      Wird(
-          wird: 'هِ الرَّحْمَنِ الرَّحِيمِ',
-          english: 'english',
-          count: 3,
-          transliteration: ''),
-      Wird(
-          wird: 'هِنِ الرَّحِيمِ',
-          english: 'english',
-          count: 2,
-          transliteration: '')
-    ];
-  }
+  // static void initWird({bool sync = false}) async {
+  //   await WirdulLatif().fetchData(sync: sync);
+  //   morningWird = _getMorningWird();
+  //   eveningWird = _getEveningWird();
+  //   Zikr = [
+  //     Wird(
+  //         wird: 'هِ الرَّحْمَنِ الرَّحِيمِ',
+  //         english: 'english',
+  //         count: 3,
+  //         transliteration: ''),
+  //     Wird(
+  //         wird: 'هِنِ الرَّحِيمِ',
+  //         english: 'english',
+  //         count: 2,
+  //         transliteration: '')
+  //   ];
+  // }
 
   // static List<Wird> _getZikr() {
   //   List<Wird> finalList = [];

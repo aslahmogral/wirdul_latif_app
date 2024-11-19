@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
-import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/routes.dart';
-import 'package:wirdul_latif/screens/bottom_nav_bar/bottomNavbar.dart';
+import 'package:wirdul_latif/screens/splash_screen/splash_screen.dart';
 import 'package:wirdul_latif/utils/initialize.dart';
 import 'package:wirdul_latif/utils/theme.dart';
 import 'package:wirdul_latif/utils/theme_provider_model.dart';
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
       theme: themeProvider.isDarkMode
           ? customTheme.darkTheme
           : customTheme.lightTheme,
-      home: const BottomNavBar(),
+      home:  SplashScreen(),
     );
   }
 }

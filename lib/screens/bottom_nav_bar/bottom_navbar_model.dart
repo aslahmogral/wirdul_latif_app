@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/screens/counter_screen/counter_screen.dart';
 import 'package:wirdul_latif/screens/reels_screen/youtube_reels.dart';
 import 'package:wirdul_latif/screens/settings_screen/settings_screen.dart';
 import 'package:wirdul_latif/screens/wird_section_screens/wird_home_screen/wird_home_screen.dart';
 
 class BottomNavbarModel with ChangeNotifier {
-  BottomNavbarModel() {}
+  BottomNavbarModel() {
+  }
   int currentindex = 0;
   bool isMorning = false;
 
@@ -25,7 +27,8 @@ class BottomNavbarModel with ChangeNotifier {
           Icons.adjust,
         ),
         label: 'Counter'),
-    BottomNavigationBarItem(icon: Icon(Icons.smart_display), label: 'motivation'),
+    BottomNavigationBarItem(
+        icon: Icon(Icons.smart_display), label: 'motivation'),
     BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'settings'),
   ];
 
