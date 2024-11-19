@@ -112,6 +112,45 @@ class WirdScreen extends StatelessWidget {
                                         visible:
                                             ThemeProvider.isEnglishTranslation,
                                         child: Container(
+                                          width: MediaQuery.of(context).size.width,
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: WirdGradients
+                                                    .listTileShadeGradient
+                                                    .colors
+                                                    .last
+                                                    .withOpacity(0.5),
+                                                width: 2,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(15),
+                                            ),
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.all(16.0),
+                                              child: Column(
+                                                children: [
+                                                  Text(
+                                                      model.wirdList[index]
+                                                          .transliteration,
+                                                      // textAlign: TextAlign.left,
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .headlineSmall
+                                                          ?.copyWith(
+                                                            fontSize: 16,
+                                                          )),
+                                                ],
+                                              ),
+                                            )),
+                                      ),
+                                      SizedBox(
+                                        height: 16,
+                                      ),
+                                      Visibility(
+                                        visible:
+                                            ThemeProvider.isEnglishTranslation,
+                                        child: Container(
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: WirdGradients

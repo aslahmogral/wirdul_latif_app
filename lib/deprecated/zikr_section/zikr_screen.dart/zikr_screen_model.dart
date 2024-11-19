@@ -6,8 +6,8 @@ class ZikrScreenModel with ChangeNotifier {
     Wird(
         wird: 'لا إله إلا الله',
         english: 'There is no god but Allah',
-        count: 3),
-    Wird(wird: 'لا ', english: 'There ', count: 3)
+        count: 3, transliteration: ''),
+    Wird(wird: 'لا ', english: 'There ', count: 3, transliteration: '')
   ];
   int currentPage = 0;
   PageController controller = PageController();
