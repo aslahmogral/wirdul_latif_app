@@ -3,11 +3,11 @@ import 'package:wirdul_latif/model/wird.dart';
 
 class ZikrScreenModel with ChangeNotifier {
   List<Wird> wirdList = [
-    Wird(
-        wird: 'لا إله إلا الله',
-        english: 'There is no god but Allah',
-        count: 3, transliteration: ''),
-    Wird(wird: 'لا ', english: 'There ', count: 3, transliteration: '')
+    // Wird(
+    //     wird: 'لا إله إلا الله',
+    //     english: 'There is no god but Allah',
+    //     count: 3, transliteration: ''),
+    // Wird(wird: 'لا ', english: 'There ', count: 3, transliteration: '')
   ];
   int currentPage = 0;
   PageController controller = PageController();

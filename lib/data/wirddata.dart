@@ -7,9 +7,12 @@ class WirdulLatif {
   static List<Wird> morningWird = [];
   static List<Wird> eveningWird = [];
   static List<Wird> Zikr = [];
+  static Map<String, Map<String, dynamic>> _wirdList = {};
+  static int wirdVersion = 0;
 
   Future<void> initWirdData({bool sync = false}) async {
-    if (sync) {
+    final bool versionChanged = await hasVersionChanged();
+    if (sync || versionChanged) {
       final prefs = await SharedPreferences.getInstance();
       final response = await http.get(Uri.parse(
           'https://aslahmogral.github.io/wird-al-latif-json/wird.json'));
@@ -59,55 +62,31 @@ class WirdulLatif {
     eveningWird = _getEveningWird();
   }
 
-  // Future<void> _initFromStorage() async {
-  //   final prefs = await SharedPreferences.getInstance();
-  //   final data = prefs.getString('wird_data');
-  //   if (data != null) {
-  //     try {
-  //       _wirdList = jsonDecode(data).map((key, value) {
-  //         if (value is Map<String, dynamic>) {
-  //           return MapEntry(key, value);
-  //         } else {
-  //           throw Exception('Invalid data structure');
-  //         }
-  //       });
-  //     } catch (e) {
-  //       print('Error loading data from SharedPreferences: $e');
-  //     }
-  //   }
-  // }
+  Future<bool> hasVersionChanged() async {
+    try {
+      final prefs = await SharedPreferences.getInstance();
+      final localVersion = prefs.getInt('version') ?? 0;
 
-  static Map<String, Map<String, dynamic>> _wirdList = {};
-  // static void initWird({bool sync = false}) async {
-  //   await WirdulLatif().fetchData(sync: sync);
-  //   morningWird = _getMorningWird();
-  //   eveningWird = _getEveningWird();
-  //   Zikr = [
-  //     Wird(
-  //         wird: 'هِ الرَّحْمَنِ الرَّحِيمِ',
-  //         english: 'english',
-  //         count: 3,
-  //         transliteration: ''),
-  //     Wird(
-  //         wird: 'هِنِ الرَّحِيمِ',
-  //         english: 'english',
-  //         count: 2,
-  //         transliteration: '')
-  //   ];
-  // }
+      final response = await http.get(Uri.parse(
+          'https://aslahmogral.github.io/wird-al-latif-json/version.json'));
 
-  // static List<Wird> _getZikr() {
-  //   List<Wird> finalList = [];
-  //   _zikrList.forEach((key, value) {
-  //     finalList.add(Wird(
-  //       wird: value['wird'],
-  //       // eveningWird: value['eveningwird'],
-  //       english: value['english'],
-  //       count: value['count'],
-  //     ));
-  //   });
-  //   return finalList;
-  // }
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        if (data is Map<String, dynamic> && data.containsKey('version')) {
+          final remoteVersion = data['version'];
+          if (remoteVersion != localVersion) {
+            await prefs.setInt('version', remoteVersion);
+            return true;
+          }
+        }
+      }
+    } on Exception {
+      // Handle no internet connection
+      print('No internet connection');
+    }
+
+    return false;
+  }
 
   static List<Wird> _getMorningWird() {
     List<Wird> finalList = [];

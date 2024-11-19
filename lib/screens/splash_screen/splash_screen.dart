@@ -13,18 +13,14 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     initWirdData();
-  
   }
 
   initWirdData() async {
     await WirdulLatif().initWirdData();
-    Timer(
-      const Duration(seconds: 3), // Splash screen duration
-      () => Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-            builder: (context) => BottomNavBar()), // Navigate to home
-      ),
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+          builder: (context) => BottomNavBar()), // Navigate to home
     );
   }
 

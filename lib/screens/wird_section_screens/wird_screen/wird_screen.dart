@@ -110,7 +110,7 @@ class WirdScreen extends StatelessWidget {
                                       ),
                                       Visibility(
                                         visible:
-                                            ThemeProvider.isEnglishTranslation,
+                                            ThemeProvider.isTransliteration,
                                         child: Container(
                                           width: MediaQuery.of(context).size.width,
                                             decoration: BoxDecoration(
@@ -260,6 +260,18 @@ class WirdScreen extends StatelessWidget {
                           value: model.isDarkMode,
                           onChanged: (value) {
                             model.toggleDarkMode();
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        leading: Text(
+                          'Transliteration',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        trailing: Switch(
+                          value: model.isTransliteration,
+                          onChanged: (value) {
+                            model.toggleTransliteration();
                           },
                         ),
                       ),

@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-// import 'package:url_launcher/url_launcher.dart';
 import 'package:wirdul_latif/screens/settings_screen/setting_screen_model.dart';
-import 'package:wirdul_latif/utils/constants.dart';
 import 'package:wirdul_latif/utils/theme_provider_model.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -42,6 +40,14 @@ class SettingsScreen extends StatelessWidget {
                       title: Text('Share this App'),
                       onTap: () {
                         model.shareApp();
+                      },
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.sync),
+                      title: Text('check for correction updates'),
+                      onTap: () {
+                        model.checkForUpdates(context);
+                        
                       },
                     ),
                     ListTile(
