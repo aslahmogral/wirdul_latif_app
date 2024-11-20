@@ -19,8 +19,6 @@ import 'package:webview_flutter_android/webview_flutter_android.dart';
 import 'package:webview_flutter_wkwebview/webview_flutter_wkwebview.dart';
 // #enddocregion platform_imports
 
-void main() => runApp(const MaterialApp(home: WebViewExample()));
-
 const String kNavigationExamplePage = '''
 <!DOCTYPE html><html>
 <head><title>Navigation Delegate Example</title></head>
@@ -110,14 +108,16 @@ const String kLogExamplePage = '''
 </html>
 ''';
 
-class WebViewExample extends StatefulWidget {
-  const WebViewExample({super.key});
+class WebView extends StatefulWidget {
+  final String url;
+  final String title;
+  const WebView({super.key, required this.url, required this.title});
 
   @override
-  State<WebViewExample> createState() => _WebViewExampleState();
+  State<WebView> createState() => _WebViewState();
 }
 
-class _WebViewExampleState extends State<WebViewExample> {
+class _WebViewState extends State<WebView> {
   late final WebViewController _controller;
 
   @override
@@ -188,7 +188,7 @@ Page resource error:
           );
         },
       )
-      ..loadRequest(Uri.parse('https://flutter.dev'));
+      ..loadRequest(Uri.parse(widget.url));
 
     // setBackgroundColor is not currently supported on macOS.
     if (kIsWeb || !Platform.isMacOS) {
@@ -211,15 +211,17 @@ Page resource error:
     return Scaffold(
       backgroundColor: Colors.green,
       appBar: AppBar(
-        title: const Text('Flutter WebView example'),
+        leading: IconButton(
+            onPressed: () => Navigator.pop(context), icon: Icon(Icons.close)),
+        title: Text(widget.title),
         // This drop down menu demonstrates that Flutter widgets can be shown over the web view.
-        actions: <Widget>[
-          NavigationControls(webViewController: _controller),
-          SampleMenu(webViewController: _controller),
-        ],
+        // actions: <Widget>[
+        //   NavigationControls(webViewController: _controller),
+        //   SampleMenu(webViewController: _controller),
+        // ],
       ),
       body: WebViewWidget(controller: _controller),
-      floatingActionButton: favoriteButton(),
+      // floatingActionButton: favoriteButton(),
     );
   }
 

@@ -16,7 +16,9 @@ class SettingsScreenModel with ChangeNotifier {
     loading = true;
     notifyListeners();
     final bool updated = await WirdulLatif().hasVersionChanged();
-
+    if(updated) {
+      await WirdulLatif().initWirdData(sync: true);
+    }
     loading = false;
     notifyListeners();
     ScaffoldMessenger.of(context).showSnackBar(

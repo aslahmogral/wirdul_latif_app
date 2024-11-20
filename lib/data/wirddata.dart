@@ -7,18 +7,13 @@ class WirdulLatif {
   static List<Wird> morningWird = [];
   static List<Wird> eveningWird = [];
   static List<Wird> Zikr = [];
-  static List<dynamic> Reels = [];
   static Map<String, Map<String, dynamic>> _wirdList = {};
   static int wirdVersion = 0;
+  static List<dynamic> Reels = [];
+  static List<dynamic> blogs = [];
 
   Future<void> initWirdData({bool sync = false}) async {
     final bool versionChanged = await hasVersionChanged();
-    getWirdData(sync, versionChanged);
-    getContents(sync: sync, versionChanged: versionChanged);
-    morningWird = _getMorningWird();
-    eveningWird = _getEveningWird();
-  }
-  Future<void> getWirdData(sync, versionChanged) async {
     if (sync || versionChanged) {
       final prefs = await SharedPreferences.getInstance();
       final response = await http.get(Uri.parse(
@@ -64,6 +59,9 @@ class WirdulLatif {
         }
       }
     }
+    getContents(sync: sync, versionChanged: versionChanged);
+    morningWird = _getMorningWird();
+    eveningWird = _getEveningWird();
   }
 
   Future<void> getContents({sync, versionChanged}) async {
@@ -74,21 +72,32 @@ class WirdulLatif {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        await prefs.setString('wird_data', jsonEncode(_wirdList));
         Reels = data['reels'];
         await prefs.setString('reels', jsonEncode(Reels));
+
+        blogs = data['blogs'];
+        await prefs.setString('blogs', jsonEncode(blogs));
       } else {
         throw Exception('Failed to load JSON');
       }
     } else {
       final prefs = await SharedPreferences.getInstance();
-      final data = prefs.getString('reels');
-      if (data == null) {
+      final reelsFromPrefs = prefs.getString('reels');
+      if (reelsFromPrefs == null) {
         await getContents();
       } else {
-        final reelsData = jsonDecode(data);
+        final reelsData = jsonDecode(reelsFromPrefs);
         Reels = reelsData;
         await prefs.setString('reels', jsonEncode(Reels));
+      }
+
+       final blogsFromPrefs = prefs.getString('blogs');
+      if (blogsFromPrefs == null) {
+        await getContents();
+      } else {
+        final blogsData = jsonDecode(blogsFromPrefs);
+        blogs = blogsData;
+        await prefs.setString('blogs', jsonEncode(blogs));
       }
     }
   }
