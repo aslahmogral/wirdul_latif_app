@@ -10,7 +10,7 @@ class YoutubeReelsScreen extends StatefulWidget {
 }
 
 class _YoutubeReelsScreenState extends State<YoutubeReelsScreen> {
-  final List<dynamic> videoIds = WirdulLatif.Reels;
+  final List<dynamic> videoIds = WirdulLatif.reels;
 
   late YoutubePlayerController _controller;
 

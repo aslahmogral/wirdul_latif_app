@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:wirdul_latif/screens/settings_screen/setting_screen_model.dart';
+import 'package:wirdul_latif/utils/constants.dart';
 import 'package:wirdul_latif/utils/theme_provider_model.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -54,12 +56,11 @@ class SettingsScreen extends StatelessWidget {
                       leading: Icon(Icons.rate_review),
                       title: Text('Rate this App'),
                       onTap: () {
-                        // Replace with your app's link
-                        // launchUrl(
-                        //   Uri.parse(
-                        //   Constants.appLink,
-                        //   ),
-                        // );
+                        launchUrl(
+                          Uri.parse(
+                          Constants.appLink,
+                          ),
+                        );
                       },
                     )
                   ],

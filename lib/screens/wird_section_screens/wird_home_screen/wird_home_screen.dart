@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/deprecated/zikr_section/zikr_home_screen.dart/zikr_home_screen.dart';
+import 'package:wirdul_latif/screens/blog_screen.dart/blog_screen.dart';
+import 'package:wirdul_latif/screens/blog_screen.dart/webview.dart';
 import 'package:wirdul_latif/screens/counter_screen/counter_screen.dart';
 import 'package:wirdul_latif/screens/reels_screen/youtube_reels.dart';
 import 'package:wirdul_latif/screens/settings_screen/settings_screen.dart';
@@ -320,8 +322,8 @@ class HomeScreen extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            // Navigator.of(context).pushNamed(WirdScreen.routename,
-            //     arguments: {'wird': 'evening'});
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => BlogScreen()));
           },
           child: MorningOrEveningCard(
               icon: Icons.book,
