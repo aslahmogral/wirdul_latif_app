@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
-import 'package:wirdul_latif/screens/wird_section_screens/wird_home_screen/wird_home_screen.dart';
+import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class SplashScreen extends StatefulWidget {

@@ -6,7 +6,7 @@ import 'package:wirdul_latif/screens/blog_screen.dart/webview.dart';
 import 'package:wirdul_latif/screens/counter_screen/counter_screen.dart';
 import 'package:wirdul_latif/screens/reels_screen/youtube_reels.dart';
 import 'package:wirdul_latif/screens/settings_screen/settings_screen.dart';
-import 'package:wirdul_latif/screens/wird_section_screens/wird_home_screen/wird_home_screen_model.dart';
+import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 import 'package:wirdul_latif/widgets/morning_evening_wird_card.dart';
 
