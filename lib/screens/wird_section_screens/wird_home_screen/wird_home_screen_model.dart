@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:share_plus/share_plus.dart';
 import 'package:wirdul_latif/screens/wird_section_screens/wird_screen/wird_screen.dart';
-import 'package:wirdul_latif/deprecated/zikr_section/zikr_screen.dart/zikr_screen.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 
 enum WirdType { morning, evening }
@@ -53,6 +51,13 @@ class HomeScreenModel with ChangeNotifier {
     notifyListeners();
   }
 
+  changeWirdType(){
+    isMorning = !isMorning;
+    isMorning ? wirdType = WirdType.morning : wirdType = WirdType.evening;
+    changeTab(wirdType);
+    notifyListeners();
+  }
+
   changeTab(WirdType wirdType) {
     this.wirdType = wirdType;
     initialize();
@@ -74,9 +79,7 @@ class HomeScreenModel with ChangeNotifier {
     mainImagePath = 'asset/morning.jpg';
   }
 
-  void shareApp() {
-    Share.share('Check out this amazing app: ${Constants.appLink}');
-  }
+ 
 
   setEveningDatas() {
     titleText = Constants.evening;

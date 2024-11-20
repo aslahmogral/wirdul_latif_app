@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:wirdul_latif/deprecated/zikr_section/zikr_home_screen.dart/zikr_home_screen.dart';
+import 'package:wirdul_latif/screens/counter_screen/counter_screen.dart';
+import 'package:wirdul_latif/screens/reels_screen/youtube_reels.dart';
+import 'package:wirdul_latif/screens/settings_screen/settings_screen.dart';
 import 'package:wirdul_latif/screens/wird_section_screens/wird_home_screen/wird_home_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
+import 'package:wirdul_latif/widgets/morning_evening_wird_card.dart';
 
 class HomeScreen extends StatelessWidget {
   static String routename = 'homescreen';
@@ -23,9 +28,12 @@ class HomeScreen extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () {
-                  model.shareApp();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SettingsScreen()));
                 },
-                icon: Icon(Icons.share),
+                icon: Icon(Icons.settings),
               ),
             ],
           ),
@@ -58,14 +66,31 @@ class HomeScreen extends StatelessWidget {
                           model.navigateToWird();
                         },
                         child: MorningOrEveningContainer(context, model)),
-                    const SizedBox(
-                      height: 20,
+                    const SizedBox(height: 8),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        InkWell(
+                          onTap: () {
+                            model.changeWirdType();
+                          },
+                          child: Text(
+                            'switch to ${model.wirdType == WirdType.morning ? 'evening' : 'morning'} wird',
+                            style: TextStyle(
+                                decoration: TextDecoration.underline,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16),
+                          ),
+                        ),
+                      ],
                     ),
-                    InkWell(
-                        onTap: () {
-                          model.navigateToZikr();
-                        },
-                        child: quranMessageSection()),
+                    const SizedBox(height: 28),
+                    morningAndEveningWirdSection(context),
+                    // InkWell(
+                    //     onTap: () {
+                    //       model.navigateToZikr();
+                    //     },
+                    //     child: quranMessageSection()),
                     const SizedBox(
                       height: 20,
                     ),
@@ -84,66 +109,25 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               )),
+          floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => CounterScreen()),
+              );
+            },
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Image.asset('asset/tasbih.png'),
+              ),
+            ),
+          ),
         ),
       ),
     );
   }
 
-  Stack quranMessageSection() {
-    return Stack(
-      alignment: AlignmentDirectional.bottomCenter,
-      children: [
-        // Container(
-        //   height: 200,
-        //   decoration: BoxDecoration(
-        //     borderRadius: BorderRadius.circular(15),
-        //     image: const DecorationImage(
-        //       image: AssetImage(Initialize.quranQuotes),
-        //       fit: BoxFit.cover,
-        //     ),
-        //   ),
-        // ),
-        Container(
-          height: 200,
-          decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 0, 0, 0),
-              borderRadius: BorderRadius.circular(15),
-              gradient: WirdGradients.containerShadeGradient),
-        ),
-        Container(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(22.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '“And glorify the praises of your Lord before sunrise before sunset”',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                  SizedBox(
-                    height: 22,
-                  ),
-                  Text(
-                    'Quran 50:39',
-                    style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.yellow),
-                  )
-                ],
-              ),
-            ),
-          ),
-          height: 200,
-        ),
-      ],
-    );
-  }
 
   Stack MorningOrEveningContainer(context, HomeScreenModel model) {
     return Stack(
@@ -188,13 +172,26 @@ class HomeScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(22.0),
               child: Column(mainAxisSize: MainAxisSize.min, children: [
+                Container(
+                  height: 30,
+                ),
                 Text(
                   "${model.titleText.toUpperCase()} WIRD",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.w900,
-                      color: Colors.white),
+                    fontSize: 34,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white,
+                    letterSpacing: 1.5,
+                    wordSpacing: 2,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 10.0,
+                        color: Colors.black54,
+                        offset: Offset(5.0, 5.0),
+                      ),
+                    ],
+                  ),
                 ),
                 SizedBox(
                   height: 22,
@@ -211,19 +208,35 @@ class HomeScreen extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         Text(
-                          '05:00:22',
-                          style: TextStyle(color: Colors.green),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                            // width: MediaQuery.of(context).size.width,
-                            width: 200,
-                            child: LinearProgressIndicator(
-                              value: 0.1,
-                              color: Colors.green,
-                            )),
+                          'READ NOW',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.green.shade700,
+                            letterSpacing: 1.2,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(1.0, 1.0),
+                                blurRadius: 2.0,
+                                color: Colors.black54,
+                              ),
+                            ],
+                          ),
+                        )
+                        // Text(
+                        //   '05:00:22',
+                        //   style: TextStyle(color: Colors.green),
+                        // ),
+                        // SizedBox(
+                        //   width: 10,
+                        // ),
+                        // Container(
+                        //     // width: MediaQuery.of(context).size.width,
+                        //     width: 200,
+                        //     child: LinearProgressIndicator(
+                        //       value: 0.1,
+                        //       color: Colors.green,
+                        //     )),
                       ],
                     ),
                   ),
@@ -237,31 +250,31 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Container motivationShortsTileSection() {
-    return Container(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListTile(
-          leading: Icon(Icons.bolt, color: Colors.yellow, size: 30),
-          title: Text(
-            'Motivational Shorts',
-            style: TextStyle(
-                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
-          ),
-          trailing: Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white,
-          ),
-        ),
-      ),
-      // height: 70,
-      decoration: BoxDecoration(
-        color: WirdColors.primaryDaycolor,
-        gradient: WirdGradients.listTileShadeGradient,
-        borderRadius: BorderRadius.circular(15),
-      ),
-    );
-  }
+  // Container motivationShortsTileSection() {
+  //   return Container(
+  //     child: Padding(
+  //       padding: const EdgeInsets.all(8.0),
+  //       child: ListTile(
+  //         leading: Icon(Icons.bolt, color: Colors.yellow, size: 30),
+  //         title: Text(
+  //           'Motivational Shorts',
+  //           style: TextStyle(
+  //               fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+  //         ),
+  //         trailing: Icon(
+  //           Icons.arrow_forward_ios,
+  //           color: Colors.white,
+  //         ),
+  //       ),
+  //     ),
+  //     // height: 70,
+  //     decoration: BoxDecoration(
+  //       color: WirdColors.primaryDaycolor,
+  //       gradient: WirdGradients.listTileShadeGradient,
+  //       borderRadius: BorderRadius.circular(15),
+  //     ),
+  //   );
+  // }
 
   Container StartButton(HomeScreenModel model) {
     return Container(
@@ -282,42 +295,44 @@ class HomeScreen extends StatelessWidget {
       ),
       // height: 70,
       decoration: BoxDecoration(
-        color: WirdColors.primaryDaycolor,
+        color: WirdColors.primaryDaycolor.withOpacity(0.8),
         gradient: WirdGradients.listTileShadeGradient,
         borderRadius: BorderRadius.circular(15),
       ),
     );
   }
 
-  // Row morningAndEveningWirdSection(context) {
-  //   return Row(
-  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-  //     children: [
-  //       InkWell(
-  //         onTap: () {
-  //           Navigator.of(context).pushNamed(WirdScreen.routename,
-  //               arguments: {'wird': 'morning'});
-  //         },
-  //         child: MorningOrEveningCard(
-  //             size: 170,
-  //             imagePath: 'asset/morning.jpg',
-  //             title: 'Morning',
-  //             subTitle: 'Wird'),
-  //       ),
-  //       InkWell(
-  //         onTap: () {
-  //           Navigator.of(context).pushNamed(WirdScreen.routename,
-  //               arguments: {'wird': 'evening'});
-  //         },
-  //         child: MorningOrEveningCard(
-  //             size: 170,
-  //             imagePath: 'asset/night.jpg',
-  //             title: 'Evening',
-  //             subTitle: 'Wird'),
-  //       ),
-  //     ],
-  //   );
-  // }
+  Row morningAndEveningWirdSection(context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        InkWell(
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => YoutubeReelsScreen()));
+          },
+          child: MorningOrEveningCard(
+              icon: Icons.movie,
+              size: 170,
+              color: WirdColors.primaryDaycolor,
+              title: 'Watch',
+              subTitle: 'Naseeha'),
+        ),
+        InkWell(
+          onTap: () {
+            // Navigator.of(context).pushNamed(WirdScreen.routename,
+            //     arguments: {'wird': 'evening'});
+          },
+          child: MorningOrEveningCard(
+              icon: Icons.book,
+              size: 170,
+              color: WirdColors.primaryDaycolor,
+              title: 'Read',
+              subTitle: 'Naseeha'),
+        ),
+      ],
+    );
+  }
 
   Container dummyStreakContainer() {
     return Container(

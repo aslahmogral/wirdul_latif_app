@@ -1,7 +1,7 @@
-import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
-import 'package:wirdul_latif/screens/bottom_nav_bar/bottomNavbar.dart';
+import 'package:wirdul_latif/screens/wird_section_screens/wird_home_screen/wird_home_screen.dart';
+import 'package:wirdul_latif/utils/colors.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -19,8 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     await WirdulLatif().initWirdData();
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(
-          builder: (context) => BottomNavBar()), // Navigate to home
+      MaterialPageRoute(builder: (context) => HomeScreen()), // Navigate to home
     );
   }
 
@@ -30,13 +29,22 @@ class _SplashScreenState extends State<SplashScreen> {
       // backgroundColor: Colors.white,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(width: 150, height: 150, child: Icon(Icons.book)),
-            const SizedBox(height: 20),
-            const LinearProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.blue),
+            const CircularProgressIndicator(
+              valueColor:
+                  AlwaysStoppedAnimation<Color>(WirdColors.primaryDaycolor),
             ),
+            SizedBox(height: 36,),
+            InkWell(
+              onTap: () => initWirdData(),
+              child: Text(
+                'Reload wirdul latif',
+                style: TextStyle(
+                    color: WirdColors.primaryDaycolor,
+                    decoration: TextDecoration.underline),
+              ),
+            )
           ],
         ),
       ),

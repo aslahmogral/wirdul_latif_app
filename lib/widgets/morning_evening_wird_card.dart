@@ -1,48 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/utils/colors.dart';
+
 @deprecated
 class MorningOrEveningCard extends StatelessWidget {
-  final String imagePath;
+  final Color color;
   final double size;
   final String title;
   final String subTitle;
+  final IconData icon;
 
   const MorningOrEveningCard({
     Key? key,
-    required this.imagePath,
+    required this.color,
     required this.title,
     required this.subTitle,
     required this.size,
+    required this.icon,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Stack(
-      alignment: AlignmentDirectional.bottomCenter,
+      // alignment: AlignmentDirectional.center,
       children: [
+       
         Container(
           height: size,
           width: size,
           decoration: BoxDecoration(
+            // color: WirdColors.primaryDaycolor,
             borderRadius: BorderRadius.circular(15),
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(15),
-            child: Image.asset(
-              imagePath,
-              fit: BoxFit.cover,
-              width: size,
-              height: size,
-            ),
-          ),
-        ),
-        Container(
-          height: size,
-          width: size,
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 0, 0, 0),
-            borderRadius: BorderRadius.circular(15),
-            gradient: WirdGradients.containerShadeGradient,
+            color: WirdColors.primaryDaycolor.withOpacity(0.8),
+        gradient: WirdGradients.listTileShadeGradient,
           ),
           child: Padding(
             padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
@@ -72,6 +61,15 @@ class MorningOrEveningCard extends StatelessWidget {
             ),
           ),
         ),
+        Positioned(
+          top: 40,
+          right: 60,
+          child: Icon(
+            size: 50,
+            icon,
+            color: Colors.yellow,
+          ),
+        )
       ],
     );
   }

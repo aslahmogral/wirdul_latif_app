@@ -64,6 +64,6 @@ class ThemeProvider extends ChangeNotifier {
 
    Future<void> _saveTransliterationToPrefs() async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setBool('isEnglishTranslation', _isEnglishTranslation);
+    await prefs.setBool('isTransliterationPrefs', _isTransliteration);
   }
 }

@@ -40,6 +40,12 @@ class _YoutubeReelsScreenState extends State<YoutubeReelsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: IconButton(onPressed: (){
+          Navigator.pop(context);
+        }, icon: Icon(Icons.close)),
+      ),
       body: PageView.builder(
         scrollDirection: Axis.vertical,
         itemCount: videoIds.length,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/screens/counter_screen/counter_screen_model.dart';
+import 'package:wirdul_latif/utils/colors.dart';
 
 class CounterScreen extends StatelessWidget {
   const CounterScreen({super.key});
@@ -14,13 +15,19 @@ class CounterScreen extends StatelessWidget {
       ],
       child: Consumer<CounterScreenModel>(builder: (context, model, child) {
         return Scaffold(
-          appBar: AppBar(title: Text('Zikr Counter'),centerTitle: true,),
+          appBar: AppBar(
+            title: Text('Zikr Counter'),
+            centerTitle: true,
+          ),
           body: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Center(
               child: Column(
-                mainAxisSize: MainAxisSize.min,
+                // mainAxisSize: MainAxisSize.min,
                 children: [
+                  quranMessageSection(),
+                  SizedBox(
+                    height: 50,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -64,7 +71,9 @@ class CounterScreen extends StatelessWidget {
                           child: Text('1000')),
                     ],
                   ),
-                  SizedBox(height: 16,),
+                  SizedBox(
+                    height: 16,
+                  ),
                   ElevatedButton.icon(
                       onPressed: () {
                         model.setCount('1000000000');
@@ -77,6 +86,62 @@ class CounterScreen extends StatelessWidget {
           ),
         );
       }),
+    );
+  }
+
+  Stack quranMessageSection() {
+    return Stack(
+      alignment: AlignmentDirectional.bottomCenter,
+      children: [
+        // Container(
+        //   height: 200,
+        //   decoration: BoxDecoration(
+        //     borderRadius: BorderRadius.circular(15),
+        //     image: const DecorationImage(
+        //       image: AssetImage(Initialize.quranQuotes),
+        //       fit: BoxFit.cover,
+        //     ),
+        //   ),
+        // ),
+        Container(
+          height: 200,
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 0, 0, 0),
+              borderRadius: BorderRadius.circular(15),
+              gradient: WirdGradients.listTileShadeGradient),
+        ),
+        Container(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(22.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '“And glorify the praises of your Lord before sunrise before sunset”',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                  SizedBox(
+                    height: 22,
+                  ),
+                  Text(
+                    'Quran 50:39',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.yellow),
+                  )
+                ],
+              ),
+            ),
+          ),
+          height: 200,
+        ),
+      ],
     );
   }
 }

@@ -5,15 +5,28 @@ class customTheme {
       ThemeData.dark(useMaterial3: true).copyWith(
     primaryColor: Colors.grey[800],
     hintColor: Colors.blueGrey[700],
-    scaffoldBackgroundColor: Colors.grey[900],
+    // scaffoldBackgroundColor:Colors.transparent,
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white38,
     ),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      // foregroundColor: Colors.teal,
+      backgroundColor: Colors.teal,
+    ),
 
-   
-
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
+      )
+    ),
+     switchTheme: SwitchThemeData(
+      thumbColor: MaterialStateProperty.all(Colors.white),
+      trackColor: MaterialStateProperty.all(Colors.teal),
+    ),
+    
 
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: Colors.grey[400], fontFamily: 'Poppins'),
@@ -34,10 +47,14 @@ class customTheme {
 
   static final ThemeData lightTheme =
       ThemeData.light(useMaterial3: true).copyWith(
-    primaryColor:Colors.teal,
+    primaryColor: Colors.teal,
     hintColor: Colors.teal,
     scaffoldBackgroundColor: Colors.white,
     appBarTheme: AppBarTheme(color: Colors.white),
+    floatingActionButtonTheme: FloatingActionButtonThemeData(
+      // foregroundColor: Colors.teal,
+      backgroundColor: Colors.teal,
+    ),
     
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
@@ -53,6 +70,18 @@ class customTheme {
       labelLarge: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
       bodySmall: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
       labelSmall: TextStyle(color: Colors.black45, fontFamily: 'Poppins'),
+    ),
+
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        backgroundColor: Colors.teal,
+        foregroundColor: Colors.white,
+      )
+    ),
+
+    switchTheme: SwitchThemeData(
+      thumbColor: MaterialStateProperty.all(Colors.white),
+      trackColor: MaterialStateProperty.all(Colors.teal),
     ),
     
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
