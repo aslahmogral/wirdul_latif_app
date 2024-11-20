@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubeReelsScreen extends StatefulWidget {
@@ -9,11 +10,7 @@ class YoutubeReelsScreen extends StatefulWidget {
 }
 
 class _YoutubeReelsScreenState extends State<YoutubeReelsScreen> {
-  final List<String> videoIds = [
-    // Replace with your YouTube video IDs
-
-    'W58htAlrB0Y', // Replace with your YouTube video IDs
-  ];
+  final List<dynamic> videoIds = WirdulLatif.Reels;
 
   late YoutubePlayerController _controller;
 
@@ -42,9 +39,11 @@ class _YoutubeReelsScreenState extends State<YoutubeReelsScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        leading: IconButton(onPressed: (){
-          Navigator.pop(context);
-        }, icon: Icon(Icons.close)),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(Icons.close)),
       ),
       body: PageView.builder(
         scrollDirection: Axis.vertical,

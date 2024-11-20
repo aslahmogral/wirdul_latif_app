@@ -7,11 +7,18 @@ class WirdulLatif {
   static List<Wird> morningWird = [];
   static List<Wird> eveningWird = [];
   static List<Wird> Zikr = [];
+  static List<dynamic> Reels = [];
   static Map<String, Map<String, dynamic>> _wirdList = {};
   static int wirdVersion = 0;
 
   Future<void> initWirdData({bool sync = false}) async {
     final bool versionChanged = await hasVersionChanged();
+    getWirdData(sync, versionChanged);
+    getContents(sync: sync, versionChanged: versionChanged);
+    morningWird = _getMorningWird();
+    eveningWird = _getEveningWird();
+  }
+  Future<void> getWirdData(sync, versionChanged) async {
     if (sync || versionChanged) {
       final prefs = await SharedPreferences.getInstance();
       final response = await http.get(Uri.parse(
@@ -57,9 +64,33 @@ class WirdulLatif {
         }
       }
     }
+  }
 
-    morningWird = _getMorningWird();
-    eveningWird = _getEveningWird();
+  Future<void> getContents({sync, versionChanged}) async {
+    if (sync || versionChanged) {
+      final prefs = await SharedPreferences.getInstance();
+      final response = await http.get(Uri.parse(
+          'https://aslahmogral.github.io/wird-al-latif-json/contents.json'));
+
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        await prefs.setString('wird_data', jsonEncode(_wirdList));
+        Reels = data['reels'];
+        await prefs.setString('reels', jsonEncode(Reels));
+      } else {
+        throw Exception('Failed to load JSON');
+      }
+    } else {
+      final prefs = await SharedPreferences.getInstance();
+      final data = prefs.getString('reels');
+      if (data == null) {
+        await getContents();
+      } else {
+        final reelsData = jsonDecode(data);
+        Reels = reelsData;
+        await prefs.setString('reels', jsonEncode(Reels));
+      }
+    }
   }
 
   Future<bool> hasVersionChanged() async {
