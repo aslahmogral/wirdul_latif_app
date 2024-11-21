@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
@@ -18,8 +19,10 @@ class WirdScreenModel with ChangeNotifier {
   String TitleText = '';
   bool tapHere = true;
   bool showTranslation = true;
-  late Progress progressTracker = Progress(time: DateTime.now(), count: 0, type: type.name);
-
+  late Progress progressTracker =
+      Progress(time: DateTime.now(), count: 0, type: type.name);
+  ConfettiController confettiController =
+      ConfettiController(duration: Duration(seconds: 6));
   WirdScreenModel(WirdType wirdType) {
     type = wirdType;
     initialize();
@@ -37,7 +40,7 @@ class WirdScreenModel with ChangeNotifier {
       progressTracker = oldProgress;
       currentPage = progressTracker.count;
       controller = PageController(initialPage: currentPage);
-    } 
+    }
   }
 
   showTranslationClicked(val) {
@@ -64,7 +67,7 @@ class WirdScreenModel with ChangeNotifier {
     Navigator.pop(context);
   }
 
-  void addAndRemoveDuplicateProgress() async{
+  void addAndRemoveDuplicateProgress() async {
     final prefs = await SharedPreferences.getInstance();
     var oldProgress = WirdulLatif.progressList.firstWhere(
         (element) =>
@@ -76,7 +79,8 @@ class WirdScreenModel with ChangeNotifier {
     }
 
     WirdulLatif.progressList.add(progressTracker);
-    final progressListJson = WirdulLatif.progressList.map((e) => e.toJson()).toList();
+    final progressListJson =
+        WirdulLatif.progressList.map((e) => e.toJson()).toList();
     await prefs.setString('progress', jsonEncode(progressListJson));
   }
 
@@ -93,15 +97,26 @@ class WirdScreenModel with ChangeNotifier {
 
       if (wirdList[currentPage].count == wirdList[currentPage].counted) {
         currentPageWirdCounted = 0;
-        controller.nextPage(
-            duration: const Duration(milliseconds: 500),
-            curve: Curves.easeInOut);
+        if (currentPage == 43) {
+          celebrateCompletion();
+          notifyListeners();
+        } else {
+          controller.nextPage(
+              duration: const Duration(milliseconds: 500),
+              curve: Curves.easeInOut);
+        }
+
         wirdList[currentPage].completed = true;
       }
     } else {
       currentPageWirdCounted = 0;
-      controller.nextPage(
-          duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+      if (currentPage != 43) {
+        controller.nextPage(
+            duration: const Duration(milliseconds: 500),
+            curve: Curves.easeInOut);
+      }else{
+          celebrateCompletion();
+      }
     }
 
     notifyListeners();
@@ -148,5 +163,10 @@ class WirdScreenModel with ChangeNotifier {
   undoOrPrevPage() {
     controller.previousPage(
         duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+  }
+
+  celebrateCompletion() {
+    confettiController.play();
+    notifyListeners();
   }
 }

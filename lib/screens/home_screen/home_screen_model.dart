@@ -5,6 +5,7 @@ import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 
 enum WirdType { morning, evening }
+
 enum progressType { start, continuee, complete }
 
 class HomeScreenModel with ChangeNotifier {
@@ -30,7 +31,7 @@ class HomeScreenModel with ChangeNotifier {
     notifyListeners();
   }
 
-  checkProgress() async{
+  checkProgress() async {
     var today = DateTime.now();
     var todayProgress = WirdulLatif.progressList.firstWhere(
         (element) =>
@@ -50,8 +51,6 @@ class HomeScreenModel with ChangeNotifier {
     }
     notifyListeners();
   }
-
-
 
   navigateToWird() {
     Navigator.push(
@@ -81,10 +80,11 @@ class HomeScreenModel with ChangeNotifier {
     notifyListeners();
   }
 
-  changeWirdType(){
+  changeWirdType() {
     isMorning = !isMorning;
     isMorning ? wirdType = WirdType.morning : wirdType = WirdType.evening;
     changeTab(wirdType);
+    checkProgress();
     notifyListeners();
   }
 
@@ -108,8 +108,6 @@ class HomeScreenModel with ChangeNotifier {
     wirdIcon = Icons.sunny;
     mainImagePath = 'asset/morning.jpg';
   }
-
- 
 
   setEveningDatas() {
     titleText = Constants.evening;

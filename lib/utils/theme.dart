@@ -15,18 +15,21 @@ class customTheme {
       // foregroundColor: Colors.teal,
       backgroundColor: Colors.teal,
     ),
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+      linearTrackColor: Colors.transparent,
+      circularTrackColor:Colors.white.withOpacity(0.2),
+      
+        color: Colors.teal,),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.teal,
-        foregroundColor: Colors.white,
-      )
-    ),
-     switchTheme: SwitchThemeData(
+        style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.teal,
+      foregroundColor: Colors.white,
+    )),
+    switchTheme: SwitchThemeData(
       thumbColor: MaterialStateProperty.all(Colors.white),
       trackColor: MaterialStateProperty.all(Colors.teal),
     ),
-    
 
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: Colors.grey[400], fontFamily: 'Poppins'),
@@ -55,7 +58,12 @@ class customTheme {
       // foregroundColor: Colors.teal,
       backgroundColor: Colors.teal,
     ),
-    
+    progressIndicatorTheme: ProgressIndicatorThemeData(
+
+      linearTrackColor: Colors.teal,
+      circularTrackColor: Colors.black.withOpacity(0.2)
+        // color:Colors.black.withOpacity(0.5)
+        ),
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
       bodyMedium: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
@@ -71,19 +79,15 @@ class customTheme {
       bodySmall: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
       labelSmall: TextStyle(color: Colors.black45, fontFamily: 'Poppins'),
     ),
-
     elevatedButtonTheme: ElevatedButtonThemeData(
-      style: ElevatedButton.styleFrom(
-        backgroundColor: Colors.teal,
-        foregroundColor: Colors.white,
-      )
-    ),
-
+        style: ElevatedButton.styleFrom(
+      backgroundColor: Colors.teal,
+      foregroundColor: Colors.white,
+    )),
     switchTheme: SwitchThemeData(
       thumbColor: MaterialStateProperty.all(Colors.white),
       trackColor: MaterialStateProperty.all(Colors.teal),
     ),
-    
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
       type: BottomNavigationBarType.fixed,

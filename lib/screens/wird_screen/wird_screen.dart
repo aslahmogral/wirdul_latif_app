@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:provider/provider.dart';
@@ -112,7 +115,9 @@ class WirdScreen extends StatelessWidget {
                                         visible:
                                             ThemeProvider.isTransliteration,
                                         child: Container(
-                                          width: MediaQuery.of(context).size.width,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
                                             decoration: BoxDecoration(
                                               border: Border.all(
                                                 color: WirdGradients
@@ -413,12 +418,16 @@ class bottomBar extends StatelessWidget {
                           duration: const Duration(milliseconds: 300),
                           builder: (context, value, _) {
                             return LinearProgressIndicator(
+
+                              borderRadius: BorderRadius.all(Radius.circular(20)),
                                 // color: Colors.teal,
-                                color: Theme.of(context)
-                                    .textTheme
-                                    .bodyMedium
-                                    ?.color,
-                                minHeight: 5,
+                              
+                                // color: Theme.of(context)
+                                //     .textTheme
+                                //     .bodyMedium
+                                //     ?.color,
+                                    
+                                minHeight: 6,
                                 value: value);
                           }),
                     ),
@@ -428,6 +437,18 @@ class bottomBar extends StatelessWidget {
 
               //circular progress indicator
             ],
+          ),
+          Align(
+            alignment: Alignment.center,
+            child: ConfettiWidget(
+              colors: [
+                Colors.teal,
+                Colors.white
+              ],
+              minBlastForce: 1,
+              maxBlastForce: 50,
+              blastDirectionality: BlastDirectionality.explosive, // up direction
+              confettiController: model.confettiController),
           ),
           counter(context)
         ],
@@ -477,8 +498,7 @@ class bottomBar extends StatelessWidget {
                                 valueColor: AlwaysStoppedAnimation<Color>(
                                   WirdColors.primaryDaycolor,
                                 ),
-                                backgroundColor:
-                                    Colors.black45.withOpacity(0.2),
+                               
                               );
                             }),
                       ),
@@ -512,7 +532,8 @@ class bottomBar extends StatelessWidget {
                         ),
                       ),
                       Visibility(
-                        visible: model.tapHere && (model.controller.initialPage == 0),
+                        visible: model.tapHere &&
+                            (model.controller.initialPage == 0),
                         child: Container(
                           height: 80,
                           width: 80,
