@@ -37,13 +37,7 @@ class SettingsScreen extends StatelessWidget {
                         },
                       ),
                     ),
-                    ListTile(
-                      leading: Icon(Icons.delete_forever),
-                      title: Text('Clear Stats'),
-                      onTap: () {
-                        model.clearStats(context);
-                      },
-                    ),
+                    
                     ListTile(
                       leading: Icon(Icons.share),
                       title: Text('Share this App'),
@@ -63,13 +57,25 @@ class SettingsScreen extends StatelessWidget {
                       leading: Icon(Icons.rate_review),
                       title: Text('Rate this App'),
                       onTap: () {
-                        launchUrl(
-                          Uri.parse(
-                          Constants.appLink,
-                          ),
-                        );
+                       model.rateApp();
                       },
-                    )
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.apps),
+                      title: Text('For More App'),
+                      onTap: () {
+                        model.moreApps();
+                      },
+                    ),
+                  
+
+                    ListTile(
+                      leading: Icon(Icons.delete_forever),
+                      title: Text('Reset Stats'),
+                      onTap: () {
+                        model.clearStats(context);
+                      },
+                    ),
                   ],
                 );
               },
