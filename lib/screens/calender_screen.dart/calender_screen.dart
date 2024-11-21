@@ -34,7 +34,6 @@ class CalenderScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
               ),
             ),
             SizedBox(height: 16,),
@@ -73,7 +72,7 @@ class CalenderScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
-                color: Colors.black,
+                // color: Colors.black,
               ),
             ),
             SizedBox(height: 16,),
