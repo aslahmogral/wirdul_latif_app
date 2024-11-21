@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:wirdul_latif/data/wirddata.dart';
+import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 
 enum WirdType { morning, evening }
+enum progressType { start, continuee, complete }
 
 class HomeScreenModel with ChangeNotifier {
   bool isNightMode = false;
@@ -13,17 +16,42 @@ class HomeScreenModel with ChangeNotifier {
   IconData wirdIcon = Icons.sunny;
   String mainImagePath = '';
   bool isMorning = false;
+  progressType progress = progressType.start;
 
   HomeScreenModel(BuildContext context) {
     _context = context;
     checkIsItMorningOrEvening();
     initialize();
+    checkProgress();
   }
 
   onItemTapped(int index) {
     currentindex = index;
     notifyListeners();
   }
+
+  checkProgress() async{
+    var today = DateTime.now();
+    var todayProgress = WirdulLatif.progressList.firstWhere(
+        (element) =>
+            element.time.day == today.day &&
+            element.time.month == today.month &&
+            element.time.year == today.year &&
+            element.type == wirdType.name,
+        orElse: () => Progress(time: today, count: 0, type: ''));
+    if (todayProgress.type == '') {
+      progress = progressType.start;
+    } else if (todayProgress.count == 0) {
+      progress = progressType.start;
+    } else if (todayProgress.count < WirdulLatif.eveningWird.length - 1) {
+      progress = progressType.continuee;
+    } else {
+      progress = progressType.complete;
+    }
+    notifyListeners();
+  }
+
+
 
   navigateToWird() {
     Navigator.push(
@@ -32,7 +60,9 @@ class HomeScreenModel with ChangeNotifier {
           builder: (context) => WirdScreen(
             wirdType: wirdType,
           ),
-        ));
+        )).then((value) {
+      checkProgress();
+    });
   }
 
   navigateToZikr() {

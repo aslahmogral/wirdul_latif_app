@@ -18,7 +18,7 @@ class WirdScreenModel with ChangeNotifier {
   String TitleText = '';
   bool tapHere = true;
   bool showTranslation = true;
-  late Progress progressTracker;
+  late Progress progressTracker = Progress(time: DateTime.now(), count: 0, type: type.name);
 
   WirdScreenModel(WirdType wirdType) {
     type = wirdType;
@@ -37,9 +37,7 @@ class WirdScreenModel with ChangeNotifier {
       progressTracker = oldProgress;
       currentPage = progressTracker.count;
       controller = PageController(initialPage: currentPage);
-    } else {
-      progressTracker = Progress(time: DateTime.now(), count: 0, type: 'type');
-    }
+    } 
   }
 
   showTranslationClicked(val) {

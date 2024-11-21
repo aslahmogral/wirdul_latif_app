@@ -29,9 +29,12 @@ class HomeScreen extends StatelessWidget {
               IconButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => SettingsScreen()));
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => SettingsScreen()))
+                      .then((value) {
+                    model.checkProgress();
+                  });
                 },
                 icon: Icon(Icons.settings),
               ),
@@ -128,7 +131,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-
   Stack MorningOrEveningContainer(context, HomeScreenModel model) {
     return Stack(
       alignment: AlignmentDirectional.bottomCenter,
@@ -207,20 +209,61 @@ class HomeScreen extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
-                          'READ NOW',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green.shade700,
-                            letterSpacing: 1.2,
-                            shadows: [
-                              Shadow(
-                                offset: Offset(1.0, 1.0),
-                                blurRadius: 2.0,
-                                color: Colors.black54,
-                              ),
-                            ],
+                        Visibility(
+                          visible: model.progress == progressType.start,
+                          child: Text(
+                            'READ NOW',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red.shade700,
+                              letterSpacing: 1.2,
+                              shadows: [
+                                Shadow(
+                                  offset: Offset(1.0, 1.0),
+                                  blurRadius: 2.0,
+                                  color: Colors.black54,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Visibility(
+                          visible: model.progress == progressType.continuee,
+                          child: Text(
+                            'continue reading',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.yellow.shade700,
+                              letterSpacing: 1.2,
+                              shadows: [
+                                Shadow(
+                                  offset: Offset(1.0, 1.0),
+                                  blurRadius: 2.0,
+                                  color: Colors.black54,
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Visibility(
+                          visible: model.progress == progressType.complete,
+                          child: Text(
+                            'Completed',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green.shade700,
+                              letterSpacing: 1.2,
+                              shadows: [
+                                Shadow(
+                                  offset: Offset(1.0, 1.0),
+                                  blurRadius: 2.0,
+                                  color: Colors.black54,
+                                ),
+                              ],
+                            ),
                           ),
                         )
                         // Text(
@@ -320,8 +363,8 @@ class HomeScreen extends StatelessWidget {
         ),
         InkWell(
           onTap: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => BlogScreen()));
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => BlogScreen()));
           },
           child: MorningOrEveningCard(
               icon: Icons.book,
