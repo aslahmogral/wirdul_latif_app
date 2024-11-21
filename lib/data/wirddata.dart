@@ -1,16 +1,18 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/model/wird.dart';
 
 class WirdulLatif {
   static List<Wird> morningWird = [];
   static List<Wird> eveningWird = [];
   static List<Wird> Zikr = [];
-  static Map<String, Map<String, dynamic>> _wirdList = {};
+  static Map<String, Map<String, dynamic>> _wirdMap = {};
   static int wirdVersion = 0;
   static List<dynamic> Reels = [];
   static List<dynamic> blogs = [];
+  static List<dynamic> progressList = [];
 
   Future<void> initWirdData({bool sync = false}) async {
     final bool versionChanged = await hasVersionChanged();
@@ -22,7 +24,7 @@ class WirdulLatif {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         if (data is Map<String, dynamic>) {
-          _wirdList = data.map((key, value) {
+          _wirdMap = data.map((key, value) {
             if (value is Map<String, dynamic>) {
               return MapEntry(key, value);
             } else {
@@ -30,7 +32,7 @@ class WirdulLatif {
             }
           });
 
-          await prefs.setString('wird_data', jsonEncode(_wirdList));
+          await prefs.setString('wird_data', jsonEncode(_wirdMap));
         } else {
           throw Exception('Invalid data structure');
         }
@@ -45,7 +47,7 @@ class WirdulLatif {
       } else {
         final wirdData = jsonDecode(data);
         if (wirdData is Map<String, dynamic>) {
-          _wirdList = wirdData.map((key, value) {
+          _wirdMap = wirdData.map((key, value) {
             if (value is Map<String, dynamic>) {
               return MapEntry(key, value);
             } else {
@@ -53,15 +55,27 @@ class WirdulLatif {
             }
           });
 
-          await prefs.setString('wird_data', jsonEncode(_wirdList));
+          await prefs.setString('wird_data', jsonEncode(_wirdMap));
         } else {
           throw Exception('Invalid data structure');
         }
       }
     }
     getContents(sync: sync, versionChanged: versionChanged);
+    initProgress();
     morningWird = _getMorningWird();
     eveningWird = _getEveningWird();
+  }
+
+  Future<void> initProgress() async {
+    final prefs = await SharedPreferences.getInstance();
+    final data = prefs.getString('progress');
+    if (data == null) {
+      await prefs.setString('progress', jsonEncode([]));
+    } else {
+      final progress = jsonDecode(data) as List;
+      progressList = progress.map((e) => Progress.fromJson(e)).toList();
+    }
   }
 
   Future<void> getContents({sync, versionChanged}) async {
@@ -91,7 +105,7 @@ class WirdulLatif {
         await prefs.setString('reels', jsonEncode(Reels));
       }
 
-       final blogsFromPrefs = prefs.getString('blogs');
+      final blogsFromPrefs = prefs.getString('blogs');
       if (blogsFromPrefs == null) {
         await getContents();
       } else {
@@ -130,7 +144,7 @@ class WirdulLatif {
 
   static List<Wird> _getMorningWird() {
     List<Wird> finalList = [];
-    _wirdList.forEach((key, value) {
+    _wirdMap.forEach((key, value) {
       finalList.add(Wird(
         wird: value['wird'],
 
@@ -146,7 +160,7 @@ class WirdulLatif {
 
   static List<Wird> _getEveningWird() {
     List<Wird> finalList = [];
-    _wirdList.forEach((key, value) {
+    _wirdMap.forEach((key, value) {
       String eveningWird = value['eveningwird'] ?? '';
       finalList.add(Wird(
           wird: eveningWird != '' ? eveningWird : value['wird'],

@@ -492,8 +492,9 @@ class bottomBar extends StatelessWidget {
                         ),
                       ),
                       Visibility(
-                        visible: model.wirdList[model.currentPage].completed ??
-                            false,
+                        // visible: model.wirdList[model.currentPage ].completed ??
+                        //     false,
+                        visible: model.checkIfCurrentWirdCompleted(),
                         child: Container(
                           height: 80,
                           width: 80,
@@ -511,7 +512,7 @@ class bottomBar extends StatelessWidget {
                         ),
                       ),
                       Visibility(
-                        visible: model.tapHere,
+                        visible: model.tapHere && (model.controller.initialPage == 0),
                         child: Container(
                           height: 80,
                           width: 80,

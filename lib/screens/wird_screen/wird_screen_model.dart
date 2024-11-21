@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
+import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/model/wird.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/utils/constants.dart';
@@ -14,11 +18,30 @@ class WirdScreenModel with ChangeNotifier {
   String TitleText = '';
   bool tapHere = true;
   bool showTranslation = true;
+  late Progress progressTracker;
+
   WirdScreenModel(WirdType wirdType) {
     type = wirdType;
     initialize();
+    progressInitialize();
     controller.addListener(_onPageChanged);
   }
+
+  void progressInitialize() {
+    final oldProgress = WirdulLatif.progressList.firstWhere(
+        (element) =>
+            element.time.day == DateTime.now().day && element.type == type.name,
+        orElse: () => Progress(time: DateTime.now(), count: 0, type: ''));
+
+    if (oldProgress.type != '') {
+      progressTracker = oldProgress;
+      currentPage = progressTracker.count;
+      controller = PageController(initialPage: currentPage);
+    } else {
+      progressTracker = Progress(time: DateTime.now(), count: 0, type: 'type');
+    }
+  }
+
   showTranslationClicked(val) {
     showTranslation = val;
     notifyListeners();
@@ -27,13 +50,36 @@ class WirdScreenModel with ChangeNotifier {
   void _onPageChanged() {
     currentPage = controller.page?.round() ?? 0;
     currentPageWirdCounted = wirdList[currentPage].counted ?? 0;
+    progressTracker =
+        Progress(time: DateTime.now(), type: type.name, count: currentPage);
     notifyListeners();
+  }
+
+  bool checkIfCurrentWirdCompleted() {
+    return wirdList[currentPage].count == wirdList[currentPage].counted;
   }
 
   void closeButton(context) {
     tapHere = true;
+    addAndRemoveDuplicateProgress();
     notifyListeners();
     Navigator.pop(context);
+  }
+
+  void addAndRemoveDuplicateProgress() async{
+    final prefs = await SharedPreferences.getInstance();
+    var oldProgress = WirdulLatif.progressList.firstWhere(
+        (element) =>
+            element.time.day == progressTracker.time.day &&
+            element.type == progressTracker.type,
+        orElse: () => Progress(time: DateTime.now(), count: 0, type: ''));
+    if (oldProgress.type != '') {
+      WirdulLatif.progressList.remove(oldProgress);
+    }
+
+    WirdulLatif.progressList.add(progressTracker);
+    final progressListJson = WirdulLatif.progressList.map((e) => e.toJson()).toList();
+    await prefs.setString('progress', jsonEncode(progressListJson));
   }
 
   thasbeehButtonClicked() {

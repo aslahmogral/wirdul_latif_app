@@ -38,6 +38,13 @@ class SettingsScreen extends StatelessWidget {
                       ),
                     ),
                     ListTile(
+                      leading: Icon(Icons.delete_forever),
+                      title: Text('Clear Stats'),
+                      onTap: () {
+                        model.clearStats(context);
+                      },
+                    ),
+                    ListTile(
                       leading: Icon(Icons.share),
                       title: Text('Share this App'),
                       onTap: () {
