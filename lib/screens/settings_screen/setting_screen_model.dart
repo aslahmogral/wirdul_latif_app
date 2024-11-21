@@ -54,6 +54,7 @@ class SettingsScreenModel with ChangeNotifier {
     );
     if (confirm ?? false) {
       {
+        WirdulLatif().initWirdData(sync: false);
         final prefs = await SharedPreferences.getInstance();
         WirdulLatif.progressList = [];
         await prefs.setString('progress', jsonEncode([]));

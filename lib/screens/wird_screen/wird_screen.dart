@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -26,200 +24,206 @@ class WirdScreen extends StatelessWidget {
             builder: (context, ThemeProvider, child) {
           return Consumer<WirdScreenModel>(
             builder: (context, model, child) {
-              return Scaffold(
-                appBar: AppBar(
-                  leading: IconButton(
-                      onPressed: () {
-                        model.closeButton(context);
-                      },
-                      icon: Icon(Icons.close)),
-                  centerTitle: true,
-                  title: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Text(
-                          '${model.TitleText[0].toUpperCase()}${model.TitleText.substring(1)} Wird'),
+              return PopScope(
+                canPop: false,
+                child: Scaffold(
+                  appBar: AppBar(
+                    leading: IconButton(
+                        onPressed: () {
+                          model.closeButton(context);
+                        },
+                        icon: Icon(Icons.close)),
+                    centerTitle: true,
+                    title: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Text(
+                            '${model.TitleText[0].toUpperCase()}${model.TitleText.substring(1)} Wird'),
+                      ],
+                    ),
+                    actions: [
+                      setttingsBottomSheet(context, ThemeProvider),
                     ],
                   ),
-                  actions: [
-                    setttingsBottomSheet(context, ThemeProvider),
-                  ],
-                ),
-                body: Stack(
-                  children: [
-                    PageView.builder(
-                      itemCount: model.wirdList.length,
-                      controller: model.controller,
-                      onPageChanged: (value) {
-                        model.currentPage = value;
-                      },
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Stack(
-                            children: [
-                              SingleChildScrollView(
-                                child: Center(
-                                  child: Column(
-                                    mainAxisSize: MainAxisSize.min,
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      CircleAvatar(
-                                        radius: 18,
-                                        backgroundColor:
-                                            WirdColors.primaryDaycolor,
-                                        child: CircleAvatar(
-                                          radius: 16,
-                                          backgroundColor: Theme.of(context)
-                                              .scaffoldBackgroundColor,
+                  body: Stack(
+                    children: [
+                      PageView.builder(
+                        itemCount: model.wirdList.length,
+                        controller: model.controller,
+                        onPageChanged: (value) {
+                          model.currentPage = value;
+                        },
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Stack(
+                              children: [
+                                SingleChildScrollView(
+                                  child: Center(
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        CircleAvatar(
+                                          radius: 18,
+                                          backgroundColor:
+                                              WirdColors.primaryDaycolor,
+                                          child: CircleAvatar(
+                                            radius: 16,
+                                            backgroundColor: Theme.of(context)
+                                                .scaffoldBackgroundColor,
+                                            child: Text(
+                                              (model.currentPage + 1)
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  color: Theme.of(context)
+                                                      .textTheme
+                                                      .headlineSmall
+                                                      ?.color,
+                                                  fontSize: 12),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: 16,
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.all(16),
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          decoration: BoxDecoration(
+                                            gradient: WirdGradients
+                                                .listTileShadeGradient,
+                                            borderRadius:
+                                                BorderRadius.circular(15),
+                                            color: WirdColors.primaryDaycolor,
+                                          ),
                                           child: Text(
-                                            (model.currentPage + 1).toString(),
-                                            style: TextStyle(
-                                                color: Theme.of(context)
-                                                    .textTheme
-                                                    .headlineSmall
-                                                    ?.color,
-                                                fontSize: 12),
+                                            model.wirdList[index].wird,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              // fontWeight: FontWeight.bold,
+                                              fontSize: 24,
+                                              fontFamily: 'Kfgqpc',
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 16,
-                                      ),
-                                      Container(
-                                        padding: const EdgeInsets.all(16),
-                                        width:
-                                            MediaQuery.of(context).size.width,
-                                        decoration: BoxDecoration(
-                                          gradient: WirdGradients
-                                              .listTileShadeGradient,
-                                          borderRadius:
-                                              BorderRadius.circular(15),
-                                          color: WirdColors.primaryDaycolor,
+                                        SizedBox(
+                                          height: 16,
                                         ),
-                                        child: Text(
-                                          model.wirdList[index].wird,
-                                          textAlign: TextAlign.center,
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            // fontWeight: FontWeight.bold,
-                                            fontSize: 24,
-                                            fontFamily: 'Kfgqpc',
-                                          ),
+                                        Visibility(
+                                          visible:
+                                              ThemeProvider.isTransliteration,
+                                          child: Container(
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: WirdGradients
+                                                      .listTileShadeGradient
+                                                      .colors
+                                                      .last
+                                                      .withOpacity(0.5),
+                                                  width: 2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                              ),
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(16.0),
+                                                child: Column(
+                                                  children: [
+                                                    Text(
+                                                        model.wirdList[index]
+                                                            .transliteration,
+                                                        // textAlign: TextAlign.left,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headlineSmall
+                                                            ?.copyWith(
+                                                              fontSize: 16,
+                                                            )),
+                                                  ],
+                                                ),
+                                              )),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        height: 16,
-                                      ),
-                                      Visibility(
-                                        visible:
-                                            ThemeProvider.isTransliteration,
-                                        child: Container(
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: WirdGradients
-                                                    .listTileShadeGradient
-                                                    .colors
-                                                    .last
-                                                    .withOpacity(0.5),
-                                                width: 2,
+                                        SizedBox(
+                                          height: 16,
+                                        ),
+                                        Visibility(
+                                          visible: ThemeProvider
+                                              .isEnglishTranslation,
+                                          child: Container(
+                                              decoration: BoxDecoration(
+                                                border: Border.all(
+                                                  color: WirdGradients
+                                                      .listTileShadeGradient
+                                                      .colors
+                                                      .last
+                                                      .withOpacity(0.5),
+                                                  width: 2,
+                                                ),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
                                               ),
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(16.0),
-                                              child: Column(
-                                                children: [
-                                                  Text(
-                                                      model.wirdList[index]
-                                                          .transliteration,
-                                                      // textAlign: TextAlign.left,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headlineSmall
-                                                          ?.copyWith(
-                                                            fontSize: 16,
-                                                          )),
-                                                ],
-                                              ),
-                                            )),
-                                      ),
-                                      SizedBox(
-                                        height: 16,
-                                      ),
-                                      Visibility(
-                                        visible:
-                                            ThemeProvider.isEnglishTranslation,
-                                        child: Container(
-                                            decoration: BoxDecoration(
-                                              border: Border.all(
-                                                color: WirdGradients
-                                                    .listTileShadeGradient
-                                                    .colors
-                                                    .last
-                                                    .withOpacity(0.5),
-                                                width: 2,
-                                              ),
-                                              borderRadius:
-                                                  BorderRadius.circular(15),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(20.0),
-                                              child: Column(
-                                                children: [
-                                                  // Text('TRANSLATION',
-                                                  //     textAlign: TextAlign.center,
-                                                  //     style: Theme.of(context)
-                                                  //         .textTheme
-                                                  //         .headlineSmall
-                                                  //         ?.copyWith(
-                                                  //             fontSize: 14,
-                                                  //             )),
-                                                  // SizedBox(
-                                                  //   height: 16,
-                                                  // ),
-                                                  Text(
-                                                      model.wirdList[index]
-                                                          .english
-                                                          .replaceAll(
-                                                              RegExp(r'[˹˺]'),
-                                                              ''),
-                                                      textAlign: TextAlign.left,
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .headlineSmall
-                                                          ?.copyWith(
-                                                            fontSize: 16,
-                                                          )),
-                                                ],
-                                              ),
-                                            )),
-                                      ),
-                                      SizedBox(
-                                        height: 100,
-                                      )
-                                    ],
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(20.0),
+                                                child: Column(
+                                                  children: [
+                                                    // Text('TRANSLATION',
+                                                    //     textAlign: TextAlign.center,
+                                                    //     style: Theme.of(context)
+                                                    //         .textTheme
+                                                    //         .headlineSmall
+                                                    //         ?.copyWith(
+                                                    //             fontSize: 14,
+                                                    //             )),
+                                                    // SizedBox(
+                                                    //   height: 16,
+                                                    // ),
+                                                    Text(
+                                                        model.wirdList[index]
+                                                            .english
+                                                            .replaceAll(
+                                                                RegExp(r'[˹˺]'),
+                                                                ''),
+                                                        textAlign:
+                                                            TextAlign.left,
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .headlineSmall
+                                                            ?.copyWith(
+                                                              fontSize: 16,
+                                                            )),
+                                                  ],
+                                                ),
+                                              )),
+                                        ),
+                                        SizedBox(
+                                          height: 100,
+                                        )
+                                      ],
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: bottomBar(
-                        model: model,
+                              ],
+                            ),
+                          );
+                        },
                       ),
-                    ),
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: bottomBar(
+                          model: model,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               );
             },
@@ -418,15 +422,15 @@ class bottomBar extends StatelessWidget {
                           duration: const Duration(milliseconds: 300),
                           builder: (context, value, _) {
                             return LinearProgressIndicator(
-
-                              borderRadius: BorderRadius.all(Radius.circular(20)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20)),
                                 // color: Colors.teal,
-                              
+
                                 // color: Theme.of(context)
                                 //     .textTheme
                                 //     .bodyMedium
                                 //     ?.color,
-                                    
+
                                 minHeight: 6,
                                 value: value);
                           }),
@@ -441,14 +445,12 @@ class bottomBar extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: ConfettiWidget(
-              colors: [
-                Colors.teal,
-                Colors.white
-              ],
-              minBlastForce: 1,
-              maxBlastForce: 50,
-              blastDirectionality: BlastDirectionality.explosive, // up direction
-              confettiController: model.confettiController),
+                colors: [Colors.teal, Colors.white],
+                minBlastForce: 1,
+                maxBlastForce: 50,
+                blastDirectionality:
+                    BlastDirectionality.explosive, // up direction
+                confettiController: model.confettiController),
           ),
           counter(context)
         ],
@@ -498,7 +500,6 @@ class bottomBar extends StatelessWidget {
                                 valueColor: AlwaysStoppedAnimation<Color>(
                                   WirdColors.primaryDaycolor,
                                 ),
-                               
                               );
                             }),
                       ),
