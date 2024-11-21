@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/screens/blog_screen.dart/blog_screen.dart';
+import 'package:wirdul_latif/screens/calender_screen.dart/calender_screen.dart';
 import 'package:wirdul_latif/screens/counter_screen/counter_screen.dart';
 import 'package:wirdul_latif/screens/reels_screen/youtube_reels.dart';
 import 'package:wirdul_latif/screens/settings_screen/settings_screen.dart';
@@ -103,29 +104,44 @@ class HomeScreen extends StatelessWidget {
                     // ),
                     InkWell(
                         onTap: () {
-                          model.navigateToWird();
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CalenderScreen()));
                         },
-                        child: StartButton(model)),
+                        child: calender(model)),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => CounterScreen()),
+                          );
+                        },
+                        child: zikrCounter(model)),
                     const SizedBox(
                       height: 30,
                     ),
                   ],
                 ),
               )),
-          floatingActionButton: FloatingActionButton(
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => CounterScreen()),
-              );
-            },
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Image.asset('asset/tasbih.png'),
-              ),
-            ),
-          ),
+          // floatingActionButton: FloatingActionButton(
+          //   onPressed: () {
+          //     Navigator.push(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => CounterScreen()),
+          //     );
+          //   },
+          //   child: Container(
+          //     child: Padding(
+          //       padding: const EdgeInsets.all(12.0),
+          //       child: Image.asset('asset/tasbih.png'),
+          //     ),
+          //   ),
+          // ),
         ),
       ),
     );
@@ -319,14 +335,48 @@ class HomeScreen extends StatelessWidget {
   //   );
   // }
 
-  Container StartButton(HomeScreenModel model) {
+  Container zikrCounter(HomeScreenModel model) {
     return Container(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
-          leading: Icon(model.wirdIcon, color: Colors.yellow, size: 30),
+          leading: Container(
+            child: CircleAvatar(
+              backgroundColor: Colors.yellow,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                child: Image.asset('asset/tasbih.png'),
+              ),
+            ),
+          ),
           title: Text(
-            'Read ${model.titleText[0].toUpperCase()}${model.titleText.substring(1)} Wird',
+            'Zikr Counter',
+            style: TextStyle(
+                fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.white,
+          ),
+        ),
+      ),
+      // height: 70,
+      decoration: BoxDecoration(
+        color: WirdColors.primaryDaycolor.withOpacity(0.8),
+        gradient: WirdGradients.listTileShadeGradient,
+        borderRadius: BorderRadius.circular(15),
+      ),
+    );
+  }
+
+  Container calender(HomeScreenModel model) {
+    return Container(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          leading: Icon(Icons.bolt, color: Colors.yellow, size: 30),
+          title: Text(
+            'check your streak calender',
             style: TextStyle(
                 fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
           ),

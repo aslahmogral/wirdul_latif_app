@@ -59,7 +59,7 @@ class customTheme {
       backgroundColor: Colors.teal,
     ),
     progressIndicatorTheme: ProgressIndicatorThemeData(
-
+      color: Colors.black.withOpacity(0.8),
       linearTrackColor: Colors.teal,
       circularTrackColor: Colors.black.withOpacity(0.2)
         // color:Colors.black.withOpacity(0.5)

@@ -47,6 +47,7 @@ dependencies:
   webview_flutter: ^4.10.0
   url_launcher: ^6.3.1
   confetti: ^0.8.0
+  streak_calendar: ^1.1.2
   # rive: ^0.13.4
   # wirdul_latif: ^0.0.2
 
