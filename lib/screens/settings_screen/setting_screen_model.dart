@@ -5,6 +5,7 @@ import 'package:share_plus/share_plus.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
+import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 
 class SettingsScreenModel with ChangeNotifier {
@@ -24,7 +25,7 @@ class SettingsScreenModel with ChangeNotifier {
     );
   }
 
-    void moreApps() {
+  void moreApps() {
     launchUrl(
       Uri.parse(
         Constants.moreAppLink,
@@ -32,7 +33,7 @@ class SettingsScreenModel with ChangeNotifier {
     );
   }
 
-  clearStats(context) async {
+  clearStats(context, HomeScreenModel model) async {
     final confirm = await showDialog<bool>(
       context: context,
       builder: (context) {
@@ -58,6 +59,8 @@ class SettingsScreenModel with ChangeNotifier {
         final prefs = await SharedPreferences.getInstance();
         WirdulLatif.progressList = [];
         await prefs.setString('progress', jsonEncode([]));
+        model.calculateStreak();
+        model.checkProgress();
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text(

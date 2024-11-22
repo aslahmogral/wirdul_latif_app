@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/screens/settings_screen/setting_screen_model.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 import 'package:wirdul_latif/utils/theme_provider_model.dart';
@@ -15,6 +15,7 @@ class SettingsScreen extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => SettingsScreenModel(),
         ),
+
       ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
@@ -70,7 +71,7 @@ class SettingsScreen extends StatelessWidget {
                       leading: Icon(Icons.delete_forever),
                       title: Text('Reset Stats'),
                       onTap: () {
-                        model.clearStats(context);
+                        // model.clearStats(context);
                       },
                     ),
                   ],

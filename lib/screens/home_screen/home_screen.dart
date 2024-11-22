@@ -4,9 +4,10 @@ import 'package:wirdul_latif/screens/blog_screen.dart/blog_screen.dart';
 import 'package:wirdul_latif/screens/calender_screen.dart/calender_screen.dart';
 import 'package:wirdul_latif/screens/counter_screen/counter_screen.dart';
 import 'package:wirdul_latif/screens/reels_screen/youtube_reels_screen.dart';
-import 'package:wirdul_latif/screens/settings_screen/settings_screen.dart';
+import 'package:wirdul_latif/screens/settings_screen/setting_screen_model.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
+import 'package:wirdul_latif/utils/theme_provider_model.dart';
 import 'package:wirdul_latif/widgets/morning_evening_wird_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -23,128 +24,291 @@ class HomeScreen extends StatelessWidget {
                 )),
       ],
       child: Consumer<HomeScreenModel>(
-        builder: (context, model, child) => Scaffold(
-          appBar: AppBar(
-            title: Text('Wird al latif'),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SettingsScreen()))
-                      .then((value) {
-                    model.checkProgress();
-                  });
-                },
-                icon: Icon(Icons.settings),
-              ),
-            ],
-          ),
-          body: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // Row(
-                    //   mainAxisAlignment: MainAxisAlignment.center,
-                    //   children: [
+        builder: (context, model, child) => Consumer<ThemeProvider>(
+            builder: (context, themeProviderModel, child) {
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Wird al latif'),
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Row(
+                    children: [
+                      Icon(
+                        Icons.local_fire_department,
+                        color: Colors.orange[700],
+                      ),
+                      Text(
+                        model.currentStreaks.toString(),
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            drawer: drawer(themeProviderModel,model),
+            body: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
 
-                    //     ElevatedButton(
-                    //         onPressed: () {
-                    //           model.changeTab(WirdType.morning);
-                    //         },
-                    //         child: Text('Morning')),
-                    //     ElevatedButton(
-                    //         onPressed: () {
-                    //           model.changeTab(WirdType.evening);
-                    //         },
-                    //         child: Text('evening'))
-                    //   ],
-                    // ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    InkWell(
-                        onTap: () {
-                          model.navigateToWird();
-                        },
-                        child: MorningOrEveningContainer(context, model)),
-                    const SizedBox(height: 8),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        InkWell(
+                      //     ElevatedButton(
+                      //         onPressed: () {
+                      //           model.changeTab(WirdType.morning);
+                      //         },
+                      //         child: Text('Morning')),
+                      //     ElevatedButton(
+                      //         onPressed: () {
+                      //           model.changeTab(WirdType.evening);
+                      //         },
+                      //         child: Text('evening'))
+                      //   ],
+                      // ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
                           onTap: () {
-                            model.changeWirdType();
+                            model.navigateToWird();
                           },
-                          child: Text(
-                            'switch to ${model.wirdType == WirdType.morning ? 'evening' : 'morning'} wird',
-                            style: TextStyle(
-                                decoration: TextDecoration.underline,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
+                          child: MorningOrEveningContainer(context, model)),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              model.changeWirdType();
+                            },
+                            child: Text(
+                              'switch to ${model.wirdType == WirdType.morning ? 'evening' : 'morning'} wird',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 28),
-                    morningAndEveningWirdSection(context),
-                    // InkWell(
-                    //     onTap: () {
-                    //       model.navigateToZikr();
-                    //     },
-                    //     child: quranMessageSection()),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    // dummyStreakContainer(),
-                    // const SizedBox(
-                    //   height: 20,
-                    // ),
-                    InkWell(
-                        onTap: () {
-                          Navigator.push(
+                        ],
+                      ),
+                      const SizedBox(height: 28),
+                      morningAndEveningWirdSection(context),
+                      // InkWell(
+                      //     onTap: () {
+                      //       model.navigateToZikr();
+                      //     },
+                      //     child: quranMessageSection()),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      // dummyStreakContainer(),
+                      // const SizedBox(
+                      //   height: 20,
+                      // ),
+                      InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CalenderScreen()));
+                          },
+                          child: calender(model)),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                          onTap: () {
+                            Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => CalenderScreen()));
-                        },
-                        child: calender(model)),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => CounterScreen()),
-                          );
-                        },
-                        child: zikrCounter(model)),
-                    const SizedBox(
-                      height: 30,
-                    ),
-                  ],
-                ),
-              )),
-          // floatingActionButton: FloatingActionButton(
-          //   onPressed: () {
-          //     Navigator.push(
-          //       context,
-          //       MaterialPageRoute(builder: (context) => CounterScreen()),
-          //     );
-          //   },
-          //   child: Container(
-          //     child: Padding(
-          //       padding: const EdgeInsets.all(12.0),
-          //       child: Image.asset('asset/tasbih.png'),
-          //     ),
-          //   ),
-          // ),
-        ),
+                                  builder: (context) => CounterScreen()),
+                            );
+                          },
+                          child: zikrCounter(model)),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                    ],
+                  ),
+                )),
+            // floatingActionButton: FloatingActionButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => CounterScreen()),
+            //     );
+            //   },
+            //   child: Container(
+            //     child: Padding(
+            //       padding: const EdgeInsets.all(12.0),
+            //       child: Image.asset('asset/tasbih.png'),
+            //     ),
+            //   ),
+            // ),
+          );
+        }),
       ),
     );
+  }
+
+  Drawer drawer(ThemeProvider themeProviderModel,HomeScreenModel homescreenModel) {
+    return Drawer(
+        child: MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => SettingsScreenModel()),
+      ],
+      child: Consumer<SettingsScreenModel>(
+        builder: (context, settingsModel, child) => Column(children: [
+          Container(
+            height: 160,
+            decoration: BoxDecoration(
+              gradient: WirdGradients.listTileShadeGradient,
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.max,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(
+                        height: 16,
+                      ),
+                      CircleAvatar(
+                        radius: 30,
+                        backgroundColor: Colors.black,
+                      ),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        'Wird Al Latif',
+                        style: TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                    ],
+                  ),
+                ),
+                Spacer(),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: 16,
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        themeProviderModel.toggleDarkMode();
+                      },
+                      icon: Icon(
+                        themeProviderModel.isDarkMode
+                            ? Icons.dark_mode
+                            : Icons.light_mode,
+                        color: Colors.yellow,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          ),
+          Column(
+            children: [
+              SizedBox(
+                height: 16,
+              ),
+
+              ListTile(
+                leading: Icon(Icons.notifications),
+                title: Text('Notifications'),
+                onTap: () {
+                  showDialog(
+                    context: context,
+                    builder: (BuildContext context) {
+                      return AlertDialog(
+                        title: Text('Coming Soon'),
+                        content: Text('This feature will be available soon.'),
+                        actions: <Widget>[
+                          TextButton(
+                            child: Text('OK'),
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                          ),
+                        ],
+                      );
+                    },
+                  );
+                },
+                trailing: Icon(Icons.chevron_right),
+              ),
+              ListTile(
+                leading: Icon(Icons.sync),
+                title: Text('check for correction updates'),
+                onTap: () {
+                  settingsModel.checkForUpdates(context);
+                },
+                trailing: Icon(Icons.chevron_right),
+              ),
+              ListTile(
+                leading: Icon(Icons.delete_forever),
+                title: Text('Reset Streaks / Calender'),
+                onTap: () {
+                  settingsModel.clearStats(context, homescreenModel);
+                },
+                trailing: Icon(Icons.chevron_right),
+              ),
+              Divider(),
+              ListTile(
+                leading: Icon(Icons.rate_review),
+                title: Text('Rate this App'),
+                onTap: () {
+                  settingsModel.rateApp();
+                },
+                trailing: Icon(Icons.chevron_right),
+              ),
+              ListTile(
+                leading: Icon(Icons.share),
+                title: Text('Share this App'),
+                onTap: () {
+                  settingsModel.shareApp();
+                },
+                trailing: Icon(Icons.chevron_right),
+              ),
+              ListTile(
+                leading: Icon(Icons.apps),
+                title: Text('More Apps'),
+                onTap: () {
+                  settingsModel.moreApps();
+                },
+                trailing: Icon(Icons.chevron_right),
+              ),
+
+              // Spacer(),
+            ],
+          )
+          // ListView(
+          //   children: [
+
+          // ])
+          ,
+          Spacer(),
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Version 1.0.0',
+              style: TextStyle(color: Colors.grey),
+            ),
+          )
+        ]),
+      ),
+    ));
   }
 
   Stack MorningOrEveningContainer(context, HomeScreenModel model) {

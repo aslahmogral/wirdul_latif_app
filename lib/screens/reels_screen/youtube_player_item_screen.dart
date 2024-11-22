@@ -58,27 +58,27 @@ class _YoutubePlayerItemState extends State<YoutubePlayerItem> {
             children: [
               Container(
                 child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Row(
-                    children: [
-                      CircleAvatar(
-                        child: Icon(Icons.play_arrow),
-                        backgroundColor: Colors.teal,
-                      ),
-                      SizedBox(width: 16),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text('Motivational Video ',style: TextStyle(color: Colors.white),),
-                          Text('Wirdul Latif'),
-                        ],
-                      ),
-                    ],
-                  )
-                ),
-
-               
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          child: Icon(Icons.play_arrow),
+                          backgroundColor: Colors.teal,
+                        ),
+                        SizedBox(width: 16),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text(
+                              'Motivational Video ',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Text('Wirdul Latif'),
+                          ],
+                        ),
+                      ],
+                    )),
               ),
               Container(
                 child: Padding(
@@ -86,20 +86,26 @@ class _YoutubePlayerItemState extends State<YoutubePlayerItem> {
                   child: Column(
                     children: [
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          comingSoonDialog(context);
+                        },
                         icon: const Icon(Icons.favorite),
                         color: Colors.white,
                       ),
                       Transform.rotate(
                         angle: -0.5, // Adjust the angle as needed
                         child: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            comingSoonDialog(context);
+                          },
                           icon: const Icon(Icons.send),
                           color: Colors.white,
                         ),
                       ),
                       IconButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          comingSoonDialog(context);
+                        },
                         icon: const Icon(Icons.more_vert),
                         color: Colors.white,
                       ),
@@ -111,6 +117,26 @@ class _YoutubePlayerItemState extends State<YoutubePlayerItem> {
           ),
         ),
       ],
+    );
+  }
+
+  void comingSoonDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('Coming Soon'),
+          content: Text('This feature will be available soon.'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }

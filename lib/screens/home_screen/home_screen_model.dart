@@ -18,6 +18,7 @@ class HomeScreenModel with ChangeNotifier {
   String mainImagePath = '';
   bool isMorning = false;
   progressType progress = progressType.start;
+  int currentStreaks = 0;
 
   HomeScreenModel(BuildContext context) {
     _context = context;
@@ -28,6 +29,29 @@ class HomeScreenModel with ChangeNotifier {
 
   onItemTapped(int index) {
     currentindex = index;
+    notifyListeners();
+  }
+
+  calculateStreak() {
+    var dates = WirdulLatif.progressList
+        .where((element) => element.type == wirdType.name && element.count >= 10)
+        .map((e) => DateTime(e.time.year, e.time.month, e.time.day))
+        .toSet()
+        .toList();
+    dates.sort((a, b) => b.compareTo(a)); // Sort dates in descending order
+    var currentDate = DateTime.now();
+    var currentStreak = 0;
+
+    for (var date in dates) {
+      if (date.isBefore(currentDate) || date.isAtSameMomentAs(currentDate)) {
+        currentStreak++;
+        currentDate = currentDate.subtract(Duration(days: 1));
+      } else {
+        break;
+      }
+    }
+
+    currentStreaks = currentStreak;
     notifyListeners();
   }
 
@@ -49,6 +73,8 @@ class HomeScreenModel with ChangeNotifier {
     } else {
       progress = progressType.complete;
     }
+
+    calculateStreak();
     notifyListeners();
   }
 
