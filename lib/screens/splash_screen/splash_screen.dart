@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
+import 'package:wirdul_latif/screens/onboarding_screens.dart/onboarding_screen.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -17,9 +19,30 @@ class _SplashScreenState extends State<SplashScreen> {
 
   initWirdData() async {
     await WirdulLatif().initWirdData();
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => HomeScreen()), // Navigate to home
+    checkFirstRun();
+  }
+
+  Future<void> checkFirstRun() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bool? hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
+
+    if (hasSeenOnboarding) {
+      navigateToHome();
+    } else {
+      prefs.setBool('hasSeenOnboarding', true);
+      navigateToOnboarding();
+    }
+  }
+
+  void navigateToHome() {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => HomeScreen()),
+    );
+  }
+
+  void navigateToOnboarding() {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(builder: (_) => OnboardingScreen(isInitialPage: true,)),
     );
   }
 
@@ -35,7 +58,9 @@ class _SplashScreenState extends State<SplashScreen> {
               valueColor:
                   AlwaysStoppedAnimation<Color>(WirdColors.primaryDaycolor),
             ),
-            SizedBox(height: 36,),
+            SizedBox(
+              height: 36,
+            ),
             InkWell(
               onTap: () => initWirdData(),
               child: Text(

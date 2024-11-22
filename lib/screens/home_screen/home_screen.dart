@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/screens/blog_screen.dart/blog_screen.dart';
 import 'package:wirdul_latif/screens/calender_screen.dart/calender_screen.dart';
 import 'package:wirdul_latif/screens/counter_screen/counter_screen.dart';
+import 'package:wirdul_latif/screens/onboarding_screens.dart/onboarding_screen.dart';
 import 'package:wirdul_latif/screens/reels_screen/youtube_reels_screen.dart';
 import 'package:wirdul_latif/screens/settings_screen/setting_screen_model.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
@@ -36,10 +38,8 @@ class HomeScreen extends StatelessWidget {
                     icon: Row(
                       children: [
                         InkWell(
-                          child: Icon(
-                            Icons.local_fire_department,
-                            color: Colors.orange[700],
-                          ),
+                          child: Lottie.asset('asset/onboarding/streak.json',
+                              height: 50.0),
                           onTap: () {
                             showDialog(
                               context: context,
@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                                       Text(
                                         model.currentStreaks.toString(),
                                         style: TextStyle(
-                                          fontSize: 30,
+                                            fontSize: 30,
                                             fontWeight: FontWeight.bold),
                                       ),
                                     ],
@@ -68,7 +68,10 @@ class HomeScreen extends StatelessWidget {
                                       '“To maintain your streak, make sure to read at least 10 wirds of Morning or Evening every day.\n\nKeep it simple, stay consistent, and keep your streak alive!”.'),
                                   actions: <Widget>[
                                     TextButton(
-                                      child: Text('OK',style: TextStyle(color: Colors.teal),),
+                                      child: Text(
+                                        'OK',
+                                        style: TextStyle(color: Colors.teal),
+                                      ),
                                       onPressed: () {
                                         Navigator.of(context).pop();
                                       },
@@ -281,7 +284,10 @@ class HomeScreen extends StatelessWidget {
                         content: Text('This feature will be available soon.'),
                         actions: <Widget>[
                           TextButton(
-                            child: Text('OK',style: TextStyle(color: Colors.teal),),
+                            child: Text(
+                              'OK',
+                              style: TextStyle(color: Colors.teal),
+                            ),
                             onPressed: () {
                               Navigator.of(context).pop();
                             },
@@ -293,6 +299,21 @@ class HomeScreen extends StatelessWidget {
                 },
                 trailing: Icon(Icons.chevron_right),
               ),
+
+              ListTile(
+                leading: Icon(Icons.star),
+                title: Text('App Features'),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => OnboardingScreen(
+                                isInitialPage: false,
+                              )));
+                },
+                trailing: Icon(Icons.chevron_right),
+              ),
+              Divider(),
               ListTile(
                 leading: Icon(Icons.sync),
                 title: Text('check for correction updates'),
@@ -303,7 +324,7 @@ class HomeScreen extends StatelessWidget {
               ),
               ListTile(
                 leading: Icon(Icons.delete_forever),
-                title: Text('Reset Streaks / Calender'),
+                title: Text('Reset Calender Streaks'),
                 onTap: () {
                   settingsModel.clearStats(context, homescreenModel);
                 },
@@ -546,7 +567,6 @@ class HomeScreen extends StatelessWidget {
 
   Container zikrCounter(HomeScreenModel model) {
     return Container(
-      
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
         child: ListTile(
@@ -637,6 +657,4 @@ class HomeScreen extends StatelessWidget {
       ],
     );
   }
-
-  
 }

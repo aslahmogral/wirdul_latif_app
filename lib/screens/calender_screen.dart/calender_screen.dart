@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:streak_calendar/streak_calendar.dart';
 import 'package:wirdul_latif/screens/calender_screen.dart/calender_screen_model.dart';
@@ -78,10 +79,7 @@ class CalenderScreen extends StatelessWidget {
                   Spacer(),
                   Row(
                     children: [
-                      Icon(
-                        Icons.local_fire_department,
-                        color: Colors.orange,
-                      )
+                      Lottie.asset('asset/onboarding/streak.json', height: 50.0),
                     ],
                   ),
                   Text(

@@ -48,6 +48,7 @@ dependencies:
   url_launcher: ^6.3.1
   confetti: ^0.8.0
   streak_calendar: ^1.1.2
+  introduction_screen: ^3.0.2
   # rive: ^0.13.4
   # wirdul_latif: ^0.0.2
 
@@ -81,6 +82,9 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - asset/masjid_arc.png
+    - asset/onboarding/onboarding1.json
+    - asset/onboarding/onboarding2.json
+    - asset/onboarding/streak.json
     - asset/tasbih.png
     - asset/finger_print.png
     - asset/bismillah.png
