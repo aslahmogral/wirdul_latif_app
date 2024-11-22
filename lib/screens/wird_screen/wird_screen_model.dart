@@ -88,7 +88,7 @@ class WirdScreenModel with ChangeNotifier {
                   Navigator.pop(context);
                   addAndRemoveDuplicateProgress(model);
                 },
-                child: const Text('OK'),
+                child: const Text('OK',style: TextStyle(color: Colors.teal),),
               )
             ],
           );
@@ -120,7 +120,7 @@ class WirdScreenModel with ChangeNotifier {
                   // canPop = true;
                 },
                 child: const Text(
-                  'No',
+                  'No',style: TextStyle(color: Colors.teal),
                 ),
               )
             ],
