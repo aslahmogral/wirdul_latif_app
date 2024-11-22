@@ -278,19 +278,7 @@ class WirdScreen extends StatelessWidget {
                           },
                         ),
                       ),
-                      ListTile(
-                        leading: Text(
-                          'Dark Mode',
-                          style: TextStyle(fontSize: 16),
-                        ),
-                        trailing: Switch(
-                          activeColor: Colors.teal,
-                          value: model.isDarkMode,
-                          onChanged: (value) {
-                            model.toggleDarkMode();
-                          },
-                        ),
-                      ),
+                      
                       ListTile(
                         leading: Text(
                           'Transliteration',
@@ -301,6 +289,19 @@ class WirdScreen extends StatelessWidget {
                           value: model.isTransliteration,
                           onChanged: (value) {
                             model.toggleTransliteration();
+                          },
+                        ),
+                      ),
+                      ListTile(
+                        leading: Text(
+                          'Dark Mode',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        trailing: Switch(
+                          activeColor: Colors.teal,
+                          value: model.isDarkMode,
+                          onChanged: (value) {
+                            model.toggleDarkMode();
                           },
                         ),
                       ),
