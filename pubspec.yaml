@@ -92,6 +92,9 @@ flutter:
     - asset/wird.json
     - asset/
     - asset/quotes1.jpg
+    - asset/logo/wird_logo.png
+    - asset/logo/wird_logo1.png
+    - asset/logo/wird_only_logo.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

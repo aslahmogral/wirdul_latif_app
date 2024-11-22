@@ -229,16 +229,24 @@ class HomeScreen extends StatelessWidget {
                       SizedBox(
                         height: 16,
                       ),
-                      CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.black,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(30.0),
+                        child: Image.asset(
+                          'asset/logo/wird_logo1.png',
+                          width: 70.0,
+                          height: 70.0,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                       SizedBox(
                         height: 8,
                       ),
                       Text(
                         'Wird Al Latif',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(
+                            color: Colors.yellow,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
@@ -270,6 +278,17 @@ class HomeScreen extends StatelessWidget {
             children: [
               SizedBox(
                 height: 16,
+              ),
+              ListTile(
+                leading: Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                ),
+                title: Text('Super Important'),
+                onTap: () {
+                  homescreenModel.showPrayerRequest(context);
+                },
+                trailing: Icon(Icons.chevron_right),
               ),
 
               ListTile(
@@ -313,6 +332,7 @@ class HomeScreen extends StatelessWidget {
                 },
                 trailing: Icon(Icons.chevron_right),
               ),
+
               Divider(),
               ListTile(
                 leading: Icon(Icons.sync),

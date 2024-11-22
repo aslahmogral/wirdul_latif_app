@@ -32,6 +32,28 @@ class HomeScreenModel with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> showPrayerRequest(BuildContext context) async {
+  showDialog(
+    context: context,
+    builder: (context) {
+      return AlertDialog(
+        title: Text("A Humble Request 🙏"),
+        content: Text(
+          "Dear user,\n\nThis app was developed with love and dedication to make Wirdullateef accessible for everyone. We kindly request you to include me and my family in your prayers, asking Allah for blessings, health, and guidance.\n\nMay Allah accept your prayers and efforts. JazakAllah Khair!",
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+            child: Text("Okay",style: TextStyle(color: Colors.teal),),
+          ),
+        ],
+      );
+    },
+  );
+}
+
   calculateStreak() {
     var dates = WirdulLatif.progressList
         .where((element) => element.type == wirdType.name && element.count >= 10)
