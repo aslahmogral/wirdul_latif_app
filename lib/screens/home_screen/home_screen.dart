@@ -254,6 +254,7 @@ class HomeScreen extends StatelessWidget {
                             ? Icons.dark_mode
                             : Icons.light_mode,
                         color: Colors.yellow,
+                        size: 35,
                       ),
                     ),
                   ],
