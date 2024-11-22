@@ -223,12 +223,12 @@ class WirdScreenModel with ChangeNotifier {
 
   skipOrNextPage() {
     controller.nextPage(
-        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+        duration: const Duration(milliseconds:100), curve: Curves.easeInOut);
   }
 
   undoOrPrevPage() {
     controller.previousPage(
-        duration: const Duration(milliseconds: 500), curve: Curves.easeInOut);
+        duration: const Duration(milliseconds: 100), curve: Curves.easeInOut);
   }
 
   celebrateCompletion() {
