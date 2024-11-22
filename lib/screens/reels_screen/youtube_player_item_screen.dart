@@ -129,7 +129,7 @@ class _YoutubePlayerItemState extends State<YoutubePlayerItem> {
           content: Text('This feature will be available soon.'),
           actions: <Widget>[
             TextButton(
-              child: Text('OK'),
+              child: Text('OK',style: TextStyle(color: Colors.teal),),
               onPressed: () {
                 Navigator.of(context).pop();
               },
