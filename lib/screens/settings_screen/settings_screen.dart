@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/screens/settings_screen/setting_screen_model.dart';
-import 'package:wirdul_latif/utils/constants.dart';
 import 'package:wirdul_latif/utils/theme_provider_model.dart';
 
 class SettingsScreen extends StatelessWidget {

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/screens/counter_screen/counter_screen.dart';
 import 'package:wirdul_latif/screens/settings_screen/settings_screen.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen.dart';

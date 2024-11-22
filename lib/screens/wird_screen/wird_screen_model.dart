@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
@@ -60,14 +61,79 @@ class WirdScreenModel with ChangeNotifier {
     return wirdList[currentPage].count == wirdList[currentPage].counted;
   }
 
-  void closeButton(context) {
-    tapHere = true;
-    addAndRemoveDuplicateProgress();
-    notifyListeners();
-    Navigator.pop(context);
+  
+  showWarning(HomeScreenModel model, BuildContext context) async {
+    if (currentPage < 10) {
+      await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Warning'),
+            content: const Text(
+                'You haven\'t completed even 10 wird. Please complete at least 10 wird to maintain the streak'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  addAndRemoveDuplicateProgress(model);
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'No I want to Exit Now',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  addAndRemoveDuplicateProgress(model);
+                },
+                child: const Text('OK'),
+              )
+            ],
+          );
+        },
+      );
+    } else if (currentPage < 43) {
+      await showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Warning'),
+            content: const Text('Do you really want to exit?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  addAndRemoveDuplicateProgress(model);
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+                child: const Text(
+                  'Yes , I want to Exit Now',
+                  style: TextStyle(color: Colors.red),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                  addAndRemoveDuplicateProgress(model);
+                  // canPop = true;
+                },
+                child: const Text(
+                  'No',
+                ),
+              )
+            ],
+          );
+        },
+      );
+    } else {
+      addAndRemoveDuplicateProgress(model);
+      Navigator.pop(context);
+    }
   }
 
-  void addAndRemoveDuplicateProgress() async {
+  void addAndRemoveDuplicateProgress(HomeScreenModel model) async {
     final prefs = await SharedPreferences.getInstance();
     var oldProgress = WirdulLatif.progressList.firstWhere(
         (element) =>
@@ -114,8 +180,8 @@ class WirdScreenModel with ChangeNotifier {
         controller.nextPage(
             duration: const Duration(milliseconds: 500),
             curve: Curves.easeInOut);
-      }else{
-          celebrateCompletion();
+      } else {
+        celebrateCompletion();
       }
     }
 
