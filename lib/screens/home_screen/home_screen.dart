@@ -544,14 +544,16 @@ class HomeScreen extends StatelessWidget {
 
   Container zikrCounter(HomeScreenModel model) {
     return Container(
+      
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
         child: ListTile(
           leading: Container(
+            height: 30,
             child: CircleAvatar(
               backgroundColor: Colors.yellow,
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4.0),
+                padding: const EdgeInsets.all(4.0),
                 child: Image.asset('asset/tasbih.png'),
               ),
             ),
@@ -581,9 +583,9 @@ class HomeScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
-          leading: Icon(Icons.bolt, color: Colors.yellow, size: 30),
+          leading: Icon(Icons.calendar_month, color: Colors.yellow, size: 30),
           title: Text(
-            'check your streak calender',
+            'Calender',
             style: TextStyle(
                 fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
           ),
