@@ -26,11 +26,7 @@ class customTheme {
       backgroundColor: Colors.teal,
       foregroundColor: Colors.white,
     )),
-    switchTheme: SwitchThemeData(
-      thumbColor: MaterialStateProperty.all(Colors.white),
-      trackColor: MaterialStateProperty.all(Colors.teal),
-    ),
-
+  
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: Colors.grey[400], fontFamily: 'Poppins'),
       bodyMedium: TextStyle(color: Colors.grey[400], fontFamily: 'Poppins'),
@@ -84,10 +80,10 @@ class customTheme {
       backgroundColor: Colors.teal,
       foregroundColor: Colors.white,
     )),
-    switchTheme: SwitchThemeData(
-      thumbColor: MaterialStateProperty.all(Colors.white),
-      trackColor: MaterialStateProperty.all(Colors.teal),
-    ),
+    // switchTheme: SwitchThemeData(
+    //   thumbColor: MaterialStateProperty.all(Colors.white),
+    //   trackColor: MaterialStateProperty.all(Colors.grey.withOpacity(0.5)),
+    // ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: Colors.white,
       type: BottomNavigationBarType.fixed,

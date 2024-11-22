@@ -31,13 +31,13 @@ class SettingsScreen extends StatelessWidget {
                       leading: Icon(Icons.dark_mode),
                       title: Text('Dark Mode'),
                       trailing: Switch(
+                        activeColor: Colors.teal,
                         value: themeProvider.isDarkMode,
                         onChanged: (value) {
                           themeProvider.toggleDarkMode();
                         },
                       ),
                     ),
-                    
                     ListTile(
                       leading: Icon(Icons.share),
                       title: Text('Share this App'),
@@ -50,14 +50,13 @@ class SettingsScreen extends StatelessWidget {
                       title: Text('check for correction updates'),
                       onTap: () {
                         model.checkForUpdates(context);
-                        
                       },
                     ),
                     ListTile(
                       leading: Icon(Icons.rate_review),
                       title: Text('Rate this App'),
                       onTap: () {
-                       model.rateApp();
+                        model.rateApp();
                       },
                     ),
                     ListTile(
@@ -67,8 +66,6 @@ class SettingsScreen extends StatelessWidget {
                         model.moreApps();
                       },
                     ),
-                  
-
                     ListTile(
                       leading: Icon(Icons.delete_forever),
                       title: Text('Reset Stats'),

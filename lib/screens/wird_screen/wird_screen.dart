@@ -254,6 +254,8 @@ class WirdScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 16),
                         ),
                         trailing: Switch(
+                          activeColor: Colors.teal,
+
                           value: model.isEnglishTranslation,
                           onChanged: (value) {
                             model.toggleEnglishTranslation();
@@ -266,6 +268,8 @@ class WirdScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 16),
                         ),
                         trailing: Switch(
+                          activeColor: Colors.teal,
+
                           value: model.isDarkMode,
                           onChanged: (value) {
                             model.toggleDarkMode();
@@ -278,6 +282,8 @@ class WirdScreen extends StatelessWidget {
                           style: TextStyle(fontSize: 16),
                         ),
                         trailing: Switch(
+                          activeColor: Colors.teal,
+                         
                           value: model.isTransliteration,
                           onChanged: (value) {
                             model.toggleTransliteration();

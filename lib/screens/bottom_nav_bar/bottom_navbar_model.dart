@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/screens/counter_screen/counter_screen.dart';
-import 'package:wirdul_latif/screens/reels_screen/youtube_reels.dart';
 import 'package:wirdul_latif/screens/settings_screen/settings_screen.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
 
@@ -49,7 +48,7 @@ class BottomNavbarModel with ChangeNotifier {
         return Center(child: CounterScreen());
       case 2:
         return Center(
-          child: YoutubeReelsScreen(),
+          // child: YoutubeReelsScreen(),
         );
       case 3:
         return SettingsScreen();
