@@ -68,11 +68,11 @@ currentProgressColor(){
 currentProgressText(){
   switch (progress) {
     case progressType.start:
-      return "Start";
+      return "Start 😰";
     case progressType.continuee:
-      return 'Continue';
+      return 'Continue 😟';
     case progressType.complete:
-      return 'Completed';
+      return 'Completed 🤩';
   }
 }
 

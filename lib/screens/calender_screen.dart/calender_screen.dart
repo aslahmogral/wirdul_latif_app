@@ -19,69 +19,90 @@ class CalenderScreen extends StatelessWidget {
         builder: (context, model, child) {
           return Scaffold(
             appBar: AppBar(
-              elevation: 2,
               title: const Text("Streak Calendar"),
               actions: [
-                IconButton(
-                  onPressed: () {},
-                  icon: Row(
-                    children: [
-                      InkWell(
-                        child: Lottie.asset('asset/onboarding/streak.json',
-                            height: 50.0),
-                        onTap: () {
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Icon(
-                                      size: 50,
-                                      Icons.local_fire_department,
-                                      color: Colors.orange[700],
-                                    ),
-                                    SizedBox(
-                                      width: 8,
-                                    ),
-                                    Text(
-                                      model.currentStreak.toString(),
-                                      style: TextStyle(
-                                          fontSize: 30,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                                content: Text(
-                                    '“To maintain your streak, make sure to read at least 10 wirds of Morning or Evening every day.\n\nKeep it simple, stay consistent, and keep your streak alive!”.'),
-                                actions: <Widget>[
-                                  TextButton(
-                                    child: Text(
-                                      'OK',
-                                      style: TextStyle(color: Colors.teal),
-                                    ),
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
+            
+                  InkWell(
+                     onTap: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return AlertDialog(
+                                      title: Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Icon(
+                                            size: 50,
+                                            Icons.local_fire_department,
+                                            color: Colors.orange[700],
+                                          ),
+                                          SizedBox(
+                                            width: 8,
+                                          ),
+                                          Text(
+                                            model.currentStreak.toString(),
+                                            style: TextStyle(
+                                                fontSize: 30,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ],
+                                      ),
+                                      content: Text(
+                                          '“To maintain your streak, make sure to read at least 10 wirds of Morning or Evening every day.\n\nKeep it simple, stay consistent, and keep your streak alive!”.'),
+                                      actions: <Widget>[
+                                        TextButton(
+                                          child: Text(
+                                            'OK',
+                                            style: TextStyle(color: Colors.teal),
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                          
+                   child: Row(
+                      children: [
+                        Stack(
+                          // mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Container(
+                              width: 50,
+                              // color: Colors.yellow,
+                              child: Lottie.asset('asset/onboarding/streak.json',
+                                  height: 40.0
+                                  
                                   ),
-                                ],
-                              );
-                            },
-                          );
-                        },
-                      ),
-                      Text(
-                        model.currentStreak.toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        width: 8,
-                      )
-                    ],
-                  ),
-                ),
-              ],
+                            ),
+                            Positioned(
+                              right: 0,
+                              bottom: -8,
+                   
+                              child: Container(
+                                height: 50,
+                                // color: Colors.green,
+                                child: Center(
+                                  child: Text(
+                                    model.currentStreak.toString(),
+                                    style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          
+                          ],
+                        ),
+                        SizedBox(width: 16,)
+                      ],
+                    ),
+                 ),
+                  
+                
+                ],
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -174,8 +195,10 @@ class CalenderScreen extends StatelessWidget {
               leadingTrailingDatesProperties: DatesProperties(
                 datesDecoration: DatesDecoration(
                     datesBorderRadius: 1000,
-                    datesBorderColor: Colors.transparent,
-                    datesTextColor: Colors.transparent),
+                    // Theme.of(context).scaffoldBackgroundColor)
+                    datesBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                    datesBorderColor: Theme.of(context).scaffoldBackgroundColor,
+                    datesTextColor: Theme.of(context).scaffoldBackgroundColor),
               ),
             ),
           ],

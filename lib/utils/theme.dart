@@ -11,6 +11,7 @@ class customTheme {
       selectedItemColor: Colors.white,
       unselectedItemColor: Colors.white38,
     ),
+    scaffoldBackgroundColor: Colors.black,
     floatingActionButtonTheme: FloatingActionButtonThemeData(
       // foregroundColor: Colors.teal,
       backgroundColor: Colors.teal,
@@ -64,16 +65,17 @@ class customTheme {
       // foregroundColor: Colors.teal,
       backgroundColor: Colors.teal,
     ),
-textButtonTheme: TextButtonThemeData(
-  style: ButtonStyle(
-    foregroundColor: MaterialStateProperty.resolveWith<Color>(
-      (states) {
-        // Set text color to teal for all states
-        return Colors.teal;
-      },
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+          (states) {
+            // Set text color to teal for all states
+            return Colors.teal;
+          },
+        ),
+      ),
     ),
-  ),
-),
+    
     progressIndicatorTheme: ProgressIndicatorThemeData(
         color: Colors.yellow,
         linearTrackColor: Colors.teal,
@@ -98,6 +100,7 @@ textButtonTheme: TextButtonThemeData(
       backgroundColor: Colors.teal,
       foregroundColor: Colors.white,
     )),
+
     // switchTheme: SwitchThemeData(
     //   thumbColor: MaterialStateProperty.all(Colors.white),
     //   trackColor: MaterialStateProperty.all(Colors.grey.withOpacity(0.5)),

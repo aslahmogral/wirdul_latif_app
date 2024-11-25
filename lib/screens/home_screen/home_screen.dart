@@ -28,175 +28,192 @@ class HomeScreen extends StatelessWidget {
       child: Consumer<HomeScreenModel>(
         builder: (context, model, child) => Consumer<ThemeProvider>(
             builder: (context, themeProviderModel, child) {
-          return SafeArea(
-            child: Scaffold(
-              appBar: AppBar(
-                title: Text('Wird al latif'),
-                actions: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Row(
-                      children: [
-                        InkWell(
-                          child: Lottie.asset('asset/onboarding/streak.json',
-                              height: 50.0),
-                          onTap: () {
-                            showDialog(
-                              context: context,
-                              builder: (BuildContext context) {
-                                return AlertDialog(
-                                  title: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Icon(
-                                        size: 50,
-                                        Icons.local_fire_department,
-                                        color: Colors.orange[700],
-                                      ),
-                                      SizedBox(
-                                        width: 8,
-                                      ),
-                                      Text(
-                                        model.currentStreaks.toString(),
-                                        style: TextStyle(
-                                            fontSize: 30,
-                                            fontWeight: FontWeight.bold),
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Wird al latif'),
+              actions: [
+               InkWell(
+                   onTap: () {
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  return AlertDialog(
+                                    title: Row(
+                                      mainAxisAlignment: MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          size: 50,
+                                          Icons.local_fire_department,
+                                          color: Colors.orange[700],
+                                        ),
+                                        SizedBox(
+                                          width: 8,
+                                        ),
+                                        Text(
+                                          model.currentStreaks.toString(),
+                                          style: TextStyle(
+                                              fontSize: 30,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ],
+                                    ),
+                                    content: Text(
+                                        '“To maintain your streak, make sure to read at least 10 wirds of Morning or Evening every day.\n\nKeep it simple, stay consistent, and keep your streak alive!”.'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: Text(
+                                          'OK',
+                                          style: TextStyle(color: Colors.teal),
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
                                       ),
                                     ],
-                                  ),
-                                  content: Text(
-                                      '“To maintain your streak, make sure to read at least 10 wirds of Morning or Evening every day.\n\nKeep it simple, stay consistent, and keep your streak alive!”.'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      child: Text(
-                                        'OK',
-                                        style: TextStyle(color: Colors.teal),
-                                      ),
-                                      onPressed: () {
-                                        Navigator.of(context).pop();
-                                      },
-                                    ),
-                                  ],
-                                );
-                              },
-                            );
-                          },
-                        ),
-                        Text(
-                          model.currentStreaks.toString(),
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        )
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-              drawer: drawer(themeProviderModel, model),
-              body: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        // Row(
-                        //   mainAxisAlignment: MainAxisAlignment.center,
-                        //   children: [
-
-                        //     ElevatedButton(
-                        //         onPressed: () {
-                        //           model.changeTab(WirdType.morning);
-                        //         },
-                        //         child: Text('Morning')),
-                        //     ElevatedButton(
-                        //         onPressed: () {
-                        //           model.changeTab(WirdType.evening);
-                        //         },
-                        //         child: Text('evening'))
-                        //   ],
-                        // ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        InkWell(
-                            onTap: () {
-                              model.navigateToWird();
-                            },
-                            child: MorningOrEveningContainer(context, model)),
-                        const SizedBox(height: 8),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            InkWell(
-                              onTap: () {
-                                model.changeWirdType();
-                              },
-                              child: Text(
-                                'switch to ${model.wirdType == WirdType.morning ? 'evening' : 'morning'} wird',
-                                style: TextStyle(
-                                    decoration: TextDecoration.underline,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16),
-                              ),
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 28),
-                        morningAndEveningWirdSection(context),
-                        // InkWell(
-                        //     onTap: () {
-                        //       model.navigateToZikr();
-                        //     },
-                        //     child: quranMessageSection()),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        // dummyStreakContainer(),
-                        // const SizedBox(
-                        //   height: 20,
-                        // ),
-                        InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => CalenderScreen(currentStreak: model.currentStreaks,)));
-                            },
-                            child: calender(model)),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CounterScreen()),
+                                  );
+                                },
                               );
                             },
-                            child: zikrCounter(model)),
-                        const SizedBox(
-                          height: 30,
-                        ),
-                      ],
-                    ),
-                  )),
-              // floatingActionButton: FloatingActionButton(
-              //   onPressed: () {
-              //     Navigator.push(
-              //       context,
-              //       MaterialPageRoute(builder: (context) => CounterScreen()),
-              //     );
-              //   },
-              //   child: Container(
-              //     child: Padding(
-              //       padding: const EdgeInsets.all(12.0),
-              //       child: Image.asset('asset/tasbih.png'),
-              //     ),
-              //   ),
-              // ),
+                        
+                 child: Row(
+                    children: [
+                      Stack(
+                        // mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            width: 50,
+                            // color: Colors.yellow,
+                            child: Lottie.asset('asset/onboarding/streak.json',
+                                height: 40.0
+                                
+                                ),
+                          ),
+                          Positioned(
+                            right: 0,
+                            bottom: -8,
+                 
+                            child: Container(
+                              height: 50,
+                              // color: Colors.green,
+                              child: Center(
+                                child: Text(
+                                  model.currentStreaks.toString(),
+                                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),
+                                ),
+                              ),
+                            ),
+                          ),
+                        
+                        ],
+                      ),
+                      SizedBox(width: 16,)
+                    ],
+                  ),
+               ),
+              ],
             ),
+            drawer: drawer(themeProviderModel, model),
+            body: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.center,
+                      //   children: [
+          
+                      //     ElevatedButton(
+                      //         onPressed: () {
+                      //           model.changeTab(WirdType.morning);
+                      //         },
+                      //         child: Text('Morning')),
+                      //     ElevatedButton(
+                      //         onPressed: () {
+                      //           model.changeTab(WirdType.evening);
+                      //         },
+                      //         child: Text('evening'))
+                      //   ],
+                      // ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                          onTap: () {
+                            model.navigateToWird();
+                          },
+                          child: MorningOrEveningContainer(context, model)),
+                      const SizedBox(height: 8),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              model.changeWirdType();
+                            },
+                            child: Text(
+                              'switch to ${model.wirdType == WirdType.morning ? 'evening' : 'morning'} wird',
+                              style: TextStyle(
+                                  decoration: TextDecoration.underline,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 28),
+                      morningAndEveningWirdSection(context),
+                      // InkWell(
+                      //     onTap: () {
+                      //       model.navigateToZikr();
+                      //     },
+                      //     child: quranMessageSection()),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      // dummyStreakContainer(),
+                      // const SizedBox(
+                      //   height: 20,
+                      // ),
+                      InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CalenderScreen(currentStreak: model.currentStreaks,)));
+                          },
+                          child: calender(model)),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      InkWell(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => CounterScreen()),
+                            );
+                          },
+                          child: zikrCounter(model)),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                    ],
+                  ),
+                )),
+            // floatingActionButton: FloatingActionButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => CounterScreen()),
+            //     );
+            //   },
+            //   child: Container(
+            //     child: Padding(
+            //       padding: const EdgeInsets.all(12.0),
+            //       child: Image.asset('asset/tasbih.png'),
+            //     ),
+            //   ),
+            // ),
           );
         }),
       ),
@@ -213,50 +230,50 @@ class HomeScreen extends StatelessWidget {
       child: Consumer<SettingsScreenModel>(
         builder: (context, settingsModel, child) => Column(children: [
           Container(
-            height: 160,
+            // height: 160,
             decoration: BoxDecoration(
               gradient: WirdGradients.listTileShadeGradient,
             ),
-            child: Row(
-              mainAxisSize: MainAxisSize.max,
+            child: Column(
+            
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      SizedBox(
-                        height: 16,
-                      ),
-                      ClipRRect(
-                        borderRadius: BorderRadius.circular(30.0),
-                        child: Image.asset(
-                          'asset/logo/wird_logo1.png',
-                          width: 70.0,
-                          height: 70.0,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        'Wird Al Latif',
-                        style: TextStyle(
-                            color: Colors.yellow,
-                            fontSize: 20,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ],
-                  ),
-                ),
-                Spacer(),
-                Column(
+                SizedBox(height: 30,),
+                Row(
+                  // mainAxisSize: MainAxisSize.max,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SizedBox(
-                      height: 16,
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SizedBox(
+                            height: 16,
+                          ),
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(30.0),
+                            child: Image.asset(
+                              'asset/logo/wird_logo1.png',
+                              width: 70.0,
+                              height: 70.0,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Text(
+                            'Wird Al Latif ',
+                            style: TextStyle(
+                                color: Colors.yellow,
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ],
+                      ),
                     ),
+                    Spacer(),
                     IconButton(
                       onPressed: () {
                         themeProviderModel.toggleDarkMode();
@@ -268,9 +285,9 @@ class HomeScreen extends StatelessWidget {
                         color: Colors.yellow,
                         size: 35,
                       ),
-                    ),
+                    )
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -342,13 +359,16 @@ class HomeScreen extends StatelessWidget {
                 },
                 trailing: Icon(Icons.chevron_right),
               ),
-              ListTile(
-                leading: Icon(Icons.delete_forever),
-                title: Text('Reset Calender Streaks'),
-                onTap: () {
-                  settingsModel.clearStats(context, homescreenModel);
-                },
-                trailing: Icon(Icons.chevron_right),
+              Visibility(
+                visible: false,
+                child: ListTile(
+                  leading: Icon(Icons.delete_forever),
+                  title: Text('Reset Calender Streaks'),
+                  onTap: () {
+                    settingsModel.clearStats(context, homescreenModel);
+                  },
+                  trailing: Icon(Icons.chevron_right),
+                ),
               ),
               Divider(),
               ListTile(
