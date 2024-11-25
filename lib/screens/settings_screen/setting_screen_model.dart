@@ -47,7 +47,7 @@ class SettingsScreenModel with ChangeNotifier {
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Clear'),
+              child: Text('Clear',style: TextStyle(color: Colors.red),),
             ),
           ],
         );
@@ -83,6 +83,7 @@ class SettingsScreenModel with ChangeNotifier {
     }
     loading = false;
     notifyListeners();
+    Navigator.of(context).pop(); // close navbar
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(

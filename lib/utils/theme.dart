@@ -15,18 +15,28 @@ class customTheme {
       // foregroundColor: Colors.teal,
       backgroundColor: Colors.teal,
     ),
+    textButtonTheme: TextButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+          (states) {
+            // Set text color to teal for all states
+            return Colors.teal;
+          },
+        ),
+      ),
+    ),
     progressIndicatorTheme: ProgressIndicatorThemeData(
       linearTrackColor: Colors.transparent,
-      circularTrackColor:Colors.white.withOpacity(0.2),
-      
-        color: Colors.teal,),
+      circularTrackColor: Colors.white.withOpacity(0.2),
+      color: Colors.teal,
+    ),
 
     elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
       backgroundColor: Colors.teal,
       foregroundColor: Colors.white,
     )),
-  
+
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: Colors.grey[400], fontFamily: 'Poppins'),
       bodyMedium: TextStyle(color: Colors.grey[400], fontFamily: 'Poppins'),
@@ -54,12 +64,20 @@ class customTheme {
       // foregroundColor: Colors.teal,
       backgroundColor: Colors.teal,
     ),
+textButtonTheme: TextButtonThemeData(
+  style: ButtonStyle(
+    foregroundColor: MaterialStateProperty.resolveWith<Color>(
+      (states) {
+        // Set text color to teal for all states
+        return Colors.teal;
+      },
+    ),
+  ),
+),
     progressIndicatorTheme: ProgressIndicatorThemeData(
-      color: Colors.black.withOpacity(0.8),
-      linearTrackColor: Colors.teal,
-      circularTrackColor: Colors.black.withOpacity(0.2)
-        // color:Colors.black.withOpacity(0.5)
-        ),
+        color: Colors.yellow,
+        linearTrackColor: Colors.teal,
+        circularTrackColor: Colors.black.withOpacity(0.2)),
     textTheme: TextTheme(
       bodyLarge: TextStyle(color: Colors.black, fontFamily: 'Poppins'),
       bodyMedium: TextStyle(color: Colors.black, fontFamily: 'Poppins'),

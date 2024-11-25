@@ -6,13 +6,14 @@ import 'package:wirdul_latif/screens/calender_screen.dart/calender_screen_model.
 import 'package:wirdul_latif/utils/colors.dart';
 
 class CalenderScreen extends StatelessWidget {
-  const CalenderScreen({super.key});
+  final currentStreak;
+  const CalenderScreen({super.key, this.currentStreak});
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => CalenderScreenModel()),
+        ChangeNotifierProvider(create: (context) => CalenderScreenModel(currentStreak)),
       ],
       child: Consumer<CalenderScreenModel>(
         builder: (context, model, child) {
@@ -20,7 +21,67 @@ class CalenderScreen extends StatelessWidget {
             appBar: AppBar(
               elevation: 2,
               title: const Text("Streak Calendar"),
-              
+              actions: [
+                IconButton(
+                  onPressed: () {},
+                  icon: Row(
+                    children: [
+                      InkWell(
+                        child: Lottie.asset('asset/onboarding/streak.json',
+                            height: 50.0),
+                        onTap: () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      size: 50,
+                                      Icons.local_fire_department,
+                                      color: Colors.orange[700],
+                                    ),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      model.currentStreak.toString(),
+                                      style: TextStyle(
+                                          fontSize: 30,
+                                          fontWeight: FontWeight.bold),
+                                    ),
+                                  ],
+                                ),
+                                content: Text(
+                                    '“To maintain your streak, make sure to read at least 10 wirds of Morning or Evening every day.\n\nKeep it simple, stay consistent, and keep your streak alive!”.'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text(
+                                      'OK',
+                                      style: TextStyle(color: Colors.teal),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                      ),
+                      Text(
+                        model.currentStreak.toString(),
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      )
+                    ],
+                  ),
+                ),
+              ],
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -77,11 +138,7 @@ class CalenderScreen extends StatelessWidget {
                         color: WirdColors.primaryDaycolor),
                   ),
                   Spacer(),
-                  Row(
-                    children: [
-                      Lottie.asset('asset/onboarding/streak.json', height: 50.0),
-                    ],
-                  ),
+                  Text('Total : '),
                   Text(
                     datesForStreaks.length.toString(),
                     style: TextStyle(

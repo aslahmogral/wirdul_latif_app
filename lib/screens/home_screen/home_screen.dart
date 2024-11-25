@@ -161,7 +161,7 @@ class HomeScreen extends StatelessWidget {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => CalenderScreen()));
+                                      builder: (context) => CalenderScreen(currentStreak: model.currentStreaks,)));
                             },
                             child: calender(model)),
                         const SizedBox(

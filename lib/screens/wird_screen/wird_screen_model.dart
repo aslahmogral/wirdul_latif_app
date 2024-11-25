@@ -79,16 +79,16 @@ class WirdScreenModel with ChangeNotifier {
                   Navigator.pop(context);
                 },
                 child: const Text(
-                  'No I want to Exit Now',
-                  style: TextStyle(color: Colors.red),
+                  'No',
+                  style: TextStyle(color: Colors.grey),
                 ),
               ),
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                   addAndRemoveDuplicateProgress(model);
                 },
-                child: const Text('OK',style: TextStyle(color: Colors.teal),),
+                child: const Text('OK , I will Finish...',style: TextStyle(),),
               )
             ],
           );
@@ -109,18 +109,18 @@ class WirdScreenModel with ChangeNotifier {
                   Navigator.pop(context);
                 },
                 child: const Text(
-                  'Yes , I want to Exit Now',
-                  style: TextStyle(color: Colors.red),
+                  'Yes',
+                  style: TextStyle(color: Colors.grey),
                 ),
               ),
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                   addAndRemoveDuplicateProgress(model);
                   // canPop = true;
                 },
                 child: const Text(
-                  'No',style: TextStyle(color: Colors.teal),
+                  'No , I will Finish...',style: TextStyle(),
                 ),
               )
             ],
