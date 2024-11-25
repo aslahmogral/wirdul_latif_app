@@ -25,13 +25,13 @@ class SettingsScreenModel with ChangeNotifier {
     );
   }
 
-  void moreApps() {
-    launchUrl(
-      Uri.parse(
-        Constants.moreAppLink,
-      ),
-    );
-  }
+  // void moreApps() {
+  //   launchUrl(
+  //     Uri.parse(
+  //       Constants.moreAppLink,
+  //     ),
+  //   );
+  // }
 
   clearStats(context, HomeScreenModel model) async {
     final confirm = await showDialog<bool>(

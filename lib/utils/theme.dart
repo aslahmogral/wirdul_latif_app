@@ -16,6 +16,22 @@ class customTheme {
       // foregroundColor: Colors.teal,
       backgroundColor: Colors.teal,
     ),
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+          (states) {
+            // Set text color to teal for all states
+            return Colors.teal;
+          },
+        ),
+        side: MaterialStateProperty.resolveWith<BorderSide?>(
+          (states) {
+            return BorderSide(color: Colors.teal);
+          },
+        ),
+
+      )
+    ),
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.resolveWith<Color>(
@@ -75,7 +91,22 @@ class customTheme {
         ),
       ),
     ),
-    
+    outlinedButtonTheme: OutlinedButtonThemeData(
+      style: ButtonStyle(
+        foregroundColor: MaterialStateProperty.resolveWith<Color>(
+          (states) {
+            // Set text color to teal for all states
+            return Colors.teal;
+          },
+        ),
+        side: MaterialStateProperty.resolveWith<BorderSide?>(
+          (states) {
+            return BorderSide(color: Colors.teal);
+          },
+        ),
+
+      )
+    ),
     progressIndicatorTheme: ProgressIndicatorThemeData(
         color: Colors.yellow,
         linearTrackColor: Colors.teal,

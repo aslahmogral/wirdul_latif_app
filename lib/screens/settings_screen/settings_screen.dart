@@ -58,13 +58,13 @@ class SettingsScreen extends StatelessWidget {
                         model.rateApp();
                       },
                     ),
-                    ListTile(
-                      leading: Icon(Icons.apps),
-                      title: Text('For More App'),
-                      onTap: () {
-                        model.moreApps();
-                      },
-                    ),
+                    // ListTile(
+                    //   leading: Icon(Icons.apps),
+                    //   title: Text('For More App'),
+                    //   onTap: () {
+                    //     model.moreApps();
+                    //   },
+                    // ),
                     ListTile(
                       leading: Icon(Icons.delete_forever),
                       title: Text('Reset Stats'),

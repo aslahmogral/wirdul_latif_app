@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/screens/blog_screen.dart/blog_screen.dart';
 import 'package:wirdul_latif/screens/calender_screen.dart/calender_screen.dart';
+import 'package:wirdul_latif/screens/contact_us_screen/contact_us_screen.dart';
 import 'package:wirdul_latif/screens/counter_screen/counter_screen.dart';
 import 'package:wirdul_latif/screens/onboarding_screens.dart/onboarding_screen.dart';
 import 'package:wirdul_latif/screens/reels_screen/youtube_reels_screen.dart';
 import 'package:wirdul_latif/screens/settings_screen/setting_screen_model.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
+import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 import 'package:wirdul_latif/utils/theme_provider_model.dart';
@@ -117,7 +120,6 @@ class HomeScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                     
                       const SizedBox(
                         height: 20,
                       ),
@@ -238,15 +240,22 @@ class HomeScreen extends StatelessWidget {
                           SizedBox(
                             height: 16,
                           ),
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(30.0),
-                            child: Image.asset(
-                              'asset/logo/wird_logo1.png',
-                              width: 70.0,
-                              height: 70.0,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                          Image.asset(
+                            'asset/logo/wird_logo_bg.png',
+                            width: 80.0,
+                            height: 80.0,
+                            fit: BoxFit.cover,
+                          )
+                              .animate(
+                                onPlay: (controller) => controller.repeat(),
+                              )
+                              .shimmer(
+                                duration: 3000
+                                    .ms, // Duration of the shimmer animation
+                                color:
+                                    Colors.white, // Highlight color for shimmer
+                                angle: 0.5,
+                              ),
                           SizedBox(
                             height: 8,
                           ),
@@ -337,10 +346,10 @@ class HomeScreen extends StatelessWidget {
                 trailing: Icon(Icons.chevron_right),
               ),
 
-              Divider(),
+              // Divider(),
               ListTile(
                 leading: Icon(Icons.sync),
-                title: Text('check for correction updates'),
+                title: Text('Update Files'),
                 onTap: () {
                   settingsModel.checkForUpdates(context);
                 },
@@ -357,7 +366,7 @@ class HomeScreen extends StatelessWidget {
                   trailing: Icon(Icons.chevron_right),
                 ),
               ),
-              Divider(),
+              // Divider(),
               ListTile(
                 leading: Icon(Icons.rate_review),
                 title: Text('Rate this App'),
@@ -374,11 +383,25 @@ class HomeScreen extends StatelessWidget {
                 },
                 trailing: Icon(Icons.chevron_right),
               ),
+              // ListTile(
+              //   leading: Icon(Icons.apps),
+              //   title: Text('More Apps'),
+              //   onTap: () {
+              //     settingsModel.moreApps();
+              //   },
+              //   trailing: Icon(Icons.chevron_right),
+              // ),
               ListTile(
-                leading: Icon(Icons.apps),
-                title: Text('More Apps'),
+                leading: Text(
+                  '@',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+                ),
+                title: Text('Contact Us'),
                 onTap: () {
-                  settingsModel.moreApps();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ContactUsScreen()));
                 },
                 trailing: Icon(Icons.chevron_right),
               ),

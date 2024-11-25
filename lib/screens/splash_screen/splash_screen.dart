@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
 import 'package:wirdul_latif/screens/onboarding_screens.dart/onboarding_screen.dart';
+import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -16,6 +18,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     initWirdData();
   }
+
+  bool showReload = false;
 
   initWirdData() async {
     await WirdulLatif().initWirdData();
@@ -35,14 +39,22 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   void navigateToHome() {
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => HomeScreen()),
-    );
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => HomeScreen()),
+      );
+    });
+    //  setState(() {
+    //     showReload = true;
+    //   });
   }
 
   void navigateToOnboarding() {
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (_) => OnboardingScreen(isInitialPage: true,)),
+      MaterialPageRoute(
+          builder: (_) => OnboardingScreen(
+                isInitialPage: true,
+              )),
     );
   }
 
@@ -54,20 +66,27 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const CircularProgressIndicator(
-              valueColor:
-                  AlwaysStoppedAnimation<Color>(WirdColors.primaryDaycolor),
-            ),
+            Image.asset(
+              'asset/logo/wird_logo_bg.png',
+              height: 100,
+              width: 100,
+            ).animate().scale(duration: Duration(seconds: 2)).shimmer(
+                duration: 1500.ms, // Duration of the shimmer animation
+                color: Colors.white, // Highlight color for shimmer
+                angle: 0.5),
             SizedBox(
               height: 36,
             ),
-            InkWell(
-              onTap: () => initWirdData(),
-              child: Text(
-                'Reload wirdul latif',
-                style: TextStyle(
-                    color: WirdColors.primaryDaycolor,
-                    decoration: TextDecoration.underline),
+            Visibility(
+              visible: showReload,
+              child: InkWell(
+                onTap: () => initWirdData(),
+                child: Text(
+                  'Reload wirdul latif',
+                  style: TextStyle(
+                      color: WirdColors.primaryDaycolor,
+                      decoration: TextDecoration.underline),
+                ),
               ),
             )
           ],
