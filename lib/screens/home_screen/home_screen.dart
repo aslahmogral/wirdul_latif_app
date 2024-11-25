@@ -9,6 +9,7 @@ import 'package:wirdul_latif/screens/reels_screen/youtube_reels_screen.dart';
 import 'package:wirdul_latif/screens/settings_screen/setting_screen_model.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
+import 'package:wirdul_latif/utils/constants.dart';
 import 'package:wirdul_latif/utils/theme_provider_model.dart';
 import 'package:wirdul_latif/widgets/morning_evening_wird_card.dart';
 
@@ -116,22 +117,7 @@ class HomeScreen extends StatelessWidget {
                 child: SingleChildScrollView(
                   child: Column(
                     children: [
-                      // Row(
-                      //   mainAxisAlignment: MainAxisAlignment.center,
-                      //   children: [
-
-                      //     ElevatedButton(
-                      //         onPressed: () {
-                      //           model.changeTab(WirdType.morning);
-                      //         },
-                      //         child: Text('Morning')),
-                      //     ElevatedButton(
-                      //         onPressed: () {
-                      //           model.changeTab(WirdType.evening);
-                      //         },
-                      //         child: Text('evening'))
-                      //   ],
-                      // ),
+                     
                       const SizedBox(
                         height: 20,
                       ),
@@ -361,7 +347,7 @@ class HomeScreen extends StatelessWidget {
                 trailing: Icon(Icons.chevron_right),
               ),
               Visibility(
-                visible: false,
+                visible: Constants.resetCalender,
                 child: ListTile(
                   leading: Icon(Icons.delete_forever),
                   title: Text('Reset Calender Streaks'),
@@ -491,6 +477,18 @@ class HomeScreen extends StatelessWidget {
                   decoration: BoxDecoration(
                     color: model.currentProgressColor(),
                     borderRadius: BorderRadius.circular(15),
+                    // boxShadow: [
+                    //   BoxShadow(
+                    //     color: Colors.black54,
+                    //     offset: Offset(4, 4),
+                    //     blurRadius: 4,
+                    //   ),
+                    //   BoxShadow(
+                    //     color: Colors.white,
+                    //     offset: Offset(-4, -4),
+                    //     blurRadius: 4,
+                    //   ),
+                    // ],
                   ),
                   child: Center(
                     child: Row(
@@ -505,13 +503,6 @@ class HomeScreen extends StatelessWidget {
                                 ? Colors.black
                                 : Colors.white,
                             letterSpacing: 1.2,
-                            shadows: [
-                              Shadow(
-                                offset: Offset(1.0, 1.0),
-                                blurRadius: 2.0,
-                                color: Colors.black54,
-                              ),
-                            ],
                           ),
                         ),
                       ],

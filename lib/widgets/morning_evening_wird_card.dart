@@ -21,7 +21,6 @@ class MorningOrEveningCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      // alignment: AlignmentDirectional.center,
       children: [
         Container(
           height: size,
@@ -61,8 +60,8 @@ class MorningOrEveningCard extends StatelessWidget {
           ),
         ),
         Positioned(
-            top: 30,
-            right: 60,
+            top: 20,
+            left: 10,
             child: Text(
               emojiString,
               style: TextStyle(fontSize: 50),
@@ -71,6 +70,3 @@ class MorningOrEveningCard extends StatelessWidget {
     );
   }
 }
-
-// 🍿
-// 📚
