@@ -54,6 +54,28 @@ class HomeScreenModel with ChangeNotifier {
   );
 }
 
+currentProgressColor(){
+  switch (progress) {
+    case progressType.start:
+      return Colors.red;
+    case progressType.continuee:
+      return Colors.yellow;
+    case progressType.complete:
+      return Colors.green;
+  }
+}
+
+currentProgressText(){
+  switch (progress) {
+    case progressType.start:
+      return "Start";
+    case progressType.continuee:
+      return 'Continue';
+    case progressType.complete:
+      return 'Completed';
+  }
+}
+
   calculateStreak() {
     var dates = WirdulLatif.progressList
         .where((element) => element.type == wirdType.name && element.count >= 10)

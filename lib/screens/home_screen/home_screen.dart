@@ -468,84 +468,31 @@ class HomeScreen extends StatelessWidget {
                   height: 50,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                    color: Colors.black54,
+                    color: model.currentProgressColor(),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Center(
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Visibility(
-                          visible: model.progress == progressType.start,
-                          child: Text(
-                            'READ NOW',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.red.shade700,
-                              letterSpacing: 1.2,
-                              shadows: [
-                                Shadow(
-                                  offset: Offset(1.0, 1.0),
-                                  blurRadius: 2.0,
-                                  color: Colors.black54,
-                                ),
-                              ],
-                            ),
+                        Text(
+                          model.currentProgressText(),
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: model.progress == progressType.continuee
+                                ? Colors.black
+                                : Colors.white,
+                            letterSpacing: 1.2,
+                            shadows: [
+                              Shadow(
+                                offset: Offset(1.0, 1.0),
+                                blurRadius: 2.0,
+                                color: Colors.black54,
+                              ),
+                            ],
                           ),
                         ),
-                        Visibility(
-                          visible: model.progress == progressType.continuee,
-                          child: Text(
-                            'continue reading',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.yellow.shade700,
-                              letterSpacing: 1.2,
-                              shadows: [
-                                Shadow(
-                                  offset: Offset(1.0, 1.0),
-                                  blurRadius: 2.0,
-                                  color: Colors.black54,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Visibility(
-                          visible: model.progress == progressType.complete,
-                          child: Text(
-                            'Completed',
-                            style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.green.shade700,
-                              letterSpacing: 1.2,
-                              shadows: [
-                                Shadow(
-                                  offset: Offset(1.0, 1.0),
-                                  blurRadius: 2.0,
-                                  color: Colors.black54,
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                        // Text(
-                        //   '05:00:22',
-                        //   style: TextStyle(color: Colors.green),
-                        // ),
-                        // SizedBox(
-                        //   width: 10,
-                        // ),
-                        // Container(
-                        //     // width: MediaQuery.of(context).size.width,
-                        //     width: 200,
-                        //     child: LinearProgressIndicator(
-                        //       value: 0.1,
-                        //       color: Colors.green,
-                        //     )),
                       ],
                     ),
                   ),
