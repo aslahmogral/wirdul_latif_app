@@ -32,50 +32,48 @@ class HomeScreen extends StatelessWidget {
             appBar: AppBar(
               title: Text('Wird al latif'),
               actions: [
-               InkWell(
-                   onTap: () {
-                              showDialog(
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return AlertDialog(
-                                    title: Row(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          size: 50,
-                                          Icons.local_fire_department,
-                                          color: Colors.orange[700],
-                                        ),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
-                                        Text(
-                                          model.currentStreaks.toString(),
-                                          style: TextStyle(
-                                              fontSize: 30,
-                                              fontWeight: FontWeight.bold),
-                                        ),
-                                      ],
-                                    ),
-                                    content: Text(
-                                        '“To maintain your streak, make sure to read at least 10 wirds of Morning or Evening every day.\n\nKeep it simple, stay consistent, and keep your streak alive!”.'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        child: Text(
-                                          'OK',
-                                          style: TextStyle(color: Colors.teal),
-                                        ),
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                        
-                 child: Row(
+                InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                size: 50,
+                                Icons.local_fire_department,
+                                color: Colors.orange[700],
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                model.currentStreaks.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          content: Text(
+                              '“To maintain your streak, make sure to read at least 10 wirds of Morning or Evening every day.\n\nKeep it simple, stay consistent, and keep your streak alive!”.'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text(
+                                'OK',
+                                style: TextStyle(color: Colors.teal),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: Row(
                     children: [
                       Stack(
                         // mainAxisAlignment: MainAxisAlignment.end,
@@ -84,32 +82,32 @@ class HomeScreen extends StatelessWidget {
                             width: 50,
                             // color: Colors.yellow,
                             child: Lottie.asset('asset/onboarding/streak.json',
-                                height: 40.0
-                                
-                                ),
+                                height: 40.0),
                           ),
                           Positioned(
                             right: 0,
                             bottom: -8,
-                 
                             child: Container(
                               height: 50,
                               // color: Colors.green,
                               child: Center(
                                 child: Text(
                                   model.currentStreaks.toString(),
-                                  style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
                                 ),
                               ),
                             ),
                           ),
-                        
                         ],
                       ),
-                      SizedBox(width: 16,)
+                      SizedBox(
+                        width: 16,
+                      )
                     ],
                   ),
-               ),
+                ),
               ],
             ),
             drawer: drawer(themeProviderModel, model),
@@ -121,7 +119,7 @@ class HomeScreen extends StatelessWidget {
                       // Row(
                       //   mainAxisAlignment: MainAxisAlignment.center,
                       //   children: [
-          
+
                       //     ElevatedButton(
                       //         onPressed: () {
                       //           model.changeTab(WirdType.morning);
@@ -179,7 +177,9 @@ class HomeScreen extends StatelessWidget {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => CalenderScreen(currentStreak: model.currentStreaks,)));
+                                    builder: (context) => CalenderScreen(
+                                          currentStreak: model.currentStreaks,
+                                        )));
                           },
                           child: calender(model)),
                       const SizedBox(
@@ -235,9 +235,10 @@ class HomeScreen extends StatelessWidget {
               gradient: WirdGradients.listTileShadeGradient,
             ),
             child: Column(
-            
               children: [
-                SizedBox(height: 30,),
+                SizedBox(
+                  height: 30,
+                ),
                 Row(
                   // mainAxisSize: MainAxisSize.max,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -559,11 +560,11 @@ class HomeScreen extends StatelessWidget {
         child: ListTile(
           leading: Container(
             height: 30,
-            child: CircleAvatar(
-              backgroundColor: Colors.yellow,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Image.asset('asset/tasbih.png'),
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text(
+                '🤲',
+                style: TextStyle(fontSize: 20),
               ),
             ),
           ),
@@ -592,7 +593,10 @@ class HomeScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
-          leading: Icon(Icons.calendar_month, color: Colors.yellow, size: 30),
+          leading: Text(
+            '🗓️',
+            style: TextStyle(fontSize: 20),
+          ),
           title: Text(
             'Calender',
             style: TextStyle(
@@ -623,7 +627,7 @@ class HomeScreen extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => YoutubeReelsScreen()));
           },
           child: MorningOrEveningCard(
-              icon: Icons.movie,
+              emojiString: '🍿',
               size: 170,
               color: WirdColors.primaryDaycolor,
               title: 'Watch',
@@ -635,7 +639,7 @@ class HomeScreen extends StatelessWidget {
                 context, MaterialPageRoute(builder: (context) => BlogScreen()));
           },
           child: MorningOrEveningCard(
-              icon: Icons.book,
+              emojiString: '📚',
               size: 170,
               color: WirdColors.primaryDaycolor,
               title: 'Read',

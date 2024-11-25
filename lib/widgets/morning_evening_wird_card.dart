@@ -7,7 +7,7 @@ class MorningOrEveningCard extends StatelessWidget {
   final double size;
   final String title;
   final String subTitle;
-  final IconData icon;
+  final String emojiString;
 
   const MorningOrEveningCard({
     Key? key,
@@ -15,7 +15,7 @@ class MorningOrEveningCard extends StatelessWidget {
     required this.title,
     required this.subTitle,
     required this.size,
-    required this.icon,
+    required this.emojiString,
   }) : super(key: key);
 
   @override
@@ -23,7 +23,6 @@ class MorningOrEveningCard extends StatelessWidget {
     return Stack(
       // alignment: AlignmentDirectional.center,
       children: [
-       
         Container(
           height: size,
           width: size,
@@ -31,7 +30,7 @@ class MorningOrEveningCard extends StatelessWidget {
             // color: WirdColors.primaryDaycolor,
             borderRadius: BorderRadius.circular(15),
             color: WirdColors.primaryDaycolor.withOpacity(0.8),
-        gradient: WirdGradients.listTileShadeGradient,
+            gradient: WirdGradients.listTileShadeGradient,
           ),
           child: Padding(
             padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
@@ -62,15 +61,16 @@ class MorningOrEveningCard extends StatelessWidget {
           ),
         ),
         Positioned(
-          top: 40,
-          right: 60,
-          child: Icon(
-            size: 50,
-            icon,
-            color: Colors.yellow,
-          ),
-        )
+            top: 30,
+            right: 60,
+            child: Text(
+              emojiString,
+              style: TextStyle(fontSize: 50),
+            ))
       ],
     );
   }
 }
+
+// 🍿
+// 📚
