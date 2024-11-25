@@ -42,7 +42,6 @@ class _YoutubeReelsScreenState extends State<YoutubeReelsScreen> {
         leadingWidth: 2,
         leading: SizedBox(),
         title: Text('Shorts'),
-        backgroundColor: Colors.black,
         actions: [
           IconButton(
               onPressed: () {
