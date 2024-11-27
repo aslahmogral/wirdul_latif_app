@@ -67,7 +67,8 @@ class _SplashScreenState extends State<SplashScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
-              'asset/logo/wird_logo_bg.png',
+              // 'asset/logo/wird_logo_bg.png',
+              'asset/wirdul_latif.png',
               height: 100,
               width: 100,
             ).animate().scale(duration: Duration(seconds: 2)).shimmer(

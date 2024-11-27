@@ -91,6 +91,7 @@ flutter:
     - asset/logo/wird_logo1.png
     - asset/logo/wird_logo_bg.png
     - asset/logo/wird_only_logo.png
+    - asset/wirdul_latif.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

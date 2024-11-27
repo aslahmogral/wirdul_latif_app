@@ -241,7 +241,8 @@ class HomeScreen extends StatelessWidget {
                             height: 16,
                           ),
                           Image.asset(
-                            'asset/logo/wird_logo_bg.png',
+                            // 'asset/logo/wird_logo_bg.png',
+                            'asset/wirdul_latif.png',
                             width: 80.0,
                             height: 80.0,
                             fit: BoxFit.cover,
