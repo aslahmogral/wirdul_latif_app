@@ -1,0 +1,4 @@
+enum WirdType {
+  morning,
+  evening
+}
