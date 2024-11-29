@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:streak_calendar/streak_calendar.dart';
@@ -200,8 +201,9 @@ class CalenderScreen extends StatelessWidget {
                     100: const Color.fromARGB(255, 37, 88, 39),
                   },
                   onClick: (value) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(value.toString())));
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text(
+                            '${DateFormat('MMMM d yyyy').format(value)}')));
                   },
                 ),
               ),

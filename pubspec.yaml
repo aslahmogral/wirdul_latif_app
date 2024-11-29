@@ -51,6 +51,7 @@ dependencies:
   introduction_screen: ^3.0.2
   jhijri: ^1.0.0
   flutter_heatmap_calendar: ^1.0.5
+  intl: ^0.19.0
   # rive: ^0.13.4
   # wirdul_latif: ^0.0.2
 
