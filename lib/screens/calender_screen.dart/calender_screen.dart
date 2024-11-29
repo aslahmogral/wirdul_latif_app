@@ -117,12 +117,12 @@ class CalenderScreen extends StatelessWidget {
                   //   ],
                   // ),
                   heatMapCalender(
-                      model.morningDatesForStreaks, context, 'Morning'),
+                      model.morningDatesForStreaks, context, 'Morning',model.showMoreMorningDatesForStreaks),
                   SizedBox(
                     height: 16,
                   ),
                   heatMapCalender(
-                      model.eveningDatesForStreaks, context, 'Evening'),
+                      model.eveningDatesForStreaks, context, 'Evening',model.showMoreEveningDatesForStreaks),
                   SizedBox(
                     height: 16,
                   ),
@@ -141,7 +141,7 @@ class CalenderScreen extends StatelessWidget {
   }
 
   Padding heatMapCalender(Map<DateTime, int> datesForStreaks,
-      BuildContext context, String typeName) {
+      BuildContext context, String typeName,List<DateTime> showMoreList) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
@@ -183,28 +183,59 @@ class CalenderScreen extends StatelessWidget {
                 //  color: Colors.grey[200],
               ),
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: HeatMap(
-                  textColor: Colors.teal,
-                  datasets: datesForStreaks,
-                  defaultColor: Colors.grey.withOpacity(0.5),
-                  startDate: DateTime.now().subtract(Duration(days: 75)),
-                  endDate: DateTime.now(),
-                  colorMode: ColorMode.color,
-                  showText: false,
-                  scrollable: true,
-                  colorsets: {
-                    11: const Color.fromARGB(255, 88, 176, 91),
-                    24: const Color.fromARGB(255, 63, 145, 66),
-                    34: const Color.fromARGB(255, 59, 136, 62),
-                    44: const Color.fromARGB(255, 37, 88, 39),
-                    100: const Color.fromARGB(255, 37, 88, 39),
-                  },
-                  onClick: (value) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text(
-                            '${DateFormat('MMMM d yyyy').format(value)}')));
-                  },
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    HeatMap(
+                      textColor: Colors.teal,
+                      datasets: datesForStreaks,
+                      defaultColor: Colors.grey.withOpacity(0.5),
+                      startDate: DateTime.now().subtract(Duration(days: 75)),
+                      endDate: DateTime.now(),
+                      colorMode: ColorMode.color,
+                      showColorTip: false,
+                      showText: false,
+                      scrollable: true,
+                      colorsets: {
+                        11: const Color.fromARGB(255, 88, 176, 91),
+                        24: const Color.fromARGB(255, 63, 145, 66),
+                        34: const Color.fromARGB(255, 59, 136, 62),
+                        44: const Color.fromARGB(255, 37, 88, 39),
+                        100: const Color.fromARGB(255, 37, 88, 39),
+                      },
+                      onClick: (value) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                '${DateFormat('MMMM d yyyy').format(value)}')));
+                      },
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: Text('Calender'),
+                                content: cleanCalender(
+                                    showMoreList, context, typeName),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text(
+                                      'OK',
+                                      style: TextStyle(color: Colors.teal),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      child: Text('show more...',
+                          style: TextStyle(color: Colors.teal)),
+                    )
+                  ],
                 ),
               ),
             ),

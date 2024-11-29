@@ -22,13 +22,13 @@ class CalenderScreenModel with ChangeNotifier {
     };
   }
 
-  // List<DateTime> morningDatesForStreaks = WirdulLatif.progressList
-  //     .where((e) => e.count >= 10 && e.type == WirdType.morning.name)
-  //     .map<DateTime>((e) => e.time as DateTime)
-  //     .toList();
+  List<DateTime> showMoreMorningDatesForStreaks = WirdulLatif.progressList
+      .where((e) => e.count >= 10 && e.type == WirdType.morning.name)
+      .map<DateTime>((e) => e.time as DateTime)
+      .toList();
 
-  // List<DateTime> eveningDatesForStreaks = WirdulLatif.progressList
-  //     .where((e) => e.count >= 10 && e.type == WirdType.evening.name)
-  //     .map<DateTime>((e) => e.time as DateTime)
-  //     .toList();
+  List<DateTime> showMoreEveningDatesForStreaks = WirdulLatif.progressList
+      .where((e) => e.count >= 10 && e.type == WirdType.evening.name)
+      .map<DateTime>((e) => e.time as DateTime)
+      .toList();
 }
