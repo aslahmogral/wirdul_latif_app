@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:jhijri/jHijri.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:wirdul_latif/screens/blog_screen.dart/blog_screen.dart';
@@ -10,7 +11,6 @@ import 'package:wirdul_latif/screens/onboarding_screens.dart/onboarding_screen.d
 import 'package:wirdul_latif/screens/reels_screen/youtube_reels_screen.dart';
 import 'package:wirdul_latif/screens/settings_screen/setting_screen_model.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
-import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 import 'package:wirdul_latif/utils/theme_provider_model.dart';
@@ -34,7 +34,29 @@ class HomeScreen extends StatelessWidget {
             builder: (context, themeProviderModel, child) {
           return Scaffold(
             appBar: AppBar(
-              title: Text('Wird al latif'),
+              centerTitle: true,
+              title: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('Wird al latif'),
+                  Row(
+                    children: [
+                      Text(
+                        '(${JHijri.now().hijri.day.toString()} ',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                      Text(
+                        '${JHijri.now().hijri.monthName}  ',
+                        style: TextStyle(fontSize: 14),
+                      ),
+                      Text(
+                        '${JHijri.now().year.toString()} )',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ],
+                  )
+                ],
+              ),
               actions: [
                 InkWell(
                   onTap: () {
@@ -167,6 +189,7 @@ class HomeScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => CalenderScreen(
                                           currentStreak: model.currentStreaks,
+                                          
                                         )));
                           },
                           child: calender(model)),

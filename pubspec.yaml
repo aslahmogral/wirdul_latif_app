@@ -49,6 +49,8 @@ dependencies:
   confetti: ^0.8.0
   streak_calendar: ^1.1.2
   introduction_screen: ^3.0.2
+  jhijri: ^1.0.0
+  flutter_heatmap_calendar: ^1.0.5
   # rive: ^0.13.4
   # wirdul_latif: ^0.0.2
 
@@ -66,7 +68,7 @@ dev_dependencies:
 
 flutter_icons:
   android: true
-  image_path: "asset/wirdul_latif.png"
+  image_path: "asset/logo/wird_logo_bg.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
