@@ -109,16 +109,9 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen> {
                     // primary: Colors.teal,
                     shape: CircleBorder(),
                     padding: EdgeInsets.all(80),
-                    elevation: 8,
+                    elevation: 10,
                   ),
-                  child: Text(
-                    '+',
-                    style: TextStyle(
-                      fontSize: 48,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
+                  child: Icon(Icons.keyboard_arrow_up, size: 50),
                 ),
               ),
             ],
