@@ -208,10 +208,11 @@ class CalenderScreen extends StatelessWidget {
                     TextButton(
                       onPressed: () {
                         showDialog(
+                          barrierDismissible: false,
                             context: context,
                             builder: (context) {
                               return AlertDialog(
-                                title: Text('Calender'),
+                                // title: Text('Calender'),
                                 content: cleanCalender(
                                     showMoreList, context, typeName),
                                 actions: <Widget>[
@@ -246,43 +247,21 @@ class CalenderScreen extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        width: MediaQuery.of(context).size.width / 1.2,
+        width: MediaQuery.of(context).size.width ,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12.0),
-              child: Row(
-                children: [
-                  Text(
-                    typeName,
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: WirdColors.primaryDaycolor),
-                  ),
-                  Spacer(),
-                  Text('Total : '),
-                  Text(
-                    datesForStreaks.length.toString(),
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: WirdColors.primaryDaycolor),
-                  ),
-                ],
-              ),
-            ),
+            
             CleanCalendar(
               datesForStreaks: datesForStreaks,
-              currentDateProperties: DatesProperties(
-                datesDecoration: DatesDecoration(
-                  datesBorderRadius: 1000,
-                  datesBackgroundColor: Colors.lightGreen.shade100,
-                  datesBorderColor: Colors.black,
-                  datesTextColor: Colors.black,
-                ),
-              ),
+              // currentDateProperties: DatesProperties(
+              //   datesDecoration: DatesDecoration(
+              //     datesBorderRadius: 1000,
+              //     datesBackgroundColor: Colors.lightGreen.shade100,
+              //     datesBorderColor: Colors.black,
+              //     datesTextColor: Colors.black,
+              //   ),
+              // ),
               streakDatesProperties: DatesProperties(
                 datesDecoration: DatesDecoration(
                   // datesBorderRadius: 1000,
@@ -295,15 +274,15 @@ class CalenderScreen extends StatelessWidget {
                 datesDecoration: DatesDecoration(
                     datesBorderRadius: 0, datesBorderColor: Colors.transparent),
               ),
-              leadingTrailingDatesProperties: DatesProperties(
-                datesDecoration: DatesDecoration(
-                    datesBorderRadius: 1000,
-                    // Theme.of(context).scaffoldBackgroundColor)
-                    datesBackgroundColor:
-                        Theme.of(context).scaffoldBackgroundColor,
-                    datesBorderColor: Theme.of(context).scaffoldBackgroundColor,
-                    datesTextColor: Theme.of(context).scaffoldBackgroundColor),
-              ),
+              // leadingTrailingDatesProperties: DatesProperties(
+              //   datesDecoration: DatesDecoration(
+              //       datesBorderRadius: 1000,
+              //       // Theme.of(context).scaffoldBackgroundColor)
+              //       datesBackgroundColor:
+              //           Theme.of(context).scaffoldBackgroundColor,
+              //       datesBorderColor: Theme.of(context).scaffoldBackgroundColor,
+              //       datesTextColor: Theme.of(context).scaffoldBackgroundColor),
+              // ),
             ),
           ],
         ),
