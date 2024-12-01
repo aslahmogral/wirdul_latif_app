@@ -116,13 +116,13 @@ class CalenderScreen extends StatelessWidget {
                   //         model.morningDatesForStreaks, context, "Morning"),
                   //   ],
                   // ),
-                  heatMapCalender(
-                      model.morningDatesForStreaks, context, 'Morning',model.showMoreMorningDatesForStreaks),
+                  heatMapCalender(model.morningDatesForStreaks, context,
+                      'Morning', model.showMoreMorningDatesForStreaks),
                   SizedBox(
                     height: 16,
                   ),
-                  heatMapCalender(
-                      model.eveningDatesForStreaks, context, 'Evening',model.showMoreEveningDatesForStreaks),
+                  heatMapCalender(model.eveningDatesForStreaks, context,
+                      'Evening', model.showMoreEveningDatesForStreaks),
                   SizedBox(
                     height: 16,
                   ),
@@ -141,7 +141,7 @@ class CalenderScreen extends StatelessWidget {
   }
 
   Padding heatMapCalender(Map<DateTime, int> datesForStreaks,
-      BuildContext context, String typeName,List<DateTime> showMoreList) {
+      BuildContext context, String typeName, List<DateTime> showMoreList) {
     return Padding(
       padding: const EdgeInsets.all(16.0),
       child: Container(
@@ -187,21 +187,17 @@ class CalenderScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     HeatMap(
-                      textColor: Colors.teal,
+                      // textColor: Colors.teal,
                       datasets: datesForStreaks,
                       defaultColor: Colors.grey.withOpacity(0.5),
-                      startDate: DateTime.now().subtract(Duration(days: 75)),
+                      startDate: DateTime.now().subtract(Duration(days: 60)),
                       endDate: DateTime.now(),
-                      colorMode: ColorMode.color,
+                      colorMode: ColorMode.opacity,
                       showColorTip: false,
-                      showText: false,
-                      scrollable: true,
+                      showText: true,
+                      scrollable: true, fontSize: 12,
                       colorsets: {
                         11: const Color.fromARGB(255, 88, 176, 91),
-                        24: const Color.fromARGB(255, 63, 145, 66),
-                        34: const Color.fromARGB(255, 59, 136, 62),
-                        44: const Color.fromARGB(255, 37, 88, 39),
-                        100: const Color.fromARGB(255, 37, 88, 39),
                       },
                       onClick: (value) {
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
