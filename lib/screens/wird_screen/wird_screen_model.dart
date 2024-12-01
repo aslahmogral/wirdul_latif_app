@@ -22,8 +22,10 @@ class WirdScreenModel with ChangeNotifier {
   bool showTranslation = true;
   late Progress progressTracker =
       Progress(time: DateTime.now(), count: 0, type: type.name);
-  ConfettiController confettiController =
-      ConfettiController(duration: Duration(seconds: 6));
+  ConfettiController confettiController = ConfettiController(
+    duration: Duration(seconds: 1),
+  );
+ 
   WirdScreenModel(WirdType wirdType) {
     type = wirdType;
     initialize();
@@ -61,7 +63,6 @@ class WirdScreenModel with ChangeNotifier {
     return wirdList[currentPage].count == wirdList[currentPage].counted;
   }
 
-  
   showWarning(HomeScreenModel model, BuildContext context) async {
     if (currentPage < 10) {
       await showDialog(
@@ -88,7 +89,10 @@ class WirdScreenModel with ChangeNotifier {
                   Navigator.pop(context);
                   addAndRemoveDuplicateProgress(model);
                 },
-                child: const Text('OK , I will Finish...',style: TextStyle(),),
+                child: const Text(
+                  'OK , I will Finish...',
+                  style: TextStyle(),
+                ),
               )
             ],
           );
@@ -120,7 +124,8 @@ class WirdScreenModel with ChangeNotifier {
                   // canPop = true;
                 },
                 child: const Text(
-                  'No , I will Finish...',style: TextStyle(),
+                  'No , I will Finish...',
+                  style: TextStyle(),
                 ),
               )
             ],
@@ -223,7 +228,7 @@ class WirdScreenModel with ChangeNotifier {
 
   skipOrNextPage() {
     controller.nextPage(
-        duration: const Duration(milliseconds:100), curve: Curves.easeInOut);
+        duration: const Duration(milliseconds: 100), curve: Curves.easeInOut);
   }
 
   undoOrPrevPage() {
