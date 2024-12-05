@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -278,7 +280,7 @@ class WirdScreen extends StatelessWidget {
                           },
                         ),
                       ),
-                      
+
                       ListTile(
                         leading: Text(
                           'Transliteration',
@@ -463,14 +465,38 @@ class bottomBar extends StatelessWidget {
               //circular progress indicator
             ],
           ),
+          
           Align(
+            alignment: Alignment.centerLeft,
+            child: ConfettiWidget(
+                colors: [Colors.teal,Colors.white,Colors.black],
+                blastDirection: 270,
+                numberOfParticles: 20,
+                gravity: 0.1,
+                blastDirectionality:
+                    BlastDirectionality.directional, // up direction
+                confettiController: model.confettiController),
+          ),
+           Align(
             alignment: Alignment.center,
             child: ConfettiWidget(
-                colors: [Colors.teal, Colors.white],
-                minBlastForce: 1,
-                maxBlastForce: 50,
+                colors: [Colors.teal,Colors.white,Colors.black],
+                // blastDirection: 180,
+                numberOfParticles: 10,
+                gravity: 0.0,
                 blastDirectionality:
                     BlastDirectionality.explosive, // up direction
+                confettiController: model.confettiController),
+          ),
+          Align(
+            alignment: Alignment.centerRight,
+            child: ConfettiWidget(
+                colors: [Colors.teal,Colors.white,Colors.black],
+                blastDirection: 180,
+                numberOfParticles: 20,
+                gravity: 0.1,
+                blastDirectionality:
+                    BlastDirectionality.directional, // up direction
                 confettiController: model.confettiController),
           ),
           counter(context)

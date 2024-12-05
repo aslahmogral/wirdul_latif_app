@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_heatmap_calendar/flutter_heatmap_calendar.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
 import 'package:streak_calendar/streak_calendar.dart';
@@ -13,7 +15,8 @@ class CalenderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => CalenderScreenModel(currentStreak)),
+        ChangeNotifierProvider(
+            create: (context) => CalenderScreenModel(currentStreak)),
       ],
       child: Consumer<CalenderScreenModel>(
         builder: (context, model, child) {
@@ -21,88 +24,83 @@ class CalenderScreen extends StatelessWidget {
             appBar: AppBar(
               title: const Text("Streak Calendar"),
               actions: [
-            
-                  InkWell(
-                     onTap: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return AlertDialog(
-                                      title: Row(
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                        children: [
-                                          Icon(
-                                            size: 50,
-                                            Icons.local_fire_department,
-                                            color: Colors.orange[700],
-                                          ),
-                                          SizedBox(
-                                            width: 8,
-                                          ),
-                                          Text(
-                                            model.currentStreak.toString(),
-                                            style: TextStyle(
-                                                fontSize: 30,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ],
-                                      ),
-                                      content: Text(
-                                          '“To maintain your streak, make sure to read at least 10 wirds of Morning or Evening every day.\n\nKeep it simple, stay consistent, and keep your streak alive!”.'),
-                                      actions: <Widget>[
-                                        TextButton(
-                                          child: Text(
-                                            'OK',
-                                            style: TextStyle(color: Colors.teal),
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
+                InkWell(
+                  onTap: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                size: 50,
+                                Icons.local_fire_department,
+                                color: Colors.orange[700],
+                              ),
+                              SizedBox(
+                                width: 8,
+                              ),
+                              Text(
+                                model.currentStreak.toString(),
+                                style: TextStyle(
+                                    fontSize: 30, fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          content: Text(
+                              '“To maintain your streak, make sure to read at least 10 wirds of Morning or Evening every day.\n\nKeep it simple, stay consistent, and keep your streak alive!”.'),
+                          actions: <Widget>[
+                            TextButton(
+                              child: Text(
+                                'OK',
+                                style: TextStyle(color: Colors.teal),
+                              ),
+                              onPressed: () {
+                                Navigator.of(context).pop();
                               },
-                          
-                   child: Row(
-                      children: [
-                        Stack(
-                          // mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Container(
-                              width: 50,
-                              // color: Colors.yellow,
-                              child: Lottie.asset('asset/onboarding/streak.json',
-                                  height: 40.0
-                                  
-                                  ),
                             ),
-                            Positioned(
-                              right: 0,
-                              bottom: -8,
-                   
-                              child: Container(
-                                height: 50,
-                                // color: Colors.green,
-                                child: Center(
-                                  child: Text(
-                                    model.currentStreak.toString(),
-                                    style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16),
-                                  ),
+                          ],
+                        );
+                      },
+                    );
+                  },
+                  child: Row(
+                    children: [
+                      Stack(
+                        // mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            width: 50,
+                            // color: Colors.yellow,
+                            child: Lottie.asset('asset/onboarding/streak.json',
+                                height: 40.0),
+                          ),
+                          Positioned(
+                            right: 0,
+                            bottom: -8,
+                            child: Container(
+                              height: 50,
+                              // color: Colors.green,
+                              child: Center(
+                                child: Text(
+                                  model.currentStreak.toString(),
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
                                 ),
                               ),
                             ),
-                          
-                          ],
-                        ),
-                        SizedBox(width: 16,)
-                      ],
-                    ),
-                 ),
-                  
-                
-                ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 16,
+                      )
+                    ],
+                  ),
+                ),
+              ],
             ),
             body: SingleChildScrollView(
               child: Column(
@@ -111,24 +109,28 @@ class CalenderScreen extends StatelessWidget {
                   SizedBox(
                     height: 16,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      cleanCalender(
-                          model.morningDatesForStreaks, context, "Morning"),
-                    ],
-                  ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     cleanCalender(
+                  //         model.morningDatesForStreaks, context, "Morning"),
+                  //   ],
+                  // ),
+                  heatMapCalender(model.morningDatesForStreaks, context,
+                      'Morning', model.showMoreMorningDatesForStreaks),
                   SizedBox(
                     height: 16,
                   ),
+                  heatMapCalender(model.eveningDatesForStreaks, context,
+                      'Evening', model.showMoreEveningDatesForStreaks),
                   SizedBox(
                     height: 16,
                   ),
-                  cleanCalender(
-                      model.eveningDatesForStreaks, context, "Evening"),
-                  SizedBox(
-                    height: 16,
-                  ),
+                  // cleanCalender(
+                  //     model.eveningDatesForStreaks, context, "Evening"),
+                  // SizedBox(
+                  //   height: 16,
+                  // ),
                 ],
               ),
             ),
@@ -138,12 +140,12 @@ class CalenderScreen extends StatelessWidget {
     );
   }
 
-  Padding cleanCalender(
-      List<DateTime> datesForStreaks, BuildContext context, String typeName) {
+  Padding heatMapCalender(Map<DateTime, int> datesForStreaks,
+      BuildContext context, String typeName, List<DateTime> showMoreList) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(16.0),
       child: Container(
-        width: MediaQuery.of(context).size.width / 1.2,
+        // width: MediaQuery.of(context).size.width / 1.2,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -170,16 +172,96 @@ class CalenderScreen extends StatelessWidget {
                 ],
               ),
             ),
-            CleanCalendar(
-              datesForStreaks: datesForStreaks,
-              currentDateProperties: DatesProperties(
-                datesDecoration: DatesDecoration(
-                  datesBorderRadius: 1000,
-                  datesBackgroundColor: Colors.lightGreen.shade100,
-                  datesBorderColor: Colors.black,
-                  datesTextColor: Colors.black,
+            SizedBox(
+              height: 8,
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                    color: Colors.teal, width: 2), // Added border color
+                borderRadius: BorderRadius.circular(15),
+                //  color: Colors.grey[200],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    HeatMap(
+                      // textColor: Colors.teal,
+                      datasets: datesForStreaks,
+                      defaultColor: Colors.grey.withOpacity(0.5),
+                      startDate: DateTime.now().subtract(Duration(days: 60)),
+                      endDate: DateTime.now(),
+                      colorMode: ColorMode.opacity,
+                      showColorTip: false,
+                      showText: true,
+                      scrollable: true, fontSize: 12,
+                      colorsets: {
+                        11: const Color.fromARGB(255, 88, 176, 91),
+                      },
+                      onClick: (value) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text(
+                                '${DateFormat('MMMM d yyyy').format(value)}')));
+                      },
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        showDialog(
+                          barrierDismissible: false,
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                // title: Text('Calender'),
+                                content: cleanCalender(
+                                    showMoreList, context, typeName),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: Text(
+                                      'OK',
+                                      style: TextStyle(color: Colors.teal),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                ],
+                              );
+                            });
+                      },
+                      child: Text('show more...',
+                          style: TextStyle(color: Colors.teal)),
+                    )
+                  ],
                 ),
               ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Padding cleanCalender(
+      List<DateTime> datesForStreaks, BuildContext context, String typeName) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Container(
+        width: MediaQuery.of(context).size.width ,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            
+            CleanCalendar(
+              datesForStreaks: datesForStreaks,
+              // currentDateProperties: DatesProperties(
+              //   datesDecoration: DatesDecoration(
+              //     datesBorderRadius: 1000,
+              //     datesBackgroundColor: Colors.lightGreen.shade100,
+              //     datesBorderColor: Colors.black,
+              //     datesTextColor: Colors.black,
+              //   ),
+              // ),
               streakDatesProperties: DatesProperties(
                 datesDecoration: DatesDecoration(
                   // datesBorderRadius: 1000,
@@ -192,14 +274,15 @@ class CalenderScreen extends StatelessWidget {
                 datesDecoration: DatesDecoration(
                     datesBorderRadius: 0, datesBorderColor: Colors.transparent),
               ),
-              leadingTrailingDatesProperties: DatesProperties(
-                datesDecoration: DatesDecoration(
-                    datesBorderRadius: 1000,
-                    // Theme.of(context).scaffoldBackgroundColor)
-                    datesBackgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                    datesBorderColor: Theme.of(context).scaffoldBackgroundColor,
-                    datesTextColor: Theme.of(context).scaffoldBackgroundColor),
-              ),
+              // leadingTrailingDatesProperties: DatesProperties(
+              //   datesDecoration: DatesDecoration(
+              //       datesBorderRadius: 1000,
+              //       // Theme.of(context).scaffoldBackgroundColor)
+              //       datesBackgroundColor:
+              //           Theme.of(context).scaffoldBackgroundColor,
+              //       datesBorderColor: Theme.of(context).scaffoldBackgroundColor,
+              //       datesTextColor: Theme.of(context).scaffoldBackgroundColor),
+              // ),
             ),
           ],
         ),

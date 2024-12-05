@@ -23,8 +23,8 @@ class MorningOrEveningCard extends StatelessWidget {
     return Stack(
       children: [
         Container(
-          height: size,
-          width: size,
+          height: MediaQuery.of(context).size.width/2.5,
+          width: MediaQuery.of(context).size.width/2.5,
           decoration: BoxDecoration(
             // color: WirdColors.primaryDaycolor,
             borderRadius: BorderRadius.circular(15),
