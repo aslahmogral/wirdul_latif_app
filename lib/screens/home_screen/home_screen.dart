@@ -442,7 +442,7 @@ class HomeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'Version 1.0.0',
+              'Version 2.1.0',
               style: TextStyle(color: Colors.grey),
             ),
           )
