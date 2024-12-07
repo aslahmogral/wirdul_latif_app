@@ -88,18 +88,61 @@ class HomeScreenModel with ChangeNotifier {
         .map((e) => DateTime(e.time.year, e.time.month, e.time.day))
         .toSet()
         .toList();
+
     dates.sort((a, b) => b.compareTo(a)); // Sort dates in descending order
     var currentDate = DateTime.now();
     var currentStreak = 0;
 
-    for (var date in dates) {
-      if (date.isBefore(currentDate) || date.isAtSameMomentAs(currentDate)) {
-        currentStreak++;
-        currentDate = currentDate.subtract(Duration(days: 1));
-      } else {
-        break;
+    if (dates.isEmpty) {
+      currentStreaks = 0;
+      notifyListeners();
+      return;
+    }
+
+    if (dates.any((date) =>
+        date.day == DateTime.now().day &&
+        date.month == DateTime.now().month &&
+        date.year == DateTime.now().year)) {
+      for (var date in dates) {
+        bool checkBreakDate = date.day == currentDate.day &&
+            date.month == currentDate.month &&
+            date.year == currentDate.year;
+        if (checkBreakDate) {
+          currentStreak++;
+          currentDate = currentDate.subtract(Duration(days: 1));
+        } else {
+          break;
+        }
+      }
+    } else {
+      for (var date in dates) {
+        var currentDate = DateTime.now().subtract(Duration(days: 1));
+        bool checkBreakDate = date.day == currentDate.day &&
+            date.month == currentDate.month &&
+            date.year == currentDate.year;
+        if (checkBreakDate) {
+          currentStreak++;
+          currentDate = currentDate.subtract(Duration(days: 1));
+        } else {
+          break;
+        }
       }
     }
+
+    // for (var date in dates) {
+    //   bool isToday = date.day == currentDate.day &&
+    //       date.month == currentDate.month &&
+    //       date.year == currentDate.year;
+    //   bool checkBreakDate = date.day == currentDate.day &&
+    //       date.month == currentDate.month &&
+    //       date.year == currentDate.year;
+    //   if (checkBreakDate || isToday) {
+    //     currentStreak++;
+    //     currentDate = currentDate.subtract(Duration(days: 1));
+    //   } else {
+    //     break;
+    //   }
+    // }
 
     currentStreaks = currentStreak;
     notifyListeners();
