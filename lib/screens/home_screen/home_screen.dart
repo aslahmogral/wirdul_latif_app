@@ -14,6 +14,7 @@ import 'package:wirdul_latif/screens/thasbeeh_counter/thasbeeh_counter.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 import 'package:wirdul_latif/utils/theme_provider_model.dart';
+import 'package:wirdul_latif/widgets/hijri_calender.dart';
 import 'package:wirdul_latif/widgets/morning_evening_wird_card.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -34,27 +35,11 @@ class HomeScreen extends StatelessWidget {
             builder: (context, themeProviderModel, child) {
           return Scaffold(
             appBar: AppBar(
-              centerTitle: true,
+              // centerTitle: true,
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text('Wirdul Latif Pro'),
-                  Row(
-                    children: [
-                      Text(
-                        '(${JHijri.now().hijri.day.toString()} ',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                      Text(
-                        '${JHijri.now().hijri.monthName}  ',
-                        style: TextStyle(fontSize: 14),
-                      ),
-                      Text(
-                        '${JHijri.now().year.toString()} )',
-                        style: TextStyle(fontSize: 12),
-                      ),
-                    ],
-                  )
                 ],
               ),
               actions: [
@@ -189,7 +174,6 @@ class HomeScreen extends StatelessWidget {
                                 MaterialPageRoute(
                                     builder: (context) => CalenderScreen(
                                           currentStreak: model.currentStreaks,
-                                          
                                         )));
                           },
                           child: calender(model)),
@@ -497,9 +481,9 @@ class HomeScreen extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(22.0),
               child: Column(mainAxisSize: MainAxisSize.min, children: [
-                Container(
-                  height: 30,
-                ),
+                // Container(
+                //   height: 30,
+                // ),
                 Text(
                   "${model.titleText.toUpperCase()} WIRD",
                   textAlign: TextAlign.center,
@@ -518,6 +502,46 @@ class HomeScreen extends StatelessWidget {
                     ],
                   ),
                 ),
+                Text(
+                  "${JHijri.now().hijri.day.toString()} ${HijriCalendar().getMonthName(JHijri.now().month)} | ${JHijri.now().year.toString()}",
+                  // textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w900,
+                    color: Colors.white70,
+                    letterSpacing: 1.5,
+                    wordSpacing: 2,
+                    shadows: [
+                      Shadow(
+                        blurRadius: 10.0,
+                        color: Colors.black54,
+                        offset: Offset(5.0, 5.0),
+                      ),
+                    ],
+                  ),
+                ),
+
+                // Row(
+                //     children: [
+                //       Text(
+                //         '(${JHijri.now().hijri.day.toString()} ',
+                //         style: TextStyle(fontSize: 12),
+                //       ),
+                //       // Text(
+                //       //   '${JHijri.now().hijri.monthName}  ',
+                //       //   style: TextStyle(fontSize: 14),
+                //       // ),
+                //       Text(
+                //         HijriCalendar().getMonthName(JHijri.now().month),
+                //         style: TextStyle(fontSize: 14),
+                //       ),
+                //       Text(
+                //         ' ${JHijri.now().year.toString()} )',
+                //         style: TextStyle(fontSize: 12),
+                //       ),
+                //     ],
+                //   )
+
                 SizedBox(
                   height: 22,
                 ),
