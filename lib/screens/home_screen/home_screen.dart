@@ -249,12 +249,15 @@ class HomeScreen extends StatelessWidget {
                           ),
                           ClipRRect(
                             borderRadius: BorderRadius.circular(20),
-                            child: Image.asset(
-                              // 'asset/logo/wird_logo_bg.png',
-                              'asset/wirdul_latif.png',
-                              width: 80.0,
-                              height: 80.0,
-                              fit: BoxFit.cover,
+                            child: Container(
+                              color: Colors.black,
+                              child: Image.asset(
+                                // 'asset/logo/wird_logo_bg.png',
+                                'asset/logo/wird_logo_bg.png',
+                                width: 80.0,
+                                height: 80.0,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           )
                               .animate(
