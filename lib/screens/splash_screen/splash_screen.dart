@@ -61,36 +61,55 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // backgroundColor: Colors.white,
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Image.asset(
-              // 'asset/logo/wird_logo_bg.png',
-              'asset/wirdul_latif.png',
-              height: 100,
-              width: 100,
-            ).animate().scale(duration: Duration(seconds: 2)).shimmer(
-                duration: 1500.ms, // Duration of the shimmer animation
-                color: Colors.white, // Highlight color for shimmer
-                angle: 0.5),
-            SizedBox(
-              height: 36,
-            ),
-            Visibility(
-              visible: showReload,
-              child: InkWell(
-                onTap: () => initWirdData(),
-                child: Text(
-                  'Reload wirdul latif',
-                  style: TextStyle(
-                      color: WirdColors.primaryDaycolor,
-                      decoration: TextDecoration.underline),
+      backgroundColor: Colors.teal,
+      body: Container(
+        decoration: BoxDecoration(
+          gradient: WirdGradients.listTileShadeGradient,
+        ),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset(
+                  // 'asset/logo/wird_logo_bg.png',
+                  'asset/wirdul_latif.png',
+                  width: 80.0,
+                  height: 80.0,
+                  fit: BoxFit.cover,
                 ),
+              ).animate().shimmer(
+                  duration: 1500.ms, // Duration of the shimmer animation
+                  color: Colors.white, // Highlight color for shimmer
+                  angle: 0.5),
+              SizedBox(
+                height: 8,
               ),
-            )
-          ],
+              Text(
+                'Wirdul Latif Pro',
+                style: TextStyle(
+                    color: Colors.yellow,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 36,
+              ),
+              Visibility(
+                visible: showReload,
+                child: InkWell(
+                  onTap: () => initWirdData(),
+                  child: Text(
+                    'Reload wirdul latif',
+                    style: TextStyle(
+                        color: WirdColors.primaryDaycolor,
+                        decoration: TextDecoration.underline),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

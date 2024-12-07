@@ -54,6 +54,7 @@ dependencies:
   intl: ^0.19.0
   firebase_core: ^3.8.1
   firebase_analytics: ^11.3.6
+  rename_app: ^1.6.1
   # rive: ^0.13.4
   # wirdul_latif: ^0.0.2
 

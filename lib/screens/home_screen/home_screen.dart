@@ -38,7 +38,7 @@ class HomeScreen extends StatelessWidget {
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Wird al latif'),
+                  Text('Wirdul Latif Pro'),
                   Row(
                     children: [
                       Text(
@@ -263,12 +263,15 @@ class HomeScreen extends StatelessWidget {
                           SizedBox(
                             height: 16,
                           ),
-                          Image.asset(
-                            // 'asset/logo/wird_logo_bg.png',
-                            'asset/wirdul_latif.png',
-                            width: 80.0,
-                            height: 80.0,
-                            fit: BoxFit.cover,
+                          ClipRRect(
+                            borderRadius: BorderRadius.circular(20),
+                            child: Image.asset(
+                              // 'asset/logo/wird_logo_bg.png',
+                              'asset/wirdul_latif.png',
+                              width: 80.0,
+                              height: 80.0,
+                              fit: BoxFit.cover,
+                            ),
                           )
                               .animate(
                                 onPlay: (controller) => controller.repeat(),
@@ -284,7 +287,7 @@ class HomeScreen extends StatelessWidget {
                             height: 8,
                           ),
                           Text(
-                            'Wird Al Latif ',
+                            'Wirdul Latif Pro',
                             style: TextStyle(
                                 color: Colors.yellow,
                                 fontSize: 20,

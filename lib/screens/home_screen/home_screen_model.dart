@@ -3,7 +3,6 @@ import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils/constants.dart';
-import 'package:wirdul_latif/widgets/firebase_analytics.dart';
 
 enum WirdType { morning, evening }
 
