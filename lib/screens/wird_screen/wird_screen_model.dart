@@ -26,13 +26,29 @@ class WirdScreenModel with ChangeNotifier {
   ConfettiController confettiController = ConfettiController(
     duration: Duration(seconds: 1),
   );
-
+  double arabicFontSize = 24.0;
   WirdScreenModel(WirdType wirdType) {
     WfirebaseAnalytics.screenTracker('wird screen');
     type = wirdType;
     initialize();
     progressInitialize();
     controller.addListener(_onPageChanged);
+  }
+
+  incrementFontSize(double fontsize){
+    arabicFontSize = fontsize;
+    setFontSizeToSharedPref(arabicFontSize);
+    notifyListeners();
+  }
+
+  setFontSizeToSharedPref(double fontsize) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setDouble('fontsize', fontsize);
+  }
+
+  Future<double> getFontSizeFromSharedPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getDouble('fontsize') ?? 24.0;
   }
 
   void progressInitialize() {
@@ -196,7 +212,7 @@ class WirdScreenModel with ChangeNotifier {
     notifyListeners();
   }
 
-  initialize() {
+  initialize() async{
     if (type == WirdType.morning) {
       setMorningDatas();
     }
@@ -204,7 +220,7 @@ class WirdScreenModel with ChangeNotifier {
     if (type == WirdType.evening) {
       setEveningDatas();
     }
-
+    arabicFontSize = await getFontSizeFromSharedPref();
     notifyListeners();
   }
 

@@ -54,7 +54,7 @@ class WirdScreen extends StatelessWidget {
                         ],
                       ),
                       actions: [
-                        setttingsBottomSheet(context, ThemeProvider),
+                        setttingsBottomSheet(context, ThemeProvider, model),
                       ],
                     ),
                     body: Stack(
@@ -115,10 +115,10 @@ class WirdScreen extends StatelessWidget {
                                             child: Text(
                                               model.wirdList[index].wird,
                                               textAlign: TextAlign.center,
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 color: Colors.white,
                                                 // fontWeight: FontWeight.bold,
-                                                fontSize: 24,
+                                                fontSize: model.arabicFontSize,
                                                 fontFamily: 'Kfgqpc',
                                               ),
                                             ),
@@ -252,7 +252,8 @@ class WirdScreen extends StatelessWidget {
     );
   }
 
-  IconButton setttingsBottomSheet(BuildContext context, ThemeProvider model) {
+  IconButton setttingsBottomSheet(BuildContext context, ThemeProvider model,
+      WirdScreenModel wirdScreenModel) {
     return IconButton(
       onPressed: () {
         showModalBottomSheet<void>(
@@ -306,6 +307,41 @@ class WirdScreen extends StatelessWidget {
                             model.toggleDarkMode();
                           },
                         ),
+                      ),
+                      SizedBox(height: 8,),
+                     
+                      StatefulBuilder(
+                        builder: (context, setState) {
+                          return Column(
+                            mainAxisSize: MainAxisSize.min,
+                            
+                            children: [
+                               Text(
+                            'Arabic Font Size',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            '(بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ)',
+                            style: TextStyle(fontSize: wirdScreenModel.arabicFontSize),
+                          ),
+                              Slider(
+                                
+                                activeColor: Colors.teal,
+                                value: wirdScreenModel.arabicFontSize,
+                                min: 18,
+                                max: 32,
+                                divisions: 4,
+                                label: wirdScreenModel.arabicFontSize.toString(),
+                                onChanged: (value) {
+                                  setState(() {
+                                    // wirdScreenModel.arabicFontSize = value;
+                                    wirdScreenModel.incrementFontSize(value);
+                                  });
+                                },
+                              ),
+                            ],
+                          );
+                        },
                       ),
                       Spacer(),
                       // ElevatedButton(
@@ -465,11 +501,10 @@ class bottomBar extends StatelessWidget {
               //circular progress indicator
             ],
           ),
-          
           Align(
             alignment: Alignment.centerLeft,
             child: ConfettiWidget(
-                colors: [Colors.teal,Colors.white,Colors.black],
+                colors: [Colors.teal, Colors.white, Colors.black],
                 blastDirection: 270,
                 numberOfParticles: 20,
                 gravity: 0.1,
@@ -477,10 +512,10 @@ class bottomBar extends StatelessWidget {
                     BlastDirectionality.directional, // up direction
                 confettiController: model.confettiController),
           ),
-           Align(
+          Align(
             alignment: Alignment.center,
             child: ConfettiWidget(
-                colors: [Colors.teal,Colors.white,Colors.black],
+                colors: [Colors.teal, Colors.white, Colors.black],
                 // blastDirection: 180,
                 numberOfParticles: 10,
                 gravity: 0.0,
@@ -491,7 +526,7 @@ class bottomBar extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: ConfettiWidget(
-                colors: [Colors.teal,Colors.white,Colors.black],
+                colors: [Colors.teal, Colors.white, Colors.black],
                 blastDirection: 180,
                 numberOfParticles: 20,
                 gravity: 0.1,
