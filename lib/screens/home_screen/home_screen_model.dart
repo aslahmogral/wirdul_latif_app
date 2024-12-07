@@ -20,6 +20,7 @@ class HomeScreenModel with ChangeNotifier {
   bool isMorning = false;
   progressType progress = progressType.start;
   int currentStreaks = 0;
+  String progressPercentage = '';
 
   HomeScreenModel(BuildContext context) {
     _context = context;
@@ -74,7 +75,7 @@ class HomeScreenModel with ChangeNotifier {
       case progressType.start:
         return "Start ✨";
       case progressType.continuee:
-        return 'Continue 🙏🏾';
+        return 'Continue 🙏🏾 $progressPercentage ';
       case progressType.complete:
         return 'Completed 🤩';
     }
@@ -119,6 +120,8 @@ class HomeScreenModel with ChangeNotifier {
       progress = progressType.start;
     } else if (todayProgress.count < WirdulLatif.eveningWird.length - 1) {
       progress = progressType.continuee;
+      progressPercentage =
+          '${((todayProgress.count) / WirdulLatif.morningWird.length * 100).toStringAsFixed(0)} % ';
     } else {
       progress = progressType.complete;
     }
