@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1069262636562",
+    "project_id": "wirdul-latif-pro",
+    "storage_bucket": "wirdul-latif-pro.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1069262636562:android:a89868fd82d8819898bacb",
+        "android_client_info": {
+          "package_name": "com.aslahmogral.wirdullatif"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9gyww_9rE3ETDqq2MfrfP3eUv1nA2ilE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

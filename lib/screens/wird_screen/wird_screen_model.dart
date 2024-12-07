@@ -9,6 +9,7 @@ import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/model/wird.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/utils/constants.dart';
+import 'package:wirdul_latif/widgets/firebase_analytics.dart';
 
 class WirdScreenModel with ChangeNotifier {
   List<Wird> wirdList = [];
@@ -25,8 +26,9 @@ class WirdScreenModel with ChangeNotifier {
   ConfettiController confettiController = ConfettiController(
     duration: Duration(seconds: 1),
   );
- 
+
   WirdScreenModel(WirdType wirdType) {
+    WfirebaseAnalytics.screenTracker('wird screen');
     type = wirdType;
     initialize();
     progressInitialize();
@@ -153,6 +155,7 @@ class WirdScreenModel with ChangeNotifier {
     final progressListJson =
         WirdulLatif.progressList.map((e) => e.toJson()).toList();
     await prefs.setString('progress', jsonEncode(progressListJson));
+    WfirebaseAnalytics.logWirdProgress(type.name, currentPage.toString());
   }
 
   thasbeehButtonClicked() {

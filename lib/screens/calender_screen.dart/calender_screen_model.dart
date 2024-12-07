@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
+import 'package:wirdul_latif/widgets/firebase_analytics.dart';
 
 class CalenderScreenModel with ChangeNotifier {
   int currentStreak = 0;
   Map<DateTime, int> morningDatesForStreaks = {};
   Map<DateTime, int> eveningDatesForStreaks = {};
   CalenderScreenModel(this.currentStreak) {
+    WfirebaseAnalytics.screenTracker('calender screen');
+
     morningDatesForStreaks = {
       for (var e in WirdulLatif.progressList)
         if (e.count! >= 10 && e.type == WirdType.morning.name)

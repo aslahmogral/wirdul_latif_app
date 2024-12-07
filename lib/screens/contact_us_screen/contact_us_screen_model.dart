@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wirdul_latif/utils/constants.dart';
+import 'package:wirdul_latif/widgets/firebase_analytics.dart';
 
 class ContactUsScreenModel with ChangeNotifier {
   // static String? encodeQueryParameters(Map<String, String> params) {
@@ -16,6 +17,10 @@ class ContactUsScreenModel with ChangeNotifier {
   //     'subject': 'Wird al Latif App Feedback',
   //   }),
   // );
+
+  ContactUsScreenModel() {
+    WfirebaseAnalytics.screenTracker('contact us screen');
+  }
 
   sendMail() async {
     String? encodeQueryParameters(Map<String, String> params) {
@@ -62,6 +67,4 @@ class ContactUsScreenModel with ChangeNotifier {
       throw 'Could not launch';
     }
   }
-
-
 }

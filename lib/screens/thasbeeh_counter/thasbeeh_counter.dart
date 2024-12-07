@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-
+import 'package:wirdul_latif/widgets/firebase_analytics.dart';
 
 class TasbeehCounterScreen extends StatefulWidget {
   @override
@@ -14,6 +13,7 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen> {
   @override
   void initState() {
     super.initState();
+    WfirebaseAnalytics.screenTracker('Tasbeeh Counter');
     _loadCounter();
   }
 
@@ -65,11 +65,10 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen> {
                     Spacer(),
                     ElevatedButton(
                       onPressed: _reset,
-                      style:
-
-                      ElevatedButton.styleFrom(
+                      style: ElevatedButton.styleFrom(
                         // primary: Colors.redAccent,
-                        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                        padding:
+                            EdgeInsets.symmetric(horizontal: 20, vertical: 12),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),

@@ -3,6 +3,7 @@ import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils/constants.dart';
+import 'package:wirdul_latif/widgets/firebase_analytics.dart';
 
 enum WirdType { morning, evening }
 
@@ -33,52 +34,56 @@ class HomeScreenModel with ChangeNotifier {
   }
 
   Future<void> showPrayerRequest(BuildContext context) async {
-  showDialog(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: Text("A Humble Request 🙏"),
-        content: Text(
-          "Dear user,\n\nThis app was developed with love and dedication to make Wirdullateef accessible for everyone. We kindly request you to include me and my family in your prayers, asking Allah for blessings, health, and guidance.\n\nMay Allah accept your prayers and efforts. JazakAllah Khair!",
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text("Okay",style: TextStyle(color: Colors.teal),),
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text("A Humble Request 🙏"),
+          content: Text(
+            "Dear user,\n\nThis app was developed with love and dedication to make Wirdullateef accessible for everyone. We kindly request you to include me and my family in your prayers, asking Allah for blessings, health, and guidance.\n\nMay Allah accept your prayers and efforts. JazakAllah Khair!",
           ),
-        ],
-      );
-    },
-  );
-}
-
-currentProgressColor(){
-  switch (progress) {
-    case progressType.start:
-      return Colors.red;
-    case progressType.continuee:
-      return Colors.yellow;
-    case progressType.complete:
-      return Colors.green;
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                "Okay",
+                style: TextStyle(color: Colors.teal),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
-}
 
-currentProgressText(){
-  switch (progress) {
-    case progressType.start:
-      return "Start ✨";
-    case progressType.continuee:
-      return 'Continue 🙏🏾';
-    case progressType.complete:
-      return 'Completed 🤩';
+  currentProgressColor() {
+    switch (progress) {
+      case progressType.start:
+        return Colors.red;
+      case progressType.continuee:
+        return Colors.yellow;
+      case progressType.complete:
+        return Colors.green;
+    }
   }
-}
+
+  currentProgressText() {
+    switch (progress) {
+      case progressType.start:
+        return "Start ✨";
+      case progressType.continuee:
+        return 'Continue 🙏🏾';
+      case progressType.complete:
+        return 'Completed 🤩';
+    }
+  }
 
   calculateStreak() {
     var dates = WirdulLatif.progressList
-        .where((element) => element.type == wirdType.name && element.count >= 10)
+        .where(
+            (element) => element.type == wirdType.name && element.count >= 10)
         .map((e) => DateTime(e.time.year, e.time.month, e.time.day))
         .toSet()
         .toList();
