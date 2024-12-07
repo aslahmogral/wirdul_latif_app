@@ -431,9 +431,18 @@ class HomeScreen extends StatelessWidget {
           Spacer(),
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Text(
-              'Version 2.1.0',
-              style: TextStyle(color: Colors.grey),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Wirdul Latif Pro',
+                  style: TextStyle(color: Colors.grey),
+                ),
+                Text(
+                  'v2.2.0',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ],
             ),
           )
         ]),
