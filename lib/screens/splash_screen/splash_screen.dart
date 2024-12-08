@@ -70,13 +70,16 @@ class _SplashScreenState extends State<SplashScreen> {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Container(
-                  color: Colors.black,
+              Card(
+                shape: RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.circular(10), // Slightly rounded corners
+                ),
+                child: ClipRRect(
+                  borderRadius:
+                      BorderRadius.circular(10), // Same value as in the Card
                   child: Image.asset(
-                    // 'asset/logo/wird_logo_bg.png',
-                    'asset/logo/wird_logo_bg.png',
+                    'asset/logo/logo.png',
                     width: 80.0,
                     height: 80.0,
                     fit: BoxFit.cover,
