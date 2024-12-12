@@ -13,15 +13,17 @@ class localStorage {
   static const String _version_key = 'version';
 
   /// Save the wird data to SharedPreferences
-  Future<void> saveWirdData(String data) async {
+  Future<void> saveWirdData(Map<String, Map<String, dynamic>> data) async {
     final prefs = await _prefs;
-    await prefs.setString(_wird_data_key, data);
+    await prefs.setString(_wird_data_key, jsonEncode(data));
   }
 
   /// Get the wird data from SharedPreferences
-  Future<String?> getWirdData() async {
+  Future<Map<String, dynamic>?> getWirdData() async {
     final prefs = await _prefs;
-    return prefs.getString(_wird_data_key);
+    final data = prefs.getString(_wird_data_key);
+    if (data == null) return null;
+    return jsonDecode(data);
   }
 
   /// Save the reels data to SharedPreferences

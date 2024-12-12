@@ -36,7 +36,7 @@ class WirdulLatifApi {
               throw Exception('Invalid data structure');
             }
           });
-          await localStorage().saveWirdData(jsonEncode(_wirdMap));
+          await localStorage().saveWirdData(_wirdMap);
         } else {
           throw Exception('Invalid data structure');
         }
@@ -44,22 +44,17 @@ class WirdulLatifApi {
         throw Exception('Failed to load JSON');
       }
     } else {
-      final data = await localStorage().getWirdData();
-      if (data == null) {
+      final wirdData = await localStorage().getWirdData();
+      if (wirdData == null) {
         await initWirdData(sync: true);
       } else {
-        final wirdData = jsonDecode(data);
-        if (wirdData is Map<String, dynamic>) {
-          _wirdMap = wirdData.map((key, value) {
-            if (value is Map<String, dynamic>) {
-              return MapEntry(key, value);
-            } else {
-              throw Exception('Invalid data structure');
-            }
-          });
-        } else {
-          throw Exception('Invalid data structure');
-        }
+        _wirdMap = wirdData.map((key, value) {
+          if (value is Map<String, dynamic>) {
+            return MapEntry(key, value);
+          } else {
+            throw Exception('Invalid data structure');
+          }
+        });
       }
     }
     getContents(sync: sync, versionChanged: versionChanged);
@@ -106,7 +101,7 @@ class WirdulLatifApi {
 
   Future<bool> hasVersionChanged() async {
     try {
-      final localVersion = localStorage().getVersion();
+      final localVersion =await localStorage().getVersion();
       final response = await http.get(Uri.parse(
           'https://aslahmogral.github.io/wird-al-latif-json/version.json'));
 
