@@ -60,21 +60,13 @@ class WirdulLatifApi {
       }
     }
     getContents(sync: sync, versionChanged: versionChanged);
-    initProgress();
+    await localStorage().getProgress();
     // morningWird = _getMorningWird();
     // eveningWird = _getEveningWird();
     haddad = _getHaddad();
   }
 
-  Future<void> initProgress() async {
-    final progress = await localStorage().getProgress();
-    if (progress == null) {
-      await localStorage().saveProgress([]);
-    } else {
-      progressList =
-          (await progress).map<Progress>((e) => Progress.fromJson(e)).toList();
-    }
-  }
+
 
   Future<void> getContents({sync, versionChanged}) async {
     if (sync || versionChanged) {
@@ -104,7 +96,7 @@ class WirdulLatifApi {
 
   Future<bool> hasVersionChanged() async {
     try {
-      final localVersion =await localStorage().getVersion();
+      final localVersion = await localStorage().getVersion();
       final response = await http.get(Uri.parse(
           'https://aslahmogral.github.io/wird-al-latif-json/version.json'));
 

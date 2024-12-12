@@ -1,9 +1,6 @@
-import 'dart:convert';
-import 'dart:math';
-
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wirdul_latif/api/local_storage_api.dart';
 import 'package:wirdul_latif/api/wirdul_latif_api.dart';
 import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/model/wird.dart';
@@ -37,18 +34,8 @@ class WirdScreenModel with ChangeNotifier {
 
   incrementFontSize(double fontsize) {
     arabicFontSize = fontsize;
-    setFontSizeToSharedPref(arabicFontSize);
+    localStorage().saveFontSize(arabicFontSize);
     notifyListeners();
-  }
-
-  setFontSizeToSharedPref(double fontsize) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setDouble('fontsize', fontsize);
-  }
-
-  Future<double> getFontSizeFromSharedPref() async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getDouble('fontsize') ?? 24.0;
   }
 
   void progressInitialize() {
@@ -157,7 +144,6 @@ class WirdScreenModel with ChangeNotifier {
   }
 
   void addAndRemoveDuplicateProgress(HomeScreenModel model) async {
-    final prefs = await SharedPreferences.getInstance();
     var oldProgress = WirdulLatifApi.progressList.firstWhere(
         (element) =>
             element.time.day == progressTracker.time.day &&
@@ -168,9 +154,7 @@ class WirdScreenModel with ChangeNotifier {
     }
 
     WirdulLatifApi.progressList.add(progressTracker);
-    final progressListJson =
-        WirdulLatifApi.progressList.map((e) => e.toJson()).toList();
-    await prefs.setString('progress', jsonEncode(progressListJson));
+    await localStorage().saveProgress();
     FirbaseApi.logWirdProgress(type.name, currentPage.toString());
   }
 
@@ -220,8 +204,7 @@ class WirdScreenModel with ChangeNotifier {
     // if (type == WirdType.evening) {
     //   setEveningDatas();
     // }
-    wirdList = WirdulLatifApi.haddad;
-    arabicFontSize = await getFontSizeFromSharedPref();
+    arabicFontSize = await localStorage().getFontSize();
     notifyListeners();
   }
 
