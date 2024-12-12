@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:wirdul_latif/data/wirddata.dart';
+import 'package:wirdul_latif/data/wirdul_latif_api.dart';
 import 'package:wirdul_latif/screens/blog_screen.dart/blog_screen_model.dart';
 import 'package:wirdul_latif/screens/blog_screen.dart/webview.dart';
 import 'package:wirdul_latif/widgets/firebase_analytics.dart';

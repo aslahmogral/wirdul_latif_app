@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:wirdul_latif/data/wirddata.dart';
+import 'package:wirdul_latif/data/wirdul_latif_api.dart';
 import 'package:wirdul_latif/widgets/firebase_analytics.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
