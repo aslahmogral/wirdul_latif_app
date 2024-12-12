@@ -4,7 +4,7 @@ import 'dart:math';
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wirdul_latif/data/wirdul_latif_api.dart';
+import 'package:wirdul_latif/api/wirdul_latif_api.dart';
 import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/model/wird.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';

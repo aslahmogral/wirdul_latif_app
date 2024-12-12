@@ -1,25 +1,30 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wirdul_latif/api/shared_prefs_api.dart';
 import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/model/wird.dart';
 
 class WirdulLatifApi {
   static List<Wird> morningWird = [];
   static List<Wird> eveningWird = [];
-  static List<Wird> Zikr = [];
   static Map<String, Map<String, dynamic>> _wirdMap = {};
-  static int wirdVersion = 0;
-  static List<dynamic> Reels = [];
+  static List<dynamic> reels = [];
   static List<dynamic> blogs = [];
   static List<dynamic> progressList = [];
+
+  static const String _reels_key = 'reels';
+  static const String _blogs_key = 'blogs';
+  static const String _version_key = 'version';
+
+  static const String _contentsUrl =
+      'https://aslahmogral.github.io/wird-al-latif-json/contents.json';
+  static const String _wirdUrl =
+      'https://aslahmogral.github.io/wird-al-latif-json/wird.json';
 
   Future<void> initWirdData({bool sync = false}) async {
     final bool versionChanged = await hasVersionChanged();
     if (sync || versionChanged) {
-      final prefs = await SharedPreferences.getInstance();
-      final response = await http.get(Uri.parse(
-          'https://aslahmogral.github.io/wird-al-latif-json/wird.json'));
+      final response = await http.get(Uri.parse(_wirdUrl));
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
@@ -31,8 +36,7 @@ class WirdulLatifApi {
               throw Exception('Invalid data structure');
             }
           });
-
-          await prefs.setString('wird_data', jsonEncode(_wirdMap));
+          await localStorage().saveWirdData(jsonEncode(_wirdMap));
         } else {
           throw Exception('Invalid data structure');
         }
@@ -40,8 +44,7 @@ class WirdulLatifApi {
         throw Exception('Failed to load JSON');
       }
     } else {
-      final prefs = await SharedPreferences.getInstance();
-      final data = prefs.getString('wird_data');
+      final data = await localStorage().getWirdData();
       if (data == null) {
         await initWirdData(sync: true);
       } else {
@@ -54,8 +57,6 @@ class WirdulLatifApi {
               throw Exception('Invalid data structure');
             }
           });
-
-          await prefs.setString('wird_data', jsonEncode(_wirdMap));
         } else {
           throw Exception('Invalid data structure');
         }
@@ -68,68 +69,53 @@ class WirdulLatifApi {
   }
 
   Future<void> initProgress() async {
-    final prefs = await SharedPreferences.getInstance();
-    final data = prefs.getString('progress');
-    if (data == null) {
-      await prefs.setString('progress', jsonEncode([]));
+    final progress = await localStorage().getProgress();
+    if (progress == null) {
+      await localStorage().saveProgress([]);
     } else {
-      final progress = jsonDecode(data) as List;
-      progressList = progress.map((e) => Progress.fromJson(e)).toList();
+      progressList =
+          (await progress).map<Progress>((e) => Progress.fromJson(e)).toList();
     }
   }
 
   Future<void> getContents({sync, versionChanged}) async {
     if (sync || versionChanged) {
-      final prefs = await SharedPreferences.getInstance();
-      final response = await http.get(Uri.parse(
-          'https://aslahmogral.github.io/wird-al-latif-json/contents.json'));
-
+      final response = await http.get(Uri.parse(_contentsUrl));
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        Reels = data['reels'];
-        await prefs.setString('reels', jsonEncode(Reels));
+        reels = data[_reels_key];
+        await localStorage().saveReels(reels);
 
-        blogs = data['blogs'];
-        await prefs.setString('blogs', jsonEncode(blogs));
+        blogs = data[_blogs_key];
+        await localStorage().saveBlogs(blogs);
       } else {
         throw Exception('Failed to load JSON');
       }
     } else {
-      final prefs = await SharedPreferences.getInstance();
-      final reelsFromPrefs = prefs.getString('reels');
-      if (reelsFromPrefs == null) {
+      final reels = await localStorage().getReels();
+      if (reels == null) {
         await getContents();
-      } else {
-        final reelsData = jsonDecode(reelsFromPrefs);
-        Reels = reelsData;
-        await prefs.setString('reels', jsonEncode(Reels));
       }
 
-      final blogsFromPrefs = prefs.getString('blogs');
-      if (blogsFromPrefs == null) {
+      final blogs = await localStorage().getBlogs();
+      if (blogs == null) {
         await getContents();
-      } else {
-        final blogsData = jsonDecode(blogsFromPrefs);
-        blogs = blogsData;
-        await prefs.setString('blogs', jsonEncode(blogs));
       }
     }
   }
 
   Future<bool> hasVersionChanged() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
-      final localVersion = prefs.getInt('version') ?? 0;
-
+      final localVersion = localStorage().getVersion();
       final response = await http.get(Uri.parse(
           'https://aslahmogral.github.io/wird-al-latif-json/version.json'));
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
-        if (data is Map<String, dynamic> && data.containsKey('version')) {
-          final remoteVersion = data['version'];
+        if (data is Map<String, dynamic> && data.containsKey(_version_key)) {
+          final remoteVersion = data[_version_key];
           if (remoteVersion != localVersion) {
-            await prefs.setInt('version', remoteVersion);
+            await localStorage().saveVersion(remoteVersion);
             return true;
           }
         }

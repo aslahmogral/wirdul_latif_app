@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:wirdul_latif/data/wirdul_latif_api.dart';
+import 'package:wirdul_latif/api/wirdul_latif_api.dart';
 import 'package:wirdul_latif/widgets/firebase_analytics.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubeReelsScreenModel with ChangeNotifier {
-  final List<dynamic> videoIds = WirdulLatifApi.Reels;
+  final List<dynamic> videoIds = WirdulLatifApi.reels;
 
   late YoutubePlayerController controller;
 

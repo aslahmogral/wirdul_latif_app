@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Wird Al Latif',
+      title: 'Wirdul Latif Pro',
       routes: AppRoutes.routes,
       theme: themeProvider.isDarkMode
           ? customTheme.darkTheme
