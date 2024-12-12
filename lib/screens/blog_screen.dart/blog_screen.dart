@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:wirdul_latif/api/wirdul_latif_api.dart';
 import 'package:wirdul_latif/screens/blog_screen.dart/blog_screen_model.dart';
 import 'package:wirdul_latif/screens/blog_screen.dart/webview.dart';
-import 'package:wirdul_latif/widgets/firebase_analytics.dart';
+import 'package:wirdul_latif/api/firebase_analytics.dart';
 
 class BlogScreen extends StatelessWidget {
   const BlogScreen({super.key});

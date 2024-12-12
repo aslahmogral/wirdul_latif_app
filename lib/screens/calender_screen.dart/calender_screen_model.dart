@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/api/wirdul_latif_api.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
-import 'package:wirdul_latif/widgets/firebase_analytics.dart';
+import 'package:wirdul_latif/api/firebase_analytics.dart';
 
 class CalenderScreenModel with ChangeNotifier {
   int currentStreak = 0;

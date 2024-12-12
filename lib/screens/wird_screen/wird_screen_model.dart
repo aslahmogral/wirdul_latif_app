@@ -9,7 +9,7 @@ import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/model/wird.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/utils/constants.dart';
-import 'package:wirdul_latif/widgets/firebase_analytics.dart';
+import 'package:wirdul_latif/api/firebase_analytics.dart';
 
 class WirdScreenModel with ChangeNotifier {
   List<Wird> wirdList = [];

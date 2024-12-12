@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wirdul_latif/utils/constants.dart';
-import 'package:wirdul_latif/widgets/firebase_analytics.dart';
+import 'package:wirdul_latif/api/firebase_analytics.dart';
 
 class ContactUsScreenModel with ChangeNotifier {
   // static String? encodeQueryParameters(Map<String, String> params) {

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:wirdul_latif/widgets/firebase_analytics.dart';
+import 'package:wirdul_latif/api/firebase_analytics.dart';
 
 class TasbeehCounterScreen extends StatefulWidget {
   @override
