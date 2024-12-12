@@ -116,7 +116,7 @@ class WirdScreenModel with ChangeNotifier {
           );
         },
       );
-    } else if (currentPage < 43) {
+    } else if (currentPage < (wirdList.length - 1)) {
       await showDialog(
         context: context,
         builder: (context) {
@@ -187,7 +187,7 @@ class WirdScreenModel with ChangeNotifier {
 
       if (wirdList[currentPage].count == wirdList[currentPage].counted) {
         currentPageWirdCounted = 0;
-        if (currentPage == 43) {
+        if (currentPage == (wirdList.length - 1)) {
           celebrateCompletion();
           notifyListeners();
         } else {
@@ -200,7 +200,7 @@ class WirdScreenModel with ChangeNotifier {
       }
     } else {
       currentPageWirdCounted = 0;
-      if (currentPage != 43) {
+      if (currentPage != (wirdList.length - 1)) {
         controller.nextPage(
             duration: const Duration(milliseconds: 500),
             curve: Curves.easeInOut);
@@ -213,13 +213,14 @@ class WirdScreenModel with ChangeNotifier {
   }
 
   initialize() async {
-    if (type == WirdType.morning) {
-      setMorningDatas();
-    }
+    // if (type == WirdType.morning) {
+    //   setMorningDatas();
+    // }
 
-    if (type == WirdType.evening) {
-      setEveningDatas();
-    }
+    // if (type == WirdType.evening) {
+    //   setEveningDatas();
+    // }
+    wirdList = WirdulLatifApi.haddad;
     arabicFontSize = await getFontSizeFromSharedPref();
     notifyListeners();
   }
@@ -235,15 +236,15 @@ class WirdScreenModel with ChangeNotifier {
         : 0;
   }
 
-  setMorningDatas() {
-    wirdList = WirdulLatifApi.morningWird;
-    TitleText = Constants.morning;
-  }
+  // setMorningDatas() {
+  //   wirdList = WirdulLatifApi.morningWird;
+  //   TitleText = Constants.morning;
+  // }
 
-  setEveningDatas() {
-    wirdList = WirdulLatifApi.eveningWird;
-    TitleText = Constants.evening;
-  }
+  // setEveningDatas() {
+  //   wirdList = WirdulLatifApi.eveningWird;
+  //   TitleText = Constants.evening;
+  // }
 
   skipOrNextPage() {
     controller.nextPage(

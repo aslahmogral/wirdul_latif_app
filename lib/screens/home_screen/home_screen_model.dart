@@ -160,10 +160,10 @@ class HomeScreenModel with ChangeNotifier {
       progress = progressType.start;
     } else if (todayProgress.count == 0) {
       progress = progressType.start;
-    } else if (todayProgress.count < WirdulLatifApi.eveningWird.length - 1) {
+    } else if (todayProgress.count < WirdulLatifApi.haddad.length - 1) {
       progress = progressType.continuee;
       progressPercentage =
-          '${((todayProgress.count) / WirdulLatifApi.morningWird.length * 100).toStringAsFixed(0)} % ';
+          '${((todayProgress.count) / WirdulLatifApi.haddad.length * 100).toStringAsFixed(0)} % ';
     } else {
       progress = progressType.complete;
     }

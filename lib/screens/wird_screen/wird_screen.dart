@@ -50,7 +50,7 @@ class WirdScreen extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                              '${model.TitleText[0].toUpperCase()}${model.TitleText.substring(1)} Wird'),
+                              'haddad ratheeb'),
                         ],
                       ),
                       actions: [
@@ -434,7 +434,7 @@ class bottomBar extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              '${43 - model.currentPage} ',
+                              '${(model.wirdList.length - 1 ) - model.currentPage} ',
                               style: TextStyle(color: Colors.white),
                             ),
                             Text(

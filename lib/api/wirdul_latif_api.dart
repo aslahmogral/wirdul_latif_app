@@ -5,8 +5,10 @@ import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/model/wird.dart';
 
 class WirdulLatifApi {
-  static List<Wird> morningWird = [];
-  static List<Wird> eveningWird = [];
+  // static List<Wird> morningWird = [];
+  // static List<Wird> eveningWird = [];
+  static List<Wird> haddad = [];
+
   static Map<String, Map<String, dynamic>> _wirdMap = {};
   static List<dynamic> reels = [];
   static List<dynamic> blogs = [];
@@ -19,7 +21,7 @@ class WirdulLatifApi {
   static const String _contentsUrl =
       'https://aslahmogral.github.io/wird-al-latif-json/contents.json';
   static const String _wirdUrl =
-      'https://aslahmogral.github.io/wird-al-latif-json/wird.json';
+      'https://aslahmogral.github.io/wird-al-latif-json/haddad.json';
 
   Future<void> initWirdData({bool sync = false}) async {
     final bool versionChanged = await hasVersionChanged();
@@ -59,8 +61,9 @@ class WirdulLatifApi {
     }
     getContents(sync: sync, versionChanged: versionChanged);
     initProgress();
-    morningWird = _getMorningWird();
-    eveningWird = _getEveningWird();
+    // morningWird = _getMorningWird();
+    // eveningWird = _getEveningWird();
+    haddad = _getHaddad();
   }
 
   Future<void> initProgress() async {
@@ -145,6 +148,19 @@ class WirdulLatifApi {
       String eveningWird = value['eveningwird'] ?? '';
       finalList.add(Wird(
           wird: eveningWird != '' ? eveningWird : value['wird'],
+          english: value['english'],
+          transliteration: value['transliteration'],
+          count: value['count']));
+    });
+    return finalList;
+  }
+
+  static List<Wird> _getHaddad() {
+    List<Wird> finalList = [];
+    _wirdMap.forEach((key, value) {
+      // String eveningWird = value['eveningwird'] ?? '';
+      finalList.add(Wird(
+          wird:value['wird'],
           english: value['english'],
           transliteration: value['transliteration'],
           count: value['count']));
