@@ -22,7 +22,7 @@ class _SplashScreenState extends State<SplashScreen> {
   bool showReload = false;
 
   initWirdData() async {
-    await WirdulLatif().initWirdData();
+    await WirdulLatifApi().initWirdData();
     checkFirstRun();
   }
 

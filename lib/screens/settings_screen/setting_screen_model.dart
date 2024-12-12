@@ -47,7 +47,10 @@ class SettingsScreenModel with ChangeNotifier {
             ),
             TextButton(
               onPressed: () => Navigator.of(context).pop(true),
-              child: Text('Clear',style: TextStyle(color: Colors.red),),
+              child: Text(
+                'Clear',
+                style: TextStyle(color: Colors.red),
+              ),
             ),
           ],
         );
@@ -55,9 +58,9 @@ class SettingsScreenModel with ChangeNotifier {
     );
     if (confirm ?? false) {
       {
-        WirdulLatif().initWirdData(sync: false);
+        WirdulLatifApi().initWirdData(sync: false);
         final prefs = await SharedPreferences.getInstance();
-        WirdulLatif.progressList = [];
+        WirdulLatifApi.progressList = [];
         await prefs.setString('progress', jsonEncode([]));
         model.calculateStreak();
         model.checkProgress();
@@ -77,9 +80,9 @@ class SettingsScreenModel with ChangeNotifier {
   checkForUpdates(context) async {
     loading = true;
     notifyListeners();
-    final bool updated = await WirdulLatif().hasVersionChanged();
+    final bool updated = await WirdulLatifApi().hasVersionChanged();
     if (updated) {
-      await WirdulLatif().initWirdData(sync: true);
+      await WirdulLatifApi().initWirdData(sync: true);
     }
     loading = false;
     notifyListeners();

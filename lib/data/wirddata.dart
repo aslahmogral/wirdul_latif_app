@@ -4,7 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/model/wird.dart';
 
-class WirdulLatif {
+class WirdulLatifApi {
   static List<Wird> morningWird = [];
   static List<Wird> eveningWird = [];
   static List<Wird> Zikr = [];

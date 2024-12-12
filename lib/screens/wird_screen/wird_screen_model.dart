@@ -28,14 +28,14 @@ class WirdScreenModel with ChangeNotifier {
   );
   double arabicFontSize = 24.0;
   WirdScreenModel(WirdType wirdType) {
-    WfirebaseAnalytics.screenTracker('wird screen');
+    FirbaseApi.screenTracker('wird screen');
     type = wirdType;
     initialize();
     progressInitialize();
     controller.addListener(_onPageChanged);
   }
 
-  incrementFontSize(double fontsize){
+  incrementFontSize(double fontsize) {
     arabicFontSize = fontsize;
     setFontSizeToSharedPref(arabicFontSize);
     notifyListeners();
@@ -52,7 +52,7 @@ class WirdScreenModel with ChangeNotifier {
   }
 
   void progressInitialize() {
-    final oldProgress = WirdulLatif.progressList.firstWhere(
+    final oldProgress = WirdulLatifApi.progressList.firstWhere(
         (element) =>
             element.time.day == DateTime.now().day && element.type == type.name,
         orElse: () => Progress(time: DateTime.now(), count: 0, type: ''));
@@ -158,20 +158,20 @@ class WirdScreenModel with ChangeNotifier {
 
   void addAndRemoveDuplicateProgress(HomeScreenModel model) async {
     final prefs = await SharedPreferences.getInstance();
-    var oldProgress = WirdulLatif.progressList.firstWhere(
+    var oldProgress = WirdulLatifApi.progressList.firstWhere(
         (element) =>
             element.time.day == progressTracker.time.day &&
             element.type == progressTracker.type,
         orElse: () => Progress(time: DateTime.now(), count: 0, type: ''));
     if (oldProgress.type != '') {
-      WirdulLatif.progressList.remove(oldProgress);
+      WirdulLatifApi.progressList.remove(oldProgress);
     }
 
-    WirdulLatif.progressList.add(progressTracker);
+    WirdulLatifApi.progressList.add(progressTracker);
     final progressListJson =
-        WirdulLatif.progressList.map((e) => e.toJson()).toList();
+        WirdulLatifApi.progressList.map((e) => e.toJson()).toList();
     await prefs.setString('progress', jsonEncode(progressListJson));
-    WfirebaseAnalytics.logWirdProgress(type.name, currentPage.toString());
+    FirbaseApi.logWirdProgress(type.name, currentPage.toString());
   }
 
   thasbeehButtonClicked() {
@@ -212,7 +212,7 @@ class WirdScreenModel with ChangeNotifier {
     notifyListeners();
   }
 
-  initialize() async{
+  initialize() async {
     if (type == WirdType.morning) {
       setMorningDatas();
     }
@@ -236,12 +236,12 @@ class WirdScreenModel with ChangeNotifier {
   }
 
   setMorningDatas() {
-    wirdList = WirdulLatif.morningWird;
+    wirdList = WirdulLatifApi.morningWird;
     TitleText = Constants.morning;
   }
 
   setEveningDatas() {
-    wirdList = WirdulLatif.eveningWird;
+    wirdList = WirdulLatifApi.eveningWird;
     TitleText = Constants.evening;
   }
 

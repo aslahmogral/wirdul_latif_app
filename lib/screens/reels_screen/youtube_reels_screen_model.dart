@@ -4,12 +4,12 @@ import 'package:wirdul_latif/widgets/firebase_analytics.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
 class YoutubeReelsScreenModel with ChangeNotifier {
-   final List<dynamic> videoIds = WirdulLatif.Reels;
+  final List<dynamic> videoIds = WirdulLatifApi.Reels;
 
   late YoutubePlayerController controller;
 
-  YoutubeReelsScreenModel(){
-     controller = YoutubePlayerController(
+  YoutubeReelsScreenModel() {
+    controller = YoutubePlayerController(
       initialVideoId: videoIds[0],
       flags: const YoutubePlayerFlags(
         autoPlay: false,
@@ -19,7 +19,6 @@ class YoutubeReelsScreenModel with ChangeNotifier {
       ),
     );
 
-    WfirebaseAnalytics.screenTracker('Reels Screen');
-
+    FirbaseApi.screenTracker('Reels Screen');
   }
 }

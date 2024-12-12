@@ -19,7 +19,7 @@ class ContactUsScreenModel with ChangeNotifier {
   // );
 
   ContactUsScreenModel() {
-    WfirebaseAnalytics.screenTracker('contact us screen');
+    FirbaseApi.screenTracker('contact us screen');
   }
 
   sendMail() async {

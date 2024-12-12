@@ -14,7 +14,7 @@ class BlogScreen extends StatelessWidget {
       create: (context) => BlogScreenModel(),
       child: Consumer<BlogScreenModel>(
         builder: (context, model, child) {
-          dynamic blogs = WirdulLatif.blogs;
+          dynamic blogs = WirdulLatifApi.blogs;
           return Scaffold(
             appBar: AppBar(
               title: const Text('Blogs'),

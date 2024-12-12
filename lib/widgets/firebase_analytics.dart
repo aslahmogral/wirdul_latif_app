@@ -1,6 +1,6 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 
-class WfirebaseAnalytics {
+class FirbaseApi {
   static FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
 
   static void screenTracker(String screenName,
@@ -18,8 +18,6 @@ class WfirebaseAnalytics {
   }
 
   static void logZikrCount(String count) {
-    _analytics.logEvent(
-        parameters: {'count': count},
-        name: 'Zikr');
+    _analytics.logEvent(parameters: {'count': count}, name: 'Zikr');
   }
 }

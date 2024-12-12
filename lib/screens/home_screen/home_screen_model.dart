@@ -81,7 +81,7 @@ class HomeScreenModel with ChangeNotifier {
   }
 
   calculateStreak() {
-    var dates = WirdulLatif.progressList
+    var dates = WirdulLatifApi.progressList
         .where(
             (element) => element.type == wirdType.name && element.count >= 10)
         .map((e) => DateTime(e.time.year, e.time.month, e.time.day))
@@ -149,7 +149,7 @@ class HomeScreenModel with ChangeNotifier {
 
   checkProgress() async {
     var today = DateTime.now();
-    var todayProgress = WirdulLatif.progressList.firstWhere(
+    var todayProgress = WirdulLatifApi.progressList.firstWhere(
         (element) =>
             element.time.day == today.day &&
             element.time.month == today.month &&
@@ -160,10 +160,10 @@ class HomeScreenModel with ChangeNotifier {
       progress = progressType.start;
     } else if (todayProgress.count == 0) {
       progress = progressType.start;
-    } else if (todayProgress.count < WirdulLatif.eveningWird.length - 1) {
+    } else if (todayProgress.count < WirdulLatifApi.eveningWird.length - 1) {
       progress = progressType.continuee;
       progressPercentage =
-          '${((todayProgress.count) / WirdulLatif.morningWird.length * 100).toStringAsFixed(0)} % ';
+          '${((todayProgress.count) / WirdulLatifApi.morningWird.length * 100).toStringAsFixed(0)} % ';
     } else {
       progress = progressType.complete;
     }

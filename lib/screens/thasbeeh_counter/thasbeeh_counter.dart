@@ -13,7 +13,7 @@ class _TasbeehCounterScreenState extends State<TasbeehCounterScreen> {
   @override
   void initState() {
     super.initState();
-    WfirebaseAnalytics.screenTracker('Tasbeeh Counter');
+    FirbaseApi.screenTracker('Tasbeeh Counter');
     _loadCounter();
   }
 
