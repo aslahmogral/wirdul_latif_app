@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wirdul_latif/api/local_storage_api.dart';
 import 'package:wirdul_latif/api/wirdul_latif_api.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
 import 'package:wirdul_latif/screens/onboarding_screens.dart/onboarding_screen.dart';
@@ -26,13 +26,12 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   Future<void> checkFirstRun() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    bool? hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
+    bool? hasSeenOnboarding = await localStorage().getSeenOnboarding();
 
     if (hasSeenOnboarding) {
       navigateToHome();
     } else {
-      prefs.setBool('hasSeenOnboarding', true);
+      localStorage().seenOnboardingScreen();
       navigateToOnboarding();
     }
   }
