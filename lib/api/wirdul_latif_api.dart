@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:wirdul_latif/api/shared_prefs_api.dart';
+import 'package:wirdul_latif/api/local_storage_api.dart';
 import 'package:wirdul_latif/model/progress.dart';
 import 'package:wirdul_latif/model/wird.dart';
 
