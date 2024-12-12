@@ -4,7 +4,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wirdul_latif/api/wirdul_latif_api.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
 import 'package:wirdul_latif/screens/onboarding_screens.dart/onboarding_screen.dart';
-import 'package:wirdul_latif/screens/wird_screen/wird_screen.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class SplashScreen extends StatefulWidget {

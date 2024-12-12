@@ -1,9 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:wirdul_latif/api/local_storage_api.dart';
 import 'package:wirdul_latif/api/wirdul_latif_api.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/utils/constants.dart';
@@ -59,9 +57,8 @@ class SettingsScreenModel with ChangeNotifier {
     if (confirm ?? false) {
       {
         WirdulLatifApi().initWirdData(sync: false);
-        final prefs = await SharedPreferences.getInstance();
         WirdulLatifApi.progressList = [];
-        await prefs.setString('progress', jsonEncode([]));
+        await localStorage().clearProgress();
         model.calculateStreak();
         model.checkProgress();
         ScaffoldMessenger.of(context).showSnackBar(
