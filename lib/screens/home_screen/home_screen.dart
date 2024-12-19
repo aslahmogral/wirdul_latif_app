@@ -39,7 +39,7 @@ class HomeScreen extends StatelessWidget {
               title: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Wirdul Latif Pro'),
+                  Text('Wirdul Latif'),
                 ],
               ),
               actions: [
