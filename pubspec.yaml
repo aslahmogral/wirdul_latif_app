@@ -95,6 +95,7 @@ flutter:
     - asset/quotes1.jpg
     - asset/logo/logo.png
     - asset/wirdul_latif.png
+    - shorebird.yaml
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

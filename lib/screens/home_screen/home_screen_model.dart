@@ -83,7 +83,7 @@ class HomeScreenModel with ChangeNotifier {
   calculateStreak() {
     var dates = WirdulLatifApi.progressList
         .where(
-            (element) => element.type == wirdType.name && element.count >= 10)
+            (element) =>  element.count >= 10)
         .map((e) => DateTime(e.time.year, e.time.month, e.time.day))
         .toSet()
         .toList();
