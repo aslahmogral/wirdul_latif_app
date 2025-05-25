@@ -1,6 +1,5 @@
-package com.example.wirdul_latif
+package com.aslahmogral.wirdullatif
 
 import io.flutter.embedding.android.FlutterActivity
 
-class MainActivity: FlutterActivity() {
-}
+class MainActivity : FlutterActivity()

@@ -85,4 +85,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'wirdul-latif-pro.firebasestorage.app',
     measurementId: 'G-E99XKQCVBJ',
   );
+
 }
