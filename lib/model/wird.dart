@@ -13,4 +13,23 @@ class Wird {
       required this.count,
       this.counted,
       this.completed});
+
+  factory Wird.fromJson(Map<String, dynamic> json) => Wird(
+        wird: json['wird'],
+        english: json['english'],
+        transliteration: json['transliteration'],
+        count: json['count'],
+        counted: json['counted'],
+        completed: json['completed'],
+      );
+
+  Map<String, dynamic> toJson() => {
+        'wird': wird,
+        'english': english,
+        'transliteration': transliteration,
+        'count': count,
+        'counted': counted,
+        'completed': completed,
+      };
 }
+

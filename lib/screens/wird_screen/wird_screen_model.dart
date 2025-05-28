@@ -35,7 +35,72 @@ class WirdScreenModel with ChangeNotifier {
     controller.addListener(_onPageChanged);
   }
 
-  incrementFontSize(double fontsize){
+  void restart(BuildContext context) async {
+    Navigator.pop(context);
+
+    bool restart = await showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Warning'),
+          content: const Text(
+              'If you restart now, you will loose all your previous progress and will start from the first wird'),
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                // addAndRemoveDuplicateProgress(model);
+                // Navigator.pop(context);
+                
+                Navigator.pop(context,false);
+              },
+              child: const Text(
+                'Continue Wird',
+                // style: TextStyle(color: Colors.teal),
+              ),
+            ),
+            ElevatedButton(
+              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.red)),
+
+              onPressed: () {
+                Navigator.pop(context,true);
+                // addAndRemoveDuplicateProgress(model);
+              },
+              child: const Text(
+                'Restart',
+                style: TextStyle(),
+              ),
+            )
+          ],
+        );
+      },
+    ) ?? false;
+    if(!restart){
+      return;
+    }
+    currentPage = 0;
+    currentPageWirdCounted = 0;
+    progressTracker = Progress(time: DateTime.now(), count: 0, type: type.name);
+    wirdList = [];
+    await initialize();
+    // await progressInitialize();
+    // resetWirdCount();
+    if (controller.positions.isNotEmpty) {
+      controller.animateToPage(0,
+          duration: Duration(milliseconds: 500), curve: Curves.easeInOut);
+    }
+    notifyListeners();
+  }
+
+  resetWirdCount() {
+    for (var element in wirdList) {
+      element.counted = 0;
+    }
+    currentPageWirdCounted = 0;
+    progressTracker = Progress(time: DateTime.now(), count: 0, type: type.name);
+    notifyListeners();
+  }
+
+  incrementFontSize(double fontsize) {
     arabicFontSize = fontsize;
     setFontSizeToSharedPref(arabicFontSize);
     notifyListeners();
@@ -74,6 +139,7 @@ class WirdScreenModel with ChangeNotifier {
     currentPageWirdCounted = wirdList[currentPage].counted ?? 0;
     progressTracker =
         Progress(time: DateTime.now(), type: type.name, count: currentPage);
+
     notifyListeners();
   }
 
@@ -212,7 +278,7 @@ class WirdScreenModel with ChangeNotifier {
     notifyListeners();
   }
 
-  initialize() async{
+  initialize() async {
     if (type == WirdType.morning) {
       setMorningDatas();
     }
@@ -236,12 +302,14 @@ class WirdScreenModel with ChangeNotifier {
   }
 
   setMorningDatas() {
-    wirdList = WirdulLatif.morningWird;
+    wirdList =
+        WirdulLatif.morningWird.map((e) => Wird.fromJson(e.toJson())).toList();
     TitleText = Constants.morning;
   }
 
   setEveningDatas() {
-    wirdList = WirdulLatif.eveningWird;
+    wirdList =
+        WirdulLatif.eveningWird.map((e) => Wird.fromJson(e.toJson())).toList();
     TitleText = Constants.evening;
   }
 

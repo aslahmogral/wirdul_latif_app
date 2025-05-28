@@ -54,6 +54,8 @@ class WirdScreen extends StatelessWidget {
                         ],
                       ),
                       actions: [
+                        
+                        
                         setttingsBottomSheet(context, ThemeProvider, model),
                       ],
                     ),
@@ -268,6 +270,31 @@ class WirdScreen extends StatelessWidget {
                     children: <Widget>[
                       const Text('Settings'),
                       SizedBox(height: 16),
+                      ListTile(
+                        leading: Text(
+                          'Restart',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        trailing: InkWell(
+                          onTap: () {
+                            wirdScreenModel.restart(context);
+                          },
+                          child: Padding(
+                            padding: const EdgeInsets.all(4.0),
+                            child: Container(
+                            
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                color: Colors.teal,
+                              ),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(horizontal:  16.0 ,vertical: 4 ),
+                                child: Icon(Icons.restart_alt, color: Colors.white,),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
                       ListTile(
                         leading: Text(
                           'English Translation',
