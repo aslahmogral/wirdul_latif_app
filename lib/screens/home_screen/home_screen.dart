@@ -459,7 +459,7 @@ class HomeScreen extends StatelessWidget {
                   style: TextStyle(color: Colors.grey),
                 ),
                 Text(
-                  'v2.2.0',
+                  'v3.0.0',
                   style: TextStyle(color: Colors.grey),
                 ),
               ],
