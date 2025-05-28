@@ -39,42 +39,44 @@ class WirdScreenModel with ChangeNotifier {
     Navigator.pop(context);
 
     bool restart = await showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Warning'),
-          content: const Text(
-              'If you restart now, you will loose all your previous progress and will start from the first wird'),
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                // addAndRemoveDuplicateProgress(model);
-                // Navigator.pop(context);
-                
-                Navigator.pop(context,false);
-              },
-              child: const Text(
-                'Continue Wird',
-                // style: TextStyle(color: Colors.teal),
-              ),
-            ),
-            ElevatedButton(
-              style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.red)),
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: const Text('Warning'),
+              content: const Text(
+                  'If you restart now, you will loose all your previous progress and will start from the first wird'),
+              actions: [
+                ElevatedButton(
+                  onPressed: () {
+                    // addAndRemoveDuplicateProgress(model);
+                    // Navigator.pop(context);
 
-              onPressed: () {
-                Navigator.pop(context,true);
-                // addAndRemoveDuplicateProgress(model);
-              },
-              child: const Text(
-                'Restart',
-                style: TextStyle(),
-              ),
-            )
-          ],
-        );
-      },
-    ) ?? false;
-    if(!restart){
+                    Navigator.pop(context, false);
+                  },
+                  child: const Text(
+                    'Continue Wird',
+                    // style: TextStyle(color: Colors.teal),
+                  ),
+                ),
+                ElevatedButton(
+                  style: ButtonStyle(
+                      backgroundColor:
+                          MaterialStateProperty.all<Color>(Colors.red)),
+                  onPressed: () {
+                    Navigator.pop(context, true);
+                    // addAndRemoveDuplicateProgress(model);
+                  },
+                  child: const Text(
+                    'Restart',
+                    style: TextStyle(),
+                  ),
+                )
+              ],
+            );
+          },
+        ) ??
+        false;
+    if (!restart) {
       return;
     }
     currentPage = 0;
@@ -134,11 +136,13 @@ class WirdScreenModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void _onPageChanged() {
+  void _onPageChanged() async {
     currentPage = controller.page?.round() ?? 0;
     currentPageWirdCounted = wirdList[currentPage].counted ?? 0;
     progressTracker =
         Progress(time: DateTime.now(), type: type.name, count: currentPage);
+
+    addAndRemoveDuplicateProgress();
 
     notifyListeners();
   }
@@ -159,7 +163,7 @@ class WirdScreenModel with ChangeNotifier {
             actions: [
               TextButton(
                 onPressed: () {
-                  addAndRemoveDuplicateProgress(model);
+                  addAndRemoveDuplicateProgress();
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
@@ -171,7 +175,7 @@ class WirdScreenModel with ChangeNotifier {
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  addAndRemoveDuplicateProgress(model);
+                  addAndRemoveDuplicateProgress();
                 },
                 child: const Text(
                   'OK , I will Finish...',
@@ -192,7 +196,7 @@ class WirdScreenModel with ChangeNotifier {
             actions: [
               TextButton(
                 onPressed: () {
-                  addAndRemoveDuplicateProgress(model);
+                  addAndRemoveDuplicateProgress();
                   Navigator.pop(context);
                   Navigator.pop(context);
                 },
@@ -204,7 +208,7 @@ class WirdScreenModel with ChangeNotifier {
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
-                  addAndRemoveDuplicateProgress(model);
+                  addAndRemoveDuplicateProgress();
                   // canPop = true;
                 },
                 child: const Text(
@@ -217,12 +221,12 @@ class WirdScreenModel with ChangeNotifier {
         },
       );
     } else {
-      addAndRemoveDuplicateProgress(model);
+      addAndRemoveDuplicateProgress();
       Navigator.pop(context);
     }
   }
 
-  void addAndRemoveDuplicateProgress(HomeScreenModel model) async {
+  void addAndRemoveDuplicateProgress() async {
     final prefs = await SharedPreferences.getInstance();
     var oldProgress = WirdulLatif.progressList.firstWhere(
         (element) =>
