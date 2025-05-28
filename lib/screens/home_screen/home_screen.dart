@@ -52,19 +52,12 @@ class HomeScreen extends StatelessWidget {
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(
-                                size: 50,
-                                Icons.local_fire_department,
-                                color: Colors.orange[700],
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                model.currentStreaks.toString(),
-                                style: TextStyle(
-                                    fontSize: 30, fontWeight: FontWeight.bold),
-                              ),
+                              Container(
+                                  // width: 50,
+                                  // color: Colors.yellow,
+                                  child: Lottie.asset(
+                                      'asset/onboarding/streak.json',
+                                      height: 100.0)),
                             ],
                           ),
                           content: Text(
@@ -84,39 +77,63 @@ class HomeScreen extends StatelessWidget {
                       },
                     );
                   },
-                  child: Row(
-                    children: [
-                      Stack(
-                        // mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Container(
-                            width: 50,
-                            // color: Colors.yellow,
-                            child: Lottie.asset('asset/onboarding/streak.json',
-                                height: 40.0),
-                          ),
-                          Positioned(
-                            right: 0,
-                            bottom: -8,
-                            child: Container(
-                              height: 50,
-                              // color: Colors.green,
-                              child: Center(
-                                child: Text(
-                                  model.currentStreaks.toString(),
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 16),
+                  child: Visibility(
+                    replacement: Opacity(
+                      opacity: 0.5,
+                      child: Icon(
+                        Icons.local_fire_department,
+                        size: 35,
+                        color: Colors.grey[400],
+                      ),
+                    ),
+                    visible: model.currentStreaks != 0,
+                    child: Row(
+                      children: [
+                        Stack(
+                          // mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            Visibility(
+                                replacement: Container(
+                                        width: 50,
+                                        // color: Colors.yellow,
+                                        child: Lottie.asset(
+                                            'asset/onboarding/streak.json',
+                                            height: 40.0))
+                                    .animate(
+                                      onPlay: (controller) =>
+                                          controller.repeat(reverse: true),
+                                    )
+                                    .fadeIn(duration: 600.ms),
+                                visible: model.todayStreakAchieved,
+                                child: Container(
+                                    width: 50,
+                                    // color: Colors.yellow,
+                                    child: Lottie.asset(
+                                        'asset/onboarding/streak.json',
+                                        height: 40.0))),
+                            Positioned(
+                              right: 0,
+                              bottom: -8,
+                              child: Container(
+                                height: 50,
+                                // color: Colors.green,
+                                child: Center(
+                                  child: Text(
+                                    model.currentStreaks.toString(),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 16),
+                                  ),
                                 ),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: 16,
-                      )
-                    ],
+                          ],
+                        ),
+                        SizedBox(
+                          width: 16,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ],

@@ -20,6 +20,8 @@ class HomeScreenModel with ChangeNotifier {
   progressType progress = progressType.start;
   int currentStreaks = 0;
   String progressPercentage = '';
+  bool todayStreakAchieved = false;
+  bool brokenStreak = true;
 
   HomeScreenModel(BuildContext context) {
     _context = context;
@@ -81,12 +83,55 @@ class HomeScreenModel with ChangeNotifier {
   }
 
   calculateStreak() {
+    // var wirdList = [
+    //   Progress(time: DateTime.now(), type: WirdType.morning.name, count: 30),
+    //   Progress(
+    //       time: DateTime.now().subtract(Duration(days: 1)),
+    //       type: WirdType.evening.name,
+    //       count: 30),
+    //   Progress(
+    //       time: DateTime.now().subtract(Duration(days: 3)),
+    //       type: WirdType.evening.name,
+    //       count: 30),
+    //   Progress(
+    //       time: DateTime.now().subtract(Duration(days: 3)),
+    //       type: WirdType.morning.name,
+    //       count: 30),
+    //   Progress(
+    //       time: DateTime.now().subtract(Duration(days: 3)),
+    //       type: WirdType.morning.name,
+    //       count: 30),
+    //   Progress(
+    //       time: DateTime.now().subtract(Duration(days: 3)),
+    //       type: WirdType.morning.name,
+    //       count: 30),
+    //   Progress(
+    //       time: DateTime.now().subtract(Duration(days: 3)),
+    //       type: WirdType.morning.name,
+    //       count: 30),
+    //   Progress(
+    //       time: DateTime.now().subtract(Duration(days: 3)),
+    //       type: WirdType.morning.name,
+    //       count: 30),
+    // ];
+
+    // var dates = wirdList
+    //     .where((element) => element.count >= 10)
+    //     .map((e) => DateTime(e.time.year, e.time.month, e.time.day))
+    //     .toSet()
+    //     .toList();
+
     var dates = WirdulLatif.progressList
-        .where(
-            (element) => element.type == wirdType.name && element.count >= 10)
+        .where((element) => element.count >= 10)
         .map((e) => DateTime(e.time.year, e.time.month, e.time.day))
         .toSet()
         .toList();
+
+    todayStreakAchieved = WirdulLatif.progressList.any((element) =>
+        element.time.day == DateTime.now().day &&
+        element.time.month == DateTime.now().month &&
+        element.time.year == DateTime.now().year);
+
 
     dates.sort((a, b) => b.compareTo(a)); // Sort dates in descending order
     var currentDate = DateTime.now();
@@ -146,6 +191,30 @@ class HomeScreenModel with ChangeNotifier {
     currentStreaks = currentStreak;
     notifyListeners();
   }
+
+  //  calculateStreak() {
+  //   var dates = WirdulLatif.progressList
+  //       .where(
+  //           (element) => element.type == wirdType.name && element.count >= 10)
+  //       .map((e) => DateTime(e.time.year, e.time.month, e.time.day))
+  //       .toSet()
+  //       .toList();
+  //   dates.sort((a, b) => b.compareTo(a)); // Sort dates in descending order
+  //   var currentDate = DateTime.now();
+  //   var currentStreak = 0;
+
+  //   for (var date in dates) {
+  //     if (date.isBefore(currentDate) || date.isAtSameMomentAs(currentDate)) {
+  //       currentStreak++;
+  //       currentDate = currentDate.subtract(Duration(days: 1));
+  //     } else {
+  //       break;
+  //     }
+  //   }
+
+  //   currentStreaks = currentStreak;
+  //   notifyListeners();
+  // }
 
   checkProgress() async {
     var today = DateTime.now();
