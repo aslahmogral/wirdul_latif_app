@@ -1,0 +1,1 @@
+ /Users/aslahmogral/Documents/GitHub/wirdul_latif_app/wirdul\ latif\ pro/.dart_tool/flutter_build/5b8c4a8ae13668876e71926650560122/dart_build_result.json: 

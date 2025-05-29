@@ -1,0 +1,2 @@
+/Users/aslahmogral/Documents/GitHub/wirdul_latif_app/wirdul latif pro/android/app/.cxx/Debug/2r513o1w/x86/CMakeFiles/edit_cache.dir
+/Users/aslahmogral/Documents/GitHub/wirdul_latif_app/wirdul latif pro/android/app/.cxx/Debug/2r513o1w/x86/CMakeFiles/rebuild_cache.dir
