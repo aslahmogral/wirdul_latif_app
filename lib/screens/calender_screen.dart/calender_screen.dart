@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:streak_calendar/streak_calendar.dart';
 import 'package:wirdul_latif/screens/calender_screen.dart/calender_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
+import 'package:wirdul_latif/utils/responsive.dart';
 
 class CalenderScreen extends StatelessWidget {
   final currentStreak;
@@ -102,36 +103,62 @@ class CalenderScreen extends StatelessWidget {
                 ),
               ],
             ),
-            body: SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  SizedBox(
-                    height: 16,
+             body: SingleChildScrollView(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                    maxWidth: context.isTablet ? 1200 : double.infinity,
                   ),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: [
-                  //     cleanCalender(
-                  //         model.morningDatesForStreaks, context, "Morning"),
-                  //   ],
-                  // ),
-                  heatMapCalender(model.morningDatesForStreaks, context,
-                      'Morning', model.showMoreMorningDatesForStreaks),
-                  SizedBox(
-                    height: 16,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      if (context.isTablet)
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: heatMapCalender(
+                                  model.morningDatesForStreaks,
+                                  context,
+                                  'Morning',
+                                  model.showMoreMorningDatesForStreaks),
+                            ),
+                            Expanded(
+                              child: heatMapCalender(
+                                  model.eveningDatesForStreaks,
+                                  context,
+                                  'Evening',
+                                  model.showMoreEveningDatesForStreaks),
+                            ),
+                          ],
+                        )
+                      else
+                        Column(
+                          children: [
+                            heatMapCalender(
+                                model.morningDatesForStreaks,
+                                context,
+                                'Morning',
+                                model.showMoreMorningDatesForStreaks),
+                            const SizedBox(
+                              height: 16,
+                            ),
+                            heatMapCalender(
+                                model.eveningDatesForStreaks,
+                                context,
+                                'Evening',
+                                model.showMoreEveningDatesForStreaks),
+                          ],
+                        ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                    ],
                   ),
-                  heatMapCalender(model.eveningDatesForStreaks, context,
-                      'Evening', model.showMoreEveningDatesForStreaks),
-                  SizedBox(
-                    height: 16,
-                  ),
-                  // cleanCalender(
-                  //     model.eveningDatesForStreaks, context, "Evening"),
-                  // SizedBox(
-                  //   height: 16,
-                  // ),
-                ],
+                ),
               ),
             ),
           );

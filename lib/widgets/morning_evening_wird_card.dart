@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
+import 'package:wirdul_latif/utils/responsive.dart';
+
 @deprecated
 class MorningOrEveningCard extends StatelessWidget {
   final Color color;
@@ -20,11 +22,15 @@ class MorningOrEveningCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isTablet = context.isTablet;
+    final double cardWidth = isTablet ? double.infinity : MediaQuery.of(context).size.width / 2.5;
+    final double cardHeight = isTablet ? 160 : MediaQuery.of(context).size.width / 2.5;
+
     return Stack(
       children: [
         Container(
-          height: MediaQuery.of(context).size.width/2.5,
-          width: MediaQuery.of(context).size.width/2.5,
+          height: cardHeight,
+          width: cardWidth,
           decoration: BoxDecoration(
             // color: WirdColors.primaryDaycolor,
             borderRadius: BorderRadius.circular(15),
@@ -32,7 +38,7 @@ class MorningOrEveningCard extends StatelessWidget {
             gradient: WirdGradients.listTileShadeGradient,
           ),
           child: Padding(
-            padding: const EdgeInsets.only(left: 16.0, bottom: 16.0),
+            padding: const EdgeInsets.only(left: 16.0, bottom: 16.0, right: 16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,

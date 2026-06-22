@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -8,6 +6,7 @@ import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/screens/wird_screen/wird_screen_model.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 import 'package:wirdul_latif/utils/theme_provider_model.dart';
+import 'package:wirdul_latif/utils/responsive.dart';
 
 class WirdScreen extends StatelessWidget {
   static String routename = 'wirdscreen';
@@ -17,34 +16,28 @@ class WirdScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => WirdScreenModel(wirdType)),
-        ChangeNotifierProvider(create: (context) => HomeScreenModel(context))
-      ],
-      builder: (context, child) {
-        return Consumer<HomeScreenModel>(
-            builder: (context, HomeScreenModel, child) {
-          return Consumer<ThemeProvider>(
-              builder: (context, ThemeProvider, child) {
-            return Consumer<WirdScreenModel>(
-              builder: (context, model, child) {
-                return PopScope(
-                  canPop: false,
-                  onPopInvokedWithResult: (didPop, result) {
-                    if (didPop) {
-                      return;
-                    } else {
-                      model.showWarning(HomeScreenModel, context);
-                    }
-                  },
-                  child: Scaffold(
-                    appBar: AppBar(
-                      leading: IconButton(
-                          onPressed: () {
-                            model.showWarning(HomeScreenModel, context);
-                          },
-                          icon: Icon(Icons.close)),
+    return ChangeNotifierProvider(
+      create: (context) => WirdScreenModel(wirdType),
+      child: Consumer<ThemeProvider>(
+        builder: (context, ThemeProvider, child) {
+          return Consumer<WirdScreenModel>(
+            builder: (context, model, child) {
+              return PopScope(
+                canPop: false,
+                onPopInvokedWithResult: (didPop, result) {
+                  if (didPop) {
+                    return;
+                  } else {
+                    model.showWarning(context);
+                  }
+                },
+                child: Scaffold(
+                  appBar: AppBar(
+                    leading: IconButton(
+                        onPressed: () {
+                          model.showWarning(context);
+                        },
+                        icon: Icon(Icons.close)),
                       centerTitle: true,
                       title: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -74,8 +67,12 @@ class WirdScreen extends StatelessWidget {
                                 children: [
                                   SingleChildScrollView(
                                     child: Center(
-                                      child: Column(
-                                        mainAxisSize: MainAxisSize.min,
+                                      child: ConstrainedBox(
+                                        constraints: BoxConstraints(
+                                          maxWidth: context.isTablet ? 750 : double.infinity,
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -104,9 +101,7 @@ class WirdScreen extends StatelessWidget {
                                           ),
                                           Container(
                                             padding: const EdgeInsets.all(16),
-                                            width: MediaQuery.of(context)
-                                                .size
-                                                .width,
+                                            width: double.infinity,
                                             decoration: BoxDecoration(
                                               gradient: WirdGradients
                                                   .listTileShadeGradient,
@@ -132,9 +127,7 @@ class WirdScreen extends StatelessWidget {
                                             visible:
                                                 ThemeProvider.isTransliteration,
                                             child: Container(
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
+                                                width: double.infinity,
                                                 decoration: BoxDecoration(
                                                   border: Border.all(
                                                     color: WirdGradients
@@ -228,6 +221,7 @@ class WirdScreen extends StatelessWidget {
                                             height: 100,
                                           )
                                         ],
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -248,10 +242,9 @@ class WirdScreen extends StatelessWidget {
                 );
               },
             );
-          });
-        });
-      },
-    );
+          },
+        ),
+      );
   }
 
   IconButton setttingsBottomSheet(BuildContext context, ThemeProvider model,
@@ -397,9 +390,13 @@ class bottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Align(
       alignment: Alignment.bottomCenter,
-      child: Stack(
-        alignment: Alignment.bottomCenter,
-        children: [
+      child: ConstrainedBox(
+        constraints: BoxConstraints(
+          maxWidth: context.isTablet ? 750 : double.infinity,
+        ),
+        child: Stack(
+          alignment: Alignment.bottomCenter,
+          children: [
           Stack(
             alignment: Alignment.bottomCenter,
             children: [
@@ -461,7 +458,7 @@ class bottomBar extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              '${43 - model.currentPage} ',
+                              '${model.wirdList.length - 1 - model.currentPage} ',
                               style: TextStyle(color: Colors.white),
                             ),
                             Text(
@@ -488,7 +485,7 @@ class bottomBar extends StatelessWidget {
                   color: Theme.of(context).primaryColor,
                 ),
                 height: 60,
-                width: MediaQuery.of(context).size.width,
+                width: double.infinity,
               ),
 
               //linear progress indicator
@@ -564,6 +561,7 @@ class bottomBar extends StatelessWidget {
           counter(context)
         ],
       ),
+     ),
     );
   }
 

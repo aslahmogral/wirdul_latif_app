@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
+import 'package:wirdul_latif/utils/responsive.dart';
 
 class YoutubePlayerItem extends StatefulWidget {
   final String videoId;
@@ -40,11 +41,12 @@ class _YoutubePlayerItemState extends State<YoutubePlayerItem> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      // alignment: Alignment.center,
+    final isTablet = context.isTablet;
+
+    Widget body = Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SizedBox(),
+        const SizedBox(),
         Center(
           child: YoutubePlayer(
             controller: _controller,
@@ -61,20 +63,20 @@ class _YoutubePlayerItemState extends State<YoutubePlayerItem> {
                     padding: const EdgeInsets.all(16.0),
                     child: Row(
                       children: [
-                        CircleAvatar(
-                          child: Icon(Icons.play_arrow),
+                        const CircleAvatar(
                           backgroundColor: Colors.teal,
+                          child: Icon(Icons.play_arrow, color: Colors.white),
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisSize: MainAxisSize.min,
-                          children: [
+                          children: const [
                             Text(
                               'Motivational Video ',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
                             ),
-                            Text('Wirdul Latif'),
+                            Text('Wirdul Latif', style: TextStyle(color: Colors.white70)),
                           ],
                         ),
                       ],
@@ -118,6 +120,28 @@ class _YoutubePlayerItemState extends State<YoutubePlayerItem> {
         ),
       ],
     );
+
+    if (isTablet) {
+      return Container(
+        color: Colors.black,
+        child: Center(
+          child: Container(
+            margin: const EdgeInsets.symmetric(vertical: 24),
+            decoration: BoxDecoration(
+              color: Colors.grey[900],
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.teal, width: 2),
+            ),
+            clipBehavior: Clip.antiAlias,
+            width: 400,
+            height: 700,
+            child: body,
+          ),
+        ),
+      );
+    }
+
+    return body;
   }
 
   void comingSoonDialog(BuildContext context) {
@@ -125,11 +149,11 @@ class _YoutubePlayerItemState extends State<YoutubePlayerItem> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Coming Soon'),
-          content: Text('This feature will be available soon.'),
+          title: const Text('Coming Soon'),
+          content: const Text('This feature will be available soon.'),
           actions: <Widget>[
             TextButton(
-              child: Text('OK',style: TextStyle(color: Colors.teal),),
+              child: const Text('OK', style: TextStyle(color: Colors.teal)),
               onPressed: () {
                 Navigator.of(context).pop();
               },

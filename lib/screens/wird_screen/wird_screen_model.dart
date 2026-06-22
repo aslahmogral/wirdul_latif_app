@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
 import 'package:wirdul_latif/model/progress.dart';
@@ -151,7 +151,7 @@ class WirdScreenModel with ChangeNotifier {
     return wirdList[currentPage].count == wirdList[currentPage].counted;
   }
 
-  showWarning(HomeScreenModel model, BuildContext context) async {
+  showWarning(BuildContext context) async {
     if (currentPage < 10) {
       await showDialog(
         context: context,
@@ -245,6 +245,7 @@ class WirdScreenModel with ChangeNotifier {
   }
 
   thasbeehButtonClicked() {
+    HapticFeedback.lightImpact();
     tapHere = false;
     if (wirdList[currentPage].counted == null) {
       wirdList[currentPage].counted = 0;
