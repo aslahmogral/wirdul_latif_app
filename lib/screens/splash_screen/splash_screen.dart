@@ -22,8 +22,13 @@ class _SplashScreenState extends State<SplashScreen> {
   bool showReload = false;
 
   initWirdData() async {
-    await WirdulLatif().initWirdData();
-    checkFirstRun();
+    try {
+      await WirdulLatif().initWirdData();
+    } catch (e) {
+      print('Error initializing Wird data: $e');
+    } finally {
+      checkFirstRun();
+    }
   }
 
   Future<void> checkFirstRun() async {

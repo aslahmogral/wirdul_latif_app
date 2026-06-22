@@ -1,0 +1,27 @@
+default_platform(:android)
+
+platform :android do
+  desc "Deploy a new version to the Google Play Store"
+  lane :deploy do |options|
+    # Track can be: internal, alpha, beta, or production
+    track = options[:track] || "internal"
+    
+    UI.message("Starting build for Google Play Store track: #{track}...")
+    
+    # Compile the Flutter App Bundle from the project root directory
+    Dir.chdir("..") do
+      sh("flutter", "build", "appbundle", "--release")
+    end
+    
+    # Upload the app bundle to Google Play Store
+    # We skip metadata/images/screenshots upload to only focus on updating the binary,
+    # as metadata is typically managed directly in the Google Play Console UI.
+    upload_to_play_store(
+      track: track,
+      aab: "../build/app/outputs/bundle/release/app-release.aab",
+      skip_upload_metadata: true,
+      skip_upload_images: true,
+      skip_upload_screenshots: true
+    )
+  end
+end

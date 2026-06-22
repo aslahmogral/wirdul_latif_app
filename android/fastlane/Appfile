@@ -1,0 +1,2 @@
+json_key_file("school-444217-03886af5d445.json") # Path to the service account JSON relative to the 'android' folder
+package_name("com.aslahmogral.wirdullatif") # App package identifier

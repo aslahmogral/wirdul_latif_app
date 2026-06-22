@@ -1,0 +1,31 @@
+{
+    "reels": [
+        "NOJ_k_6IvnA",
+        "W58htAlrB0Y",
+        "8XvAyQeAJ2k",
+        "0ZlpTRwZEIw",
+        "60UfqQ3z0FY"
+       
+        
+    ],
+    "blogs": [
+        {
+            "id": 1,
+            "title": "The Complete Wird al Latif",
+            "content": "A Dhikr Set by Imam Al-Haddad",
+            "url": "https://simplyislam.academy/blog/the-complete-wird-al-latif"
+        },
+        {
+            "id": 2,
+            "title": "On Reciting Wird al-Latif Outside Its Time",
+            "content": "",
+            "url": "https://muwasala.org/2013/04/27/on-reciting-wird-al-latif-outside-its-time/"
+        },
+        {
+            "id": 3,
+            "title": "Imam ‘Abdullah bin ‘Alawi al-Haddad",
+            "content": "",
+            "url": "https://muwasala.org/2015/08/20/imam-al-haddad/"
+        }
+    ]
+}

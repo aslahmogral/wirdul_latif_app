@@ -12,3 +12,12 @@ GeneratedPluginRegistrant.java
 key.properties
 **/*.keystore
 **/*.jks
+
+# Google Play Developer API credentials
+school-*.json
+
+# Fastlane and Bundler local paths
+.bundle/
+vendor/bundle/
+
+

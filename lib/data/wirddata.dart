@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wirdul_latif/model/progress.dart';
@@ -16,55 +17,68 @@ class WirdulLatif {
 
   Future<void> initWirdData({bool sync = false}) async {
     final bool versionChanged = await hasVersionChanged();
+    final prefs = await SharedPreferences.getInstance();
+
     if (sync || versionChanged) {
-      final prefs = await SharedPreferences.getInstance();
-      final response = await http.get(Uri.parse(
-          'https://aslahmogral.github.io/wird-al-latif-json/wird.json'));
+      try {
+        final response = await http.get(Uri.parse(
+            'https://aslahmogral.github.io/wird-al-latif-json/wird.json'));
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        if (data is Map<String, dynamic>) {
-          _wirdMap = data.map((key, value) {
-            if (value is Map<String, dynamic>) {
-              return MapEntry(key, value);
-            } else {
-              throw Exception('Invalid data structure');
-            }
-          });
+        if (response.statusCode == 200) {
+          final data = jsonDecode(response.body);
+          if (data is Map<String, dynamic>) {
+            _wirdMap = data.map((key, value) {
+              if (value is Map<String, dynamic>) {
+                return MapEntry(key, value);
+              } else {
+                throw Exception('Invalid data structure');
+              }
+            });
 
-          await prefs.setString('wird_data', jsonEncode(_wirdMap));
+            await prefs.setString('wird_data', jsonEncode(_wirdMap));
+          } else {
+            throw Exception('Invalid data structure');
+          }
         } else {
-          throw Exception('Invalid data structure');
+          throw Exception('Failed to load JSON');
         }
-      } else {
-        throw Exception('Failed to load JSON');
+      } catch (e) {
+        print("Failed to fetch remote wird.json, falling back: $e");
+        await _loadWirdFromPrefsOrAssets(prefs);
       }
     } else {
-      final prefs = await SharedPreferences.getInstance();
-      final data = prefs.getString('wird_data');
-      if (data == null) {
-        await initWirdData(sync: true);
-      } else {
-        final wirdData = jsonDecode(data);
-        if (wirdData is Map<String, dynamic>) {
-          _wirdMap = wirdData.map((key, value) {
-            if (value is Map<String, dynamic>) {
-              return MapEntry(key, value);
-            } else {
-              throw Exception('Invalid data structure');
-            }
-          });
-
-          await prefs.setString('wird_data', jsonEncode(_wirdMap));
-        } else {
-          throw Exception('Invalid data structure');
-        }
-      }
+      await _loadWirdFromPrefsOrAssets(prefs);
     }
-    getContents(sync: sync, versionChanged: versionChanged);
+    await getContents(sync: sync, versionChanged: versionChanged);
     initProgress();
     morningWird = _getMorningWird();
     eveningWird = _getEveningWird();
+  }
+
+  Future<void> _loadWirdFromPrefsOrAssets(SharedPreferences prefs) async {
+    var data = prefs.getString('wird_data');
+    if (data == null) {
+      try {
+        data = await rootBundle.loadString('asset/wird.json');
+        await prefs.setString('wird_data', data);
+      } catch (e) {
+        print('Error reading wird.json asset fallback: $e');
+        return;
+      }
+    }
+
+    final wirdData = jsonDecode(data);
+    if (wirdData is Map<String, dynamic>) {
+      _wirdMap = wirdData.map((key, value) {
+        if (value is Map<String, dynamic>) {
+          return MapEntry(key, value);
+        } else {
+          throw Exception('Invalid data structure');
+        }
+      });
+    } else {
+      throw Exception('Invalid data structure');
+    }
   }
 
   Future<void> initProgress() async {
@@ -78,48 +92,84 @@ class WirdulLatif {
     }
   }
 
-  Future<void> getContents({sync, versionChanged}) async {
+  Future<void> getContents({bool sync = false, bool versionChanged = false}) async {
+    final prefs = await SharedPreferences.getInstance();
     if (sync || versionChanged) {
-      final prefs = await SharedPreferences.getInstance();
-      final response = await http.get(Uri.parse(
-          'https://aslahmogral.github.io/wird-al-latif-json/contents.json'));
+      try {
+        final response = await http.get(Uri.parse(
+            'https://aslahmogral.github.io/wird-al-latif-json/contents.json'));
 
-      if (response.statusCode == 200) {
-        final data = jsonDecode(response.body);
-        Reels = data['reels'];
-        await prefs.setString('reels', jsonEncode(Reels));
+        if (response.statusCode == 200) {
+          final data = jsonDecode(response.body);
+          Reels = data['reels'];
+          await prefs.setString('reels', jsonEncode(Reels));
 
-        blogs = data['blogs'];
-        await prefs.setString('blogs', jsonEncode(blogs));
-      } else {
-        throw Exception('Failed to load JSON');
+          blogs = data['blogs'];
+          await prefs.setString('blogs', jsonEncode(blogs));
+        } else {
+          throw Exception('Failed to load JSON');
+        }
+      } catch (e) {
+        print("Failed to fetch remote contents.json, falling back: $e");
+        await _loadContentsFromPrefsOrAssets(prefs);
       }
     } else {
-      final prefs = await SharedPreferences.getInstance();
-      final reelsFromPrefs = prefs.getString('reels');
-      if (reelsFromPrefs == null) {
-        await getContents();
-      } else {
-        final reelsData = jsonDecode(reelsFromPrefs);
-        Reels = reelsData;
-        await prefs.setString('reels', jsonEncode(Reels));
-      }
-
-      final blogsFromPrefs = prefs.getString('blogs');
-      if (blogsFromPrefs == null) {
-        await getContents();
-      } else {
-        final blogsData = jsonDecode(blogsFromPrefs);
-        blogs = blogsData;
-        await prefs.setString('blogs', jsonEncode(blogs));
-      }
+      await _loadContentsFromPrefsOrAssets(prefs);
     }
+  }
+
+  Future<void> _loadContentsFromPrefsOrAssets(SharedPreferences prefs) async {
+    var reelsData = prefs.getString('reels');
+    var blogsData = prefs.getString('blogs');
+
+    if (reelsData == null || blogsData == null) {
+      try {
+        final jsonString = await rootBundle.loadString('asset/contents.json');
+        final data = jsonDecode(jsonString);
+
+        if (reelsData == null) {
+          Reels = data['reels'];
+          await prefs.setString('reels', jsonEncode(Reels));
+        } else {
+          Reels = jsonDecode(reelsData);
+        }
+
+        if (blogsData == null) {
+          blogs = data['blogs'];
+          await prefs.setString('blogs', jsonEncode(blogs));
+        } else {
+          blogs = jsonDecode(blogsData);
+        }
+      } catch (e) {
+        print('Error reading contents.json asset fallback: $e');
+      }
+    } else {
+      Reels = jsonDecode(reelsData);
+      blogs = jsonDecode(blogsData);
+    }
+  }
+
+  Future<int> _getDefaultVersion() async {
+    try {
+      final jsonString = await rootBundle.loadString('asset/version.json');
+      final data = jsonDecode(jsonString);
+      if (data is Map<String, dynamic> && data.containsKey('version')) {
+        return data['version'] as int;
+      }
+    } catch (e) {
+      print('Error reading default version asset: $e');
+    }
+    return 0;
   }
 
   Future<bool> hasVersionChanged() async {
     try {
       final prefs = await SharedPreferences.getInstance();
-      final localVersion = prefs.getInt('version') ?? 0;
+      var localVersion = prefs.getInt('version');
+      if (localVersion == null) {
+        localVersion = await _getDefaultVersion();
+        await prefs.setInt('version', localVersion);
+      }
 
       final response = await http.get(Uri.parse(
           'https://aslahmogral.github.io/wird-al-latif-json/version.json'));
@@ -127,16 +177,15 @@ class WirdulLatif {
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
         if (data is Map<String, dynamic> && data.containsKey('version')) {
-          final remoteVersion = data['version'];
+          final remoteVersion = data['version'] as int;
           if (remoteVersion != localVersion) {
             await prefs.setInt('version', remoteVersion);
             return true;
           }
         }
       }
-    } on Exception {
-      // Handle no internet connection
-      print('No internet connection');
+    } catch (e) {
+      print('No internet connection or failed to get version: $e');
     }
 
     return false;
