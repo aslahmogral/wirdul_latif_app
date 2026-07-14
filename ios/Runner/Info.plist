@@ -41,6 +41,18 @@
       <string>UIInterfaceOrientationLandscapeLeft</string>
       <string>UIInterfaceOrientationLandscapeRight</string>
     </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+      <dict>
+        <key>CFBundleTypeRole</key>
+        <string>Editor</string>
+        <key>CFBundleURLSchemes</key>
+        <array>
+          <!-- TODO: Replace this with the REVERSED_CLIENT_ID from your downloaded GoogleService-Info.plist -->
+          <string>com.googleusercontent.apps.1069262636562-73a3685410e56fb098bacb</string>
+        </array>
+      </dict>
+    </array>
     <key>UIViewControllerBasedStatusBarAppearance</key>
     <false/>
     <key>CADisableMinimumFrameDurationOnPhone</key>

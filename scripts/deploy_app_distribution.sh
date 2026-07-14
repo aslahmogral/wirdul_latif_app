@@ -20,9 +20,20 @@ echo -e "${BLUE}=== Wirdul Latif Pro - Firebase App Distribution Deployer ===${N
 # 1. Pre-requisites Check
 echo -e "${YELLOW}Checking pre-requisites...${NC}"
 
-if ! command -v flutter &> /dev/null; then
-    echo -e "${RED}Error: Flutter SDK is not installed or not in your PATH.${NC}"
-    exit 1
+# Detect Flutter command (standard, home path, or Shorebird fallback)
+if command -v flutter &> /dev/null; then
+    FLUTTER_CMD="flutter"
+elif [ -f "$HOME/flutter/bin/flutter" ]; then
+    FLUTTER_CMD="$HOME/flutter/bin/flutter"
+else
+    # Try to locate the Flutter binary installed by Shorebird
+    SHOREBIRD_FLUTTER=$(find "$HOME/.shorebird/bin/cache/flutter" -name "flutter" -type f 2>/dev/null | head -n 1)
+    if [ -n "$SHOREBIRD_FLUTTER" ] && [ -f "$SHOREBIRD_FLUTTER" ]; then
+        FLUTTER_CMD="$SHOREBIRD_FLUTTER"
+    else
+        echo -e "${RED}Error: Neither Flutter SDK nor Shorebird's internal Flutter was found.${NC}"
+        exit 1
+    fi
 fi
 
 if ! command -v firebase &> /dev/null; then
@@ -72,14 +83,14 @@ echo -e "- Release Notes:  ${GREEN}$release_notes${NC}\n"
 
 # Clean build directory before building
 echo -e "${YELLOW}Cleaning Flutter build directory...${NC}"
-flutter clean
-flutter pub get
+$FLUTTER_CMD clean
+$FLUTTER_CMD pub get
 
 # 4. Deploy Android
 if [ "$BUILD_ANDROID" = true ]; then
     echo -e "\n${BLUE}--- Processing Android build ---${NC}"
     echo -e "${YELLOW}Building Release APK...${NC}"
-    flutter build apk --release
+    $FLUTTER_CMD build apk --release
 
     APK_PATH="build/app/outputs/flutter-apk/app-release.apk"
     if [ -f "$APK_PATH" ]; then
@@ -107,7 +118,7 @@ fi
 if [ "$BUILD_IOS" = true ]; then
     echo -e "\n${BLUE}--- Processing iOS build ---${NC}"
     echo -e "${YELLOW}Building Release IPA (Ad-Hoc)...${NC}"
-    flutter build ipa --release --export-method=ad-hoc
+    $FLUTTER_CMD build ipa --release --export-method=ad-hoc
 
     # Find the generated IPA in build/ios/ipa/
     IPA_PATH=$(find build/ios/ipa -name "*.ipa" -print -quit 2>/dev/null)

@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:jhijri/jHijri.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:wirdul_latif/screens/auth_screen/auth_screen.dart';
 import 'package:wirdul_latif/screens/blog_screen.dart/blog_screen.dart';
 import 'package:wirdul_latif/screens/calender_screen.dart/calender_screen.dart';
 import 'package:wirdul_latif/screens/contact_us_screen/contact_us_screen.dart';
@@ -11,6 +13,7 @@ import 'package:wirdul_latif/screens/reels_screen/youtube_reels_screen.dart';
 import 'package:wirdul_latif/screens/settings_screen/setting_screen_model.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen_model.dart';
 import 'package:wirdul_latif/screens/thasbeeh_counter/thasbeeh_counter.dart';
+import 'package:wirdul_latif/utils/auth_service.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 import 'package:wirdul_latif/utils/constants.dart';
 import 'package:wirdul_latif/utils/theme_provider_model.dart';
@@ -313,85 +316,97 @@ class HomeScreen extends StatelessWidget {
       ],
       child: Consumer<SettingsScreenModel>(
         builder: (context, settingsModel, child) => Column(children: [
-          Container(
-            // height: 160,
-            decoration: BoxDecoration(
-              gradient: WirdGradients.listTileShadeGradient,
-            ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 30,
+          StreamBuilder<User?>(
+            stream: AuthService().authStateChanges,
+            builder: (context, snapshot) {
+              final user = snapshot.data;
+              final isGuest = user == null || user.isAnonymous;
+
+              return Container(
+                decoration: BoxDecoration(
+                  gradient: WirdGradients.listTileShadeGradient,
                 ),
-                Row(
-                  // mainAxisSize: MainAxisSize.max,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                child: Column(
                   children: [
+                    const SizedBox(height: 40),
                     Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        mainAxisAlignment: MainAxisAlignment.center,
+                      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 12.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          SizedBox(
-                            height: 16,
+                          CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.white.withOpacity(0.2),
+                            backgroundImage: (!isGuest && user.photoURL != null)
+                                ? NetworkImage(user.photoURL!)
+                                : null,
+                            child: isGuest
+                                ? const Icon(Icons.person, color: Colors.yellow, size: 30)
+                                : (user.photoURL == null
+                                    ? Text(
+                                        user.displayName?.isNotEmpty == true
+                                            ? user.displayName![0].toUpperCase()
+                                            : 'U',
+                                        style: const TextStyle(
+                                            color: Colors.yellow,
+                                            fontWeight: FontWeight.bold,
+                                            fontSize: 24),
+                                      )
+                                    : null),
                           ),
-                          Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                  10), // Slightly rounded corners
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  isGuest
+                                      ? 'Guest Account'
+                                      : (user.displayName ?? 'Google User'),
+                                  style: const TextStyle(
+                                    color: Colors.yellow,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                if (!isGuest && user.email != null) ...[
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    user.email!,
+                                    style: TextStyle(
+                                      color: Colors.white.withOpacity(0.8),
+                                      fontSize: 12,
+                                    ),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ],
                             ),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(
-                                  10), // Same value as in the Card
-                              child: Image.asset(
-                                'asset/logo/logo.png',
-                                width: 80.0,
-                                height: 80.0,
-                                fit: BoxFit.cover,
-                              ),
+                          ),
+                          IconButton(
+                            onPressed: () {
+                              themeProviderModel.toggleDarkMode();
+                            },
+                            icon: Icon(
+                              themeProviderModel.isDarkMode
+                                  ? Icons.dark_mode
+                                  : Icons.light_mode,
+                              color: Colors.yellow,
+                              size: 30,
                             ),
                           )
-                              .animate(
-                                onPlay: (controller) => controller.repeat(),
-                              )
-                              .shimmer(
-                                duration: 3000
-                                    .ms, // Duration of the shimmer animation
-                                color:
-                                    Colors.white, // Highlight color for shimmer
-                                angle: 0.5,
-                              ),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text(
-                            'Wirdul Latif Pro',
-                            style: TextStyle(
-                                color: Colors.yellow,
-                                fontSize: 20,
-                                fontWeight: FontWeight.bold),
-                          ),
                         ],
                       ),
                     ),
-                    Spacer(),
-                    IconButton(
-                      onPressed: () {
-                        themeProviderModel.toggleDarkMode();
-                      },
-                      icon: Icon(
-                        themeProviderModel.isDarkMode
-                            ? Icons.dark_mode
-                            : Icons.light_mode,
-                        color: Colors.yellow,
-                        size: 35,
-                      ),
-                    )
+                    const SizedBox(height: 12),
                   ],
                 ),
-              ],
-            ),
+              );
+            },
           ),
           Expanded(
             child: SingleChildScrollView(
@@ -399,6 +414,155 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   const SizedBox(
                     height: 16,
+                  ),
+                  StreamBuilder<User?>(
+                    stream: AuthService().authStateChanges,
+                    builder: (context, snapshot) {
+                      final user = snapshot.data;
+                      if (user == null) return const SizedBox.shrink();
+
+                      if (user.isAnonymous) {
+                        return _drawerItem(
+                          context: context,
+                          leading: const Icon(Icons.sync, color: Colors.yellow),
+                          title: 'Sync Progress with Google',
+                          onTap: () async {
+                            Navigator.pop(context); // Close drawer
+
+                            // Show loading dialog
+                            showDialog(
+                              context: context,
+                              barrierDismissible: false,
+                              builder: (_) => const Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(Colors.yellow),
+                                ),
+                              ),
+                            );
+
+                            try {
+                              final authService = AuthService();
+                              await authService.linkWithGoogle();
+                              Navigator.pop(context); // Dismiss loading
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text('Account synced successfully with Google!'),
+                                  backgroundColor: Colors.green,
+                                ),
+                              );
+                            } on FirebaseAuthException catch (e) {
+                              Navigator.pop(context); // Dismiss loading
+                              
+                              if (e.code == 'credential-already-in-use') {
+                                final confirmSwitch = await showDialog<bool>(
+                                  context: context,
+                                  builder: (ctx) => AlertDialog(
+                                    title: const Text('Account Already Exists'),
+                                    content: const Text(
+                                      'This Google account is already linked to another profile.\n\n'
+                                      'Would you like to switch to that account? (Note: Unsynced local progress will be replaced by the other profile\'s data).'
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(ctx, false),
+                                        child: const Text('Cancel'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(ctx, true),
+                                        child: const Text('Switch Account', style: TextStyle(color: Colors.red)),
+                                      ),
+                                    ],
+                                  ),
+                                );
+
+                                if (confirmSwitch == true) {
+                                  try {
+                                    showDialog(
+                                      context: context,
+                                      barrierDismissible: false,
+                                      builder: (_) => const Center(child: CircularProgressIndicator()),
+                                    );
+
+                                    final authService = AuthService();
+                                    await authService.signOut();
+                                    await authService.signInWithGoogle();
+
+                                    Navigator.pop(context); // Dismiss loading
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text('Switched to Google account successfully!'),
+                                        backgroundColor: Colors.green,
+                                      ),
+                                    );
+                                  } catch (err) {
+                                    Navigator.pop(context); // Dismiss loading if failed
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      SnackBar(
+                                        content: Text('Failed to switch account: $err'),
+                                        backgroundColor: Colors.redAccent,
+                                      ),
+                                    );
+                                  }
+                                }
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  SnackBar(
+                                    content: Text('Linking failed: ${e.message}'),
+                                    backgroundColor: Colors.redAccent,
+                                  ),
+                                );
+                              }
+                            } catch (e) {
+                              Navigator.pop(context); // Dismiss loading
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text('An unexpected error occurred: $e'),
+                                  backgroundColor: Colors.redAccent,
+                                ),
+                              );
+                            }
+                          },
+                        );
+                      } else {
+                        return _drawerItem(
+                          context: context,
+                          leading: const Icon(Icons.logout, color: Colors.redAccent),
+                          title: 'Sign Out',
+                          onTap: () async {
+                            final confirm = await showDialog<bool>(
+                              context: context,
+                              builder: (ctx) => AlertDialog(
+                                title: const Text('Sign Out'),
+                                content: const Text('Are you sure you want to sign out? You will need to sign in again to access your account.'),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(ctx, false),
+                                    child: const Text('Cancel'),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.pop(ctx, true),
+                                    child: const Text('Sign Out', style: TextStyle(color: Colors.red)),
+                                  ),
+                                ],
+                              ),
+                            );
+
+                            if (confirm == true) {
+                              final authService = AuthService();
+                              await authService.signOut();
+
+                              if (context.mounted) {
+                                Navigator.of(context).pushAndRemoveUntil(
+                                  MaterialPageRoute(builder: (_) => const AuthScreen()),
+                                  (route) => false,
+                                );
+                              }
+                            }
+                          },
+                        );
+                      }
+                    },
                   ),
                   _drawerItem(
                     context: context,

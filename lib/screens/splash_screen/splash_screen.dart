@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:wirdul_latif/data/wirddata.dart';
+import 'package:wirdul_latif/screens/auth_screen/auth_screen.dart';
 import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
 import 'package:wirdul_latif/screens/onboarding_screens.dart/onboarding_screen.dart';
+import 'package:wirdul_latif/utils/auth_service.dart';
 import 'package:wirdul_latif/utils/colors.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -34,11 +36,24 @@ class _SplashScreenState extends State<SplashScreen> {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? hasSeenOnboarding = prefs.getBool('hasSeenOnboarding') ?? false;
 
-    if (hasSeenOnboarding) {
+    final authService = AuthService();
+
+    if (authService.isSignedIn) {
       navigateToHome();
     } else {
-      prefs.setBool('hasSeenOnboarding', true);
-      navigateToOnboarding();
+      if (hasSeenOnboarding) {
+        // Silent anonymous sign-in for existing users upgrading the app
+        try {
+          await authService.signInAnonymously();
+          navigateToHome();
+        } catch (e) {
+          print('Splash silent auth failed: $e');
+          navigateToAuth();
+        }
+      } else {
+        // Brand new users go to Onboarding first
+        navigateToOnboarding();
+      }
     }
   }
 
@@ -48,9 +63,14 @@ class _SplashScreenState extends State<SplashScreen> {
         MaterialPageRoute(builder: (_) => HomeScreen()),
       );
     });
-    //  setState(() {
-    //     showReload = true;
-    //   });
+  }
+
+  void navigateToAuth() {
+    Future.delayed(const Duration(seconds: 0), () {
+      Navigator.of(context).pushReplacement(
+        MaterialPageRoute(builder: (_) => const AuthScreen()),
+      );
+    });
   }
 
   void navigateToOnboarding() {

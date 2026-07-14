@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 3.0.0+10
 
 environment:
-  sdk: '>=2.19.6 <3.0.0'
+  sdk: '>=3.0.0 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -55,6 +55,8 @@ dependencies:
   firebase_core: ^3.8.1
   firebase_analytics: ^11.3.6
   rename_app: ^1.6.1
+  firebase_auth: ^5.7.0
+  google_sign_in: ^7.1.1
   # rive: ^0.13.4
   # wirdul_latif: ^0.0.2
 

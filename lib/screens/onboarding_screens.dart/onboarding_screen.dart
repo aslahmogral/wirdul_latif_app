@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:introduction_screen/introduction_screen.dart';
 import 'package:lottie/lottie.dart';
-import 'package:wirdul_latif/screens/home_screen/home_screen.dart';
+import 'package:wirdul_latif/screens/auth_screen/auth_screen.dart';
 import 'package:wirdul_latif/utils/responsive.dart';
 
 class OnboardingScreen extends StatelessWidget {
@@ -73,7 +73,7 @@ class OnboardingScreen extends StatelessWidget {
                 Navigator.pop(context);
               } else {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => HomeScreen()),
+                  MaterialPageRoute(builder: (_) => const AuthScreen()),
                 );
               }
             },
@@ -82,7 +82,7 @@ class OnboardingScreen extends StatelessWidget {
                 Navigator.pop(context);
               } else {
                 Navigator.of(context).pushReplacement(
-                  MaterialPageRoute(builder: (_) => HomeScreen()),
+                  MaterialPageRoute(builder: (_) => const AuthScreen()),
                 );
               }
             },
